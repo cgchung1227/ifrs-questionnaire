@@ -194,30 +194,12 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       <div class="survey-l4">感謝您撥冗參與本次重大性評估問卷填答。本問卷旨在協助公司識別與評估 IFRS 永續相關財務揭露準則所要求之重大風險與機會，您的意見對於提升公司永續治理品質至關重要，敬請如實填寫。</div>
     </div>
     <div class="survey-intro-actions">
-      <span style="font-size:12px;color:#1A8F7F;display:flex;align-items:center"><span class="autosave-dot"></span><span id="saveStatus">自動儲存於 14:32</span></span>
-      <button class="btn btn-outline" onclick="saveDraft()">儲存草稿</button>
       <button class="btn btn-primary" onclick="submitForm()">送出問卷</button>
     </div>
   </div>
 
   <!-- CARD INNER -->
   <div class="card-inner">
-
-    <!-- PROGRESS -->
-    <div class="prog-bar-wrap">
-      <div class="prog-header">
-        <span class="prog-title">填答進度</span>
-        <span class="prog-count" id="progCount">2 / 5 個主題已完成</span>
-      </div>
-      <div class="prog-steps" id="progSteps"></div>
-      <div class="prog-labels" id="progLabels"></div>
-    </div>
-
-    <!-- TOPIC TABS -->
-    <div class="tabs-wrap">
-      <div class="tabs-label">我負責的永續主題（每個主題至少需填一個風險與一個機會）</div>
-      <div class="tabs" id="topicTabs"></div>
-    </div>
 
     <!-- TOPIC CONTENT -->
     <div id="topicContent"></div>
@@ -228,12 +210,8 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 
 <!-- BOTTOM BAR -->
 <div class="bot-bar">
-  <div class="bot-nav">
-    <button class="btn btn-outline" style="padding:6px 14px;font-size:13px" id="prevBtn" onclick="prevTopic()">◀ 上一主題</button>
-    <span class="bot-info" id="botInfo">主題 1 / 5</span>
-    <button class="btn btn-primary" style="padding:6px 14px;font-size:13px" id="nextBtn" onclick="nextTopic()">下一主題 ▶</button>
-  </div>
-  <div style="font-size:12px;color:#aaa">截止日：<strong style="color:#c0392b">2024-12-31</strong></div>
+  <div></div>
+  <button class="btn btn-primary" onclick="submitForm()">送出問卷</button>
 </div>
 
 <!-- TOAST -->
@@ -349,51 +327,12 @@ let customCards = []; // track added custom
 // RENDER
 // ══════════════════════════════════════════
 function renderAll(){
-  renderProgress();
-  renderTabs();
   renderTopicContent();
-  renderBotBar();
 }
-
-function renderProgress(){
-  const stepsEl = document.getElementById('progSteps');
-  const labelsEl = document.getElementById('progLabels');
-  const countEl = document.getElementById('progCount');
-  const done = TOPICS.filter(t=>t.status==='done').length;
-  countEl.textContent = `${done} / ${TOPICS.length} 個主題已完成`;
-  stepsEl.innerHTML = TOPICS.map((t,i)=>{
-    const cls = t.status==='done'?'done':t.status==='active'?'active':'empty';
-    return `<div class="prog-step ${cls}" onclick="jumpTopic(${i})" title="${t.name}"><div class="prog-step-fill"></div></div>`;
-  }).join('');
-  labelsEl.innerHTML = TOPICS.map((t,i)=>{
-    const cls = t.status==='done'?'done':t.status==='active'?'active':'';
-    return `<div class="prog-lbl ${cls}" onclick="jumpTopic(${i})">${t.name}</div>`;
-  }).join('');
-}
-
-function renderTabs(){ /* tabs removed */ }
 
 function renderTopicContent(){
   const container = document.getElementById('topicContent');
-  const topic = TOPICS[currentTopicIdx];
-  if(!topic){ container.innerHTML=''; return; }
-  // For demo: only topic 3 (生物多樣性) has full data
-  if(currentTopicIdx === 2){
-    container.innerHTML = ISSUES_T3.map(iss => renderIssue(iss)).join('');
-  } else if(topic.status==='done'){
-    container.innerHTML = `<div style="background:#fff;border:1px solid #d8e4e0;border-radius:8px;padding:32px;text-align:center;color:#1A8F7F">
-      <div style="font-size:32px;margin-bottom:12px">✅</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:6px">${topic.name}主題已完成填答</div>
-      <div style="font-size:13px;color:#888">此主題的風險與機會評估已送出，如需修改請聯繫問卷管理員。</div>
-    </div>`;
-  } else {
-    container.innerHTML = `<div style="background:#fff;border:1px solid #d8e4e0;border-radius:8px;padding:32px;text-align:center;color:#888">
-      <div style="font-size:32px;margin-bottom:12px">📝</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px">${topic.name}</div>
-      <div style="font-size:13px">此主題尚未開始填寫，請選擇下方的風險與機會項目。</div>
-      <div style="margin-top:20px;padding:16px;background:#f8fcfb;border-radius:6px;border:1px dashed #c8d8d4;font-size:12px;color:#aaa">（Demo 中僅「生物多樣性」主題有完整互動資料）</div>
-    </div>`;
-  }
+  container.innerHTML = ISSUES_T3.map(iss => renderIssue(iss)).join('');
 }
 
 function renderIssue(iss){
@@ -640,7 +579,7 @@ function updateField(cardId, section, field, value){
   if(!item) return;
   if(!item[section]) item[section] = {};
   item[section][field] = value;
-  autoSave();
+
   // Re-render just the part tabs to show completion dots
   const partTabs = document.querySelector(`#detail-${cardId} .part-tabs`);
   if(partTabs){
@@ -665,7 +604,7 @@ function updateQual(cardId, idx, val){
   if(!item) return;
   if(!item.p3b) item.p3b = new Array(7).fill(null);
   item.p3b[idx] = val;
-  autoSave();
+
   // Re-render qual row
   const row = document.querySelector(`#p3-${cardId} .qual-list`).children[idx];
   if(row){
@@ -686,7 +625,7 @@ function toggleVC(cardId, vc){
   const idx = item.p4.vc.indexOf(vc);
   if(idx>-1) item.p4.vc.splice(idx,1);
   else item.p4.vc.push(vc);
-  autoSave();
+
   // Re-render part 4 content
   const p4 = document.getElementById(`p4-${cardId}`);
   if(p4){
@@ -732,21 +671,6 @@ function addCustomCard(issId, type){
   showToast('自訂項目已新增','#1A8F7F');
 }
 
-function jumpTopic(idx){
-  currentTopicIdx = idx;
-  TOPICS.forEach((t,i)=>{ if(i===idx && t.status==='empty') t.status='active'; });
-  renderAll();
-  document.getElementById('mainScroll').scrollTop = 0;
-}
-
-function prevTopic(){ if(currentTopicIdx>0) jumpTopic(currentTopicIdx-1); }
-function nextTopic(){ if(currentTopicIdx<TOPICS.length-1) jumpTopic(currentTopicIdx+1); }
-
-function renderBotBar(){
-  document.getElementById('botInfo').textContent = `主題 ${currentTopicIdx+1} / ${TOPICS.length} · ${TOPICS[currentTopicIdx].name}`;
-  document.getElementById('prevBtn').disabled = currentTopicIdx===0;
-  document.getElementById('nextBtn').textContent = currentTopicIdx===TOPICS.length-1 ? '完成填答 ✓' : '下一主題 ▶';
-}
 
 // ══════════════════════════════════════════
 // HELPERS
@@ -763,23 +687,8 @@ function findItemById(cardId){
 }
 
 // ══════════════════════════════════════════
-// SAVE / SUBMIT
+// SUBMIT
 // ══════════════════════════════════════════
-let saveTimer = null;
-function autoSave(){
-  clearTimeout(saveTimer);
-  document.getElementById('saveStatus').textContent = '儲存中...';
-  saveTimer = setTimeout(()=>{
-    const now = new Date();
-    document.getElementById('saveStatus').textContent = `自動儲存於 ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  }, 800);
-}
-
-function saveDraft(){
-  showToast('草稿已儲存', '#1A8F7F');
-  document.getElementById('saveStatus').textContent = `自動儲存於 ${new Date().toTimeString().slice(0,5)}`;
-}
-
 function submitForm(){
   // Validate topic 3
   const errors = [];
@@ -794,8 +703,6 @@ function submitForm(){
       if(!item.p4?.vc?.length) errors.push(`「${iss.name}」中的風險/機會：請選擇價值鏈位置`);
     }
   }
-  // Check unfilled topics
-  TOPICS.forEach(t=>{ if(t.status==='empty') errors.push(`主題「${t.name}」尚未開始填寫`) });
 
   if(errors.length>0){
     document.getElementById('validateList').innerHTML = errors.map(e=>`<div class="validate-item">${e}</div>`).join('');
