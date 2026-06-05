@@ -82,13 +82,19 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .ro-card{background:#fff;border:1.5px solid #EAF0EE;border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color .15s,box-shadow .15s;box-shadow:0 1px 6px rgba(0,0,0,.04)}
 .ro-card:hover{border-color:#B8D8D3;box-shadow:0 3px 12px rgba(26,143,127,.08)}
 .ro-card.sel{border-color:#1A8F7F;box-shadow:0 2px 14px rgba(26,143,127,.14)}
-.ro-card-hdr{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.ro-card-hdr{padding:14px 18px;display:flex;align-items:center;gap:12px}
 .chkbox{width:20px;height:20px;border:2px solid #C8D8D4;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;cursor:pointer}
 .chkbox:hover{border-color:#1A8F7F}
 .chkbox.on{background:#1A8F7F;border-color:#1A8F7F;color:#fff}
-.ro-desc{flex:1;font-size:13.5px;color:#333;line-height:1.5}
+.ro-desc{flex:1;font-size:13.5px;color:#333;line-height:1.5;cursor:pointer}
 .custom-tag{font-size:10px;background:#FFF5E0;color:#B8860B;border:1px solid #EDCE82;padding:2px 8px;border-radius:4px;white-space:nowrap}
-.expand-arrow{color:#ccc;font-size:12px;transition:transform .2s;flex-shrink:0}
+.expand-arrow{color:#ccc;font-size:12px;transition:transform .2s;flex-shrink:0;cursor:pointer}
+/* CLIENT NOTE FIELD */
+.ro-note-wrap{width:230px;flex-shrink:0;padding-left:14px;border-left:1.5px solid #EEF3F1;display:flex;flex-direction:column;gap:4px}
+.ro-note-lbl{font-size:10px;color:#b0bcba;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.ro-note-inp{width:100%;padding:7px 10px;border:1.5px solid #E4EDEA;border-radius:8px;font-size:12.5px;color:#444;font-family:inherit;background:#F8FDFB;resize:none;transition:border-color .15s,background .15s;line-height:1.5;height:56px}
+.ro-note-inp:focus{outline:none;border-color:#1A8F7F;background:#fff;box-shadow:0 0 0 3px rgba(26,143,127,.07)}
+.ro-note-inp::placeholder{color:#c8d4d0}
 .ro-detail{display:none;padding:0 18px 18px}
 .ro-detail.open{display:block}
 /* PART TABS */
@@ -485,11 +491,16 @@ function renderROSection(iss, type){
 function renderROCard(item, isRisk, issId){
   const isOpen = expandedCards.has(item.id);
   const activePart = activeParts[item.id] || 'p1';
+  const noteVal = (item.clientNote||'').replace(/"/g,'&quot;');
   return `<div class="ro-card ${item.checked?'sel':''}" id="card-${item.id}">
     <div class="ro-card-hdr">
       <div class="chkbox ${item.checked?'on':''}" onclick="toggleCheck('${item.id}','${issId}','${isRisk?'risk':'opp'}')">${item.checked?'✓':''}</div>
       <div class="ro-desc" onclick="if(document.getElementById('card-${item.id}').classList.contains('sel'))toggleExpand('${item.id}')">${item.desc}</div>
       ${item.custom?'<span class="custom-tag">自訂新增</span>':''}
+      <div class="ro-note-wrap" onclick="event.stopPropagation()">
+        <div class="ro-note-lbl">客戶備註</div>
+        <textarea class="ro-note-inp" placeholder="可在此補充說明或修改建議…" oninput="updateClientNote('${item.id}',this.value)">${noteVal}</textarea>
+      </div>
       ${item.checked?`<span class="expand-arrow" onclick="toggleExpand('${item.id}')" style="transform:${isOpen?'rotate(180deg)':'rotate(0)'}">▼</span>`:''}
     </div>
     ${item.checked ? renderRODetail(item, isRisk, activePart, isOpen) : ''}
@@ -771,6 +782,11 @@ function addCustomCard(issId, type){
 // ══════════════════════════════════════════
 // HELPERS
 // ══════════════════════════════════════════
+function updateClientNote(cardId, value){
+  const item = findItemById(cardId);
+  if(item) item.clientNote = value;
+}
+
 function findIssue(issId){
   return ISSUES_T3.find(i=>i.id===issId);
 }
