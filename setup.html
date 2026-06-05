@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFRS 重大性評估 · 清單設定</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:#F3F6F8;color:#2d2d2d;font-size:14px}
+/* BANNER */
+.banner{width:100%;height:200px;background:linear-gradient(150deg,#054e41 0%,#0a7060 28%,#1A8F7F 55%,#35aa94 78%,#7dd4c4 100%);position:relative;overflow:hidden;flex-shrink:0}
+.banner::before{content:'';position:absolute;bottom:-60px;left:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.07)}
+.banner::after{content:'';position:absolute;top:-50px;right:40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.05)}
+.banner-stage{position:absolute;top:20px;right:28px;background:rgba(255,255,255,.18);color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;letter-spacing:.08em;border:1px solid rgba(255,255,255,.3)}
+/* PAGE WRAP */
+.page-wrap{max-width:920px;margin:0 auto;padding:0 20px}
+/* CONTENT CARD */
+.content-card{background:#fff;border-radius:24px 24px 0 0;margin-top:-44px;position:relative;z-index:10;box-shadow:0 -4px 24px rgba(0,0,0,.08);min-height:calc(100vh - 156px)}
+/* SURVEY INTRO */
+.survey-intro{padding:30px 32px 24px;border-bottom:2px solid #F0F5F3}
+.survey-l1{font-size:21px;font-weight:700;color:#1a2e2a;letter-spacing:.02em;margin-bottom:10px}
+.survey-l2-wrap{margin-bottom:14px}
+.survey-l2{display:inline-block;font-size:12.5px;font-weight:700;padding:5px 14px;border-radius:6px;letter-spacing:.05em}
+.survey-l2.amber{background:#FFF3CD;color:#996600}
+.survey-l3{font-size:16px;font-weight:700;color:#1e2d2a;margin-bottom:8px}
+.survey-l4{font-size:13.5px;color:#777;line-height:1.85;max-width:640px}
+/* STEP INDICATOR */
+.step-row{display:flex;align-items:center;gap:8px;margin-top:20px}
+.step{display:flex;align-items:center;gap:7px;font-size:12px;color:#aaa}
+.step.active{color:#1A8F7F;font-weight:700}
+.step.done{color:#9ECFC7}
+.step-num{width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.step.active .step-num{background:#1A8F7F;border-color:#1A8F7F;color:#fff}
+.step-div{flex:1;height:1px;background:#E8ECEF;max-width:60px}
+/* CARD INNER */
+.card-inner{padding:20px 32px 100px}
+/* BUTTONS */
+.btn{padding:8px 18px;border-radius:10px;font-size:13px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:500;transition:all .15s}
+.btn-primary{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.btn-primary:hover{background:#168070}
+.btn-outline{background:#fff;color:#555;border-color:#DDE3E7}
+.btn-outline:hover{background:#F7FAFA}
+.btn-amber{background:#fff8e6;color:#996600;border-color:#e8d080;font-weight:600}
+.btn-amber:hover{background:#fff3cc}
+/* ISSUE */
+.issue{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:box-shadow .2s}
+.issue:hover{box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.issue-hdr{background:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;border-bottom:2px solid #F3F6F8}
+.issue-hdr:hover{background:#FAFCFB}
+.issue-left{display:flex;align-items:flex-start;gap:12px}
+.icode{font-size:11px;background:#1A8F7F;color:#fff;padding:3px 10px;border-radius:6px;font-weight:700;margin-top:2px;white-space:nowrap}
+.iname{font-size:15px;font-weight:700;color:#1e2d2a}
+.isasb{font-size:11px;color:#9AAAA6;margin-top:3px}
+.istatus{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.sbadge{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;white-space:nowrap}
+.s-ok{background:#E4F6F1;color:#1A8F7F}
+.s-pend{background:#FFF5E0;color:#B8860B}
+.s-empty{background:#F2F4F5;color:#aaa}
+.chevron{font-size:11px;color:#bbb;transition:transform .25s;margin-left:4px}
+.chevron.open{transform:rotate(180deg)}
+.issue-body{padding:20px;display:none;background:#FAFCFB}
+.issue-body.open{display:block}
+/* RO SECTION */
+.ro-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.ro-badge{font-size:11px;padding:4px 12px;border-radius:6px;font-weight:700;letter-spacing:.03em}
+.risk-b{background:#FEF0EE;color:#e05252;border:1px solid #f8d0cc}
+.opp-b{background:#E4F6F1;color:#1A8F7F;border:1px solid #9ECFC7}
+.ro-count{font-size:11px;color:#1A8F7F;margin-left:auto;font-weight:600}
+.ro-count.zero{color:#aaa}
+/* RO CARD */
+.ro-card{background:#fff;border:1.5px solid #EAF0EE;border-radius:14px;margin-bottom:8px;transition:border-color .15s,box-shadow .15s;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.ro-card:hover{border-color:#B8D8D3;box-shadow:0 3px 12px rgba(26,143,127,.08)}
+.ro-card.sel{border-color:#1A8F7F;box-shadow:0 2px 14px rgba(26,143,127,.12)}
+.ro-card-hdr{padding:14px 18px;display:flex;align-items:flex-start;gap:12px}
+.chkbox{width:20px;height:20px;border:2px solid #C8D8D4;border-radius:6px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;cursor:pointer}
+.chkbox:hover{border-color:#1A8F7F}
+.chkbox.on{background:#1A8F7F;border-color:#1A8F7F;color:#fff}
+.ro-desc{flex:1;font-size:13.5px;color:#333;line-height:1.6;padding-top:1px}
+.custom-tag{font-size:10px;background:#FFF5E0;color:#B8860B;border:1px solid #EDCE82;padding:2px 8px;border-radius:4px;white-space:nowrap;margin-top:3px;align-self:flex-start}
+/* NOTE FIELD */
+.ro-note-wrap{width:240px;flex-shrink:0;padding-left:16px;border-left:1.5px solid #EEF3F1;display:flex;flex-direction:column;gap:5px}
+.ro-note-lbl{font-size:10px;color:#b0bcba;font-weight:700;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:5px}
+.ro-note-lbl::after{content:'';flex:1;height:1px;background:#EEF3F1}
+.ro-note-inp{width:100%;padding:8px 10px;border:1.5px solid #E4EDEA;border-radius:8px;font-size:12.5px;color:#444;font-family:inherit;background:#F8FDFB;resize:none;transition:border-color .15s,background .15s;line-height:1.6;height:62px}
+.ro-note-inp:focus{outline:none;border-color:#1A8F7F;background:#fff;box-shadow:0 0 0 3px rgba(26,143,127,.07)}
+.ro-note-inp::placeholder{color:#c8d4d0;font-size:12px}
+/* ADD ROW */
+.sdiv{height:1px;background:#EEF2F0;margin:14px 0}
+.add-row{display:flex;gap:8px;margin-top:8px}
+.add-inp{flex:1;padding:9px 14px;border:1.5px dashed #C0D4CF;border-radius:10px;font-size:13px;color:#333;font-family:inherit;background:#F8FDFB;transition:all .15s}
+.add-inp:focus{outline:none;border-color:#1A8F7F;background:#fff;border-style:solid}
+.add-inp::placeholder{color:#bbb}
+.btn-add{padding:9px 16px;background:#fff;border:1.5px solid #1A8F7F;color:#1A8F7F;border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;font-weight:600}
+.btn-add:hover{background:#E4F6F1}
+/* BOTTOM BAR */
+.bot-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E8ECEF;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;z-index:50;box-shadow:0 -2px 12px rgba(0,0,0,.07)}
+.sel-summary{font-size:13px;color:#666}
+.sel-summary strong{color:#1A8F7F}
+/* TOAST */
+.toast{position:fixed;bottom:80px;right:24px;border-radius:12px;padding:13px 20px;font-size:13px;display:none;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,.16);max-width:380px;align-items:center;gap:10px;color:#fff}
+.toast.show{display:flex}
+/* COMPLETE OVERLAY */
+.complete-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.complete-overlay.show{display:flex}
+.complete-card{background:#fff;border-radius:20px;padding:40px 44px;text-align:center;max-width:420px;box-shadow:0 16px 56px rgba(0,0,0,.18)}
+.complete-icon{width:68px;height:68px;border-radius:50%;background:#FFF3CD;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:30px}
+.complete-title{font-size:20px;font-weight:700;color:#996600;margin-bottom:10px}
+.complete-sub{font-size:13px;color:#999;line-height:1.7;margin-bottom:10px}
+.complete-detail{font-size:12px;color:#bbb;background:#F8F8F8;border-radius:8px;padding:10px 14px;margin-bottom:24px;text-align:left;line-height:1.8}
+/* VALIDATE */
+.validate-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.validate-modal.show{display:flex}
+.validate-card{background:#fff;border-radius:16px;padding:28px;max-width:460px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.16)}
+.validate-title{font-size:14px;font-weight:700;color:#e05252;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.validate-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.validate-item{font-size:13px;color:#555;padding:10px 14px;background:#fffaf9;border:1.5px solid #f8d0cc;border-radius:8px;display:flex;align-items:flex-start;gap:8px}
+.validate-item::before{content:'⚠';color:#e05252;flex-shrink:0}
+.validate-footer{display:flex;justify-content:flex-end;gap:8px}
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-stage">STEP 1 · 清單設定</div>
+  <svg style="position:absolute;bottom:0;left:0;right:0;height:60px;opacity:.15;width:100%" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#fff"/>
+  </svg>
+</div>
+
+<!-- MAIN WRAP -->
+<div class="page-wrap">
+<div class="content-card" id="mainScroll">
+
+  <!-- INTRO HEADER -->
+  <div class="survey-intro">
+    <div>
+      <div class="survey-l1">慢想股份有限公司 · IFRS 重大性評估</div>
+      <div class="survey-l2-wrap">
+        <span class="survey-l2 amber">清單設定階段 · 送出後由顧問確認</span>
+      </div>
+      <div class="survey-l3">請確認風險與機會清單</div>
+      <div class="survey-l4">請勾選您認為與公司營運相關的風險與機會項目，並在右側欄位補充說明或提出修改建議。完成後送出清單，由顧問審核確認後，再發出正式問卷。</div>
+      <div class="step-row">
+        <div class="step active">
+          <div class="step-num">1</div>
+          <span>客戶確認清單</span>
+        </div>
+        <div class="step-div"></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <span>顧問審核確認</span>
+        </div>
+        <div class="step-div"></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <span>發出問卷填答</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISSUES -->
+  <div class="card-inner">
+    <div id="issueContent"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bot-bar">
+  <div class="sel-summary" id="selSummary">已選 <strong>0</strong> 項風險 · <strong>0</strong> 項機會</div>
+  <button class="btn btn-amber" onclick="submitSetup()">送出給顧問確認 →</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastIcon" style="font-size:16px;flex-shrink:0">✓</span><span id="toastMsg"></span></div>
+
+<!-- COMPLETE OVERLAY -->
+<div class="complete-overlay" id="completeOverlay">
+  <div class="complete-card">
+    <div class="complete-icon">📋</div>
+    <div class="complete-title">清單已送出！</div>
+    <div class="complete-sub">清單已送交顧問審核，確認後將發出正式問卷。</div>
+    <div class="complete-detail" id="completeDetail"></div>
+    <button class="btn btn-outline" style="width:100%" onclick="document.getElementById('completeOverlay').classList.remove('show')">關閉</button>
+  </div>
+</div>
+
+<!-- VALIDATE MODAL -->
+<div class="validate-modal" id="validateModal">
+  <div class="validate-card">
+    <div class="validate-title"><span>⚠</span> 請至少選擇一項</div>
+    <div class="validate-list" id="validateList"></div>
+    <div class="validate-footer">
+      <button class="btn btn-outline" onclick="document.getElementById('validateModal').classList.remove('show')">繼續設定</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const ISSUES = [
+  {
+    id:'e01', code:'E-01', name:'氣候變遷與極端氣候事件',
+    sasb:'SASB: EM-EP-110a.1 · 永續主題：氣候變遷 · 實體風險',
+    risks:[
+      { id:'re01', desc:'極端降雨與洪水事件頻率增加，導致廠區設備損毀及生產中斷', checked:true },
+      { id:'re02', desc:'高溫熱浪影響戶外作業人員健康，增加勞工安全管理成本', checked:true },
+      { id:'re03', desc:'颱風強度增強導致供應鏈物流中斷，原料供應不穩定', checked:false },
+    ],
+    opps:[
+      { id:'oe01', desc:'氣候韌性強化投資可申請綠色融資，降低資金成本', checked:true },
+      { id:'oe02', desc:'開發耐候性產品因應市場需求，拓展新業務收益', checked:false },
+    ]
+  },
+  {
+    id:'e02', code:'E-02', name:'水資源短缺與水質污染',
+    sasb:'SASB: IF-WU-140a.1 · 永續主題：水資源管理',
+    risks:[
+      { id:'re04', desc:'廠區位於高缺水風險地區，製程用水取得成本顯著上升', checked:true },
+      { id:'re05', desc:'廢水排放標準趨嚴，污水處理設備需大規模升級', checked:false },
+    ],
+    opps:[
+      { id:'oe03', desc:'導入水資源循環再利用系統，降低用水成本並改善水效率', checked:true },
+      { id:'oe04', desc:'水處理技術輸出至缺水市場，開拓新收益來源', checked:false },
+    ]
+  },
+  {
+    id:'e03', code:'E-03', name:'碳排放與能源轉型',
+    sasb:'SASB: EM-EP-110a.3 · 永續主題：碳排放 · 轉型風險—政策和法規',
+    risks:[
+      { id:'re06', desc:'碳定價機制實施後，溫室氣體排放成本大幅增加，影響生產成本結構', checked:true },
+      { id:'re07', desc:'化石燃料依賴度高，面臨能源轉型期間成本壓力與資產擱淺風險', checked:true },
+      { id:'re08', desc:'主要客戶設定供應鏈碳中和目標，未達標將面臨訂單流失風險', checked:false },
+    ],
+    opps:[
+      { id:'oe05', desc:'投資再生能源自發自用，降低能源成本並取得碳權收益', checked:true },
+      { id:'oe06', desc:'低碳產品認證可取得綠色溢價，提升毛利率並吸引 ESG 導向投資人', checked:false },
+    ]
+  },
+  {
+    id:'e04', code:'E-04', name:'生態系服務喪失',
+    sasb:'SASB: IF-WM-160a.1 · 永續主題：生物多樣性 · 氣候調適',
+    risks:[
+      { id:'r1', desc:'營運區域周邊生態系服務（如授粉、水源涵養）減損，導致原料取得成本上升', checked:true },
+      { id:'r2', desc:'土地使用法規因生物多樣性保護趨嚴，造成廠區限制擴建或需取得生態補償許可', checked:false },
+      { id:'r3', desc:'供應鏈上游農業原料因生態破壞導致年度歉收，供貨不穩定性增加', checked:true },
+    ],
+    opps:[
+      { id:'o1', desc:'發展自然正向產品（Nature-positive products），搶占綠色採購市場，提升客戶溢價空間', checked:true },
+      { id:'o2', desc:'與生態保育組織合作進行棲地復育，取得生物多樣性信用（Biodiversity Credits）創造額外收益', checked:false },
+    ]
+  },
+  {
+    id:'e05', code:'E-05', name:'外來物種入侵與土地使用變更',
+    sasb:'SASB: RR-BI-160a.1 · 永續主題：生物多樣性',
+    risks:[
+      { id:'r4', desc:'外來入侵物種擴散至廠區周邊，導致生態補救及清除成本增加', checked:true },
+    ],
+    opps:[
+      { id:'o3', desc:'主動進行在地棲地復育，強化企業永續形象與社區信任', checked:true },
+    ]
+  },
+  {
+    id:'e06', code:'E-06', name:'廢棄物管理與循環經濟',
+    sasb:'SASB: RT-HH-150a.1 · 永續主題：廢棄物管理 · 循環經濟',
+    risks:[
+      { id:'re09', desc:'有害廢棄物處理法規加嚴，合規成本提升且違規罰款風險增加', checked:false },
+      { id:'re10', desc:'廢棄物掩埋場容量趨近飽和，廢棄物處置費用大幅上漲', checked:false },
+      { id:'re11', desc:'電子廢棄物回收責任立法，需建立逆物流體系並承擔相關成本', checked:false },
+    ],
+    opps:[
+      { id:'oe07', desc:'推動廢料再生利用，降低原料採購成本並創造循環經濟效益', checked:false },
+      { id:'oe08', desc:'建立產品回收機制，強化品牌永續形象並符合延伸生產者責任規範', checked:false },
+    ]
+  },
+  {
+    id:'e07', code:'E-07', name:'供應鏈永續與人權風險',
+    sasb:'SASB: CG-HP-430a.1 · 永續主題：供應鏈管理 · 社會責任',
+    risks:[
+      { id:'re12', desc:'供應商勞工條件不符國際標準，引發品牌聲譽損害與客戶抵制風險', checked:false },
+      { id:'re13', desc:'供應鏈集中於單一地區，地緣政治風險導致供貨中斷', checked:false },
+      { id:'re14', desc:'原物料採購涉及衝突礦物或毀林指控，面臨監管處罰與貿易壁壘', checked:false },
+    ],
+    opps:[
+      { id:'oe09', desc:'建立負責任採購認證，取得要求供應鏈透明度之高端市場准入資格', checked:false },
+      { id:'oe10', desc:'輔導供應商提升永續能力，強化供應鏈韌性並降低斷鏈風險', checked:false },
+    ]
+  },
+];
+
+let expandedIssues = new Set(['e01','e02','e03','e04','e05','e06','e07']);
+
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
+function renderAll(){
+  document.getElementById('issueContent').innerHTML = ISSUES.map(renderIssue).join('');
+  updateSummary();
+}
+
+function renderIssue(iss){
+  const isOpen = expandedIssues.has(iss.id);
+  const rCount = iss.risks.filter(r=>r.checked).length;
+  const oCount = iss.opps.filter(o=>o.checked).length;
+  const total = rCount + oCount;
+  const statusCls = total > 0 ? (rCount>0&&oCount>0?'s-ok':'s-pend') : 's-empty';
+  const statusLabel = total > 0 ? `已選 ${rCount} 風險・${oCount} 機會` : '尚未選擇';
+
+  return `<div class="issue" id="iss-${iss.id}">
+    <div class="issue-hdr" onclick="toggleIssue('${iss.id}')">
+      <div class="issue-left">
+        <span class="icode">${iss.code}</span>
+        <div>
+          <div class="iname">${iss.name}</div>
+          <div class="isasb">${iss.sasb}</div>
+        </div>
+      </div>
+      <div class="istatus">
+        <span class="sbadge ${statusCls}">${statusLabel}</span>
+        <span class="chevron ${isOpen?'open':''}">▼</span>
+      </div>
+    </div>
+    <div class="issue-body ${isOpen?'open':''}" id="body-${iss.id}">
+      ${renderROSection(iss,'risk')}
+      <div class="sdiv"></div>
+      ${renderROSection(iss,'opp')}
+    </div>
+  </div>`;
+}
+
+function renderROSection(iss, type){
+  const isRisk = type==='risk';
+  const items = isRisk ? iss.risks : iss.opps;
+  const count = items.filter(i=>i.checked).length;
+  const label = isRisk ? '⚠ 風險' : '✦ 機會';
+  const cls = isRisk ? 'risk-b' : 'opp-b';
+
+  return `<div class="ro-hdr">
+    <span class="ro-badge ${cls}">${label}</span>
+    <span style="font-size:12px;color:#999">勾選納入問卷的項目，右側可補充備註</span>
+    <span class="ro-count ${count===0?'zero':''}">${count>0?`✓ 已選 ${count} 項`:'尚未選擇'}</span>
+  </div>
+  ${items.map(item=>renderCard(item, iss.id, isRisk)).join('')}
+  <div class="add-row">
+    <input class="add-inp" id="addInp-${iss.id}-${type}" placeholder="＋ 新增自訂${isRisk?'風險':'機會'}項目">
+    <button class="btn-add" onclick="addCustom('${iss.id}','${type}')">新增</button>
+  </div>`;
+}
+
+function renderCard(item, issId, isRisk){
+  const noteVal = (item.clientNote||'').replace(/"/g,'&quot;');
+  return `<div class="ro-card ${item.checked?'sel':''}" id="card-${item.id}">
+    <div class="ro-card-hdr">
+      <div class="chkbox ${item.checked?'on':''}" onclick="toggleCheck('${item.id}','${issId}','${isRisk?'risk':'opp'}')">${item.checked?'✓':''}</div>
+      <div class="ro-desc">${item.desc}</div>
+      ${item.custom?'<span class="custom-tag">自訂</span>':''}
+      <div class="ro-note-wrap" onclick="event.stopPropagation()">
+        <div class="ro-note-lbl">備註</div>
+        <textarea class="ro-note-inp" placeholder="補充說明或修改建議…" oninput="updateNote('${item.id}',this.value)">${noteVal}</textarea>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════
+function toggleIssue(issId){
+  if(expandedIssues.has(issId)) expandedIssues.delete(issId);
+  else expandedIssues.add(issId);
+  renderAll();
+}
+
+function toggleCheck(cardId, issId, type){
+  const iss = ISSUES.find(i=>i.id===issId);
+  if(!iss) return;
+  const list = type==='risk' ? iss.risks : iss.opps;
+  const item = list.find(r=>r.id===cardId);
+  if(!item) return;
+  item.checked = !item.checked;
+  // re-render just this card and header counts
+  renderAll();
+}
+
+function updateNote(cardId, value){
+  for(const iss of ISSUES){
+    const item = [...iss.risks,...iss.opps].find(x=>x.id===cardId);
+    if(item){ item.clientNote = value; return; }
+  }
+}
+
+function addCustom(issId, type){
+  const inp = document.getElementById(`addInp-${issId}-${type}`);
+  const val = inp ? inp.value.trim() : '';
+  if(!val) return;
+  const iss = ISSUES.find(i=>i.id===issId);
+  if(!iss) return;
+  const id = 'c'+Date.now();
+  const newItem = { id, desc:val, checked:true, custom:true };
+  if(type==='risk') iss.risks.push(newItem);
+  else iss.opps.push(newItem);
+  renderAll();
+  showToast('自訂項目已新增','#1A8F7F');
+}
+
+function updateSummary(){
+  let r=0, o=0;
+  ISSUES.forEach(iss=>{
+    r += iss.risks.filter(x=>x.checked).length;
+    o += iss.opps.filter(x=>x.checked).length;
+  });
+  document.getElementById('selSummary').innerHTML =
+    `已選 <strong>${r}</strong> 項風險 · <strong>${o}</strong> 項機會`;
+}
+
+// ══════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════
+function submitSetup(){
+  const errors = [];
+  ISSUES.forEach(iss=>{
+    const r = iss.risks.filter(x=>x.checked).length;
+    const o = iss.opps.filter(x=>x.checked).length;
+    if(r===0 && o===0) return; // skip if none selected at all
+    if(r===0) errors.push(`「${iss.name}」已選機會但未選任何風險項目`);
+    if(o===0) errors.push(`「${iss.name}」已選風險但未選任何機會項目`);
+  });
+
+  const totalR = ISSUES.reduce((s,i)=>s+i.risks.filter(x=>x.checked).length,0);
+  const totalO = ISSUES.reduce((s,i)=>s+i.opps.filter(x=>x.checked).length,0);
+  if(totalR===0 || totalO===0){
+    document.getElementById('validateList').innerHTML =
+      `<div class="validate-item">請至少選擇一項風險及一項機會後再送出</div>`;
+    document.getElementById('validateModal').classList.add('show');
+    return;
+  }
+  if(errors.length>0){
+    document.getElementById('validateList').innerHTML = errors.map(e=>`<div class="validate-item">${e}</div>`).join('');
+    document.getElementById('validateModal').classList.add('show');
+    return;
+  }
+
+  // Build summary
+  let detail = '';
+  ISSUES.forEach(iss=>{
+    const sel = [...iss.risks,...iss.opps].filter(x=>x.checked);
+    if(sel.length>0){
+      const rn = iss.risks.filter(x=>x.checked).length;
+      const on = iss.opps.filter(x=>x.checked).length;
+      detail += `${iss.code} ${iss.name}：${rn} 風險 · ${on} 機會\n`;
+    }
+  });
+  document.getElementById('completeDetail').textContent = detail.trim();
+  document.getElementById('completeOverlay').classList.add('show');
+}
+
+function showToast(msg, color){
+  const t = document.getElementById('toast');
+  t.style.background = color||'#1A8F7F';
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastIcon').textContent = '✓';
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+// INIT
+renderAll();
+</script>
+</body>
+</html>
