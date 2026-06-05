@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>湠精實 — IFRS 後台設定</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:#fff;color:#2d2d2d;font-size:14px;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:#fff;border-bottom:1px solid #e0eeea;height:56px;display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:200}
+.hamburger{width:32px;height:32px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;height:2px;background:#888;border-radius:2px}
+.sys-name{font-size:17px;font-weight:700;color:#1A8F7F;letter-spacing:1px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.company-sel{display:flex;align-items:center;gap:6px;border:1px solid #c8d8d4;border-radius:6px;padding:5px 12px;font-size:13px;color:#444;background:#fff}
+.ticon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;color:#666;font-size:16px}
+.ticon:hover{background:#f0f5f3}
+.lang-btn{font-size:13px;color:#555;cursor:pointer;padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#fff}
+.layout{display:flex;flex:1;overflow:hidden}
+.icon-bar{width:56px;background:#1A8F7F;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px;flex-shrink:0}
+.ibar-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.65);transition:all .15s}
+.ibar-btn:hover,.ibar-btn.on{background:rgba(255,255,255,.2);color:#fff}
+.ibar-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.left-menu{width:200px;background:#fff;border-right:1px solid #e0eeea;flex-shrink:0;overflow-y:auto;display:flex;flex-direction:column;transition:width .2s}
+.left-menu.hidden{width:0;overflow:hidden}
+.lm-section{padding:8px 0}
+.lm-label{font-size:10px;color:#aaa;padding:8px 14px 4px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.lm-item{padding:9px 14px;cursor:pointer;color:#555;font-size:13px;font-weight:400;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
+.lm-item:hover{background:#f5faf8;color:#1A8F7F}
+.lm-item.on{background:#f0faf8;color:#1A8F7F;border-left-color:#1A8F7F;font-weight:600}
+.lm-item .new-tag{font-size:9px;background:#1A8F7F;color:#fff;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.lm-divider{height:1px;background:#eef3f1;margin:4px 10px}
+.main{flex:1;overflow-y:auto;background:#fff}
+.page{display:none;padding:24px 32px 60px}
+.page.on{display:block}
+/* PAGE HEADER */
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.ph h1{font-size:20px;font-weight:700;color:#1A8F7F;display:flex;align-items:center;gap:8px}
+.ph h1 .slash{color:#ccc;font-weight:300;margin:0 2px}
+.ph h1 .sub{font-size:14px;color:#1A8F7F;font-weight:600}
+.ph-actions{display:flex;gap:8px;align-items:center}
+/* BUTTONS */
+.btn{padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.btn-teal:hover{background:#158070}
+.btn-ghost{background:#fff;color:#444;border-color:#c8d8d4}
+.btn-ghost:hover{background:#f5faf8;border-color:#9ECFC7}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-del{background:#fff;color:#c0392b;border-color:#e8c0bc}
+.btn-del:hover{background:#fff5f4}
+/* FILTER ROW */
+.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-wrap{display:flex;align-items:center;gap:6px;border:1px solid #d0ddd9;border-radius:6px;padding:6px 12px;background:#fff;margin-left:auto}
+.search-wrap input{border:none;outline:none;font-size:13px;font-family:inherit;width:180px;color:#444}
+.search-wrap input::placeholder{color:#bbb}
+.sel-f{padding:7px 10px;border:1px solid #d0ddd9;border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:#444;cursor:pointer}
+.sel-f:focus{outline:none;border-color:#1A8F7F}
+/* TABLE */
+.tbl-wrap{border:1px solid #d8ece6;border-radius:8px;overflow:hidden;margin-bottom:16px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl thead tr{background:#d8ece6}
+.tbl th{padding:11px 14px;text-align:center;font-size:12px;font-weight:600;color:#2d6b5f;white-space:nowrap;border-right:1px solid #c5e0d8}
+.tbl th:last-child{border-right:none}
+.tbl th.tleft{text-align:left}
+.tbl td{padding:10px 14px;border-bottom:1px solid #eef5f3;text-align:center;vertical-align:middle}
+.tbl td.tleft{text-align:left}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#f8fcfb}
+.tbl .frow td{background:#f0f9f6;padding:6px 10px;border-bottom:1px solid #deeee9}
+.tbl .frow td select{width:100%;padding:5px 8px;border:1px solid #c8d8d4;border-radius:4px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer}
+.tbl .frow td select:focus{outline:none;border-color:#1A8F7F}
+.sort-icon{font-size:10px;color:#7fbdb5;margin-left:3px}
+/* BADGE */
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;min-width:44px;text-align:center}
+.badge-on{background:#d8f5e8;color:#1a7a50}
+.badge-off{background:#fde8e8;color:#a03030}
+.badge-new{background:#e8f0fb;color:#2E5FA8;font-size:10px;padding:2px 7px;border-radius:3px}
+/* FUNC ICONS */
+.func-icons{display:flex;align-items:center;justify-content:center;gap:12px}
+.fi{cursor:pointer;color:#aaa;font-size:16px;transition:color .15s}
+.fi:hover{color:#1A8F7F}
+.fi.del:hover{color:#c0392b}
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:4px;font-size:11px;margin:2px}
+.chip-blue{background:#e8f0fb;color:#2E5FA8;border:1px solid #b8cef0}
+.chip-green{background:#e0f5ee;color:#1a7a50;border:1px solid #9ECFC7}
+.chip-amber{background:#fdf0dc;color:#8a5d00;border:1px solid #e8c87a}
+.chip-red{background:#fde8e8;color:#a03030;border:1px solid #f0b8b8}
+.chip-teal{background:#d8ece6;color:#1A8F7F;border:1px solid #9ECFC7}
+.chip .rm{cursor:pointer;opacity:.5;font-size:10px;margin-left:1px}
+.chip .rm:hover{opacity:1;color:#c0392b}
+.add-chip-btn{display:inline-flex;align-items:center;gap:2px;padding:3px 9px;border:1px dashed #b8ccc8;border-radius:4px;font-size:11px;color:#888;cursor:pointer;background:#fff;font-family:inherit;margin:2px}
+.add-chip-btn:hover{border-color:#1A8F7F;color:#1A8F7F}
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 16px;border-top:1px solid #eef5f3;font-size:13px;color:#555;background:#fafcfb}
+.pag-label{color:#888}
+.pag-ni{width:44px;padding:4px 6px;border:1px solid #c8d8d4;border-radius:4px;font-size:13px;text-align:center;font-family:inherit}
+.pag-btn{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid #c8d8d4;border-radius:4px;cursor:pointer;background:#fff;font-size:13px;color:#555}
+.pag-btn:hover{border-color:#1A8F7F;color:#1A8F7F}
+.pag-btn.ap{background:#1A8F7F;color:#fff;border-color:#1A8F7F;font-weight:700}
+.pag-total{color:#888;font-size:12px}
+.per-page-sel{padding:4px 8px;border:1px solid #c8d8d4;border-radius:4px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer}
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fl{font-size:13px;color:#444;font-weight:500}
+.req{color:#c0392b;margin-left:2px}
+.finp{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;transition:border-color .15s}
+.finp:focus{outline:none;border-color:#1A8F7F;box-shadow:0 0 0 2px rgba(26,143,127,.08)}
+.ftextarea{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;resize:vertical;min-height:72px}
+.ftextarea:focus{outline:none;border-color:#1A8F7F}
+.fsel{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;background:#fff;cursor:pointer}
+.fsel:focus{outline:none;border-color:#1A8F7F}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.radio-group{display:flex;gap:20px;align-items:center}
+.radio-group label{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:#444}
+.radio-group input[type=radio]{accent-color:#1A8F7F;width:15px;height:15px}
+/* ML TABLE */
+.ml-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.ml-tbl th{background:#d8ece6;padding:9px 14px;font-size:12px;font-weight:600;color:#2d6b5f;border:1px solid #c5e0d8;text-align:center}
+.ml-tbl th.tleft{text-align:left}
+.ml-tbl td{padding:8px 12px;border:1px solid #eef5f3;vertical-align:middle}
+.ml-tbl td:first-child{text-align:center;color:#555;font-weight:500;background:#f8fcfb}
+.ml-tbl textarea{width:100%;padding:6px 10px;border:1px solid #c8d8d4;border-radius:4px;font-size:13px;font-family:inherit;resize:none;height:52px}
+.ml-tbl textarea:focus{outline:none;border-color:#1A8F7F}
+/* NOTICE */
+.notice{padding:10px 14px;border-radius:6px;font-size:12px;display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;line-height:1.6}
+.n-info{background:#e8f4fb;border:1px solid #a8d0e8;color:#1a5f8a}
+.n-warn{background:#fdf0dc;border:1px solid #e8c87a;color:#7a4f00}
+.n-ok{background:#e0f5ee;border:1px solid #9ECFC7;color:#1a5f4a}
+/* TOGGLE */
+.toggle{width:36px;height:20px;background:#c8d8d4;border-radius:10px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle.on{background:#1A8F7F}
+.toggle::after{content:'';position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle.on::after{left:18px}
+/* SECTION */
+.form-section-title{font-size:13px;font-weight:700;color:#555;border-bottom:1px solid #e0eeea;padding-bottom:8px;margin-bottom:14px;margin-top:4px}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:8000;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal-box{background:#fff;border-radius:10px;width:560px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.18)}
+.modal-head{padding:16px 22px;border-bottom:1px solid #e0eeea;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-head h3{font-size:15px;font-weight:700;color:#2d2d2d}
+.modal-close{cursor:pointer;color:#aaa;font-size:20px;line-height:1}
+.modal-close:hover{color:#333}
+.modal-body{padding:22px}
+.modal-foot{padding:14px 22px;border-top:1px solid #e0eeea;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;border-radius:8px;padding:12px 18px;font-size:13px;display:none;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.15);align-items:center;gap:10px;color:#fff}
+.toast.show{display:flex}
+/* DATA SCHEMA */
+.schema-box{background:#f8fcfb;border:1px solid #d8ece6;border-radius:8px;padding:16px;margin-bottom:16px;font-size:12px;font-family:monospace;color:#2d6b5f;line-height:1.8}
+.schema-box .layer{margin-left:20px;color:#555}
+.schema-box .arrow{color:#1A8F7F;font-weight:700}
+.schema-box .note{color:#aaa;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="sys-name">湠精實</div>
+  <div class="topbar-right">
+    <div class="company-sel">公司別&nbsp;
+      <select style="border:none;outline:none;font-size:13px;font-family:inherit;color:#444;background:transparent;cursor:pointer">
+        <option>01002_CRIS2 慢想股份有限公司</option>
+      </select>
+    </div>
+    <div class="ticon">⚙</div>
+    <div class="lang-btn">繁</div>
+    <div class="ticon">⇥</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="icon-bar">
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="ibar-btn on"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+  </div>
+
+  <div class="left-menu" id="leftMenu">
+    <div class="lm-section">
+      <div class="lm-label">後台問卷管理</div>
+      <div class="lm-item" onclick="go('pg-industry')">產業別管理</div>
+      <div class="lm-item" onclick="go('pg-quotation')">問卷引文建置管理</div>
+      <div class="lm-item" onclick="go('pg-scale')">問卷填答尺度管理</div>
+      <div class="lm-item" onclick="go('pg-aspect')">議題面向管理</div>
+      <div class="lm-item on" onclick="go('pg-esg')">ESG 議題清單</div>
+      <div class="lm-item" onclick="go('pg-disclosure')">永續揭露準則資料庫</div>
+      <div class="lm-item" onclick="go('pg-stakeholder')">利害關係人類別管理</div>
+      <div class="lm-item" onclick="go('pg-financial')">財務衝擊項目管理</div>
+      <div class="lm-item" onclick="go('pg-external')">外部衝擊項目管理</div>
+    </div>
+    <div class="lm-divider"></div>
+    <div class="lm-section">
+      <div class="lm-label">IFRS 問卷設定 <span class="badge-new">NEW</span></div>
+      <div class="lm-item" onclick="go('pg-theme')">永續主題管理 <span class="new-tag">新</span></div>
+      <div class="lm-item" onclick="go('pg-iro')">風險／機會清單 <span class="new-tag">新</span></div>
+      <div class="lm-item" onclick="go('pg-iro-setting')">IRO 設定管理 <span class="new-tag">新</span></div>
+      <div class="lm-item" onclick="go('pg-vc')">價值鏈位置 <span class="new-tag">新</span></div>
+    </div>
+  </div>
+
+  <div class="main" id="mainArea">
+
+    <!-- ═══════════════════════════════
+         ESG 議題清單（+ SASB + 永續主題）
+    ═══════════════════════════════ -->
+    <div class="page on" id="pg-esg">
+      <div class="ph">
+        <div><h1>ESG 議題清單 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-ghost btn-sm" onclick="go('pg-schema')">查看資料關聯</button>
+          <button class="btn btn-teal" onclick="openModal('add-esg')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>IFRS 新增欄位：<b>SASB 對應（1.2）</b> 已整合至本頁。<b>永續主題</b> 掛在議題下（1對多），點擊右側「主題數」可進入管理；風險/機會清單再掛在各永續主題下。</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:90px">面向 <span class="sort-icon">⇅</span></th>
+            <th style="width:150px">議題 <span class="sort-icon">⇅</span></th>
+            <th class="tleft">描述說明</th>
+            <th style="width:170px">SASB 對應 <span class="badge-new">1.2</span></th>
+            <th style="width:110px;text-align:center">永續主題數 <span class="badge-new">1.3</span></th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option><option>環境面</option><option>社會面</option><option>治理/經濟面</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>環境面</td>
+              <td style="font-weight:600">氣候策略與能源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">積極管理氣候相關風險與機會，設定減碳目標，導入節能減碳專案。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">IF-WM-110a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <span class="chip chip-blue">CRES-410a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">2 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>環境面</td>
+              <td style="font-weight:600">水資源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">掌握用水來源與風險分析，開發多元水源，推動節水措施。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">IF-WM-140a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">1 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>環境面</td>
+              <td style="font-weight:600">生物多樣性</td>
+              <td class="tleft" style="font-size:12px;color:#555">制定生物多樣性保育承諾，進行生態調查與監測。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">RR-BI-160a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">1 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>社會面</td>
+              <td style="font-weight:600">人才吸引與留任</td>
+              <td class="tleft" style="font-size:12px;color:#555">制定多元人才策略，提升員工滿意度與留任率。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">SV-PS-330a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">1 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>社會面</td>
+              <td style="font-weight:600">資訊安全與隱私</td>
+              <td class="tleft" style="font-size:12px;color:#555">建立完善資安管理體系，保護客戶與企業資料。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">TC-SI-230a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">1 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>治理/經濟面</td>
+              <td style="font-weight:600">公司治理與誠信經營</td>
+              <td class="tleft" style="font-size:12px;color:#555">強化董事會治理機制，落實反貪腐政策，提升企業透明度。</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-blue">SV-PS-510a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+                <button class="add-chip-btn" onclick="addChip(this,'sasb')">＋</button>
+              </div></td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-theme')">1 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-esg')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">2</div><div class="pag-btn">3</div><div class="pag-btn">4</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 54 項</span>
+          <select class="per-page-sel"><option>15項/頁</option><option>30項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         議題面向管理（原版，移除永續主題欄）
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-aspect">
+      <div class="ph">
+        <div><h1>議題面向管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-aspect')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:70px">代碼 <span class="sort-icon">⇅</span></th>
+            <th style="width:140px">面向 <span class="sort-icon">⇅</span></th>
+            <th style="width:80px">使用色碼</th>
+            <th>使用屬性</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>001</td><td>環境面</td>
+              <td><div style="display:flex;justify-content:center"><div style="width:28px;height:28px;border-radius:4px;background:#b8e8d8;border:1px solid #c8d8d4"></div></div></td>
+              <td>外部衝擊</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-aspect')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>002</td><td>治理/經濟面</td>
+              <td><div style="display:flex;justify-content:center"><div style="width:28px;height:28px;border-radius:4px;background:#d8c8e8;border:1px solid #c8d8d4"></div></div></td>
+              <td>議題,外部衝擊</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-aspect')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>003</td><td>社會面</td>
+              <td><div style="display:flex;justify-content:center"><div style="width:28px;height:28px;border-radius:4px;background:#e8e0b8;border:1px solid #c8d8d4"></div></div></td>
+              <td>議題,外部衝擊</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-aspect')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>005</td><td>成本與投報</td>
+              <td><div style="display:flex;justify-content:center"><div style="width:28px;height:28px;border-radius:4px;background:#c8d8f0;border:1px solid #c8d8d4"></div></div></td>
+              <td>議題,外部衝擊</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-aspect')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">2</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 21 項</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         財務衝擊項目管理（+ 衝擊類型欄）
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-financial">
+      <div class="ph">
+        <div><h1>財務衝擊項目管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-fin')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>IFRS 新增欄位：<b>衝擊類型（1.5）</b>。「量化」對應 Part 3a 填答欄；「質化」對應 Part 3b 的 Yes/No 評估題目。</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:70px">代碼 <span class="sort-icon">⇅</span></th>
+            <th>衝擊項目名稱 <span class="sort-icon">⇅</span></th>
+            <th style="width:140px">衝擊類型 <span class="badge-new">IFRS 1.5</span></th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option><option>量化</option><option>質化</option></select></td>
+              <td></td>
+            </tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>001</td><td style="text-align:left">發生機率</td><td><span class="chip chip-blue">量化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>002</td><td style="text-align:left">營收影響金額</td><td><span class="chip chip-blue">量化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>003</td><td style="text-align:left">成本影響金額</td><td><span class="chip chip-blue">量化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>004</td><td style="text-align:left">財務影響（EBITDA 比例）</td><td><span class="chip chip-blue">量化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q01</td><td style="text-align:left">是否已建立相關政策管控措施？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q02</td><td style="text-align:left">是否會影響公司營運策略與業務發展目標？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q03</td><td style="text-align:left">是否與高階主管之薪酬相連結？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q04</td><td style="text-align:left">是否已有法規要求進行管理／申報／揭露？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q05</td><td style="text-align:left">是否出現在供應商／承攬商之選商決策中？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q06</td><td style="text-align:left">是否有被股東或投資人要求公開揭露？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>Q07</td><td style="text-align:left">是否有被客戶要求建立管理機制（含設定目標）？</td><td><span class="chip chip-amber">質化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-off">停用</span></td><td>005</td><td style="text-align:left;color:#aaa">資本支出影響</td><td><span class="chip chip-blue" style="opacity:.5">量化</span></td><td><div class="func-icons"><span class="fi">✏️</span><span class="fi">↺</span></div></td></tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 12 項</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         永續主題管理（新頁面）
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-theme">
+      <div class="ph">
+        <div><h1>永續主題管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-theme')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>永續主題隸屬於 ESG 議題（1對多）。每個議題可有多個永續主題，每個主題再有各自的風險／機會清單。部門填答時依主題接題。</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:80px">代碼 <span class="sort-icon">⇅</span></th>
+            <th style="width:160px">永續主題名稱 <span class="sort-icon">⇅</span></th>
+            <th class="tleft">說明</th>
+            <th style="width:180px">所屬 ESG 議題</th>
+            <th style="width:90px">風險/機會數</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td><td></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T001</td>
+              <td style="font-weight:600">氣候策略</td>
+              <td class="tleft" style="font-size:12px;color:#555">與氣候變遷相關的策略規劃、目標設定與績效管理</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">3</span> 風險 <span style="color:#1A8F7F;font-weight:600">2</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T002</td>
+              <td style="font-weight:600">能源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">再生能源使用、能源效率提升、電力來源管理</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">2</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T003</td>
+              <td style="font-weight:600">水資源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">用水效率、廢水管理、水資源風險評估</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">水資源管理</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T004</td>
+              <td style="font-weight:600">生物多樣性</td>
+              <td class="tleft" style="font-size:12px;color:#555">生態系服務、自然資本、物種保育</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">生物多樣性</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T005</td>
+              <td style="font-weight:600">人才發展</td>
+              <td class="tleft" style="font-size:12px;color:#555">人才招募、培育、留任與組織文化</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">人才吸引與留任</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T006</td>
+              <td style="font-weight:600">資訊安全</td>
+              <td class="tleft" style="font-size:12px;color:#555">資安管理體系、資料保護、網路韌性</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">資訊安全與隱私</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td>T007</td>
+              <td style="font-weight:600">公司治理</td>
+              <td class="tleft" style="font-size:12px;color:#555">董事會治理、反貪腐、透明度揭露</td>
+              <td><div style="display:flex;flex-wrap:wrap">
+                <span class="chip chip-green" style="font-size:10px">公司治理與誠信經營</span>
+              </div></td>
+              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">1</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')">✏️</span><span class="fi del">🚫</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 7 項</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         風險/機會清單（掛在永續主題下）
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-iro">
+      <div class="ph">
+        <div><h1>風險／機會清單 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-iro')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>資料層級：<b>ESG 議題 → 永續主題 → 風險／機會清單</b>。清單掛在永續主題下，同仁填答時依主題看到對應清單，描述由顧問設定不可修改，但可自行新增自訂項目。</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:130px">ESG 議題 <span class="sort-icon">⇅</span></th>
+            <th style="width:130px">永續主題 <span class="sort-icon">⇅</span></th>
+            <th style="width:70px;text-align:center">類型</th>
+            <th class="tleft">描述</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option><option>氣候策略與能源管理</option><option>水資源管理</option><option>生物多樣性</option><option>人才吸引與留任</option><option>資訊安全與隱私</option><option>公司治理與誠信經營</option></select></td>
+              <td><select><option>請選擇</option><option>氣候策略</option><option>能源管理</option><option>水資源管理</option><option>生物多樣性</option><option>人才發展</option><option>資訊安全</option><option>公司治理</option></select></td>
+              <td><select><option>請選擇</option><option>風險</option><option>機會</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td>
+            </tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">氣候策略與能源管理</td><td><span class="chip chip-teal">氣候策略</span></td><td><span class="chip chip-red">風險</span></td><td class="tleft" style="font-size:12px">碳定價制度強化，付費配額擴大導致營運成本上升</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">氣候策略與能源管理</td><td><span class="chip chip-teal">氣候策略</span></td><td><span class="chip chip-red">風險</span></td><td class="tleft" style="font-size:12px">品牌客戶要求低碳製程，若未因應消費者購買意願下降</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">氣候策略與能源管理</td><td><span class="chip chip-teal">氣候策略</span></td><td><span class="chip chip-green">機會</span></td><td class="tleft" style="font-size:12px">擴展高評等節能產品與碳標籤產品組合，強化品牌信任</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">氣候策略與能源管理</td><td><span class="chip chip-teal">能源管理</span></td><td><span class="chip chip-red">風險</span></td><td class="tleft" style="font-size:12px">再生能源成本波動影響電力採購預算</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">氣候策略與能源管理</td><td><span class="chip chip-teal">能源管理</span></td><td><span class="chip chip-green">機會</span></td><td class="tleft" style="font-size:12px">根據 RE100 策略擴大再生能源使用，降低電費與範疇二排放</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">水資源管理</td><td><span class="chip chip-teal">水資源管理</span></td><td><span class="chip chip-red">風險</span></td><td class="tleft" style="font-size:12px">水資源短缺影響廠區生產，增加資本支出</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td style="font-size:12px">生物多樣性</td><td><span class="chip chip-teal">生物多樣性</span></td><td><span class="chip chip-red">風險</span></td><td class="tleft" style="font-size:12px">生態系服務減損導致原料取得成本上升</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">2</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 24 項</span>
+          <select class="per-page-sel"><option>15項/頁</option><option>30項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         價值鏈位置（新頁面）
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-vc">
+      <div class="ph">
+        <div><h1>價值鏈位置 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-vc')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>啟用的位置將顯示在同仁填答的 Part 4 中。</span></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:80px">代碼 <span class="sort-icon">⇅</span></th>
+            <th style="width:160px">位置名稱 <span class="sort-icon">⇅</span></th>
+            <th class="tleft">說明</th>
+            <th style="width:70px">排序</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td><td></td>
+            </tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>VC01</td><td style="font-weight:600">上游供應商</td><td class="tleft" style="font-size:12px;color:#555">原料供應、外包生產、採購相關活動</td><td>1</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-vc')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>VC02</td><td style="font-weight:600">自有營運</td><td class="tleft" style="font-size:12px;color:#555">公司自身的製造、辦公、物流等活動</td><td>2</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-vc')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>VC03</td><td style="font-weight:600">下游客戶</td><td class="tleft" style="font-size:12px;color:#555">產品銷售、售後服務、終端使用</td><td>3</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-vc')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-on">啟用</span></td><td>VC04</td><td style="font-weight:600">投資活動</td><td class="tleft" style="font-size:12px;color:#555">股權投資、合資、融資相關</td><td>4</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-vc')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            <tr><td><span class="badge badge-off">停用</span></td><td>VC05</td><td style="font-weight:600;color:#aaa">研發活動</td><td class="tleft" style="font-size:12px;color:#bbb">產品開發、技術研究</td><td style="color:#bbb">5</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-vc')">✏️</span><span class="fi">↺</span></div></td></tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 5 項</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         資料關聯說明
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-schema">
+      <div class="ph">
+        <div><h1>資料關聯架構 <span class="slash">/</span> <span class="sub">說明</span></h1></div>
+        <div class="ph-actions"><button class="btn btn-ghost btn-sm" onclick="go('pg-esg')">← 返回</button></div>
+      </div>
+      <div class="notice n-ok"><span>✅</span><span>以下為 IFRS 問卷模組的資料層級關聯，供開發參考。</span></div>
+      <div class="schema-box">
+        <div>【面向】環境面 / 社會面 / 治理面 <span class="note">← 議題面向管理（現有）</span></div>
+        <div class="layer">└─ 【ESG 議題】氣候策略與能源管理、水資源管理… <span class="note">← ESG 議題清單（現有，加 SASB 欄）</span></div>
+        <div class="layer" style="margin-left:40px">└─ 1對多 ↓</div>
+        <br>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;└─ 【永續主題】氣候策略 / 能源管理… <span class="note">← 永續主題管理（新頁面，掛在議題下 1對多）</span></div>
+        <div class="layer" style="margin-left:60px">└─ 【風險／機會清單】掛在主題下 <span class="note">← 風險/機會清單（新頁面，掛在主題下 1對多）</span></div>
+        <div class="layer" style="margin-left:80px">├─ 風險：碳定價上升、水資源短缺…</div>
+        <div class="layer" style="margin-left:80px">└─ 機會：節能產品、RE100…</div>
+        <br>
+        <div>【部門綁定】部門 A → 永續主題 X, Y <span class="note">← P04 問卷發放設定</span></div>
+        <br>
+        <div>【填答介面】同仁登入 → 選部門 → 帶出永續主題 → 展開各主題的風險/機會清單</div>
+        <div class="layer">└─ Part 2：IRO 類型 / 時間尺度</div>
+        <div class="layer">└─ Part 3a：量化衝擊 <span class="note">← 財務衝擊項目管理（量化類型）</span></div>
+        <div class="layer">└─ Part 3b：質化 7 題 <span class="note">← 財務衝擊項目管理（質化類型）</span></div>
+        <div class="layer">└─ Part 4：價值鏈位置 <span class="note">← 價值鏈位置（新頁面）</span></div>
+        <br>
+        <div>【衝擊尺度】發生機率 / 金額 / EBITDA <span class="note">← 問卷填答尺度管理（現有）</span></div>
+        <div>【SASB 對應】議題 ↔ SASB 標準 <span class="note">← ESG 議題清單（加欄）</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px">
+        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
+          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">整合到現有頁面</div>
+          <div style="font-size:12px;color:#555;line-height:2">✅ ESG 議題清單<br>→ 加 SASB 欄（1.2）<br>→ 加永續主題欄（1.3）<br><br>✅ 財務衝擊項目管理<br>→ 加衝擊類型欄（1.5）<br>→ 質化 Q01–Q07 新增為資料</div>
+        </div>
+        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
+          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">新增頁面</div>
+          <div style="font-size:12px;color:#555;line-height:2">🆕 永續主題管理<br>（獨立 CRUD）<br><br>🆕 風險／機會清單<br>（掛在永續主題下）<br><br>🆕 價值鏈位置<br>（Part 4 選項）</div>
+        </div>
+        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
+          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">從 C3 進入（不在此）</div>
+          <div style="font-size:12px;color:#555;line-height:2">📋 1.8 最終確認<br>（從 C3 問卷建置進入）<br><br>📋 部門 × 主題綁定<br>（P04 問卷發放設定）<br><br>📋 問卷試填 / 正式發放<br>（P05 預覽 / P06 填答）</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- IRO 設定管理 -->
+    <div class="page" id="pg-iro-setting">
+      <div class="ph">
+        <div><h1>IRO 設定管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>管理同仁填答 Part 2 的兩個下拉選單：<b>IRO 類型</b> 與 <b>影響時間尺度</b>。</span></div>
+      <div style="display:flex;border-bottom:2px solid #d8ece6;margin-bottom:16px">
+        <div id="tab-iro" onclick="switchIROTab('iro')" style="padding:10px 22px;cursor:pointer;font-size:13px;font-weight:700;color:#1A8F7F;border-bottom:2px solid #1A8F7F;margin-bottom:-2px">IRO 類型</div>
+        <div id="tab-time" onclick="switchIROTab('time')" style="padding:10px 22px;cursor:pointer;font-size:13px;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px">影響時間尺度</div>
+      </div>
+      <div id="panel-iro">
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:12px">
+          <button class="btn btn-teal" onclick="openModal('add-iro-type')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:80px">狀態</th>
+              <th style="width:80px">代碼 <span class="sort-icon">⇅</span></th>
+              <th style="width:80px;text-align:center">屬性</th>
+              <th class="tleft">IRO 類型名稱 <span class="sort-icon">⇅</span></th>
+              <th style="width:70px">排序</th>
+              <th style="width:70px">功能</th>
+            </tr></thead>
+            <tbody>
+              <tr class="frow">
+                <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+                <td><select><option>請選擇</option></select></td>
+                <td><select><option>請選擇</option><option>風險</option><option>機會</option></select></td>
+                <td><select><option>請選擇</option></select></td>
+                <td></td><td></td>
+              </tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>R001</td><td><span class="chip chip-red">風險</span></td><td class="tleft">實體風險</td><td>1</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>R002</td><td><span class="chip chip-red">風險</span></td><td class="tleft">轉型風險－政策和法規</td><td>2</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>R003</td><td><span class="chip chip-red">風險</span></td><td class="tleft">轉型風險－技術</td><td>3</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>R004</td><td><span class="chip chip-red">風險</span></td><td class="tleft">轉型風險－市場</td><td>4</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>R005</td><td><span class="chip chip-red">風險</span></td><td class="tleft">轉型風險－聲譽</td><td>5</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>O001</td><td><span class="chip chip-green">機會</span></td><td class="tleft">機會－資源效率</td><td>6</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>O002</td><td><span class="chip chip-green">機會</span></td><td class="tleft">機會－能源來源</td><td>7</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>O003</td><td><span class="chip chip-green">機會</span></td><td class="tleft">機會－產品／服務</td><td>8</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>O004</td><td><span class="chip chip-green">機會</span></td><td class="tleft">機會－市場</td><td>9</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>O005</td><td><span class="chip chip-green">機會</span></td><td class="tleft">機會－韌性</td><td>10</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-iro-type')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+            <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+            <span class="pag-total">共 10 項</span>
+            <select class="per-page-sel"><option>15項/頁</option></select>
+          </div>
+        </div>
+      </div>
+      <div id="panel-time" style="display:none">
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:12px">
+          <button class="btn btn-teal" onclick="openModal('add-time-scale')">新增</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb">🔍</span><input placeholder="請輸入"></div>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:80px">狀態</th>
+              <th style="width:80px">代碼 <span class="sort-icon">⇅</span></th>
+              <th class="tleft">時間尺度名稱 <span class="sort-icon">⇅</span></th>
+              <th style="width:200px">說明</th>
+              <th style="width:70px">排序</th>
+              <th style="width:70px">功能</th>
+            </tr></thead>
+            <tbody>
+              <tr class="frow">
+                <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+                <td><select><option>請選擇</option></select></td>
+                <td><select><option>請選擇</option></select></td>
+                <td></td><td></td><td></td>
+              </tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>TS01</td><td class="tleft" style="font-weight:600">短期</td><td class="tleft" style="font-size:12px;color:#555">1 年內</td><td>1</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-time-scale')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>TS02</td><td class="tleft" style="font-weight:600">中期</td><td class="tleft" style="font-size:12px;color:#555">3–5 年</td><td>2</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-time-scale')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>TS03</td><td class="tleft" style="font-weight:600">長期</td><td class="tleft" style="font-size:12px;color:#555">5 年以上</td><td>3</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-time-scale')">✏️</span><span class="fi del">🚫</span></div></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+            <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+            <span class="pag-total">共 3 項</span>
+            <select class="per-page-sel"><option>15項/頁</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 佔位頁面 -->
+    <div class="page" id="pg-industry"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>產業別管理 — 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+    <div class="page" id="pg-quotation"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>問卷引文建置管理 — 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+    <div class="page" id="pg-scale"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>問卷填答尺度管理（對應 IFRS 1.6）— 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+    <div class="page" id="pg-disclosure"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>永續揭露準則資料庫 — 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+    <div class="page" id="pg-stakeholder"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>利害關係人類別管理 — 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+    <div class="page" id="pg-external"><div style="padding:24px 32px"><div class="notice n-info"><span>ℹ️</span><span>外部衝擊項目管理 — 現有系統頁面，此 Demo 未重新繪製。</span></div></div></div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="modalTitle"></h3><span class="modal-close" onclick="closeModal()">✕</span></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">取消</button>
+      <button class="btn btn-teal" onclick="saveModal()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastIcon">✓</span><span id="toastMsg"></span></div>
+
+<script>
+const SASB_OPTIONS=['IF-WM-110a.1','IF-WM-140a.1','IF-WM-150a.1','IF-WM-160a.1','CRES-410a.1','RR-BI-160a.1','SV-PS-330a.1','SV-PS-510a.1','TC-SI-230a.1'];
+const THEME_OPTIONS=['氣候策略','能源管理','水資源管理','生物多樣性','廢棄物管理','人才發展','職場安全','永續供應鏈','公司治理','資訊安全','財務績效'];
+const ESG_OPTIONS=['氣候策略與能源管理','水資源管理','生物多樣性','空汙與廢棄物','人才吸引與留任','職場安全與健康','資訊安全與隱私','公司治理與誠信經營'];
+let menuOpen=true;
+
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('leftMenu').classList.toggle('hidden',!menuOpen);
+}
+
+function go(pid){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.lm-item').forEach(m=>m.classList.remove('on'));
+  const pg=document.getElementById(pid);
+  if(pg) pg.classList.add('on');
+  document.querySelectorAll('.lm-item').forEach(m=>{
+    if(m.getAttribute('onclick')===`go('${pid}')`) m.classList.add('on');
+  });
+  document.getElementById('mainArea').scrollTop=0;
+}
+
+function removeChip(rm){ rm.closest('.chip').remove(); }
+
+function addChip(btn, type){
+  const container=btn.parentElement;
+  const existing=[...container.querySelectorAll('.chip')].map(c=>c.textContent.replace('✕','').trim());
+  const opts=type==='sasb'?SASB_OPTIONS:THEME_OPTIONS;
+  const avail=opts.filter(o=>!existing.includes(o));
+  if(!avail.length){showToast('已無可新增的項目','#B8860B');return;}
+  const sel=prompt((type==='sasb'?'選擇 SASB 標準：':'選擇永續主題：')+'\n'+avail.map((o,i)=>`${i+1}. ${o}`).join('\n')+'\n\n請輸入序號：');
+  if(!sel) return;
+  const idx=parseInt(sel)-1;
+  if(idx>=0&&idx<avail.length){
+    const chip=document.createElement('span');
+    chip.className='chip '+(type==='sasb'?'chip-blue':'chip-teal');
+    chip.innerHTML=avail[idx]+'<span class="rm" onclick="removeChip(this)">✕</span>';
+    container.insertBefore(chip,btn);
+    showToast('已新增 '+avail[idx],'#1A8F7F');
+  }
+}
+
+const MODAL_CONTENTS = {
+  'add-esg':{title:'新增 ESG 議題',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">面向 <span class="req">*</span></label><select class="fsel"><option>請選擇</option><option>環境面</option><option>社會面</option><option>治理/經濟面</option></select></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：10"></div>
+    </div>
+    <div class="fg"><label class="fl">議題名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入議題名稱"></div>
+    <div class="fg"><label class="fl">描述說明</label><textarea class="ftextarea" rows="3" placeholder="議題說明..."></textarea></div>
+    <div class="fg"><label class="fl">SASB 對應 <span style="font-size:11px;color:#888;font-weight:400">（1.2，可多選）</span></label>
+      <select class="fsel"><option value="">請選擇 SASB 標準</option>${SASB_OPTIONS.map(s=>`<option>${s}</option>`).join('')}</select></div>
+    <div class="fg"><label class="fl">永續主題 <span style="font-size:11px;color:#888;font-weight:400">（1.3，可多選）</span></label>
+      <select class="fsel"><option value="">請選擇永續主題</option>${THEME_OPTIONS.map(t=>`<option>${t}</option>`).join('')}</select></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 議題名稱</th></tr></thead>
+    <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+    <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+    <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr></tbody></table>`},
+  'edit-esg':{title:'編輯 ESG 議題',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">面向</label><select class="fsel"><option>環境面</option></select></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1"></div>
+    </div>
+    <div class="fg"><label class="fl">議題名稱 <span class="req">*</span></label><input class="finp" value="氣候策略與能源管理"></div>
+    <div class="fg"><label class="fl">描述說明</label><textarea class="ftextarea" rows="3">積極管理氣候相關風險與機會，設定減碳目標，導入節能減碳專案，提升競爭力。</textarea></div>
+    <div class="fg"><label class="fl">SASB 對應</label>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <span class="chip chip-blue">IF-WM-110a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <span class="chip chip-blue">CRES-410a.1<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'blue')">
+          <option value="">＋ 新增</option>${SASB_OPTIONS.map(s=>`<option>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">永續主題</label>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <span class="chip chip-teal">氣候策略<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <span class="chip chip-teal">能源管理<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
+          <option value="">＋ 新增</option>${THEME_OPTIONS.map(t=>`<option>${t}</option>`).join('')}
+        </select>
+      </div>
+    </div>`},
+  'add-theme':{title:'新增永續主題',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：T008"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：8"></div>
+    </div>
+    <div class="fg"><label class="fl">所屬 ESG 議題 <span class="req">*</span></label>
+      <select class="fsel"><option value="">請選擇</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}</select>
+      <span style="font-size:11px;color:#888;margin-top:3px">永續主題隸屬於 ESG 議題（1對多關係）</span></div>
+    <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入永續主題名稱"></div>
+    <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2" placeholder="此主題的範圍說明..."></textarea></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 主題名稱</th></tr></thead>
+    <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+    <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+    <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr></tbody></table>`},
+  'edit-theme':{title:'編輯永續主題',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" value="T001" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
+    </div>
+    <div class="fg"><label class="fl">所屬 ESG 議題</label>
+      <input class="finp" value="氣候策略與能源管理" readonly style="background:#f5f5f5">
+      <span style="font-size:11px;color:#aaa;margin-top:2px">所屬議題不可更改，如需變更請刪除後重新新增</span></div>
+    <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" value="氣候策略"></div>
+    <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2">與氣候變遷相關的策略規劃、目標設定與績效管理</textarea></div>`},
+  'add-iro':{title:'新增風險／機會項目',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">ESG 議題 <span class="req">*</span></label>
+        <select class="fsel" onchange="updateThemeSelect(this)">
+          <option value="">請選擇</option>
+          <option>氣候策略與能源管理</option><option>水資源管理</option><option>生物多樣性</option>
+          <option>人才吸引與留任</option><option>資訊安全與隱私</option><option>公司治理與誠信經營</option>
+        </select></div>
+      <div class="fg"><label class="fl">永續主題 <span class="req">*</span></label>
+        <select class="fsel" id="themeSelect"><option>請先選擇 ESG 議題</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">類型 <span class="req">*</span></label>
+        <div class="radio-group" style="margin-top:6px">
+          <label><input type="radio" name="irotype" value="risk" checked> ⚠ 風險</label>
+          <label><input type="radio" name="irotype" value="opp"> ✦ 機會</label>
+        </div>
+      </div>
+    <div class="fg"><label class="fl">描述 <span class="req">*</span></label>
+      <textarea class="ftextarea" rows="3" placeholder="請輸入風險或機會的描述說明..."></textarea></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 描述</th></tr></thead>
+    <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="2" placeholder="請輸入"></textarea></td></tr>
+    <tr><td>English</td><td><textarea class="ftextarea" rows="2" placeholder="Please enter"></textarea></td></tr>
+    <tr><td>简体中文</td><td><textarea class="ftextarea" rows="2" placeholder="请输入"></textarea></td></tr></tbody></table>`},
+  'edit-iro':{title:'編輯風險／機會項目',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">ESG 議題</label><input class="finp" value="氣候策略與能源管理" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">永續主題</label><input class="finp" value="氣候策略" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">類型</label>
+        <div class="radio-group" style="margin-top:6px">
+          <label><input type="radio" name="irot2" value="risk" checked> ⚠ 風險</label>
+          <label><input type="radio" name="irot2" value="opp"> ✦ 機會</label>
+        </div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">描述 <span class="req">*</span></label>
+      <textarea class="ftextarea" rows="3">碳定價制度強化，付費配額擴大導致營運成本上升</textarea></div>
+`},
+  'add-vc':{title:'新增價值鏈位置',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：VC06"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：6"></div>
+      <div class="fg"><label class="fl">狀態</label><select class="fsel"><option>啟用</option><option>停用</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">位置名稱 <span class="req">*</span></label><input class="finp" placeholder="例：研發活動"></div>
+    <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="例：產品開發、技術研究"></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 位置名稱</th></tr></thead>
+    <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+    <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+    <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr></tbody></table>`},
+  'edit-vc':{title:'編輯價值鏈位置',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" value="VC01" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
+      <div class="fg"><label class="fl">狀態</label><select class="fsel"><option>啟用</option><option>停用</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">位置名稱 <span class="req">*</span></label><input class="finp" value="上游供應商"></div>
+    <div class="fg"><label class="fl">說明</label><input class="finp" value="原料供應、外包生產、採購相關活動"></div>`},
+  'add-aspect':{title:'新增議題面向',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：011"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number"></div>
+      <div class="fg"><label class="fl">使用色碼</label><input type="color" class="finp" value="#b8e8d8" style="height:42px;padding:4px"></div>
+    </div>
+    <div class="fg"><label class="fl">面向名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入面向名稱"></div>
+    <div class="fg"><label class="fl">使用屬性</label>
+      <select class="fsel"><option>議題</option><option>外部衝擊</option><option>議題,外部衝擊</option></select></div>`},
+  'edit-aspect':{title:'編輯議題面向',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" value="001" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
+      <div class="fg"><label class="fl">使用色碼</label><input type="color" class="finp" value="#b8e8d8" style="height:42px;padding:4px"></div>
+    </div>
+    <div class="fg"><label class="fl">面向名稱</label><input class="finp" value="環境面"></div>
+    <div class="fg"><label class="fl">使用屬性</label>
+      <select class="fsel"><option>外部衝擊</option><option>議題</option><option>議題,外部衝擊</option></select></div>`},
+  'add-iro-type':{title:'新增 IRO 類型',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：R006"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number"></div>
+      <div class="fg"><label class="fl">屬性 <span class="req">*</span></label><select class="fsel"><option>風險</option><option>機會</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">IRO 類型名稱 <span class="req">*</span></label><input class="finp" placeholder="例：轉型風險－法律"></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 類型名稱</th></tr></thead>
+    <tbody>
+      <tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+      <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+      <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr>
+    </tbody></table>`},
+  'edit-iro-type':{title:'編輯 IRO 類型',body:()=>`
+    <div class="grid3">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" value="R001" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
+      <div class="fg"><label class="fl">屬性</label><select class="fsel"><option selected>風險</option><option>機會</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">IRO 類型名稱 <span class="req">*</span></label><input class="finp" value="實體風險"></div>`},
+  'add-time-scale':{title:'新增影響時間尺度',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：TS04"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" type="number"></div>
+    </div>
+    <div class="fg"><label class="fl">時間尺度名稱 <span class="req">*</span></label><input class="finp" placeholder="例：超長期"></div>
+    <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="例：10 年以上"></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 名稱</th></tr></thead>
+    <tbody>
+      <tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+      <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+      <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr>
+    </tbody></table>`},
+  'edit-time-scale':{title:'編輯影響時間尺度',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" value="TS01" readonly style="background:#f5f5f5"></div>
+      <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
+    </div>
+    <div class="fg"><label class="fl">時間尺度名稱 <span class="req">*</span></label><input class="finp" value="短期"></div>
+    <div class="fg"><label class="fl">說明</label><input class="finp" value="1 年內"></div>`},
+  'add-fin':{title:'新增財務衝擊項目',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">代碼</label><input class="finp" placeholder="系統自動產生"></div>
+      <div class="fg"><label class="fl">衝擊類型 <span class="req">*</span></label>
+        <select class="fsel"><option>量化（Part 3a）</option><option>質化（Part 3b Yes/No）</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">衝擊項目名稱 <span class="req">*</span></label>
+      <input class="finp" placeholder="例：是否已建立相關政策管控措施？"></div>
+    <div class="form-section-title" style="margin-top:8px">多語系</div>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 項目名稱</th></tr></thead>
+    <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
+    <tr><td>English</td><td><textarea class="ftextarea" rows="1" placeholder="Please enter"></textarea></td></tr>
+    <tr><td>简体中文</td><td><textarea class="ftextarea" rows="1" placeholder="请输入"></textarea></td></tr></tbody></table>`},
+};
+
+function openModal(key){
+  const m=MODAL_CONTENTS[key];
+  if(!m) return;
+  document.getElementById('modalTitle').textContent=m.title;
+  document.getElementById('modalBody').innerHTML=m.body();
+  document.getElementById('modalBg').classList.add('show');
+}
+function addFromModal(sel,cls){
+  if(!sel.value) return;
+  const chip=document.createElement('span');
+  chip.className='chip chip-'+cls;
+  chip.innerHTML=sel.value+'<span class="rm" onclick="removeChip(this)">✕</span>';
+  sel.parentElement.insertBefore(chip,sel);
+  sel.value='';
+}
+function switchIROTab(tab){
+  const isIRO = tab==='iro';
+  document.getElementById('panel-iro').style.display = isIRO ? '' : 'none';
+  document.getElementById('panel-time').style.display = isIRO ? 'none' : '';
+  const tIRO = document.getElementById('tab-iro');
+  const tTime = document.getElementById('tab-time');
+  if(tIRO) { tIRO.style.color=isIRO?'#1A8F7F':'#888'; tIRO.style.fontWeight=isIRO?'700':'400'; tIRO.style.borderBottom=isIRO?'2px solid #1A8F7F':'2px solid transparent'; }
+  if(tTime){ tTime.style.color=isIRO?'#888':'#1A8F7F'; tTime.style.fontWeight=isIRO?'400':'700'; tTime.style.borderBottom=isIRO?'2px solid transparent':'2px solid #1A8F7F'; }
+}
+const ESG_THEME_MAP = {
+  '氣候策略與能源管理': ['氣候策略','能源管理'],
+  '水資源管理': ['水資源管理'],
+  '生物多樣性': ['生物多樣性'],
+  '空汙與廢棄物': ['廢棄物管理'],
+  '人才吸引與留任': ['人才發展'],
+  '職場安全與健康': ['職場安全'],
+  '資訊安全與隱私': ['資訊安全'],
+  '公司治理與誠信經營': ['公司治理'],
+};
+function updateThemeSelect(esgSel){
+  const themes = ESG_THEME_MAP[esgSel.value]||[];
+  const tSel = document.getElementById('themeSelect');
+  if(!tSel) return;
+  tSel.innerHTML = themes.length
+    ? themes.map(t=>`<option>${t}</option>`).join('')
+    : '<option>請先選擇ESG議題</option>';
+}
+function closeModal(){document.getElementById('modalBg').classList.remove('show');}
+function saveModal(){closeModal();showToast('儲存成功','#1A8F7F');}
+function showToast(msg,color){
+  const t=document.getElementById('toast');
+  t.style.background=color||'#1A8F7F';
+  document.getElementById('toastMsg').textContent=msg;
+  document.getElementById('toastIcon').textContent=color==='#c0392b'?'⚠':color==='#2E75B6'?'ℹ️':'✓';
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>
