@@ -376,11 +376,7 @@ function renderROSection(iss, type){
     <span style="font-size:12px;color:#888">點選核取方塊選擇項目，展開後填寫評估欄位</span>
     <span class="${reqCls}">${reqLabel}</span>
   </div>
-  ${items.map(item => renderROCard(item, isRisk, iss.id)).join('')}
-  <div class="add-row">
-    <input class="add-inp" id="addInp-${iss.id}-${type}" placeholder="＋ 新增自訂${isRisk?'風險':'機會'}項目（若清單中無適合選項）">
-    <button class="btn-add" onclick="addCustomCard('${iss.id}','${type}')">新增</button>
-  </div>`;
+  ${items.map(item => renderROCard(item, isRisk, iss.id)).join('')}`;
 }
 
 function renderROCard(item, isRisk, issId){
