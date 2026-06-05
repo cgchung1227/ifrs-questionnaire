@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P06 同仁問卷填答介面</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:#F3F6F8;color:#2d2d2d;font-size:14px}
+/* BANNER */
+.banner{width:100%;height:200px;background:linear-gradient(150deg,#054e41 0%,#0a7060 28%,#1A8F7F 55%,#35aa94 78%,#7dd4c4 100%);position:relative;overflow:hidden;flex-shrink:0}
+.banner::before{content:'';position:absolute;bottom:-60px;left:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.07)}
+.banner::after{content:'';position:absolute;top:-50px;right:40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.05)}
+.banner-wave{position:absolute;bottom:0;left:0;right:0;height:60px;opacity:.15}
+/* PAGE WRAP */
+.page-wrap{max-width:920px;margin:0 auto;padding:0 20px}
+/* CONTENT CARD */
+.content-card{background:#fff;border-radius:24px 24px 0 0;margin-top:-44px;position:relative;z-index:10;box-shadow:0 -4px 24px rgba(0,0,0,.08);min-height:calc(100vh - 156px)}
+/* SURVEY INTRO */
+.survey-intro{padding:30px 32px 24px;border-bottom:2px solid #F0F5F3;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.survey-intro-main{flex:1}
+.survey-l1{font-size:21px;font-weight:700;color:#1a2e2a;letter-spacing:.02em;margin-bottom:10px}
+.survey-l2-wrap{margin-bottom:14px}
+.survey-l2{display:inline-block;background:#E4F6F1;color:#1A8F7F;font-size:12.5px;font-weight:700;padding:5px 14px;border-radius:6px;letter-spacing:.05em}
+.survey-l3{font-size:16px;font-weight:700;color:#1e2d2a;margin-bottom:8px}
+.survey-l4{font-size:13.5px;color:#777;line-height:1.85;max-width:580px}
+.survey-intro-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;padding-top:6px}
+/* CARD INNER */
+.card-inner{padding:20px 32px 100px}
+/* HIDER */
+.hdr-actions{display:flex;gap:8px;align-items:center}
+.btn{padding:8px 18px;border-radius:10px;font-size:13px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:500;transition:all .15s}
+.btn-primary{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.btn-primary:hover{background:#168070}
+.btn-outline{background:#fff;color:#555;border-color:#DDE3E7}
+.btn-outline:hover{background:#F7FAFA}
+/* PROGRESS */
+.prog-bar-wrap{background:#fff;border-radius:16px;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.prog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.prog-title{font-size:12px;font-weight:600;color:#666}
+.prog-count{font-size:12px;font-weight:700;color:#1A8F7F}
+.prog-steps{display:flex;gap:6px}
+.prog-step{flex:1;height:7px;border-radius:4px;background:#EDF1F0;overflow:hidden;cursor:pointer}
+.prog-step-fill{height:100%;border-radius:4px;background:#1A8F7F;transition:width .3s}
+.prog-step.done .prog-step-fill{width:100%}
+.prog-step.active .prog-step-fill{width:50%;background:#F0B429}
+.prog-step.empty .prog-step-fill{width:0}
+.prog-labels{display:flex;gap:6px;margin-top:8px}
+.prog-lbl{flex:1;font-size:10px;text-align:center;color:#bbb;cursor:pointer;transition:color .15s}
+.prog-lbl.done{color:#1A8F7F;font-weight:600}
+.prog-lbl.active{color:#B8860B;font-weight:600}
+/* TOPIC TABS */
+.tabs-wrap{display:none}
+/* ISSUE */
+.issue{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:box-shadow .2s}
+.issue:hover{box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.issue-hdr{background:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;border-bottom:2px solid #F3F6F8}
+.issue-hdr:hover{background:#FAFCFB}
+.issue-left{display:flex;align-items:flex-start;gap:12px}
+.icode{font-size:11px;background:#1A8F7F;color:#fff;padding:3px 10px;border-radius:6px;font-weight:700;margin-top:2px;white-space:nowrap}
+.icode.red{background:#e05252}
+.iname{font-size:15px;font-weight:700;color:#1e2d2a}
+.isasb{font-size:11px;color:#9AAAA6;margin-top:3px}
+.istatus{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.sbadge{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;white-space:nowrap}
+.s-ok{background:#E4F6F1;color:#1A8F7F}
+.s-pend{background:#FFF5E0;color:#B8860B}
+.s-err{background:#FEF0EE;color:#e05252}
+.s-empty{background:#F2F4F5;color:#aaa}
+.chevron{font-size:11px;color:#bbb;transition:transform .25s;margin-left:4px}
+.chevron.open{transform:rotate(180deg)}
+.issue-body{padding:20px;display:none;background:#FAFCFB}
+.issue-body.open{display:block}
+/* RO */
+.ro-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.ro-badge{font-size:11px;padding:4px 12px;border-radius:6px;font-weight:700;letter-spacing:.03em}
+.risk-b{background:#FEF0EE;color:#e05252;border:1px solid #f8d0cc}
+.opp-b{background:#E4F6F1;color:#1A8F7F;border:1px solid #9ECFC7}
+.ro-req{font-size:11px;color:#e05252;margin-left:auto}
+.ro-req.ok{color:#1A8F7F}
+/* EACH RO CARD = own white card */
+.ro-card{background:#fff;border:1.5px solid #EAF0EE;border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color .15s,box-shadow .15s;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.ro-card:hover{border-color:#B8D8D3;box-shadow:0 3px 12px rgba(26,143,127,.08)}
+.ro-card.sel{border-color:#1A8F7F;box-shadow:0 2px 14px rgba(26,143,127,.14)}
+.ro-card-hdr{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.chkbox{width:20px;height:20px;border:2px solid #C8D8D4;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;cursor:pointer}
+.chkbox:hover{border-color:#1A8F7F}
+.chkbox.on{background:#1A8F7F;border-color:#1A8F7F;color:#fff}
+.ro-desc{flex:1;font-size:13.5px;color:#333;line-height:1.5}
+.custom-tag{font-size:10px;background:#FFF5E0;color:#B8860B;border:1px solid #EDCE82;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.expand-arrow{color:#ccc;font-size:12px;transition:transform .2s;flex-shrink:0}
+.ro-detail{display:none;padding:0 18px 18px}
+.ro-detail.open{display:block}
+/* PART TABS */
+.part-tabs{display:flex;gap:6px;margin:14px 0 16px;background:#F3F6F8;border-radius:10px;padding:5px}
+.pt{flex:1;padding:8px 4px;text-align:center;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:#888;border-radius:7px;transition:all .15s;position:relative;border:none}
+.pt:hover{background:#fff;color:#1A8F7F}
+.pt.active{background:#fff;color:#1A8F7F;font-weight:700;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.pt .pt-num{font-size:10px;display:block;opacity:.7;margin-top:1px}
+.pt.done-part::after{content:'✓';position:absolute;top:5px;right:7px;font-size:9px;color:#9ECFC7}
+.pt.active.done-part::after{color:#1A8F7F}
+.part-content{display:none}
+.part-content.active{display:block}
+/* FIELDS */
+.field-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.field-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-size:12px;color:#666;font-weight:600}
+.req{color:#e05252;margin-left:2px}
+.fsel{padding:8px 12px;border:1.5px solid #DDE6E3;border-radius:8px;font-size:13px;color:#333;font-family:inherit;background:#fff;width:100%;cursor:pointer;transition:border-color .15s}
+.fsel:hover{border-color:#9ECFC7}
+.fsel:focus{outline:none;border-color:#1A8F7F;box-shadow:0 0 0 3px rgba(26,143,127,.08)}
+.fsel.err{border-color:#f0b8b4;background:#fffaf9}
+.fsel.filled{border-color:#9ECFC7;background:#F8FDFB}
+.ferr{font-size:11px;color:#e05252;margin-top:2px;display:flex;align-items:center;gap:3px}
+.part-label{font-size:11px;font-weight:700;color:#1A8F7F;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.part-label::after{content:'';flex:1;height:1px;background:#E4EDE9}
+/* VALUE CHAIN */
+.vc-wrap{margin-top:12px}
+.vc-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.vc{padding:7px 16px;border-radius:22px;font-size:12px;border:1.5px solid #DDE6E3;cursor:pointer;background:#fff;color:#666;transition:all .15s;user-select:none}
+.vc:hover{border-color:#1A8F7F;color:#1A8F7F;background:#F0F9F7}
+.vc.on{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+/* QUALITATIVE */
+.qual-list{border-radius:12px;overflow:hidden;border:1.5px solid #EAF0EE}
+.qual-row{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #EEF3F1;gap:14px;transition:background .15s;background:#fff}
+.qual-row:last-child{border-bottom:none}
+.qual-row:nth-child(odd){background:#FAFCFB}
+.qual-row:hover{background:#F2F9F7}
+.qual-q{flex:1;font-size:13px;color:#333;line-height:1.5}
+.yn-group{display:flex;gap:6px;flex-shrink:0}
+.yn{padding:6px 16px;border-radius:8px;font-size:12px;border:1.5px solid #DDE3E7;cursor:pointer;background:#fff;color:#777;transition:all .15s;white-space:nowrap;user-select:none}
+.yn:hover{border-color:#1A8F7F;color:#1A8F7F}
+.yn.yes-on{background:#E4F6F1;color:#1A8F7F;border-color:#9ECFC7;font-weight:700}
+.yn.no-on{background:#FEF0EE;color:#e05252;border-color:#f8d0cc;font-weight:700}
+.yn.na-on{background:#F2F4F5;color:#888;border-color:#CDD3D6;font-weight:700}
+/* ADD CUSTOM */
+.sdiv{height:1px;background:#EEF2F0;margin:16px 0}
+.add-row{display:flex;gap:8px;margin-top:10px}
+.add-inp{flex:1;padding:9px 14px;border:1.5px dashed #C0D4CF;border-radius:10px;font-size:13px;color:#333;font-family:inherit;background:#F8FDFB;transition:all .15s}
+.add-inp:focus{outline:none;border-color:#1A8F7F;background:#fff;border-style:solid}
+.add-inp::placeholder{color:#bbb}
+.btn-add{padding:9px 16px;background:#fff;border:1.5px solid #1A8F7F;color:#1A8F7F;border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;font-weight:600}
+.btn-add:hover{background:#E4F6F1}
+/* BOTTOM BAR */
+.bot-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E8ECEF;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;z-index:50;box-shadow:0 -2px 12px rgba(0,0,0,.07)}
+.bot-nav{display:flex;align-items:center;gap:12px}
+.bot-info{font-size:12px;color:#aaa;padding:0 4px}
+/* TOAST */
+.toast{position:fixed;bottom:80px;right:24px;border-radius:12px;padding:13px 20px;font-size:13px;display:none;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,.16);max-width:380px;align-items:center;gap:10px;color:#fff;transition:opacity .3s}
+.toast.show{display:flex}
+/* COMPLETE OVERLAY */
+.complete-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.complete-overlay.show{display:flex}
+.complete-card{background:#fff;border-radius:20px;padding:40px 44px;text-align:center;max-width:400px;box-shadow:0 16px 56px rgba(0,0,0,.18)}
+.complete-icon{width:68px;height:68px;border-radius:50%;background:#E4F6F1;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:30px}
+.complete-title{font-size:20px;font-weight:700;color:#1A8F7F;margin-bottom:10px}
+.complete-sub{font-size:13px;color:#999;line-height:1.7;margin-bottom:26px}
+/* VALIDATION */
+.validate-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:9998;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.validate-modal.show{display:flex}
+.validate-card{background:#fff;border-radius:16px;padding:28px;max-width:460px;width:92%;box-shadow:0 10px 40px rgba(0,0,0,.16)}
+.validate-title{font-size:14px;font-weight:700;color:#e05252;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.validate-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.validate-item{font-size:13px;color:#555;padding:10px 14px;background:#fffaf9;border:1.5px solid #f8d0cc;border-radius:8px;display:flex;align-items:flex-start;gap:8px}
+.validate-item::before{content:'⚠';color:#e05252;flex-shrink:0}
+.validate-footer{display:flex;justify-content:flex-end;gap:8px}
+/* AUTOSAVE */
+.autosave-dot{width:7px;height:7px;border-radius:50%;background:#9ECFC7;display:inline-block;margin-right:4px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <svg class="banner-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#fff"/>
+  </svg>
+</div>
+
+<!-- MAIN WRAP -->
+<div class="page-wrap">
+<div class="content-card" id="mainScroll">
+
+  <!-- SURVEY INTRO HEADER -->
+  <div class="survey-intro">
+    <div class="survey-intro-main">
+      <div class="survey-l1">慢想股份有限公司 · IFRS 重大性評估</div>
+      <div class="survey-l2-wrap">
+        <span class="survey-l2">永續發展衝擊調查問卷 2024</span>
+      </div>
+      <div class="survey-l3">親愛的同仁 您好：</div>
+      <div class="survey-l4">感謝您撥冗參與本次重大性評估問卷填答。本問卷旨在協助公司識別與評估 IFRS 永續相關財務揭露準則所要求之重大風險與機會，您的意見對於提升公司永續治理品質至關重要，敬請如實填寫。</div>
+    </div>
+    <div class="survey-intro-actions">
+      <span style="font-size:12px;color:#1A8F7F;display:flex;align-items:center"><span class="autosave-dot"></span><span id="saveStatus">自動儲存於 14:32</span></span>
+      <button class="btn btn-outline" onclick="saveDraft()">儲存草稿</button>
+      <button class="btn btn-primary" onclick="submitForm()">送出問卷</button>
+    </div>
+  </div>
+
+  <!-- CARD INNER -->
+  <div class="card-inner">
+
+    <!-- PROGRESS -->
+    <div class="prog-bar-wrap">
+      <div class="prog-header">
+        <span class="prog-title">填答進度</span>
+        <span class="prog-count" id="progCount">2 / 5 個主題已完成</span>
+      </div>
+      <div class="prog-steps" id="progSteps"></div>
+      <div class="prog-labels" id="progLabels"></div>
+    </div>
+
+    <!-- TOPIC TABS -->
+    <div class="tabs-wrap">
+      <div class="tabs-label">我負責的永續主題（每個主題至少需填一個風險與一個機會）</div>
+      <div class="tabs" id="topicTabs"></div>
+    </div>
+
+    <!-- TOPIC CONTENT -->
+    <div id="topicContent"></div>
+
+  </div><!-- /card-inner -->
+</div><!-- /content-card -->
+</div><!-- /page-wrap -->
+
+<!-- BOTTOM BAR -->
+<div class="bot-bar">
+  <div class="bot-nav">
+    <button class="btn btn-outline" style="padding:6px 14px;font-size:13px" id="prevBtn" onclick="prevTopic()">◀ 上一主題</button>
+    <span class="bot-info" id="botInfo">主題 1 / 5</span>
+    <button class="btn btn-primary" style="padding:6px 14px;font-size:13px" id="nextBtn" onclick="nextTopic()">下一主題 ▶</button>
+  </div>
+  <div style="font-size:12px;color:#aaa">截止日：<strong style="color:#c0392b">2024-12-31</strong></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastIcon" style="font-size:16px;flex-shrink:0">✓</span><span id="toastMsg"></span></div>
+
+<!-- VALIDATION MODAL -->
+<div class="validate-modal" id="validateModal">
+  <div class="validate-card">
+    <div class="validate-title"><span>⚠</span> 有必填欄位尚未完成</div>
+    <div class="validate-list" id="validateList"></div>
+    <div class="validate-footer">
+      <button class="btn btn-outline" onclick="closeValidate()">繼續填寫</button>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLETE OVERLAY -->
+<div class="complete-overlay" id="completeOverlay">
+  <div class="complete-card">
+    <div class="complete-icon">✅</div>
+    <div class="complete-title">問卷送出成功！</div>
+    <div class="complete-sub">感謝您完成本次重大性評估問卷填答。<br>您的回覆已記錄，顧問將進行後續分析。</div>
+    <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('completeOverlay').classList.remove('show')">確認</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const TOPICS = [
+  { id:'t1', name:'水資源管理', status:'done' },
+  { id:'t2', name:'氣候變遷',   status:'done' },
+  { id:'t3', name:'生物多樣性', status:'active' },
+  { id:'t4', name:'廢棄物管理', status:'empty' },
+  { id:'t5', name:'供應鏈管理', status:'empty' },
+];
+
+const IRO_TYPES = ['實體風險','轉型風險－政策和法規','轉型風險－技術','轉型風險－市場','轉型風險－聲譽'];
+const OPP_TYPES = ['機會－資源效率','機會－能源來源','機會－產品／服務','機會－市場','機會－韌性'];
+const TIME_OPTIONS = ['短期（1 年內）','中期（3–5 年）','長期（5 年以上）'];
+const PROB_OPTIONS = ['1：10 年以上發生一次','2：5–10 年發生一次','3：1–5 年發生一次','4：1 年發生一次','5：每半年至少發生一次'];
+const AMT_OPTIONS = ['不影響','1：小於 100 萬','2：100 萬－1,000 萬','3：1,000 萬－1 億','4：1 億－10 億','5：大於 10 億'];
+const EBITDA_OPTIONS = ['1：< 0.5% EBITDA','2：0.5–1% EBITDA','3：1–3% EBITDA','4：3–5% EBITDA','5：> 5% EBITDA'];
+const QUAL_QUESTIONS = [
+  '是否已建立相關政策管控措施？',
+  '是否會影響公司營運策略與業務發展目標？',
+  '是否與高階主管之薪酬相連結？',
+  '是否已有法規（含研議中草案）要求進行管理／申報／揭露？',
+  '是否出現在公司對供應商／承攬商之選商決策中？',
+  '是否有被既有／潛在之股東或投資人要求公開揭露相關資訊？',
+  '該永續風險或機會是否有被客戶要求建立管理機制（含設定目標）？',
+];
+const VC_OPTIONS = ['上游供應商','自有營運','下游客戶','投資活動'];
+
+// Pre-filled data for topic 3 (生物多樣性)
+const ISSUES_T3 = [
+  {
+    id:'e04', code:'E-04', name:'生態系服務喪失', sasb:'SASB: IF-WM-160a.1 · 永續主題：生物多樣性 · 氣候調適',
+    risks:[
+      { id:'r1', desc:'營運區域周邊生態系服務（如授粉、水源涵養）減損，導致原料取得成本上升', checked:true,
+        p2:{iro:'實體風險',time:'中期（3–5 年）',note:'生態調節服務相關'},
+        p3a:{prob:'3：1–5 年發生一次',rev:'2：100 萬－1,000 萬',cost:'3：1,000 萬－1 億',ebitda:'2：0.5–1% EBITDA'},
+        p3b:[true,true,false,true,false,true,true],
+        p4:{vc:['上游供應商','下游客戶']}
+      },
+      { id:'r2', desc:'土地使用法規因生物多樣性保護趨嚴，造成廠區限制擴建或需取得生態補償許可', checked:false },
+      { id:'r3', desc:'供應鏈上游農業原料因生態破壞導致年度歉收，供貨不穩定性增加', checked:true, custom:true,
+        p2:{iro:'',time:'',note:''},
+        p3a:{prob:'',rev:'',cost:'',ebitda:''},
+        p3b:[null,null,null,null,null,null,null],
+        p4:{vc:[]}
+      },
+    ],
+    opps:[
+      { id:'o1', desc:'發展自然正向產品（Nature-positive products），搶占綠色採購市場，提升客戶溢價空間', checked:true,
+        p2:{iro:'機會－產品／服務',time:'長期（5 年以上）',note:''},
+        p3a:{prob:'3：1–5 年發生一次',rev:'4：1 億－10 億',cost:'不影響',ebitda:'3：1–3% EBITDA'},
+        p3b:[true,true,false,true,false,true,true],
+        p4:{vc:['下游客戶','投資活動']}
+      },
+      { id:'o2', desc:'與生態保育組織合作進行棲地復育，取得生物多樣性信用（Biodiversity Credits）創造額外收益', checked:false },
+    ]
+  },
+  {
+    id:'e05', code:'E-05', name:'外來物種入侵與土地使用變更', sasb:'SASB: RR-BI-160a.1 · 永續主題：生物多樣性', collapsed:true,
+    risks:[
+      { id:'r4', desc:'外來入侵物種擴散至廠區周邊，導致生態補救及清除成本增加', checked:true,
+        p2:{iro:'實體風險',time:'長期（5 年以上）',note:''},
+        p3a:{prob:'2：5–10 年發生一次',rev:'1：小於 100 萬',cost:'1：小於 100 萬',ebitda:'1：< 0.5% EBITDA'},
+        p3b:[true,false,false,true,false,false,false],
+        p4:{vc:['自有營運']}
+      },
+    ],
+    opps:[
+      { id:'o3', desc:'主動進行在地棲地復育，強化企業永續形象與社區信任', checked:true,
+        p2:{iro:'機會－市場',time:'長期（5 年以上）',note:''},
+        p3a:{prob:'2：5–10 年發生一次',rev:'1：小於 100 萬',cost:'不影響',ebitda:'1：< 0.5% EBITDA'},
+        p3b:[true,true,false,false,false,true,false],
+        p4:{vc:['自有營運','下游客戶']}
+      },
+    ]
+  },
+];
+
+let currentTopicIdx = 2; // 0-based, starts at 生物多樣性
+let expandedIssues = new Set(['e04']); // e04 open by default
+let expandedCards = new Set(['r1','o1']); // pre-expanded
+let activeParts = {}; // cardId -> partSuffix
+let customCards = []; // track added custom
+
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
+function renderAll(){
+  renderProgress();
+  renderTabs();
+  renderTopicContent();
+  renderBotBar();
+}
+
+function renderProgress(){
+  const stepsEl = document.getElementById('progSteps');
+  const labelsEl = document.getElementById('progLabels');
+  const countEl = document.getElementById('progCount');
+  const done = TOPICS.filter(t=>t.status==='done').length;
+  countEl.textContent = `${done} / ${TOPICS.length} 個主題已完成`;
+  stepsEl.innerHTML = TOPICS.map((t,i)=>{
+    const cls = t.status==='done'?'done':t.status==='active'?'active':'empty';
+    return `<div class="prog-step ${cls}" onclick="jumpTopic(${i})" title="${t.name}"><div class="prog-step-fill"></div></div>`;
+  }).join('');
+  labelsEl.innerHTML = TOPICS.map((t,i)=>{
+    const cls = t.status==='done'?'done':t.status==='active'?'active':'';
+    return `<div class="prog-lbl ${cls}" onclick="jumpTopic(${i})">${t.name}</div>`;
+  }).join('');
+}
+
+function renderTabs(){ /* tabs removed */ }
+
+function renderTopicContent(){
+  const container = document.getElementById('topicContent');
+  const topic = TOPICS[currentTopicIdx];
+  if(!topic){ container.innerHTML=''; return; }
+  // For demo: only topic 3 (生物多樣性) has full data
+  if(currentTopicIdx === 2){
+    container.innerHTML = ISSUES_T3.map(iss => renderIssue(iss)).join('');
+  } else if(topic.status==='done'){
+    container.innerHTML = `<div style="background:#fff;border:1px solid #d8e4e0;border-radius:8px;padding:32px;text-align:center;color:#1A8F7F">
+      <div style="font-size:32px;margin-bottom:12px">✅</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:6px">${topic.name}主題已完成填答</div>
+      <div style="font-size:13px;color:#888">此主題的風險與機會評估已送出，如需修改請聯繫問卷管理員。</div>
+    </div>`;
+  } else {
+    container.innerHTML = `<div style="background:#fff;border:1px solid #d8e4e0;border-radius:8px;padding:32px;text-align:center;color:#888">
+      <div style="font-size:32px;margin-bottom:12px">📝</div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:6px">${topic.name}</div>
+      <div style="font-size:13px">此主題尚未開始填寫，請選擇下方的風險與機會項目。</div>
+      <div style="margin-top:20px;padding:16px;background:#f8fcfb;border-radius:6px;border:1px dashed #c8d8d4;font-size:12px;color:#aaa">（Demo 中僅「生物多樣性」主題有完整互動資料）</div>
+    </div>`;
+  }
+}
+
+function renderIssue(iss){
+  const isOpen = expandedIssues.has(iss.id);
+  const hasRisk = iss.risks.some(r=>r.checked);
+  const hasOpp = iss.opps.some(o=>o.checked);
+  const allDone = hasRisk && hasOpp;
+  const statusCls = iss.collapsed ? 's-ok' : allDone ? 's-ok' : hasRisk||hasOpp ? 's-pend' : 's-empty';
+  const statusLabel = iss.collapsed ? '已完成' : allDone ? '已完成' : hasRisk||hasOpp ? '填寫中' : '未開始';
+
+  return `<div class="issue" id="iss-${iss.id}">
+    <div class="issue-hdr" onclick="toggleIssue('${iss.id}')">
+      <div class="issue-left">
+        <span class="icode">${iss.code}</span>
+        <div>
+          <div class="iname">${iss.name}</div>
+          <div class="isasb">${iss.sasb}</div>
+        </div>
+      </div>
+      <div class="istatus">
+        <span class="sbadge ${statusCls}">${statusLabel}</span>
+        <span class="chevron ${isOpen?'open':''}">▼</span>
+      </div>
+    </div>
+    <div class="issue-body ${isOpen?'open':''}" id="body-${iss.id}">
+      ${renderROSection(iss, 'risk')}
+      <div class="sdiv"></div>
+      ${renderROSection(iss, 'opp')}
+    </div>
+  </div>`;
+}
+
+function renderROSection(iss, type){
+  const isRisk = type==='risk';
+  const items = isRisk ? iss.risks : iss.opps;
+  const checkedCount = items.filter(r=>r.checked).length;
+  const label = isRisk ? '⚠ 風險' : '✦ 機會';
+  const cls = isRisk ? 'risk-b' : 'opp-b';
+  const reqCls = checkedCount>0 ? 'ro-req ok' : 'ro-req';
+  const reqLabel = checkedCount>0 ? `✓ 已選 ${checkedCount} 項` : '* 至少一項';
+
+  return `<div class="ro-hdr">
+    <span class="ro-badge ${cls}">${label}</span>
+    <span style="font-size:12px;color:#888">點選核取方塊選擇項目，展開後填寫評估欄位</span>
+    <span class="${reqCls}">${reqLabel}</span>
+  </div>
+  ${items.map(item => renderROCard(item, isRisk, iss.id)).join('')}
+  <div class="add-row">
+    <input class="add-inp" id="addInp-${iss.id}-${type}" placeholder="＋ 新增自訂${isRisk?'風險':'機會'}項目（若清單中無適合選項）">
+    <button class="btn-add" onclick="addCustomCard('${iss.id}','${type}')">新增</button>
+  </div>`;
+}
+
+function renderROCard(item, isRisk, issId){
+  const isOpen = expandedCards.has(item.id);
+  const activePart = activeParts[item.id] || 'p1';
+  return `<div class="ro-card ${item.checked?'sel':''}" id="card-${item.id}">
+    <div class="ro-card-hdr">
+      <div class="chkbox ${item.checked?'on':''}" onclick="toggleCheck('${item.id}','${issId}','${isRisk?'risk':'opp'}')">${item.checked?'✓':''}</div>
+      <div class="ro-desc" onclick="if(document.getElementById('card-${item.id}').classList.contains('sel'))toggleExpand('${item.id}')">${item.desc}</div>
+      ${item.custom?'<span class="custom-tag">自訂新增</span>':''}
+      ${item.checked?`<span class="expand-arrow" onclick="toggleExpand('${item.id}')" style="transform:${isOpen?'rotate(180deg)':'rotate(0)'}">▼</span>`:''}
+    </div>
+    ${item.checked ? renderRODetail(item, isRisk, activePart, isOpen) : ''}
+  </div>`;
+}
+
+function renderRODetail(item, isRisk, activePart, isOpen){
+  const parts = ['p1','p2','p3','p4'];
+  const partLabels = ['Part 2','Part 3a','Part 3b','Part 4'];
+  const partSubs = ['識別確認','量化評估','質化評估','價值鏈'];
+
+  // Check which parts are filled
+  const partDone = {
+    p1: item.p2 && item.p2.iro && item.p2.time,
+    p2: item.p3a && item.p3a.prob,
+    p3: item.p3b && item.p3b.some(v=>v!==null),
+    p4: item.p4 && item.p4.vc && item.p4.vc.length>0,
+  };
+
+  return `<div class="ro-detail ${isOpen?'open':''}" id="detail-${item.id}">
+    <div class="part-tabs">
+      ${parts.map((p,i)=>{
+        const isDone = partDone[p];
+        return `<div class="pt ${activePart===p?'active':''} ${isDone?'done-part':''}" onclick="switchPart('${item.id}','${p}')">
+          ${partLabels[i]}<span class="pt-num">${partSubs[i]}</span>
+        </div>`;
+      }).join('')}
+    </div>
+    <div id="parts-${item.id}">
+      ${renderPart2(item, isRisk, activePart)}
+      ${renderPart3a(item, isRisk, activePart)}
+      ${renderPart3b(item, activePart)}
+      ${renderPart4(item, activePart)}
+    </div>
+  </div>`;
+}
+
+function renderPart2(item, isRisk, activePart){
+  const d = item.p2 || {};
+  const typeOpts = isRisk ? IRO_TYPES : OPP_TYPES;
+  return `<div class="part-content ${activePart==='p1'?'active':''}" id="p1-${item.id}">
+    <div class="part-label">Part 2 — 識別確認</div>
+    <div class="field-grid-3">
+      <div class="fg">
+        <label class="fl">IRO 類型<span class="req">*</span></label>
+        <select class="fsel ${d.iro?'filled':item.checked?'err':''}" onchange="updateField('${item.id}','p2','iro',this.value)">
+          <option value="">請選擇</option>
+          ${typeOpts.map(o=>`<option ${d.iro===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+        ${item.checked&&!d.iro?'<span class="ferr">▲ 必填</span>':''}
+      </div>
+      <div class="fg">
+        <label class="fl">影響時間尺度<span class="req">*</span></label>
+        <select class="fsel ${d.time?'filled':item.checked?'err':''}" onchange="updateField('${item.id}','p2','time',this.value)">
+          <option value="">請選擇</option>
+          ${TIME_OPTIONS.map(o=>`<option ${d.time===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+        ${item.checked&&!d.time?'<span class="ferr">▲ 必填</span>':''}
+      </div>
+      <div class="fg">
+        <label class="fl">永續主題說明<span style="color:#aaa;font-weight:400">（選填）</span></label>
+        <input type="text" class="fsel ${d.note?'filled':''}" value="${d.note||''}" placeholder="說明此風險與永續主題的關聯" oninput="updateField('${item.id}','p2','note',this.value)">
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPart3a(item, isRisk, activePart){
+  const d = item.p3a || {};
+  return `<div class="part-content ${activePart==='p2'?'active':''}" id="p2-${item.id}">
+    <div class="part-label">Part 3a — 量化財務評估</div>
+    <div class="field-grid-4">
+      <div class="fg">
+        <label class="fl">發生機率<span class="req">*</span></label>
+        <select class="fsel ${d.prob?'filled':''}" onchange="updateField('${item.id}','p3a','prob',this.value)">
+          <option value="">請選擇</option>
+          ${PROB_OPTIONS.map(o=>`<option ${d.prob===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">營收影響金額</label>
+        <select class="fsel ${d.rev?'filled':''}" onchange="updateField('${item.id}','p3a','rev',this.value)">
+          <option value="">請選擇</option>
+          ${AMT_OPTIONS.map(o=>`<option ${d.rev===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">成本影響金額</label>
+        <select class="fsel ${d.cost?'filled':''}" onchange="updateField('${item.id}','p3a','cost',this.value)">
+          <option value="">請選擇</option>
+          ${AMT_OPTIONS.map(o=>`<option ${d.cost===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">財務影響（EBITDA）</label>
+        <select class="fsel ${d.ebitda?'filled':''}" onchange="updateField('${item.id}','p3a','ebitda',this.value)">
+          <option value="">請選擇</option>
+          ${EBITDA_OPTIONS.map(o=>`<option ${d.ebitda===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#aaa;padding:8px 12px;background:#f8fcfb;border-radius:5px;border:1px solid #e8f0ee">
+      💡 量化評估與質化評估（Part 3b）至少需完成一項
+    </div>
+  </div>`;
+}
+
+function renderPart3b(item, activePart){
+  const d = item.p3b || new Array(7).fill(null);
+  return `<div class="part-content ${activePart==='p3'?'active':''}" id="p3-${item.id}">
+    <div class="part-label">Part 3b — 質化財務評估（至少回答一題）</div>
+    <div class="qual-list">
+      ${QUAL_QUESTIONS.map((q,i)=>{
+        const val = d[i];
+        return `<div class="qual-row">
+          <div class="qual-q">${q}</div>
+          <div class="yn-group">
+            <div class="yn ${val===true?'yes-on':''}" onclick="updateQual('${item.id}',${i},true)">是</div>
+            <div class="yn ${val===false?'no-on':''}" onclick="updateQual('${item.id}',${i},false)">否</div>
+            <div class="yn ${val==='na'?'na-on':''}" onclick="updateQual('${item.id}',${i},'na')">不適用</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderPart4(item, activePart){
+  const d = item.p4 || {vc:[]};
+  return `<div class="part-content ${activePart==='p4'?'active':''}" id="p4-${item.id}">
+    <div class="part-label">Part 4 — 上下游價值鏈影響位置<span class="req">*</span></div>
+    <div class="vc-chips">
+      ${VC_OPTIONS.map(v=>`<div class="vc ${d.vc.includes(v)?'on':''}" onclick="toggleVC('${item.id}','${v}')">${v}</div>`).join('')}
+    </div>
+    ${d.vc.length>0?`<div style="margin-top:10px;font-size:12px;color:#1A8F7F;padding:8px 12px;background:#E8F5F2;border-radius:5px">
+      已選：${d.vc.join('、')}
+    </div>`:'<div style="margin-top:10px;font-size:12px;color:#c0392b;padding:8px 12px;background:#fff8f7;border-radius:5px">▲ 請至少選擇一個價值鏈位置</div>'}
+  </div>`;
+}
+
+// ══════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════
+function toggleIssue(issId){
+  if(expandedIssues.has(issId)) expandedIssues.delete(issId);
+  else expandedIssues.add(issId);
+  renderTopicContent();
+}
+
+function toggleExpand(cardId){
+  if(expandedCards.has(cardId)) expandedCards.delete(cardId);
+  else expandedCards.add(cardId);
+  renderTopicContent();
+}
+
+function toggleCheck(cardId, issId, type){
+  const iss = findIssue(issId);
+  if(!iss) return;
+  const list = type==='risk' ? iss.risks : iss.opps;
+  const item = list.find(r=>r.id===cardId);
+  if(!item) return;
+  item.checked = !item.checked;
+  if(item.checked){
+    // init data
+    if(!item.p2) item.p2 = {iro:'',time:'',note:''};
+    if(!item.p3a) item.p3a = {prob:'',rev:'',cost:'',ebitda:''};
+    if(!item.p3b) item.p3b = new Array(7).fill(null);
+    if(!item.p4) item.p4 = {vc:[]};
+    expandedCards.add(cardId);
+  } else {
+    expandedCards.delete(cardId);
+  }
+  renderTopicContent();
+}
+
+function switchPart(cardId, part){
+  activeParts[cardId] = part;
+  renderTopicContent();
+}
+
+function updateField(cardId, section, field, value){
+  const item = findItemById(cardId);
+  if(!item) return;
+  if(!item[section]) item[section] = {};
+  item[section][field] = value;
+  autoSave();
+  // Re-render just the part tabs to show completion dots
+  const partTabs = document.querySelector(`#detail-${cardId} .part-tabs`);
+  if(partTabs){
+    const partDone = {
+      p1: item.p2 && item.p2.iro && item.p2.time,
+      p2: item.p3a && item.p3a.prob,
+      p3: item.p3b && item.p3b.some(v=>v!==null),
+      p4: item.p4 && item.p4.vc && item.p4.vc.length>0,
+    };
+    partTabs.querySelectorAll('.pt').forEach((pt,i)=>{
+      const pKey = ['p1','p2','p3','p4'][i];
+      pt.classList.toggle('done-part', !!partDone[pKey]);
+    });
+  }
+  // Update select styling
+  const sel = document.querySelector(`#p${['p2','p3a','p3b','p4'].indexOf(section)+1}-${cardId} select[onchange*="${field}"]`);
+  if(sel) sel.className = `fsel ${value?'filled':''}`;
+}
+
+function updateQual(cardId, idx, val){
+  const item = findItemById(cardId);
+  if(!item) return;
+  if(!item.p3b) item.p3b = new Array(7).fill(null);
+  item.p3b[idx] = val;
+  autoSave();
+  // Re-render qual row
+  const row = document.querySelector(`#p3-${cardId} .qual-list`).children[idx];
+  if(row){
+    row.querySelectorAll('.yn').forEach(btn=>btn.classList.remove('yes-on','no-on','na-on'));
+    if(val===true) row.querySelectorAll('.yn')[0].classList.add('yes-on');
+    else if(val===false) row.querySelectorAll('.yn')[1].classList.add('no-on');
+    else row.querySelectorAll('.yn')[2].classList.add('na-on');
+  }
+  // update part tab
+  const partDone = item.p3b.some(v=>v!==null);
+  const partTab = document.querySelector(`#detail-${cardId} .pt:nth-child(3)`);
+  if(partTab) partTab.classList.toggle('done-part', partDone);
+}
+
+function toggleVC(cardId, vc){
+  const item = findItemById(cardId);
+  if(!item || !item.p4) return;
+  const idx = item.p4.vc.indexOf(vc);
+  if(idx>-1) item.p4.vc.splice(idx,1);
+  else item.p4.vc.push(vc);
+  autoSave();
+  // Re-render part 4 content
+  const p4 = document.getElementById(`p4-${cardId}`);
+  if(p4){
+    p4.querySelectorAll('.vc').forEach(el=>{
+      el.classList.toggle('on', item.p4.vc.includes(el.textContent));
+    });
+    // update feedback text
+    const feedback = p4.querySelector('div[style*="margin-top:10px"]');
+    if(feedback){
+      if(item.p4.vc.length>0){
+        feedback.style.color='#1A8F7F'; feedback.style.background='#E8F5F2'; feedback.style.borderColor='#9ECFC7';
+        feedback.textContent = '已選：'+item.p4.vc.join('、');
+      } else {
+        feedback.style.color='#c0392b'; feedback.style.background='#fff8f7'; feedback.style.borderColor='#f5c6c0';
+        feedback.textContent = '▲ 請至少選擇一個價值鏈位置';
+      }
+    }
+  }
+  // update part tab
+  const partTab = document.querySelector(`#detail-${cardId} .pt:nth-child(4)`);
+  if(partTab) partTab.classList.toggle('done-part', item.p4.vc.length>0);
+}
+
+function addCustomCard(issId, type){
+  const inp = document.getElementById(`addInp-${issId}-${type}`);
+  const val = inp ? inp.value.trim() : '';
+  if(!val) return;
+  const iss = findIssue(issId);
+  if(!iss) return;
+  const id = 'c'+Date.now();
+  const newItem = {
+    id, desc:val, checked:true, custom:true,
+    p2:{iro:'',time:'',note:''},
+    p3a:{prob:'',rev:'',cost:'',ebitda:''},
+    p3b:new Array(7).fill(null),
+    p4:{vc:[]}
+  };
+  if(type==='risk') iss.risks.push(newItem);
+  else iss.opps.push(newItem);
+  expandedCards.add(id);
+  inp.value = '';
+  renderTopicContent();
+  showToast('自訂項目已新增','#1A8F7F');
+}
+
+function jumpTopic(idx){
+  currentTopicIdx = idx;
+  TOPICS.forEach((t,i)=>{ if(i===idx && t.status==='empty') t.status='active'; });
+  renderAll();
+  document.getElementById('mainScroll').scrollTop = 0;
+}
+
+function prevTopic(){ if(currentTopicIdx>0) jumpTopic(currentTopicIdx-1); }
+function nextTopic(){ if(currentTopicIdx<TOPICS.length-1) jumpTopic(currentTopicIdx+1); }
+
+function renderBotBar(){
+  document.getElementById('botInfo').textContent = `主題 ${currentTopicIdx+1} / ${TOPICS.length} · ${TOPICS[currentTopicIdx].name}`;
+  document.getElementById('prevBtn').disabled = currentTopicIdx===0;
+  document.getElementById('nextBtn').textContent = currentTopicIdx===TOPICS.length-1 ? '完成填答 ✓' : '下一主題 ▶';
+}
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+function findIssue(issId){
+  return ISSUES_T3.find(i=>i.id===issId);
+}
+function findItemById(cardId){
+  for(const iss of ISSUES_T3){
+    const r = [...iss.risks,...iss.opps].find(x=>x.id===cardId);
+    if(r) return r;
+  }
+  return null;
+}
+
+// ══════════════════════════════════════════
+// SAVE / SUBMIT
+// ══════════════════════════════════════════
+let saveTimer = null;
+function autoSave(){
+  clearTimeout(saveTimer);
+  document.getElementById('saveStatus').textContent = '儲存中...';
+  saveTimer = setTimeout(()=>{
+    const now = new Date();
+    document.getElementById('saveStatus').textContent = `自動儲存於 ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  }, 800);
+}
+
+function saveDraft(){
+  showToast('草稿已儲存', '#1A8F7F');
+  document.getElementById('saveStatus').textContent = `自動儲存於 ${new Date().toTimeString().slice(0,5)}`;
+}
+
+function submitForm(){
+  // Validate topic 3
+  const errors = [];
+  for(const iss of ISSUES_T3){
+    const hasRisk = iss.risks.some(r=>r.checked);
+    const hasOpp = iss.opps.some(o=>o.checked);
+    if(!hasRisk) errors.push(`「${iss.name}」尚未選擇任何風險項目`);
+    if(!hasOpp) errors.push(`「${iss.name}」尚未選擇任何機會項目`);
+    for(const item of [...iss.risks,...iss.opps].filter(x=>x.checked)){
+      if(!item.p2?.iro) errors.push(`「${iss.name}」中的風險/機會：IRO 類型為必填`);
+      if(!item.p2?.time) errors.push(`「${iss.name}」中的風險/機會：影響時間尺度為必填`);
+      if(!item.p4?.vc?.length) errors.push(`「${iss.name}」中的風險/機會：請選擇價值鏈位置`);
+    }
+  }
+  // Check unfilled topics
+  TOPICS.forEach(t=>{ if(t.status==='empty') errors.push(`主題「${t.name}」尚未開始填寫`) });
+
+  if(errors.length>0){
+    document.getElementById('validateList').innerHTML = errors.map(e=>`<div class="validate-item">${e}</div>`).join('');
+    document.getElementById('validateModal').classList.add('show');
+    return;
+  }
+  document.getElementById('completeOverlay').classList.add('show');
+}
+
+function closeValidate(){
+  document.getElementById('validateModal').classList.remove('show');
+}
+
+function showToast(msg, color){
+  const t = document.getElementById('toast');
+  t.style.background = color||'#1A8F7F';
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastIcon').textContent = color==='#c0392b'?'⚠':'✓';
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+renderAll();
+</script>
+</body>
+</html>
