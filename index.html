@@ -606,7 +606,7 @@ function renderPart3a(item, isRisk, activePart){
 function renderPart3b(item, activePart){
   const d = item.p3b || new Array(7).fill(null);
   return `<div class="part-content ${activePart==='p3'?'active':''}" id="p3-${item.id}">
-    <div class="part-label">Part 3b — 質化財務評估（至少回答一題）</div>
+    <div class="part-label">Part 3b — 質化財務評估</div>
     <div class="qual-list">
       ${QUAL_QUESTIONS.map((q,i)=>{
         const val = d[i];
