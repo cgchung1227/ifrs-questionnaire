@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>湠精實 — 問卷填答完成</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:linear-gradient(135deg,#f0faf8 0%,#e8f5f2 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.card{background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(26,143,127,.12);padding:48px 52px;max-width:560px;width:100%;text-align:center}
+.check-circle{width:80px;height:80px;border-radius:50%;background:#e0f5ee;display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
+.check-circle svg{width:40px;height:40px;stroke:#1A8F7F;fill:none;stroke-width:2.5}
+h1{font-size:22px;font-weight:700;color:#1A8F7F;margin-bottom:10px}
+.subtitle{font-size:15px;color:#555;line-height:1.7;margin-bottom:28px}
+.summary-box{background:#f5faf8;border:1px solid #d8ece6;border-radius:10px;padding:20px 24px;margin-bottom:28px;text-align:left}
+.summary-row{display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid #eef5f3}
+.summary-row:last-child{border-bottom:none}
+.sum-label{font-size:12px;color:#888;min-width:90px;flex-shrink:0;margin-top:1px}
+.sum-val{font-size:13px;color:#2d2d2d;font-weight:500;flex:1}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;margin:2px}
+.tag-risk{background:#fde8e8;color:#a03030}
+.tag-opp{background:#e0f5ee;color:#1a7a50}
+.divider{height:1px;background:#e0eeea;margin:0 0 28px}
+.footer-note{font-size:12px;color:#aaa;line-height:1.7;margin-bottom:24px}
+.btn{padding:12px 32px;border-radius:8px;font-size:15px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-teal{background:#1A8F7F;color:#fff;border-color:#1A8F7F;width:100%}
+.btn-teal:hover{background:#158070}
+.btn-ghost{background:#fff;color:#555;border-color:#c8d8d4;width:100%}
+.btn-ghost:hover{background:#f5faf8}
+.btn-row{display:flex;flex-direction:column;gap:10px}
+.sys-name{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-size:15px;font-weight:700;color:#1A8F7F;letter-spacing:1px;opacity:.6}
+/* Confetti animation */
+@keyframes fall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+}
+.confetti{position:fixed;top:0;width:10px;height:10px;border-radius:2px;animation:fall linear forwards;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="sys-name">湠精實</div>
+
+<div class="card" id="mainCard">
+  <div class="check-circle">
+    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+  </div>
+  <h1>問卷填答完成！</h1>
+  <p class="subtitle">感謝您完成 IFRS 永續風險與機會評估問卷。<br>您的填答資料已成功送出，顧問團隊將進行後續分析。</p>
+
+  <div class="summary-box">
+    <div class="summary-row">
+      <span class="sum-label">填答部門</span>
+      <span class="sum-val" id="dept-name">永續發展部</span>
+    </div>
+    <div class="summary-row">
+      <span class="sum-label">填答完成時間</span>
+      <span class="sum-val" id="submit-time">—</span>
+    </div>
+    <div class="summary-row">
+      <span class="sum-label">填答主題數</span>
+      <span class="sum-val">6 個永續主題</span>
+    </div>
+    <div class="summary-row">
+      <span class="sum-label">填答項目</span>
+      <span class="sum-val">
+        <span class="tag tag-risk">風險 14 項</span>
+        <span class="tag tag-opp">機會 8 項</span>
+      </span>
+    </div>
+    <div class="summary-row">
+      <span class="sum-label">完成部分</span>
+      <span class="sum-val">
+        <span class="tag" style="background:#d8ece6;color:#1A8F7F">Part 2 IRO 識別</span>
+        <span class="tag" style="background:#d8ece6;color:#1A8F7F">Part 3a 量化</span>
+        <span class="tag" style="background:#d8ece6;color:#1A8F7F">Part 3b 質化</span>
+        <span class="tag" style="background:#d8ece6;color:#1A8F7F">Part 4 價值鏈</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    如需修改填答內容，請在問卷截止日（<b>2026-06-30</b>）前聯繫顧問重新開啟您的填答連結。<br>
+    問題請洽顧問：consultant@impacts.cloud
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="window.print()">列印填答摘要</button>
+  </div>
+</div>
+
+<script>
+const now = new Date();
+document.getElementById('submit-time').textContent =
+  now.toLocaleDateString('zh-TW') + ' ' + now.toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit'});
+
+// Confetti
+const colors = ['#1A8F7F','#9ECFC7','#e0f5ee','#e8a820','#fde8e8','#2E5FA8'];
+for(let i=0;i<40;i++){
+  const el = document.createElement('div');
+  el.className='confetti';
+  el.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};
+    width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;
+    animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*1.5}s`;
+  document.body.appendChild(el);
+}
+</script>
+</body>
+</html>

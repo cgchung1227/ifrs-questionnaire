@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>湠精實 — P08 分析結果儀表板</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:#fff;color:#2d2d2d;font-size:14px;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:#fff;border-bottom:1px solid #e0eeea;height:56px;display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:200}
+.hamburger{width:32px;height:32px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;height:2px;background:#888;border-radius:2px}
+.sys-name{font-size:17px;font-weight:700;color:#1A8F7F;letter-spacing:1px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.company-sel{display:flex;align-items:center;gap:6px;border:1px solid #c8d8d4;border-radius:6px;padding:5px 12px;font-size:13px;color:#444;background:#fff}
+.ticon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;color:#666;font-size:16px}
+.ticon:hover{background:#f0f5f3}
+.lang-btn{font-size:13px;color:#555;cursor:pointer;padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#fff}
+.layout{display:flex;flex:1;overflow:hidden}
+.icon-bar{width:56px;background:#1A8F7F;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px;flex-shrink:0}
+.ibar-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.65);transition:all .15s}
+.ibar-btn:hover,.ibar-btn.on{background:rgba(255,255,255,.2);color:#fff}
+.ibar-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.left-menu{width:200px;background:#fff;border-right:1px solid #e0eeea;flex-shrink:0;overflow-y:auto;transition:width .2s}
+.left-menu.hidden{width:0;overflow:hidden}
+.lm-section{padding:8px 0}
+.lm-label{font-size:10px;color:#aaa;padding:8px 14px 4px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.lm-item{padding:9px 14px;cursor:pointer;color:#555;font-size:13px;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
+.lm-item:hover{background:#f5faf8;color:#1A8F7F}
+.lm-item.on{background:#f0faf8;color:#1A8F7F;border-left-color:#1A8F7F;font-weight:600}
+.lm-divider{height:1px;background:#eef3f1;margin:4px 10px}
+.main{flex:1;overflow-y:auto;background:#f7fbfa}
+.page{display:none;padding:24px 32px 60px}
+.page.on{display:block}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.ph h1{font-size:20px;font-weight:700;color:#1A8F7F;display:flex;align-items:center;gap:8px}
+.ph h1 .slash{color:#ccc;font-weight:300;margin:0 2px}
+.ph h1 .sub{font-size:14px;color:#1A8F7F;font-weight:600}
+.ph-actions{display:flex;gap:8px;align-items:center}
+/* BUTTONS */
+.btn{padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.btn-teal:hover{background:#158070}
+.btn-ghost{background:#fff;color:#444;border-color:#c8d8d4}
+.btn-ghost:hover{background:#f5faf8;border-color:#9ECFC7}
+.btn-sm{padding:5px 12px;font-size:12px}
+/* CARD */
+.card{background:#fff;border:1px solid #e0eeea;border-radius:10px;margin-bottom:20px}
+.card-head{padding:14px 20px;border-bottom:1px solid #eef5f3;display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:14px;font-weight:700;color:#2d2d2d;display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+/* TABS */
+.tab-bar{display:flex;gap:0;border-bottom:2px solid #e0eeea;margin-bottom:20px}
+.tab{padding:9px 20px;cursor:pointer;font-size:13px;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;font-weight:500}
+.tab:hover{color:#1A8F7F}
+.tab.on{color:#1A8F7F;border-bottom-color:#1A8F7F;font-weight:700}
+/* ORG TOGGLE */
+.org-toggle{display:flex;gap:6px;background:#f0f5f3;padding:4px;border-radius:8px}
+.org-btn{padding:6px 14px;border-radius:5px;font-size:12px;cursor:pointer;color:#888;font-weight:500;transition:all .15s;border:none;background:transparent;font-family:inherit}
+.org-btn.on{background:#fff;color:#1A8F7F;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e0eeea;border-radius:8px;padding:16px 18px}
+.stat-num{font-size:28px;font-weight:700}
+.stat-label{font-size:12px;color:#888;margin-top:3px}
+.stat-sub{font-size:11px;color:#aaa;margin-top:2px}
+/* MATRIX */
+.matrix-section{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-bottom:20px}
+.matrix-svg-wrap{background:#fff;border:1px solid #e0eeea;border-radius:10px;padding:20px;display:flex;flex-direction:column}
+.matrix-title{font-size:13px;font-weight:700;color:#2d2d2d;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#555}
+.legend-dot{width:12px;height:12px;border-radius:50%}
+/* TABLE */
+.tbl-wrap{border:1px solid #d8ece6;border-radius:8px;overflow:hidden}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl thead tr{background:#d8ece6}
+.tbl th{padding:10px 14px;text-align:center;font-size:12px;font-weight:600;color:#2d6b5f;white-space:nowrap;border-right:1px solid #c5e0d8}
+.tbl th:last-child{border-right:none}
+.tbl th.tleft{text-align:left}
+.tbl td{padding:9px 14px;border-bottom:1px solid #eef5f3;text-align:center;vertical-align:middle}
+.tbl td.tleft{text-align:left}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#f8fcfb}
+/* BADGE */
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;text-align:center;min-width:44px}
+.badge-risk{background:#fde8e8;color:#a03030}
+.badge-opp{background:#e0f5ee;color:#1a7a50}
+.badge-sig{background:#fdf0dc;color:#8a5d00}
+.badge-vsig{background:#fde8e8;color:#a03030}
+.badge-norm{background:#f0f5f3;color:#555}
+/* CHIP */
+.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:11px;margin:2px}
+.chip-teal{background:#d8ece6;color:#1A8F7F;border:1px solid #9ECFC7}
+.chip-red{background:#fde8e8;color:#a03030;border:1px solid #f0b8b8}
+.chip-green{background:#e0f5ee;color:#1a7a50;border:1px solid #9ECFC7}
+/* NOTICE */
+.notice{padding:10px 14px;border-radius:6px;font-size:12px;display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;line-height:1.6}
+.n-info{background:#e8f4fb;border:1px solid #a8d0e8;color:#1a5f8a}
+.n-warn{background:#fdf0dc;border:1px solid #e8c87a;color:#7a4f00}
+/* THRESHOLD */
+.threshold-card{background:#fff;border:1px solid #e0eeea;border-radius:8px;padding:16px 20px;margin-bottom:14px}
+.threshold-card h4{font-size:13px;font-weight:700;color:#2d2d2d;margin-bottom:12px}
+.th-row{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.th-label{font-size:13px;color:#555;width:120px;flex-shrink:0}
+.th-val{width:80px;padding:7px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:14px;font-family:inherit;font-weight:700;text-align:center;color:#2d2d2d}
+.th-val:focus{outline:none;border-color:#1A8F7F}
+.th-note{font-size:11px;color:#aaa}
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fl{font-size:13px;color:#444;font-weight:500}
+.finp{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;transition:border-color .15s}
+.finp:focus{outline:none;border-color:#1A8F7F}
+.fsel{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;background:#fff;cursor:pointer}
+.fsel:focus{outline:none;border-color:#1A8F7F}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* MAPPING TABLE */
+.map-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.map-tbl th{background:#d8ece6;padding:9px 14px;font-size:12px;font-weight:600;color:#2d6b5f;border:1px solid #c5e0d8;text-align:left}
+.map-tbl td{padding:9px 14px;border:1px solid #eef5f3;vertical-align:middle}
+.map-tbl tr:hover td{background:#f8fcfb}
+.map-sel{padding:6px 10px;border:1px solid #c8d8d4;border-radius:5px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;width:100%}
+.map-sel:focus{outline:none;border-color:#1A8F7F}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:8000;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal-box{background:#fff;border-radius:10px;width:560px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.18)}
+.modal-head{padding:16px 22px;border-bottom:1px solid #e0eeea;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-head h3{font-size:15px;font-weight:700;color:#2d2d2d}
+.modal-close{cursor:pointer;color:#aaa;font-size:20px;line-height:1}
+.modal-close:hover{color:#333}
+.modal-body{padding:22px}
+.modal-foot{padding:14px 22px;border-top:1px solid #e0eeea;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
+.btn-orange{background:#e87020;color:#fff;border-color:#e87020}
+.btn-orange:hover{background:#c86010}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;border-radius:8px;padding:12px 18px;font-size:13px;display:none;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.15);align-items:center;gap:10px;color:#fff}
+.toast.show{display:flex}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="sys-name">湠精實</div>
+  <div style="font-size:13px;color:#888;margin-left:4px">/ 分析結果</div>
+  <div class="topbar-right">
+    <div class="company-sel">公司別&nbsp;
+      <select style="border:none;outline:none;font-size:13px;font-family:inherit;color:#444;background:transparent;cursor:pointer">
+        <option>01002_CRIS2 慢想股份有限公司</option>
+      </select>
+    </div>
+    <div class="ticon" title="匯出報告">⬇</div>
+    <div class="lang-btn">繁</div>
+    <div class="ticon">⇥</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="icon-bar">
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+    <div class="ibar-btn on"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+  </div>
+
+  <div class="left-menu" id="leftMenu">
+    <div class="lm-section">
+      <div class="lm-label">分析結果</div>
+      <div class="lm-item on" onclick="go('pg-dashboard')">重大性分析儀表板</div>
+      <div class="lm-item" onclick="go('pg-threshold')">顯著性門檻設定</div>
+      <div class="lm-item" onclick="go('pg-mapping')">母子組織 Mapping</div>
+    </div>
+    <div class="lm-divider"></div>
+    <div class="lm-section">
+      <div class="lm-label">其他功能</div>
+      <div class="lm-item" onclick="window.location='distribute.html'">問卷發放設定</div>
+      <div class="lm-item" onclick="window.location='monitor.html'">問卷回收監控</div>
+      <div class="lm-item" onclick="window.location='admin.html'">後台設定</div>
+    </div>
+  </div>
+
+  <div class="main" id="mainArea">
+
+    <!-- ═══ A01 分析結果儀表板 ═══ -->
+    <div class="page on" id="pg-dashboard">
+      <div class="ph">
+        <div>
+          <h1>P08 分析結果儀表板 <span class="slash">/</span> <span class="sub">重大性評估</span></h1>
+          <div style="font-size:12px;color:#888;margin-top:4px">步驟 5–6｜分析發生機率 × 財務衝擊嚴重程度，統計顯著風險與機會</div>
+        </div>
+        <div class="ph-actions">
+          <div class="org-toggle">
+            <button class="org-btn on" onclick="setOrg(this,'全公司')">全公司</button>
+            <button class="org-btn" onclick="setOrg(this,'母子組織')">母子組織</button>
+            <button class="org-btn" onclick="setOrg(this,'by 部門')">by 部門</button>
+          </div>
+          <button class="btn btn-ghost btn-sm">⬇ 匯出</button>
+        </div>
+      </div>
+
+      <!-- 統計卡片 -->
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num" style="color:#a03030">12</div>
+          <div class="stat-label">顯著風險數</div>
+          <div class="stat-sub">分數 ≥ 9</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:#1a7a50">8</div>
+          <div class="stat-label">顯著機會數</div>
+          <div class="stat-sub">分數 ≥ 9</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:#c0392b">5</div>
+          <div class="stat-label">非常顯著項目</div>
+          <div class="stat-sub">分數 ≥ 16</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:#2d2d2d">184</div>
+          <div class="stat-label">有效填答筆數</div>
+          <div class="stat-sub">回收率 91%</div>
+        </div>
+      </div>
+
+      <!-- 分析標籤 -->
+      <div class="tab-bar">
+        <div class="tab on" onclick="setTab(this,'tb-matrix')">重大性矩陣</div>
+        <div class="tab" onclick="setTab(this,'tb-rank')">風險機會排序</div>
+        <div class="tab" onclick="setTab(this,'tb-topic')">議題次數統計</div>
+        <div class="tab" onclick="setTab(this,'tb-vc')">價值鏈分佈</div>
+      </div>
+
+      <!-- 重大性矩陣 -->
+      <div id="tb-matrix">
+        <div class="matrix-section">
+          <div class="matrix-svg-wrap">
+            <div class="matrix-title">
+              <span>重大性矩陣（發生機率 × 財務衝擊嚴重程度）</span>
+              <span style="font-size:11px;color:#888">點擊點位查看詳細</span>
+            </div>
+            <svg id="matrix-svg" viewBox="0 0 480 420" style="width:100%;max-width:480px;margin:0 auto" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#c8e8e0;border:1px solid #9ECFC7"></div>一般（< 9）</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#fdf0dc;border:1px solid #e8c87a"></div>顯著（9–15）</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#fde8e8;border:1px solid #f0b8b8"></div>非常顯著（≥ 16）</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#a03030"></div>風險</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#1a7a50"></div>機會</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card" style="margin-bottom:0">
+              <div class="card-head"><h3>非常顯著項目（≥ 16）</h3></div>
+              <div class="card-body" style="padding:12px 16px">
+                <div id="vsig-list" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+            </div>
+            <div class="card" style="margin-bottom:0">
+              <div class="card-head"><h3>顯著項目（9–15）</h3></div>
+              <div class="card-body" style="padding:12px 16px">
+                <div id="sig-list" style="display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 排序表 -->
+      <div id="tb-rank" style="display:none">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:50px">排序</th>
+              <th style="width:70px">類型</th>
+              <th style="width:140px" class="tleft">ESG 議題</th>
+              <th class="tleft">風險/機會描述</th>
+              <th style="width:70px">機率分數</th>
+              <th style="width:70px">衝擊分數</th>
+              <th style="width:80px">加權分數</th>
+              <th style="width:80px">顯著性</th>
+            </tr></thead>
+            <tbody id="rank-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 議題次數 -->
+      <div id="tb-topic" style="display:none">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:60px">面向</th>
+              <th class="tleft" style="width:180px">ESG 議題</th>
+              <th style="width:80px">顯著風險</th>
+              <th style="width:80px">顯著機會</th>
+              <th style="width:80px">風險+機會</th>
+              <th style="width:80px">非常顯著</th>
+              <th>顯著項目（條）</th>
+            </tr></thead>
+            <tbody id="topic-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 價值鏈 -->
+      <div id="tb-vc" style="display:none">
+        <div class="card">
+          <div class="card-head"><h3>價值鏈位置分佈</h3></div>
+          <div class="card-body">
+            <div id="vc-chart" style="display:flex;flex-direction:column;gap:12px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ A02 顯著性門檻設定 ═══ -->
+    <div class="page" id="pg-threshold">
+      <div class="ph">
+        <div>
+          <h1>顯著性門檻設定 <span class="slash">/</span> <span class="sub">步驟 6.1</span></h1>
+          <div style="font-size:12px;color:#888;margin-top:4px">定義量化與質化的「顯著性」門檻，影響分析結果的分類</div>
+        </div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="saveThreshold()">儲存門檻設定</button>
+        </div>
+      </div>
+
+      <div class="notice n-info"><span>ℹ️</span><span>門檻值以「機率分數 × 衝擊分數」計算，範圍為 1（1×1）至 25（5×5）。建議量化顯著門檻 9，非常顯著門檻 16。</span></div>
+
+      <!-- 量化門檻 -->
+      <div class="threshold-card">
+        <h4>量化顯著性門檻</h4>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="th-row">
+            <div class="th-label">顯著門檻</div>
+            <input class="th-val" type="number" id="th-sig" value="9" min="1" max="25">
+            <div class="th-note">機率 × 衝擊 ≥ 此值 → 顯著（黃色區域）<br>例：機率3 × 衝擊3 = 9 → 顯著</div>
+          </div>
+          <div class="th-row">
+            <div class="th-label">非常顯著門檻</div>
+            <input class="th-val" type="number" id="th-vsig" value="16" min="1" max="25">
+            <div class="th-note">機率 × 衝擊 ≥ 此值 → 非常顯著（紅色區域）<br>例：機率4 × 衝擊4 = 16 → 非常顯著</div>
+          </div>
+        </div>
+
+        <!-- 視覺化5×5 -->
+        <div style="margin-top:16px">
+          <div style="font-size:12px;color:#888;margin-bottom:8px">門檻預覽（機率 × 衝擊矩陣）</div>
+          <div style="display:inline-block;border:1px solid #c8d8d4;border-radius:6px;overflow:hidden">
+            <table style="border-collapse:collapse">
+              <thead>
+                <tr>
+                  <th style="width:50px;background:#f8fcfb;padding:6px;font-size:11px;color:#888;border:1px solid #e0eeea">機率↑</th>
+                  <th style="padding:6px 14px;font-size:11px;background:#f0f9f6;border:1px solid #e0eeea;color:#555">衝擊 1</th>
+                  <th style="padding:6px 14px;font-size:11px;background:#f0f9f6;border:1px solid #e0eeea;color:#555">衝擊 2</th>
+                  <th style="padding:6px 14px;font-size:11px;background:#f0f9f6;border:1px solid #e0eeea;color:#555">衝擊 3</th>
+                  <th style="padding:6px 14px;font-size:11px;background:#f0f9f6;border:1px solid #e0eeea;color:#555">衝擊 4</th>
+                  <th style="padding:6px 14px;font-size:11px;background:#f0f9f6;border:1px solid #e0eeea;color:#555">衝擊 5</th>
+                </tr>
+              </thead>
+              <tbody id="threshold-preview"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 質化門檻 -->
+      <div class="threshold-card">
+        <h4>質化顯著性門檻</h4>
+        <div class="grid2">
+          <div class="fg">
+            <label class="fl">質化顯著門檻（Q01–Q07 勾選數）</label>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input class="th-val" type="number" value="4" min="1" max="7" style="width:80px">
+              <span style="font-size:13px;color:#555">題以上（共 7 題）→ 顯著</span>
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl">質化非常顯著門檻</label>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input class="th-val" type="number" value="6" min="1" max="7" style="width:80px">
+              <span style="font-size:13px;color:#555">題以上 → 非常顯著</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:4px">質化題目（Part 3b）：Q01 政策、Q02 策略、Q03 薪酬、Q04 法規、Q05 供應商選擇、Q06 股東要求、Q07 客戶要求</div>
+      </div>
+    </div>
+
+    <!-- ═══ A03 母子組織 Mapping ═══ -->
+    <div class="page" id="pg-mapping">
+      <div class="ph">
+        <div>
+          <h1>母子組織 Mapping 確認 <span class="slash">/</span> <span class="sub">步驟 5.0</span></h1>
+          <div style="font-size:12px;color:#888;margin-top:4px">分析前將母子公司的 ESG 議題與風險機會對應，由顧問操作、窗口確認</div>
+        </div>
+        <div class="ph-actions">
+          <button class="btn btn-ghost btn-sm">↺ 重置 Mapping</button>
+          <button class="btn btn-teal btn-sm" onclick="saveMapping()">儲存 Mapping</button>
+        </div>
+      </div>
+
+      <div class="notice n-warn"><span>⚠️</span><span>母子組織功能需先在後台「母子組織管理」中設定組織架構。顧問操作後，請通知公司窗口進行確認。</span></div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>母公司 × 子公司 ESG 議題對應</h3>
+          <select class="fsel" style="width:auto;font-size:12px;padding:5px 10px">
+            <option>慢想股份有限公司（母）</option>
+          </select>
+        </div>
+        <div class="card-body" style="padding:0">
+          <table class="map-tbl">
+            <thead>
+              <tr>
+                <th style="width:50px">面向</th>
+                <th style="width:180px">母公司 ESG 議題</th>
+                <th style="width:180px">子公司：慢想製造廠</th>
+                <th style="width:180px">子公司：慢想國際</th>
+                <th>備註</th>
+              </tr>
+            </thead>
+            <tbody id="mapping-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Mapping 狀態總覽</h3>
+        </div>
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+            <div style="text-align:center;padding:16px;background:#f5faf8;border-radius:8px">
+              <div style="font-size:22px;font-weight:700;color:#1A8F7F">8/8</div>
+              <div style="font-size:12px;color:#888;margin-top:4px">母公司議題已對應</div>
+            </div>
+            <div style="text-align:center;padding:16px;background:#f5faf8;border-radius:8px">
+              <div style="font-size:22px;font-weight:700;color:#e8a820">6/8</div>
+              <div style="font-size:12px;color:#888;margin-top:4px">慢想製造廠對應完成</div>
+            </div>
+            <div style="text-align:center;padding:16px;background:#f5faf8;border-radius:8px">
+              <div style="font-size:22px;font-weight:700;color:#e8a820">5/8</div>
+              <div style="font-size:12px;color:#888;margin-top:4px">慢想國際對應完成</div>
+            </div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+            <button class="btn btn-ghost btn-sm">通知窗口確認</button>
+            <button class="btn btn-teal btn-sm" onclick="showToast('已提交確認請求','#1A8F7F')">送出確認請求</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+let menuOpen = true;
+
+const ESG_ISSUES = [
+  {aspect:'環境面', name:'氣候策略與能源管理'},
+  {aspect:'環境面', name:'水資源管理'},
+  {aspect:'環境面', name:'生物多樣性'},
+  {aspect:'環境面', name:'空汙與廢棄物'},
+  {aspect:'社會面', name:'人才吸引與留任'},
+  {aspect:'社會面', name:'職場安全與健康'},
+  {aspect:'社會面', name:'資訊安全與隱私'},
+  {aspect:'治理面', name:'公司治理與誠信經營'},
+];
+
+const RISK_DATA = [
+  {type:'風險',issue:'氣候策略與能源管理',desc:'碳定價強化導致營運成本上升',prob:4,impact:5,score:20},
+  {type:'風險',issue:'氣候策略與能源管理',desc:'品牌客戶要求低碳製程',prob:4,impact:4,score:16},
+  {type:'機會',issue:'氣候策略與能源管理',desc:'擴展節能產品組合強化品牌信任',prob:3,impact:5,score:15},
+  {type:'風險',issue:'水資源管理',desc:'水資源短缺影響廠區生產',prob:3,impact:4,score:12},
+  {type:'機會',issue:'水資源管理',desc:'循環用水技術降低原水使用成本',prob:3,impact:3,score:9},
+  {type:'風險',issue:'生物多樣性',desc:'生態系服務減損原料取得成本上升',prob:2,impact:4,score:8},
+  {type:'風險',issue:'人才吸引與留任',desc:'優秀人才流失影響研發能力',prob:3,impact:4,score:12},
+  {type:'機會',issue:'人才吸引與留任',desc:'ESG形象提升吸引優秀人才',prob:4,impact:3,score:12},
+  {type:'風險',issue:'資訊安全與隱私',desc:'資安事件導致客戶資料外洩',prob:2,impact:5,score:10},
+  {type:'機會',issue:'公司治理與誠信經營',desc:'ESG資訊揭露強化投資人信心',prob:4,impact:4,score:16},
+  {type:'風險',issue:'職場安全與健康',desc:'職災事故提高保險與法律成本',prob:2,impact:3,score:6},
+  {type:'機會',issue:'職場安全與健康',desc:'職安文化提升生產效率',prob:3,impact:3,score:9},
+];
+
+const VC_DATA = [
+  {name:'上游供應商', risks:8, opps:4},
+  {name:'自有營運', risks:14, opps:10},
+  {name:'下游客戶', risks:6, opps:8},
+  {name:'投資活動', risks:3, opps:5},
+];
+
+function toggleMenu(){
+  menuOpen = !menuOpen;
+  document.getElementById('leftMenu').classList.toggle('hidden',!menuOpen);
+}
+
+function go(pid){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.lm-item').forEach(m=>m.classList.remove('on'));
+  const pg = document.getElementById(pid);
+  if(pg) pg.classList.add('on');
+  document.querySelectorAll('.lm-item').forEach(m=>{
+    if(m.getAttribute('onclick')===`go('${pid}')`) m.classList.add('on');
+  });
+  document.getElementById('mainArea').scrollTop=0;
+  if(pid==='pg-threshold') buildThresholdPreview();
+  if(pid==='pg-mapping') buildMappingTable();
+}
+
+function setOrg(btn, name){
+  document.querySelectorAll('.org-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  showToast('切換至：'+name, '#1A8F7F');
+}
+
+function setTab(tab, id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  tab.classList.add('on');
+  ['tb-matrix','tb-rank','tb-topic','tb-vc'].forEach(t=>{
+    document.getElementById(t).style.display = t===id ? '' : 'none';
+  });
+}
+
+function drawMatrix(){
+  const svg = document.getElementById('matrix-svg');
+  const W=480, H=420, PL=50, PB=50, PT=20, PR=20;
+  const CW=(W-PL-PR)/5, CH=(H-PT-PB)/5;
+
+  let html = '';
+  // Background zones
+  for(let r=1;r<=5;r++){
+    for(let c=1;c<=5;c++){
+      const score = r*c;
+      let fill = '#e0f5ee';
+      if(score>=9) fill='#fef6e0';
+      if(score>=16) fill='#fde8e8';
+      const x=PL+(c-1)*CW, y=H-PB-r*CH;
+      html+=`<rect x="${x}" y="${y}" width="${CW}" height="${CH}" fill="${fill}" stroke="#c8d8d4" stroke-width="0.5"/>`;
+      html+=`<text x="${x+CW/2}" y="${y+CH/2}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#aaa">${score}</text>`;
+    }
+  }
+  // Axes labels
+  for(let i=1;i<=5;i++){
+    html+=`<text x="${PL+(i-0.5)*CW}" y="${H-PB+18}" text-anchor="middle" font-size="12" fill="#888">${i}</text>`;
+    html+=`<text x="${PL-10}" y="${H-PB-(i-0.5)*CH}" text-anchor="end" dominant-baseline="middle" font-size="12" fill="#888">${i}</text>`;
+  }
+  html+=`<text x="${PL+(W-PL-PR)/2}" y="${H-8}" text-anchor="middle" font-size="12" fill="#555">財務衝擊嚴重程度 →</text>`;
+  html+=`<text x="14" y="${PT+(H-PT-PB)/2}" text-anchor="middle" font-size="12" fill="#555" transform="rotate(-90,14,${PT+(H-PT-PB)/2})">發生機率 →</text>`;
+
+  // Data points
+  RISK_DATA.forEach((d,idx)=>{
+    const cx=PL+(d.impact-0.5)*CW, cy=H-PB-(d.prob-0.5)*CH;
+    const fill=d.type==='風險'?'#a03030':'#1a7a50';
+    const offset = (idx % 3 - 1)*8;
+    html+=`<circle cx="${cx+offset}" cy="${cy+offset*0.5}" r="8" fill="${fill}" opacity="0.85" style="cursor:pointer" title="${d.desc}">`;
+    html+=`<title>${d.desc}\n${d.type} | 分數：${d.score}</title></circle>`;
+  });
+
+  svg.innerHTML = html;
+}
+
+function buildSigLists(){
+  const vsig = RISK_DATA.filter(d=>d.score>=16).sort((a,b)=>b.score-a.score);
+  const sig  = RISK_DATA.filter(d=>d.score>=9&&d.score<16).sort((a,b)=>b.score-a.score);
+
+  document.getElementById('vsig-list').innerHTML = vsig.map(d=>`
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f0f5f3">
+      <span class="chip ${d.type==='風險'?'chip-red':'chip-green'}" style="flex-shrink:0">${d.type}</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:#2d2d2d">${d.desc}</div>
+        <div style="font-size:11px;color:#888;margin-top:2px">${d.issue} · 分數 <b style="color:#c0392b">${d.score}</b></div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('sig-list').innerHTML = sig.map(d=>`
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f0f5f3">
+      <span class="chip ${d.type==='風險'?'chip-red':'chip-green'}" style="flex-shrink:0">${d.type}</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:#2d2d2d">${d.desc}</div>
+        <div style="font-size:11px;color:#888;margin-top:2px">${d.issue} · 分數 <b style="color:#e8a820">${d.score}</b></div>
+      </div>
+    </div>`).join('');
+}
+
+function buildRankTable(){
+  const sorted = [...RISK_DATA].sort((a,b)=>b.score-a.score);
+  document.getElementById('rank-tbody').innerHTML = sorted.map((d,i)=>{
+    let sigBadge='<span class="badge badge-norm">一般</span>';
+    if(d.score>=16) sigBadge='<span class="badge badge-vsig">非常顯著</span>';
+    else if(d.score>=9) sigBadge='<span class="badge badge-sig">顯著</span>';
+    return `<tr>
+      <td style="font-weight:700;color:#888">${i+1}</td>
+      <td><span class="chip ${d.type==='風險'?'chip-red':'chip-green'}">${d.type}</span></td>
+      <td class="tleft" style="font-size:12px">${d.issue}</td>
+      <td class="tleft" style="font-size:12px">${d.desc}</td>
+      <td>${d.prob}</td>
+      <td>${d.impact}</td>
+      <td style="font-weight:700;color:${d.score>=16?'#c0392b':d.score>=9?'#8a5d00':'#555'}">${d.score}</td>
+      <td>${sigBadge}</td>
+    </tr>`;
+  }).join('');
+}
+
+function buildTopicTable(){
+  const topics = [...new Set(RISK_DATA.map(d=>d.issue))];
+  document.getElementById('topic-tbody').innerHTML = topics.map(issue=>{
+    const items = RISK_DATA.filter(d=>d.issue===issue);
+    const sigRisk = items.filter(d=>d.type==='風險'&&d.score>=9).length;
+    const sigOpp  = items.filter(d=>d.type==='機會'&&d.score>=9).length;
+    const vsig    = items.filter(d=>d.score>=16).length;
+    const aspect  = ESG_ISSUES.find(e=>e.name===issue)?.aspect||'';
+    const bar     = items.filter(d=>d.score>=9).length;
+    const barWidth = bar*20;
+    return `<tr>
+      <td style="font-size:11px">${aspect}</td>
+      <td class="tleft" style="font-weight:600">${issue}</td>
+      <td style="color:#a03030;font-weight:600">${sigRisk}</td>
+      <td style="color:#1a7a50;font-weight:600">${sigOpp}</td>
+      <td style="color:#555;font-weight:600">${sigRisk+sigOpp}</td>
+      <td style="color:#c0392b;font-weight:700">${vsig}</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div style="height:10px;width:${barWidth}px;background:#1A8F7F;border-radius:3px;min-width:4px"></div><span style="font-size:11px;color:#888">${bar} 項</span></div></td>
+    </tr>`;
+  }).join('');
+}
+
+function buildVcChart(){
+  const max = Math.max(...VC_DATA.map(d=>d.risks+d.opps));
+  document.getElementById('vc-chart').innerHTML = VC_DATA.map(d=>{
+    const total = d.risks+d.opps;
+    const rw = Math.round(d.risks/max*300);
+    const ow = Math.round(d.opps/max*300);
+    return `<div style="display:flex;align-items:center;gap:12px">
+      <div style="width:100px;font-size:13px;font-weight:600;color:#555;flex-shrink:0">${d.name}</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+        <div style="display:flex;align-items:center;gap:6px"><div style="height:14px;width:${rw}px;background:#a03030;border-radius:3px"></div><span style="font-size:12px;color:#888">風險 ${d.risks} 項</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><div style="height:14px;width:${ow}px;background:#1a7a50;border-radius:3px"></div><span style="font-size:12px;color:#888">機會 ${d.opps} 項</span></div>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:#1A8F7F;flex-shrink:0">${total}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildThresholdPreview(){
+  const sig  = parseInt(document.getElementById('th-sig').value)||9;
+  const vsig = parseInt(document.getElementById('th-vsig').value)||16;
+  let html='';
+  for(let p=5;p>=1;p--){
+    html+=`<tr><td style="background:#f0f9f6;padding:6px 10px;font-size:12px;color:#555;font-weight:600;border:1px solid #e0eeea;text-align:center">機率 ${p}</td>`;
+    for(let i=1;i<=5;i++){
+      const s=p*i;
+      let bg='#e8f8f4'; let clr='#555';
+      if(s>=vsig){bg='#fde8e8';clr='#a03030';}
+      else if(s>=sig){bg='#fef6e0';clr='#8a5d00';}
+      html+=`<td style="background:${bg};color:${clr};font-weight:700;padding:8px 12px;border:1px solid #e0eeea;text-align:center">${s}</td>`;
+    }
+    html+='</tr>';
+  }
+  document.getElementById('threshold-preview').innerHTML=html;
+}
+
+function saveThreshold(){
+  showToast('門檻設定已儲存','#1A8F7F');
+  buildThresholdPreview();
+}
+
+function buildMappingTable(){
+  const subs=['慢想製造廠','慢想國際'];
+  document.getElementById('mapping-tbody').innerHTML = ESG_ISSUES.map((e,i)=>{
+    return `<tr>
+      <td style="font-size:11px;color:#888">${e.aspect}</td>
+      <td style="font-weight:600">${e.name}</td>
+      ${subs.map(s=>`<td><select class="map-sel"><option value="">— 未對應 —</option>${ESG_ISSUES.map(x=>`<option ${Math.random()>.3?'selected':''} value="${x.name}">${x.name}</option>`).join('')}</select></td>`).join('')}
+      <td><input style="width:100%;padding:5px 8px;border:1px solid #c8d8d4;border-radius:4px;font-size:12px;font-family:inherit" placeholder="備註說明"></td>
+    </tr>`;
+  }).join('');
+}
+
+function saveMapping(){
+  showToast('Mapping 已儲存，待窗口確認','#1A8F7F');
+}
+
+function showToast(msg, bg='#1A8F7F'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.background=bg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+document.getElementById('th-sig').addEventListener('input', buildThresholdPreview);
+document.getElementById('th-vsig').addEventListener('input', buildThresholdPreview);
+
+drawMatrix();
+buildSigLists();
+buildRankTable();
+buildTopicTable();
+buildVcChart();
+buildThresholdPreview();
+</script>
+</body>
+</html>

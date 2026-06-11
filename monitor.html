@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>湠精實 — P07 問卷回收監控</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;background:#fff;color:#2d2d2d;font-size:14px;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:#fff;border-bottom:1px solid #e0eeea;height:56px;display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:200}
+.hamburger{width:32px;height:32px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;height:2px;background:#888;border-radius:2px}
+.sys-name{font-size:17px;font-weight:700;color:#1A8F7F;letter-spacing:1px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.company-sel{display:flex;align-items:center;gap:6px;border:1px solid #c8d8d4;border-radius:6px;padding:5px 12px;font-size:13px;color:#444;background:#fff}
+.ticon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;color:#666;font-size:16px}
+.ticon:hover{background:#f0f5f3}
+.lang-btn{font-size:13px;color:#555;cursor:pointer;padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#fff}
+.layout{display:flex;flex:1;overflow:hidden}
+.icon-bar{width:56px;background:#1A8F7F;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px;flex-shrink:0}
+.ibar-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.65);transition:all .15s}
+.ibar-btn:hover,.ibar-btn.on{background:rgba(255,255,255,.2);color:#fff}
+.ibar-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.left-menu{width:200px;background:#fff;border-right:1px solid #e0eeea;flex-shrink:0;overflow-y:auto;transition:width .2s}
+.left-menu.hidden{width:0;overflow:hidden}
+.lm-section{padding:8px 0}
+.lm-label{font-size:10px;color:#aaa;padding:8px 14px 4px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.lm-item{padding:9px 14px;cursor:pointer;color:#555;font-size:13px;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
+.lm-item:hover{background:#f5faf8;color:#1A8F7F}
+.lm-item.on{background:#f0faf8;color:#1A8F7F;border-left-color:#1A8F7F;font-weight:600}
+.lm-item .step-badge{font-size:10px;background:#e0f5ee;color:#1A8F7F;padding:1px 6px;border-radius:3px;margin-right:6px;font-weight:700}
+.lm-divider{height:1px;background:#eef3f1;margin:4px 10px}
+.main{flex:1;overflow-y:auto;background:#f7fbfa;padding:24px 32px 60px}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.ph h1{font-size:20px;font-weight:700;color:#1A8F7F;display:flex;align-items:center;gap:8px}
+.ph h1 .slash{color:#ccc;font-weight:300;margin:0 2px}
+.ph h1 .sub{font-size:14px;color:#1A8F7F;font-weight:600}
+.ph-actions{display:flex;gap:8px;align-items:center}
+.btn{padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer;border:1px solid;font-family:inherit;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.btn-teal:hover{background:#158070}
+.btn-ghost{background:#fff;color:#444;border-color:#c8d8d4}
+.btn-ghost:hover{background:#f5faf8;border-color:#9ECFC7}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-warn{background:#fff;color:#c0392b;border-color:#e8c0bc}
+.btn-warn:hover{background:#fff5f4}
+/* CARDS */
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e0eeea;border-radius:8px;padding:14px 16px}
+.stat-num{font-size:24px;font-weight:700}
+.stat-label{font-size:12px;color:#888;margin-top:2px}
+.card{background:#fff;border:1px solid #e0eeea;border-radius:10px;margin-bottom:20px}
+.card-head{padding:14px 20px;border-bottom:1px solid #eef5f3;display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:14px;font-weight:700;color:#2d2d2d}
+/* PROGRESS TABLE */
+.prog-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.prog-tbl th{background:#d8ece6;padding:10px 14px;font-size:12px;font-weight:600;color:#2d6b5f;border-bottom:2px solid #c5e0d8;text-align:left}
+.prog-tbl th.tc{text-align:center}
+.prog-tbl td{padding:12px 14px;border-bottom:1px solid #eef5f3;vertical-align:middle}
+.prog-tbl tr:last-child td{border-bottom:none}
+.prog-tbl tr:hover td{background:#f8fcfb}
+/* PROGRESS BAR */
+.prog-bar-wrap{display:flex;align-items:center;gap:8px}
+.prog-bar{flex:1;height:10px;background:#e0eeea;border-radius:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:5px;transition:width .3s}
+.prog-pct{font-size:12px;color:#555;min-width:36px;text-align:right;font-weight:600}
+/* BADGE */
+.badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;text-align:center}
+.badge-done{background:#d8f5e8;color:#1a7a50}
+.badge-partial{background:#fdf0dc;color:#8a5d00}
+.badge-none{background:#fde8e8;color:#a03030}
+.badge-overdue{background:#f5e0e0;color:#8a1010;font-size:11px;padding:2px 7px}
+/* DEADLINE */
+.deadline{font-size:12px;display:flex;align-items:center;gap:4px}
+.deadline.ok{color:#888}
+.deadline.near{color:#e8a820;font-weight:600}
+.deadline.over{color:#c0392b;font-weight:600}
+/* NOTICE */
+.notice{padding:10px 14px;border-radius:6px;font-size:12px;display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;line-height:1.6}
+.n-info{background:#e8f4fb;border:1px solid #a8d0e8;color:#1a5f8a}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:8000;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal-box{background:#fff;border-radius:10px;width:480px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.18)}
+.modal-head{padding:16px 22px;border-bottom:1px solid #e0eeea;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-head h3{font-size:15px;font-weight:700;color:#2d2d2d}
+.modal-close{cursor:pointer;color:#aaa;font-size:20px;line-height:1}
+.modal-body{padding:22px}
+.modal-foot{padding:14px 22px;border-top:1px solid #e0eeea;display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fl{font-size:13px;color:#444;font-weight:500}
+.finp{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%}
+.finp:focus{outline:none;border-color:#1A8F7F}
+.ftextarea{padding:8px 12px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;font-family:inherit;width:100%;resize:vertical;min-height:72px}
+.ftextarea:focus{outline:none;border-color:#1A8F7F}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;border-radius:8px;padding:12px 18px;font-size:13px;display:none;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.15);align-items:center;gap:10px;color:#fff}
+.toast.show{display:flex}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="sys-name">湠精實</div>
+  <div style="font-size:13px;color:#888;margin-left:4px">/ 問卷回收監控</div>
+  <div class="topbar-right">
+    <div class="company-sel">公司別&nbsp;
+      <select style="border:none;outline:none;font-size:13px;font-family:inherit;color:#444;background:transparent;cursor:pointer">
+        <option>01002_CRIS2 慢想股份有限公司</option>
+      </select>
+    </div>
+    <div class="ticon">⚙</div>
+    <div class="lang-btn">繁</div>
+    <div class="ticon">⇥</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="icon-bar">
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+    <div class="ibar-btn on"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+    <div class="ibar-btn"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+  </div>
+
+  <div class="left-menu" id="leftMenu">
+    <div class="lm-section">
+      <div class="lm-label">問卷建置與發放</div>
+      <div class="lm-item" onclick="window.location='setup.html'"><span class="step-badge">S1</span>清單設定</div>
+      <div class="lm-item" onclick="window.location='distribute.html'"><span class="step-badge">S2</span>問卷發放設定</div>
+      <div class="lm-item"><span class="step-badge">S3</span>預覽與留言</div>
+      <div class="lm-item on"><span class="step-badge">S4</span>問卷回收監控</div>
+    </div>
+    <div class="lm-divider"></div>
+    <div class="lm-section">
+      <div class="lm-label">系統設定</div>
+      <div class="lm-item" onclick="window.location='admin.html'">後台設定</div>
+      <div class="lm-item" onclick="window.location='analysis.html'">分析結果</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="ph">
+      <div>
+        <h1>P07 問卷回收監控 <span class="slash">/</span> <span class="sub">即時追蹤</span></h1>
+        <div style="font-size:12px;color:#888;margin-top:4px">步驟 4｜追蹤各部門問卷回收狀況，管理截止日與提醒通知</div>
+      </div>
+      <div class="ph-actions">
+        <button class="btn btn-ghost btn-sm" onclick="openModal('modal-remind')">發送提醒</button>
+        <button class="btn btn-ghost btn-sm" onclick="openModal('modal-deadline')">設定截止日</button>
+        <button class="btn btn-teal btn-sm" onclick="closeQuestionnaire()">關閉問卷</button>
+      </div>
+    </div>
+
+    <div class="notice n-info"><span>ℹ️</span><span>問卷發放中｜截止日：<b>2026-06-30</b>（還有 19 天）。已發放 6 組連結，共 202 位同仁應填答。可隨時對未回覆部門發送提醒。</span></div>
+
+    <!-- 總覽統計 -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num" style="color:#1A8F7F">184</div>
+        <div class="stat-label">已回覆筆數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#2d2d2d">202</div>
+        <div class="stat-label">應回覆總數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#1A8F7F">91%</div>
+        <div class="stat-label">整體回收率</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#e8a820">3</div>
+        <div class="stat-label">待催收部門</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#c0392b">0</div>
+        <div class="stat-label">逾期未填數</div>
+      </div>
+    </div>
+
+    <!-- 部門回收表 -->
+    <div class="card">
+      <div class="card-head">
+        <h3>各部門回收狀況</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select style="padding:5px 10px;border:1px solid #c8d8d4;border-radius:5px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer">
+            <option>所有狀態</option><option>已完成</option><option>進行中</option><option>未開始</option>
+          </select>
+          <button class="btn btn-ghost btn-sm">⬇ 匯出</button>
+        </div>
+      </div>
+      <div style="overflow:hidden">
+        <table class="prog-tbl">
+          <thead>
+            <tr>
+              <th style="width:140px">部門</th>
+              <th class="tc" style="width:100px">已/應回覆</th>
+              <th style="width:200px">回收進度</th>
+              <th class="tc" style="width:80px">狀態</th>
+              <th class="tc" style="width:120px">截止日</th>
+              <th class="tc" style="width:100px">最後更新</th>
+              <th class="tc" style="width:80px">操作</th>
+            </tr>
+          </thead>
+          <tbody id="dept-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 即時動態 -->
+    <div class="card">
+      <div class="card-head"><h3>即時填答動態</h3><span style="font-size:12px;color:#aaa">最近 10 筆</span></div>
+      <div style="padding:12px 20px;display:flex;flex-direction:column;gap:0" id="activity-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: 發送提醒 -->
+<div class="modal-bg" id="modal-remind">
+  <div class="modal-box">
+    <div class="modal-head"><h3>發送催收提醒</h3><span class="modal-close" onclick="closeModal('modal-remind')">✕</span></div>
+    <div class="modal-body">
+      <div class="fg">
+        <label class="fl">發送對象</label>
+        <select class="finp">
+          <option>所有尚未完成部門（3 個）</option>
+          <option>人力資源部</option>
+          <option>業務行銷部</option>
+          <option>資訊技術部</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">提醒訊息</label>
+        <textarea class="ftextarea" rows="4">您好，IFRS 永續風險問卷尚未完成，請於截止日 2026-06-30 前完成填答。如有問題請聯繫顧問。謝謝！</textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-remind')">取消</button>
+      <button class="btn btn-teal" onclick="sendReminder()">發送提醒</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: 設定截止日 -->
+<div class="modal-bg" id="modal-deadline">
+  <div class="modal-box" style="width:380px">
+    <div class="modal-head"><h3>設定問卷截止日</h3><span class="modal-close" onclick="closeModal('modal-deadline')">✕</span></div>
+    <div class="modal-body">
+      <div class="fg">
+        <label class="fl">截止日期</label>
+        <input class="finp" type="date" value="2026-06-30">
+      </div>
+      <div class="fg">
+        <label class="fl">提前幾天發送提醒</label>
+        <input class="finp" type="number" value="3" min="1" max="14">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-deadline')">取消</button>
+      <button class="btn btn-teal" onclick="saveDeadline()">儲存設定</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let menuOpen = true;
+
+const DEPTS = [
+  {name:'永續發展部', code:'D001', done:32, total:32, updated:'今天 14:32'},
+  {name:'環境管理部', code:'D002', done:28, total:30, updated:'今天 11:20'},
+  {name:'財務會計部', code:'D004', done:25, total:25, updated:'昨天 17:45'},
+  {name:'人力資源部', code:'D003', done:38, total:45, updated:'今天 09:15'},
+  {name:'業務行銷部', code:'D005', done:41, total:50, updated:'今天 08:00'},
+  {name:'資訊技術部', code:'D006', done:20, total:20, updated:'昨天 16:10'},
+];
+
+const ACTIVITIES = [
+  {dept:'永續發展部', user:'王小明', action:'完成填答', time:'14:32'},
+  {dept:'業務行銷部', user:'陳美玲', action:'儲存草稿', time:'14:18'},
+  {dept:'人力資源部', user:'林志遠', action:'開始填答', time:'13:55'},
+  {dept:'環境管理部', user:'張雅婷', action:'完成填答', time:'13:40'},
+  {dept:'業務行銷部', user:'黃建宏', action:'完成填答', time:'13:22'},
+  {dept:'人力資源部', user:'劉佳芬', action:'儲存草稿', time:'12:48'},
+  {dept:'永續發展部', user:'吳俊賢', action:'完成填答', time:'12:10'},
+  {dept:'業務行銷部', user:'許雯雯', action:'開始填答', time:'11:55'},
+  {dept:'環境管理部', user:'蔡宗翰', action:'完成填答', time:'11:20'},
+  {dept:'財務會計部', user:'賴淑芳', action:'完成填答', time:'10:33'},
+];
+
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('leftMenu').classList.toggle('hidden',!menuOpen);
+}
+
+function buildDeptTable(){
+  document.getElementById('dept-tbody').innerHTML = DEPTS.map(d=>{
+    const pct = Math.round(d.done/d.total*100);
+    let fillColor = '#1A8F7F';
+    let badgeClass = 'badge-done', badgeText = '已完成';
+    if(pct<100&&pct>=50){badgeClass='badge-partial';badgeText='進行中';fillColor='#e8a820';}
+    if(pct<50){badgeClass='badge-none';badgeText='進行中';fillColor='#e8a820';}
+    const isLow = pct < 90;
+    return `<tr>
+      <td style="font-weight:600">${d.name}<div style="font-size:11px;color:#aaa">${d.code}</div></td>
+      <td style="text-align:center"><b style="color:${pct>=100?'#1a7a50':'#e8a820'}">${d.done}</b><span style="color:#aaa"> / ${d.total}</span></td>
+      <td>
+        <div class="prog-bar-wrap">
+          <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+          <span class="prog-pct" style="color:${fillColor}">${pct}%</span>
+        </div>
+      </td>
+      <td style="text-align:center"><span class="badge ${badgeClass}">${badgeText}</span></td>
+      <td style="text-align:center"><span class="deadline ${isLow?'near':'ok'}">2026-06-30</span></td>
+      <td style="text-align:center;font-size:12px;color:#888">${d.updated}</td>
+      <td style="text-align:center">
+        ${pct<100?`<button class="btn btn-warn btn-sm" onclick="remind('${d.name}')">提醒</button>`:'<span style="color:#aaa;font-size:12px">—</span>'}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function buildActivityList(){
+  const colors={
+    '完成填答':'#1A8F7F',
+    '儲存草稿':'#e8a820',
+    '開始填答':'#2E5FA8',
+  };
+  document.getElementById('activity-list').innerHTML = ACTIVITIES.map(a=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0f5f3">
+      <div style="width:6px;height:6px;border-radius:50%;background:${colors[a.action]||'#888'};flex-shrink:0"></div>
+      <span style="font-size:12px;color:#aaa;width:50px;flex-shrink:0">${a.time}</span>
+      <span style="font-size:12px;color:#888;width:80px;flex-shrink:0">${a.dept}</span>
+      <span style="font-size:13px;color:#2d2d2d;font-weight:500">${a.user}</span>
+      <span style="font-size:12px;color:${colors[a.action]||'#555'}">${a.action}</span>
+    </div>`).join('');
+}
+
+function remind(name){
+  showToast('已發送催收提醒至 '+name,'#1A8F7F');
+}
+
+function sendReminder(){
+  closeModal('modal-remind');
+  setTimeout(()=>showToast('提醒已發送至 3 個部門','#1A8F7F'),300);
+}
+
+function saveDeadline(){
+  closeModal('modal-deadline');
+  showToast('截止日設定已更新','#1A8F7F');
+}
+
+function closeQuestionnaire(){
+  if(confirm('確定要關閉問卷嗎？關閉後同仁將無法繼續填答。')) showToast('問卷已關閉，進入分析階段','#c0392b');
+}
+
+function openModal(id){ document.getElementById(id).classList.add('show'); }
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+
+function showToast(msg,bg='#1A8F7F'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.background=bg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+buildDeptTable();
+buildActivityList();
+</script>
+</body>
+</html>

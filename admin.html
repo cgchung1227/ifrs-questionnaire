@@ -196,6 +196,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       <div class="lm-item" onclick="go('pg-iro')">風險／機會清單 <span class="new-tag">新</span></div>
       <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型 <span class="new-tag">新</span></div>
       <div class="lm-item" onclick="go('pg-vc')">價值鏈位置 <span class="new-tag">新</span></div>
+      <div class="lm-item" onclick="go('pg-org')">母子組織管理 <span class="new-tag">新</span></div>
     </div>
   </div>
 
@@ -770,6 +771,127 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       </div>
     </div>
 
+    <!-- ═══════════════════════════════
+         B09 母子組織管理
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-org">
+      <div class="ph">
+        <div><h1>母子組織管理 <span class="slash">/</span> <span class="sub">組織架構</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal" onclick="openModal('add-org')">新增子公司</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div class="notice n-info"><span>ℹ️</span><span>開啟母子組織功能後，可設定各子公司基本資料與權限。分析時各子公司議題需與母公司進行 Mapping，請確認議題與風險機會清單不能相差太多。</span></div>
+
+      <!-- 母公司卡片 -->
+      <div style="background:#e8f8f4;border:2px solid #9ECFC7;border-radius:10px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:44px;height:44px;border-radius:10px;background:#1A8F7F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700">母</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:#2d2d2d">慢想股份有限公司</div>
+            <div style="font-size:12px;color:#888;margin-top:2px">統一編號：12345678 ｜ 代碼：01002 ｜ 行業別：資訊科技服務</div>
+          </div>
+        </div>
+        <span class="badge badge-on">母公司</span>
+      </div>
+
+      <!-- 子公司列表 -->
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">狀態</th>
+            <th style="width:60px">類型</th>
+            <th style="width:160px" class="tleft">子公司名稱</th>
+            <th style="width:120px">統一編號</th>
+            <th style="width:100px">持股比例</th>
+            <th style="width:120px">行業別</th>
+            <th>ESG 議題 Mapping</th>
+            <th style="width:80px;text-align:center">問卷權限</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+              <td><select><option>請選擇</option><option>子公司</option><option>關聯企業</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td><span class="chip chip-teal" style="font-size:11px">子公司</span></td>
+              <td class="tleft" style="font-weight:600">慢想製造廠股份有限公司</td>
+              <td>87654321</td>
+              <td>100%</td>
+              <td style="font-size:12px;color:#555">製造業</td>
+              <td><span style="color:#1A8F7F;font-size:12px;cursor:pointer;text-decoration:underline" onclick="showToast('前往 A03 母子組織 Mapping 頁面','#1A8F7F')">已 Mapping 6/8 議題</span></td>
+              <td style="text-align:center"><div style="display:flex;justify-content:center"><div class="toggle on"></div></div></td>
+              <td><div class="func-icons">
+                <span class="fi" onclick="openModal('edit-org')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125"/></svg></span>
+                <span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-on">啟用</span></td>
+              <td><span class="chip chip-teal" style="font-size:11px">子公司</span></td>
+              <td class="tleft" style="font-weight:600">慢想國際有限公司</td>
+              <td>11223344</td>
+              <td>80%</td>
+              <td style="font-size:12px;color:#555">貿易業</td>
+              <td><span style="color:#e8a820;font-size:12px;cursor:pointer;text-decoration:underline" onclick="showToast('前往 A03 母子組織 Mapping 頁面','#e8a820')">已 Mapping 5/8 議題</span></td>
+              <td style="text-align:center"><div style="display:flex;justify-content:center"><div class="toggle on"></div></div></td>
+              <td><div class="func-icons">
+                <span class="fi" onclick="openModal('edit-org')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125"/></svg></span>
+                <span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916"/></svg></span>
+              </div></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-off">停用</span></td>
+              <td><span class="chip chip-amber" style="font-size:11px">關聯企業</span></td>
+              <td class="tleft" style="font-weight:600;color:#aaa">慢想投資控股（範例）</td>
+              <td style="color:#aaa">99887766</td>
+              <td style="color:#aaa">30%</td>
+              <td style="font-size:12px;color:#aaa">金融業</td>
+              <td style="color:#aaa;font-size:12px">未 Mapping</td>
+              <td style="text-align:center"><div style="display:flex;justify-content:center"><div class="toggle"></div></div></td>
+              <td><div class="func-icons">
+                <span class="fi" onclick="openModal('edit-org')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125"/></svg></span>
+                <span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916"/></svg></span>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pag-label">共</span><span class="pag-total"> 3 間子公司 / 關聯企業</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+
+      <!-- 組織架構圖 -->
+      <div style="background:#fff;border:1px solid #e0eeea;border-radius:10px;padding:20px 24px;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:#2d2d2d;margin-bottom:16px">組織架構示意</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+          <div style="background:#1A8F7F;color:#fff;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:700">慢想股份有限公司（母）</div>
+          <div style="display:flex;gap:60px;position:relative;padding-top:16px">
+            <div style="position:absolute;top:0;left:50%;width:1px;height:100%;background:#c8d8d4"></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:1px;height:20px;background:#c8d8d4"></div>
+              <div style="background:#e8f8f4;border:2px solid #9ECFC7;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;color:#1A8F7F">慢想製造廠（100%）</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:1px;height:20px;background:#c8d8d4"></div>
+              <div style="background:#e8f8f4;border:2px solid #9ECFC7;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;color:#1A8F7F">慢想國際（80%）</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:1px;height:20px;background:#c8d8d4"></div>
+              <div style="background:#f8f8f8;border:2px dashed #c8c8c8;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:500;color:#aaa">慢想投資（30%，停用）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -956,6 +1078,36 @@ const MODAL_CONTENTS = {
     </div>
     <div class="fg"><label class="fl">位置名稱 <span class="req">*</span></label><input class="finp" value="上游供應商"></div>
     <div class="fg"><label class="fl">說明</label><input class="finp" value="原料供應、外包生產、採購相關活動"></div>`},
+  'add-org':{title:'新增子公司／關聯企業',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">公司名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入公司名稱"></div>
+      <div class="fg"><label class="fl">統一編號</label><input class="finp" placeholder="例：12345678"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">類型 <span class="req">*</span></label><select class="fsel"><option>子公司</option><option>關聯企業</option><option>合資企業</option></select></div>
+      <div class="fg"><label class="fl">持股比例</label><input class="finp" placeholder="例：100%" type="text"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">行業別</label><input class="finp" placeholder="例：製造業"></div>
+      <div class="fg"><label class="fl">所在地</label><input class="finp" placeholder="例：台灣"></div>
+    </div>
+    <div class="fg"><label class="fl">聯絡窗口 Email</label><input class="finp" type="email" placeholder="contact@subsidiary.com"></div>
+    <div class="fg"><label class="fl">備註說明</label><textarea class="ftextarea" rows="2" placeholder="補充說明..."></textarea></div>`},
+  'edit-org':{title:'編輯子公司資料',body:()=>`
+    <div class="grid2">
+      <div class="fg"><label class="fl">公司名稱 <span class="req">*</span></label><input class="finp" value="慢想製造廠股份有限公司"></div>
+      <div class="fg"><label class="fl">統一編號</label><input class="finp" value="87654321"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">類型</label><select class="fsel"><option selected>子公司</option><option>關聯企業</option><option>合資企業</option></select></div>
+      <div class="fg"><label class="fl">持股比例</label><input class="finp" value="100%"></div>
+    </div>
+    <div class="grid2">
+      <div class="fg"><label class="fl">行業別</label><input class="finp" value="製造業"></div>
+      <div class="fg"><label class="fl">所在地</label><input class="finp" value="台灣"></div>
+    </div>
+    <div class="fg"><label class="fl">聯絡窗口 Email</label><input class="finp" type="email" value="poc@factory.com"></div>
+    <div class="fg"><label class="fl">問卷填答權限</label><select class="fsel"><option>啟用</option><option>停用</option></select></div>`},
   'add-aspect':{title:'新增議題面向',body:()=>`
     <div class="grid3">
       <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：011"></div>
@@ -1073,6 +1225,10 @@ function updateThemeSelect(esgSel){
     ? themes.map(t=>`<option>${t}</option>`).join('')
     : '<option>請先選擇ESG議題</option>';
 }
+/* ═══════════════════════════════
+   母子組織管理（B09）
+═══════════════════════════════ */
+/* (pg-org page injected below mainArea) */
 function closeModal(){document.getElementById('modalBg').classList.remove('show');}
 function saveModal(){closeModal();showToast('儲存成功','#1A8F7F');}
 function showToast(msg,color){
