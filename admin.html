@@ -1361,6 +1361,10 @@ function go(pid){
     if(m.getAttribute('onclick')===`go('${pid}')`) m.classList.add('on');
   });
   document.getElementById('mainArea').scrollTop=0;
+  if(pid==='pg-distribute') distBuildMatrix();
+  if(pid==='pg-monitor'){ monBuildDeptTable(); monBuildActivityList(); }
+  if(pid==='pg-analysis'){ anaDrawMatrix(); anaBuildSigLists(); anaBuildRankTable(); anaBuildTopicTable(); anaBuildVcChart(); anaBuildThresholdPreview(); }
+  if(pid==='pg-threshold') anaBuildThresholdPreview();
 }
 
 function removeChip(rm){ rm.closest('.chip').remove(); }
@@ -1956,14 +1960,6 @@ function anaBuildThresholdPreview(){
 function anaThresholdSave(){ showToast('門檻設定已儲存','#1A8F7F'); anaBuildThresholdPreview(); }
 
 // Override go() to init pages on first visit
-const _origGo = go;
-function go(pid){
-  _origGo(pid);
-  if(pid==='pg-distribute') distBuildMatrix();
-  if(pid==='pg-monitor'){ monBuildDeptTable(); monBuildActivityList(); }
-  if(pid==='pg-analysis'){ anaDrawMatrix(); anaBuildSigLists(); anaBuildRankTable(); anaBuildTopicTable(); anaBuildVcChart(); anaBuildThresholdPreview(); }
-  if(pid==='pg-threshold') anaBuildThresholdPreview();
-}
 
 document.getElementById('ana-th-sig')?.addEventListener('input', anaBuildThresholdPreview);
 document.getElementById('ana-th-vsig')?.addEventListener('input', anaBuildThresholdPreview);
