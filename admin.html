@@ -337,9 +337,8 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       <div class="lm-label">C2 · IFRS 問卷設定</div>
       <div class="lm-item" onclick="go('pg-theme')"><span class="lm-code">B03</span>永續主題管理</div>
       <div class="lm-item" onclick="go('pg-iro')"><span class="lm-code">B04</span>風險／機會清單</div>
-      <div class="lm-item" onclick="go('pg-iro-setting')"><span class="lm-code">B06</span>IRO 設定管理</div>
+      <div class="lm-item" onclick="go('pg-iro-setting')"><span class="lm-code">B06</span>R/O 類型</div>
       <div class="lm-item" onclick="go('pg-vc')"><span class="lm-code">B07</span>價值鏈位置</div>
-      <div class="lm-item" onclick="go('pg-schema')"><span class="lm-code">B08</span>問卷填答尺度</div>
     </div>
     <div class="lm-divider" style="display:none"></div>
     <div class="lm-section" style="display:none">
@@ -789,57 +788,12 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       </div>
     </div>
 
-    <!-- ═══════════════════════════════
-         資料關聯說明
-    ═══════════════════════════════ -->
-    <div class="page" id="pg-schema">
-      <div class="ph">
-        <div><h1><span class="pg-code">B08</span>資料關聯架構 <span class="slash">/</span> <span class="sub">說明</span></h1></div>
-        <div class="ph-actions"><button class="btn btn-ghost btn-sm" onclick="go('pg-esg')">← 返回</button></div>
-      </div>
-      <div class="notice n-ok"><span>✅</span><span>以下為 IFRS 問卷模組的資料層級關聯，供開發參考。</span></div>
-      <div class="schema-box">
-        <div>【面向】環境面 / 社會面 / 治理面 <span class="note">← 議題面向管理（現有）</span></div>
-        <div class="layer">└─ 【ESG 議題】氣候策略與能源管理、水資源管理… <span class="note">← ESG 議題清單（現有，加 SASB 欄）</span></div>
-        <div class="layer" style="margin-left:40px">└─ 1對多 ↓</div>
-        <br>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;└─ 【永續主題】氣候策略 / 能源管理… <span class="note">← 永續主題管理（新頁面，掛在議題下 1對多）</span></div>
-        <div class="layer" style="margin-left:60px">└─ 【風險／機會清單】掛在主題下 <span class="note">← 風險/機會清單（新頁面，掛在主題下 1對多）</span></div>
-        <div class="layer" style="margin-left:80px">├─ 風險：碳定價上升、水資源短缺…</div>
-        <div class="layer" style="margin-left:80px">└─ 機會：節能產品、RE100…</div>
-        <br>
-        <div>【部門綁定】部門 A → 永續主題 X, Y <span class="note">← P04 問卷發放設定</span></div>
-        <br>
-        <div>【填答介面】同仁登入 → 選部門 → 帶出永續主題 → 展開各主題的風險/機會清單</div>
-        <div class="layer">└─ Part 2：IRO 類型 / 時間尺度</div>
-        <div class="layer">└─ Part 3a：量化衝擊 <span class="note">← 財務衝擊項目管理（量化類型）</span></div>
-        <div class="layer">└─ Part 3b：質化 7 題 <span class="note">← 財務衝擊項目管理（質化類型）</span></div>
-        <div class="layer">└─ Part 4：價值鏈位置 <span class="note">← 價值鏈位置（新頁面）</span></div>
-        <br>
-        <div>【衝擊尺度】發生機率 / 金額 / EBITDA <span class="note">← 問卷填答尺度管理（現有）</span></div>
-        <div>【SASB 對應】議題 ↔ SASB 標準 <span class="note">← ESG 議題清單（加欄）</span></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px">
-        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
-          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">整合到現有頁面</div>
-          <div style="font-size:12px;color:#555;line-height:2">✅ ESG 議題清單<br>→ 加 SASB 欄（1.2）<br>→ 加永續主題欄（1.3）<br><br>✅ 財務衝擊項目管理<br>→ 加衝擊類型欄（1.5）<br>→ 質化 Q01–Q07 新增為資料</div>
-        </div>
-        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
-          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">新增頁面</div>
-          <div style="font-size:12px;color:#555;line-height:2">🆕 永續主題管理<br>（獨立 CRUD）<br><br>🆕 風險／機會清單<br>（掛在永續主題下）<br><br>🆕 價值鏈位置<br>（Part 4 選項）</div>
-        </div>
-        <div style="border:1px solid #d8ece6;border-radius:8px;padding:14px">
-          <div style="font-size:12px;font-weight:700;color:#1A8F7F;margin-bottom:8px">從 C3 進入（不在此）</div>
-          <div style="font-size:12px;color:#555;line-height:2">📋 1.8 最終確認<br>（從 C3 問卷建置進入）<br><br>📋 部門 × 主題綁定<br>（P04 問卷發放設定）<br><br>📋 問卷試填 / 正式發放<br>（P05 預覽 / P06 填答）</div>
-        </div>
-      </div>
-    </div>
 
 
-    <!-- IRO 設定管理 -->
+    <!-- R/O 類型 -->
     <div class="page" id="pg-iro-setting">
       <div class="ph">
-        <div><h1><span class="pg-code">B06</span>IRO 設定管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div><h1><span class="pg-code">B06</span>R/O 類型 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
       </div>
       <div class="notice n-info"><span>ℹ️</span><span>管理同仁填答 Part 2 的兩個下拉選單：<b>IRO 類型</b> 與 <b>影響時間尺度</b>。</span></div>
       <div style="display:flex;border-bottom:2px solid #d8ece6;margin-bottom:16px">
@@ -1400,8 +1354,6 @@ const MODAL_CONTENTS = {
     </div>
     <div class="fg"><label class="fl">議題名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入議題名稱"></div>
     <div class="fg"><label class="fl">描述說明</label><textarea class="ftextarea" rows="3" placeholder="議題說明..."></textarea></div>
-    <div class="fg"><label class="fl">SASB 對應 <span style="font-size:11px;color:#888;font-weight:400">（1.2，可多選）</span></label>
-      <select class="fsel"><option value="">請選擇 SASB 標準</option>${SASB_OPTIONS.map(s=>`<option>${s}</option>`).join('')}</select></div>
     <div class="fg"><label class="fl">永續主題 <span style="font-size:11px;color:#888;font-weight:400">（1.3，可多選）</span></label>
       <select class="fsel"><option value="">請選擇永續主題</option>${THEME_OPTIONS.map(t=>`<option>${t}</option>`).join('')}</select></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
@@ -1440,9 +1392,12 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：8"></div>
     </div>
     <div class="fg"><label class="fl">所屬 ESG 議題 <span class="req">*</span></label>
-      <select class="fsel"><option value="">請選擇</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}</select>
-      <span style="font-size:11px;color:#888;margin-top:3px">永續主題隸屬於 ESG 議題（1對多關係）</span></div>
-    <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" placeholder="請輸入永續主題名稱"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
+          <option value="">＋ 新增議題</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}
+        </select>
+      </div>
+      <span style="font-size:11px;color:#888;margin-top:3px">永續主題可隸屬多個 ESG 議題（1對多關係）</span></div>
     <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2" placeholder="此主題的範圍說明..."></textarea></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 主題名稱</th></tr></thead>
@@ -1460,27 +1415,15 @@ const MODAL_CONTENTS = {
     <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" value="氣候策略"></div>
     <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2">與氣候變遷相關的策略規劃、目標設定與績效管理</textarea></div>`},
   'add-iro':{title:'新增風險／機會項目',body:()=>`
-    <div class="grid2">
-      <div class="fg"><label class="fl">ESG 議題 <span class="req">*</span></label>
-        <select class="fsel" onchange="updateThemeSelect(this)">
-          <option value="">請選擇</option>
-          <option>氣候策略與能源管理</option><option>水資源管理</option><option>生物多樣性</option>
-          <option>人才吸引與留任</option><option>資訊安全與隱私</option><option>公司治理與誠信經營</option>
-        </select></div>
-      <div class="fg"><label class="fl">永續主題 <span class="req">*</span></label>
-        <select class="fsel" id="themeSelect"><option>請先選擇 ESG 議題</option></select></div>
-    </div>
-    <div class="grid2">
-      <div class="fg"><label class="fl">類型 <span class="req">*</span></label>
-        <div class="radio-group" style="margin-top:6px">
-          <label><input type="radio" name="irotype" value="risk" checked> ⚠ 風險</label>
-          <label><input type="radio" name="irotype" value="opp"> ✦ 機會</label>
-        </div>
-      </div>
-    <div class="fg"><label class="fl">描述 <span class="req">*</span></label>
-      <textarea class="ftextarea" rows="3" placeholder="請輸入風險或機會的描述說明..."></textarea></div>
+    <div class="fg"><label class="fl">永續主題 <span class="req">*</span></label>
+      <select class="fsel">
+        <option value="">請選擇</option>
+        <option>氣候策略</option><option>能源管理</option><option>水資源管理</option>
+        <option>生物多樣性</option><option>廢棄物管理</option><option>人才發展</option>
+        <option>職場安全</option><option>資訊安全</option><option>公司治理</option>
+      </select></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
-    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 描述</th></tr></thead>
+    <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 名稱</th></tr></thead>
     <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="2" placeholder="請輸入"></textarea></td></tr>
     <tr><td>English</td><td><textarea class="ftextarea" rows="2" placeholder="Please enter"></textarea></td></tr>
     <tr><td>简体中文</td><td><textarea class="ftextarea" rows="2" placeholder="请输入"></textarea></td></tr></tbody></table>`},
@@ -1504,8 +1447,6 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：6"></div>
       <div class="fg"><label class="fl">狀態</label><select class="fsel"><option>啟用</option><option>停用</option></select></div>
     </div>
-    <div class="fg"><label class="fl">位置名稱 <span class="req">*</span></label><input class="finp" placeholder="例：研發活動"></div>
-    <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="例：產品開發、技術研究"></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 位置名稱</th></tr></thead>
     <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
@@ -1543,7 +1484,6 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">排序</label><input class="finp" type="number"></div>
       <div class="fg"><label class="fl">屬性 <span class="req">*</span></label><select class="fsel"><option>風險</option><option>機會</option></select></div>
     </div>
-    <div class="fg"><label class="fl">IRO 類型名稱 <span class="req">*</span></label><input class="finp" placeholder="例：轉型風險－法律"></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 類型名稱</th></tr></thead>
     <tbody>
@@ -1563,8 +1503,6 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：TS04"></div>
       <div class="fg"><label class="fl">排序</label><input class="finp" type="number"></div>
     </div>
-    <div class="fg"><label class="fl">時間尺度名稱 <span class="req">*</span></label><input class="finp" placeholder="例：超長期"></div>
-    <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="例：10 年以上"></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 名稱</th></tr></thead>
     <tbody>
