@@ -174,6 +174,27 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 /* AUTOSAVE */
 .autosave-dot{width:7px;height:7px;border-radius:50%;background:#9ECFC7;display:inline-block;margin-right:4px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+/* C3-05 ENTRY SCREEN */
+.entry-screen{padding:28px 32px 100px}
+.entry-title{font-size:15px;font-weight:700;color:#1A8F7F;margin-bottom:4px;letter-spacing:.02em}
+.entry-sub{font-size:13px;color:#888;margin-bottom:24px}
+.entry-section{background:#fff;border:1.5px solid #E4EDE9;border-radius:14px;padding:20px 24px;margin-bottom:20px}
+.entry-section h3{font-size:13px;font-weight:700;color:#2d2d2d;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.entry-section h3 .step-badge{width:22px;height:22px;border-radius:50%;background:#1A8F7F;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dept-sel{padding:11px 14px;border:1.5px solid #DDE6E3;border-radius:10px;font-size:14px;color:#333;font-family:inherit;background:#fff;width:100%;cursor:pointer;transition:border-color .15s}
+.dept-sel:focus{outline:none;border-color:#1A8F7F;box-shadow:0 0 0 3px rgba(26,143,127,.08)}
+.scope-list{display:none;margin-top:16px;border-top:1px solid #EEF3F1;padding-top:16px}
+.scope-list.show{display:block}
+.scope-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #F3F6F8}
+.scope-item:last-child{border-bottom:none}
+.scope-code{font-size:11px;background:#E4F6F1;color:#1A8F7F;padding:2px 8px;border-radius:4px;font-weight:700;flex-shrink:0;margin-top:1px}
+.scope-name{font-size:13px;color:#2d2d2d;font-weight:600}
+.scope-sasb{font-size:11px;color:#aaa;margin-top:2px}
+.scope-count{margin-left:auto;font-size:11px;color:#888;flex-shrink:0}
+.confirm-bar{background:#F0F9F7;border:1.5px solid #9ECFC7;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:4px}
+.confirm-bar-icon{font-size:22px;flex-shrink:0}
+.confirm-bar-text{flex:1;font-size:13px;color:#2d6b5f;line-height:1.6}
+.confirm-bar-text strong{color:#1A8F7F}
 </style>
 </head>
 <body>
@@ -209,8 +230,37 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
     </div>
   </div>
 
+  <!-- C3-05 ENTRY SCREEN -->
+  <div id="entryScreen" class="entry-screen">
+    <div class="entry-title">步驟一：確認填答範圍</div>
+    <div class="entry-sub">請選擇您所屬部門，系統將帶出對應的永續主題，確認後開始填答。</div>
+
+    <div class="entry-section">
+      <h3><span class="step-badge">1</span>選擇您的部門</h3>
+      <select class="dept-sel" id="deptSelect" onchange="onDeptChange(this.value)">
+        <option value="">— 請選擇部門 —</option>
+        <option value="sustain">永續發展部</option>
+        <option value="mfg">製造部</option>
+        <option value="finance">財務部</option>
+        <option value="sales">業務部</option>
+        <option value="it">資訊部</option>
+        <option value="hr">人資部</option>
+        <option value="all">其他（全部主題）</option>
+      </select>
+
+      <div class="scope-list" id="scopeList">
+        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:10px;letter-spacing:.04em">您需填答的永續主題：</div>
+        <div id="scopeItems"></div>
+        <div class="confirm-bar" id="confirmBar" style="display:none">
+          <div class="confirm-bar-icon">📋</div>
+          <div class="confirm-bar-text" id="confirmBarText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CARD INNER -->
-  <div class="card-inner">
+  <div class="card-inner" id="surveyContent" style="display:none">
 
     <!-- TOPIC CONTENT -->
     <div id="topicContent"></div>
@@ -221,8 +271,11 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 
 <!-- BOTTOM BAR -->
 <div class="bot-bar">
-  <div></div>
-  <button class="btn btn-primary" onclick="submitForm()">送出問卷</button>
+  <div id="botLeft" style="font-size:13px;color:#aaa">IFRS 重大性評估問卷</div>
+  <div>
+    <button class="btn btn-primary" id="btnConfirmEntry" onclick="confirmEntry()" style="display:none">確認填答範圍，開始填答 →</button>
+    <button class="btn btn-primary" id="btnSubmit" onclick="submitForm()" style="display:none">送出問卷</button>
+  </div>
 </div>
 
 <!-- TOAST -->
@@ -842,9 +895,74 @@ function showToast(msg, color){
 }
 
 // ══════════════════════════════════════════
+// C3-05 ENTRY SCREEN
+// ══════════════════════════════════════════
+const DEPT_TOPICS = {
+  sustain: ['e01','e02','e03','e04','e05','e06','e07'],
+  mfg:     ['e01','e03','e04','e06'],
+  finance: ['e01','e03','e07'],
+  sales:   ['e01','e05','e07'],
+  it:      ['e01','e03','e05'],
+  hr:      ['e01','e07'],
+  all:     ['e01','e02','e03','e04','e05','e06','e07'],
+};
+
+function onDeptChange(val){
+  const scopeList = document.getElementById('scopeList');
+  const scopeItems = document.getElementById('scopeItems');
+  const confirmBar = document.getElementById('confirmBar');
+  const btnConfirmEntry = document.getElementById('btnConfirmEntry');
+
+  if(!val){ scopeList.classList.remove('show'); btnConfirmEntry.style.display='none'; return; }
+
+  const ids = DEPT_TOPICS[val] || [];
+  const topics = ISSUES_T3.filter(i=>ids.includes(i.id));
+  const deptName = document.getElementById('deptSelect').options[document.getElementById('deptSelect').selectedIndex].text;
+
+  scopeItems.innerHTML = topics.map(t=>`
+    <div class="scope-item">
+      <span class="scope-code">${t.code}</span>
+      <div>
+        <div class="scope-name">${t.name}</div>
+        <div class="scope-sasb">${t.sasb||''}</div>
+      </div>
+      <span class="scope-count">${t.risks.length} 風險 / ${t.opps.length} 機會</span>
+    </div>`).join('');
+
+  document.getElementById('confirmBarText').innerHTML =
+    `<strong>${deptName}</strong> 共需填答 <strong>${topics.length} 個永續主題</strong>，共 ${topics.reduce((s,t)=>s+t.risks.length+t.opps.length,0)} 項風險與機會，預計填答時間 10–15 分鐘。`;
+  confirmBar.style.display='flex';
+  scopeList.classList.add('show');
+  btnConfirmEntry.style.display='inline-flex';
+}
+
+function confirmEntry(){
+  const val = document.getElementById('deptSelect').value;
+  if(!val){ showToast('請先選擇您的部門','#c0392b'); return; }
+  const ids = DEPT_TOPICS[val] || [];
+  const deptName = document.getElementById('deptSelect').options[document.getElementById('deptSelect').selectedIndex].text;
+
+  // Filter topics to only assigned ones
+  const filtered = ISSUES_T3.filter(i=>ids.includes(i.id));
+  // Re-render with filtered topics
+  const container = document.getElementById('topicContent');
+  container.innerHTML = filtered.map(iss => renderIssue(iss)).join('');
+
+  document.getElementById('entryScreen').style.display='none';
+  document.getElementById('surveyContent').style.display='block';
+  document.getElementById('btnConfirmEntry').style.display='none';
+  document.getElementById('btnSubmit').style.display='inline-flex';
+  document.getElementById('botLeft').innerHTML = `<span style="color:#888">部門：</span><strong style="color:#1A8F7F">${deptName}</strong>`;
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
 renderAll();
+// Show entry screen on load
+document.getElementById('btnConfirmEntry').style.display='none';
+document.getElementById('btnSubmit').style.display='none';
 </script>
 </body>
 </html>
