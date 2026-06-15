@@ -159,6 +159,33 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .schema-box .layer{margin-left:20px;color:#555}
 .schema-box .arrow{color:#1A8F7F;font-weight:700}
 .schema-box .note{color:#aaa;font-style:italic}
+/* C3-01 BUILD QUESTIONNAIRE */
+.badge-prep{background:#fdf0dc;color:#8a5d00}
+.badge-survey{background:#e8f0fb;color:#2E5FA8}
+.badge-writing{background:#e0f5ee;color:#1a7a50}
+.qs-sec{background:#fff;border:1px solid #e0eeea;border-radius:10px;padding:24px;margin-bottom:20px}
+.qs-sec-hd{font-size:14px;font-weight:700;color:#2d2d2d;border-left:3px solid #1A8F7F;padding-left:10px;margin-bottom:18px}
+.lang-pill{padding:7px 22px;border:1px solid #c8d8d4;border-radius:20px;background:#fff;font-size:13px;font-family:inherit;cursor:pointer;color:#555;transition:all .15s}
+.lang-pill.on{background:#1A8F7F;color:#fff;border-color:#1A8F7F;font-weight:600}
+.qs-type-list{display:flex;flex-direction:column;gap:8px}
+.qs-type-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid #e0eeea;border-radius:6px;transition:border-color .15s}
+.qs-type-row.on{background:#f8fcfb;border-color:#9ECFC7}
+.qs-type-cb{width:16px;height:16px;accent-color:#1A8F7F;cursor:pointer;flex-shrink:0}
+.qs-applied{display:flex;align-items:center;gap:8px}
+.timeline-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.timeline-tbl td{padding:9px 14px;border:1px solid #e8f0ee;vertical-align:middle}
+.timeline-tbl td.phase-cell{background:#d8ece6;color:#2d6b5f;font-weight:600;font-size:12px;text-align:center;white-space:nowrap;width:110px}
+.timeline-tbl td.step-cell{color:#444}
+.timeline-tbl .date-inp{padding:6px 10px;border:1px solid #c8d8d4;border-radius:5px;font-size:13px;font-family:inherit;color:#444;width:100%;background:#fafcfb}
+.timeline-tbl .date-inp:focus{outline:none;border-color:#1A8F7F}
+.qsf-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #e0eeea;padding:14px 0;display:flex;align-items:center;justify-content:flex-end;gap:10px;z-index:100;margin-top:8px}
+.namemap-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.namemap-tbl th{background:#d8ece6;padding:9px 14px;font-size:12px;font-weight:600;color:#2d6b5f;border:1px solid #c5e0d8;text-align:center}
+.namemap-tbl th:first-child{text-align:left;min-width:130px}
+.namemap-tbl td{padding:8px 12px;border:1px solid #eef5f3;vertical-align:middle;background:#fafcfb;font-weight:500;font-size:13px}
+.namemap-tbl td:not(:first-child){background:#fff}
+.namemap-tbl td input{width:100%;padding:5px 8px;border:1px solid #c8d8d4;border-radius:4px;font-size:13px;font-family:inherit}
+.namemap-tbl td input:focus{outline:none;border-color:#1A8F7F}
 /* WIZARD (questionnaire-setup) */
 .wizard-bar{display:flex;align-items:center;margin-bottom:32px;gap:0}
 .wstep{display:flex;align-items:center;gap:10px;padding:11px 22px;background:#fff;border:1px solid #e0eeea;font-size:13px;color:#aaa;position:relative;cursor:default}
@@ -889,132 +916,120 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
          C3-01 問卷建置入口
     ═══════════════════════════════ -->
     <div class="page" id="pg-qsetup">
-      <div class="ph">
-        <div>
-          <h1><span class="pg-code c3">C3-01</span>問卷建置入口</h1>
-          <div style="font-size:13px;color:#888;margin-top:4px">步驟 1–2｜確認公司現況，選擇資料來源情境，建立問卷基本架構</div>
-        </div>
-      </div>
-      <div class="wizard-bar">
-        <div class="wstep on" id="qs-ws1"><span class="wstep-num">1</span>確認公司現況</div>
-        <div class="warrow">›</div>
-        <div class="wstep" id="qs-ws2"><span class="wstep-num">2</span>選擇情境</div>
-        <div class="warrow">›</div>
-        <div class="wstep" id="qs-ws3"><span class="wstep-num">3</span>問卷基本資訊</div>
-        <div class="warrow">›</div>
-        <div class="wstep" id="qs-ws4"><span class="wstep-num">4</span>確認送出</div>
-      </div>
-      <div class="step-pane on" id="qs-pane1">
-        <div class="form-section">
-          <h4><svg width="16" height="16" viewBox="0 0 24 24" stroke="#1A8F7F" fill="none" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 006 0V7m0 1a3 3 0 006 0V7m0 1a3 3 0 006 0V7H3l2-4h14l2 4"/></svg> 公司基本確認</h4>
-          <div class="grid3">
-            <div class="fg"><label class="fl">公司名稱</label><input class="finp" value="慢想股份有限公司" readonly style="background:#f8fcfb"></div>
-            <div class="fg"><label class="fl">評估年度 <span class="req">*</span></label><select class="fsel"><option>2026</option><option>2025</option><option>2024</option></select></div>
-            <div class="fg"><label class="fl">產業類別</label><input class="finp" value="資訊科技服務業" readonly style="background:#f8fcfb"></div>
+      <!-- LIST VIEW -->
+      <div id="qsl-view">
+        <div class="ph">
+          <div><h1><span class="pg-code c3">C3-01</span>建立問卷 <span class="slash">/</span> <span class="sub">年度專案期程規劃</span></h1></div>
+          <div class="ph-actions">
+            <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入" id="qsl-search" oninput="qslFilter()"></div>
+            <button class="btn btn-teal btn-sm" onclick="qsShowForm(null)">＋ 新增</button>
           </div>
         </div>
-      </div>
-      <div class="step-pane" id="qs-pane2">
-        <div class="scenario-grid">
-          <div class="sc-card" id="qs-sc1" onclick="qsSelectScenario(1)">
-            <div class="sc-icon" style="background:#e0f5ee">♻️</div>
-            <div class="sc-tag" style="background:#d8ece6;color:#1A8F7F">情境 1</div>
-            <div class="sc-title">引用前年度資料</div>
-            <div class="sc-desc">已執行過 IFRS，可引入前年資料快速建立本年度架構。</div>
-            <div class="sc-sub">
-              <div class="sc-sub-item" id="qs-sc1a" onclick="event.stopPropagation();qsSelectSub('1a')">1a 引用系統既有資料</div>
-              <div class="sc-sub-item" id="qs-sc1b" onclick="event.stopPropagation();qsSelectSub('1b')">1b 匯入公司自備資料</div>
-              <div class="sc-sub-item" id="qs-sc1c" onclick="event.stopPropagation();qsSelectSub('1c')">1c 含子公司資料</div>
-            </div>
-          </div>
-          <div class="sc-card" id="qs-sc2" onclick="qsSelectScenario(2)">
-            <div class="sc-icon" style="background:#e8f4fb">🆕</div>
-            <div class="sc-tag" style="background:#e8f0fb;color:#2E5FA8">情境 2</div>
-            <div class="sc-title">全新建立（完整 IFRS）</div>
-            <div class="sc-desc">首次執行或重新建立，涵蓋完整 IFRS S1/S2 議題範疇。</div>
-            <div class="sc-sub" style="margin-top:14px">
-              <div class="sc-sub-item" id="qs-sc2a" onclick="event.stopPropagation();qsSelectSub('2a')">2a 全新建立</div>
-            </div>
-          </div>
-          <div class="sc-card" id="qs-sc3" onclick="qsSelectScenario(3)">
-            <div class="sc-icon" style="background:#fdf0dc">🌱</div>
-            <div class="sc-tag" style="background:#fdf0dc;color:#8a5d00">情境 3</div>
-            <div class="sc-title">全新建立（永續專項）</div>
-            <div class="sc-desc">首次執行，專注永續相關 IFRS 議題（僅引用系統 ESG 議題）。</div>
-            <div class="sc-sub" style="margin-top:14px">
-              <div class="sc-sub-item" id="qs-sc3a" onclick="event.stopPropagation();qsSelectSub('3a')">3a 全新建立</div>
-            </div>
-          </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:120px">狀態</th>
+                <th style="width:70px">年度</th>
+                <th class="tleft">專案名稱</th>
+                <th class="tleft">問卷種類</th>
+                <th style="width:80px">功能</th>
+              </tr>
+              <tr class="frow">
+                <td><select onchange="qslFilter()"><option value="">請選擇</option><option>前置作業</option><option>問卷調查</option><option>writing文稿撰寫中</option></select></td>
+                <td><select onchange="qslFilter()"><option value="">請選擇</option><option>2035</option><option>2034</option><option>2033</option><option>2032</option><option>2031</option><option>2030</option><option>2029</option><option>2028</option><option>2027</option></select></td>
+                <td><select onchange="qslFilter()"><option value="">請選擇</option></select></td>
+                <td><select onchange="qslFilter()"><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊問卷</option></select></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody id="qsl-tbody"></tbody>
+          </table>
         </div>
-        <div id="qs-import-section" style="display:none">
-          <div class="form-section">
-            <h4>匯入前年度資料</h4>
-            <div class="notice n-warn"><span>⚠️</span><span>請下載範本後填入前年度資料，再上傳。若為系統資料（情境 1a）則自動帶入，無需手動上傳。</span></div>
-            <div class="grid2">
-              <div>
-                <div style="font-size:13px;font-weight:500;color:#444;margin-bottom:8px">ESG 議題清單</div>
-                <div class="import-box" onclick="showToast('下載範本：esg_issues_template.xlsx','#2E5FA8')">
-                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                  <div class="ib-title">點擊上傳 Excel 檔案</div>
-                  <div class="ib-note">支援 .xlsx / .csv，下載<span style="color:#1A8F7F;cursor:pointer"> 範本</span></div>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:13px;font-weight:500;color:#444;margin-bottom:8px">風險機會清單</div>
-                <div class="import-box" onclick="showToast('下載範本：iro_template.xlsx','#2E5FA8')">
-                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                  <div class="ib-title">點擊上傳 Excel 檔案</div>
-                  <div class="ib-note">支援 .xlsx / .csv，下載<span style="color:#1A8F7F;cursor:pointer"> 範本</span></div>
-                </div>
+        <div class="pagination" id="qsl-pagination"></div>
+      </div>
+
+      <!-- FORM VIEW -->
+      <div id="qsf-view" style="display:none">
+        <div class="ph">
+          <div><h1><span class="pg-code c3">C3-01</span>年度專案期程規劃 <span class="slash">/</span> <span class="sub" id="qsf-crumb">新增</span></h1></div>
+          <div class="ph-actions"><button class="btn btn-ghost btn-sm" onclick="qsShowList()">← 返回列表</button></div>
+        </div>
+
+        <div class="qs-sec">
+          <div class="qs-sec-hd">基本資訊設定</div>
+          <div class="grid2">
+            <div class="fg"><label class="fl">年度 <span class="req">*</span></label><input class="finp" id="qsf-year" value="2026"></div>
+            <div class="fg">
+              <label class="fl">專案名稱 <span class="req">*</span></label>
+              <div style="position:relative">
+                <input class="finp" id="qsf-name" placeholder="請輸入" maxlength="50" style="padding-right:52px" oninput="document.getElementById('qsf-nc').textContent=this.value.length">
+                <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:12px;color:#aaa;pointer-events:none"><span id="qsf-nc">0</span> / 50</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="step-pane" id="qs-pane3">
-        <div class="form-section">
-          <h4>問卷基本資訊</h4>
-          <div class="fg"><label class="fl">問卷名稱 <span class="req">*</span></label><input class="finp" value="2026 年度 IFRS 永續風險與機會重大性評估問卷"></div>
-          <div class="grid3">
-            <div class="fg"><label class="fl">填答開始日 <span class="req">*</span></label><input class="finp" type="date" value="2026-06-15"></div>
-            <div class="fg"><label class="fl">填答截止日 <span class="req">*</span></label><input class="finp" type="date" value="2026-06-30"></div>
-            <div class="fg"><label class="fl">填答語言</label><select class="fsel"><option>繁體中文</option><option>English</option><option>简体中文</option></select></div>
+
+        <div class="qs-sec">
+          <div class="qs-sec-hd">問卷語系與種類</div>
+          <div style="margin-bottom:20px">
+            <div class="fl" style="margin-bottom:10px">* 1.選擇問卷使用語系（可多選）</div>
+            <div style="display:flex;gap:8px">
+              <button class="lang-pill" data-lang="zh-tw" onclick="qsToggleLang(this)">繁體中文</button>
+              <button class="lang-pill" data-lang="en" onclick="qsToggleLang(this)">English</button>
+              <button class="lang-pill" data-lang="zh-cn" onclick="qsToggleLang(this)">简体中文</button>
+            </div>
           </div>
-          <div class="fg"><label class="fl">問卷說明（顯示於填答首頁）</label><textarea class="finp" rows="3" style="resize:vertical">本問卷旨在蒐集各部門對 IFRS S1/S2 永續風險與機會的評估意見，填答結果將作為公司重大性分析的依據。請依實際業務狀況填答，如有疑問請聯繫顧問。</textarea></div>
-        </div>
-        <div class="form-section">
-          <h4>填答部分設定</h4>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div class="toggle-row"><div class="toggle on"></div><div><div style="font-size:13px;font-weight:600">Part 2 IRO 識別（必填）</div><div style="font-size:12px;color:#888">識別風險/機會類型與影響時間尺度</div></div></div>
-            <div class="toggle-row"><div class="toggle on"></div><div><div style="font-size:13px;font-weight:600">Part 3a 量化財務衝擊</div><div style="font-size:12px;color:#888">機率、營收衝擊、成本衝擊、EBITDA</div></div></div>
-            <div class="toggle-row"><div class="toggle on"></div><div><div style="font-size:13px;font-weight:600">Part 3b 質化問題（Q01–Q07）</div><div style="font-size:12px;color:#888">政策、策略、薪酬、法規等 7 題</div></div></div>
-            <div class="toggle-row"><div class="toggle on"></div><div><div style="font-size:13px;font-weight:600">Part 4 價值鏈位置</div><div style="font-size:12px;color:#888">上游供應商、自有營運、下游客戶、投資</div></div></div>
+          <div>
+            <div class="fl" style="margin-bottom:10px">* 2.選擇欲開啟的問卷種類</div>
+            <div class="qs-type-list">
+              <div class="qs-type-row" id="qstr-sh">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="sh" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">利害關係人</span></label>
+                <div class="qs-applied" id="qsta-sh" style="display:none"><span style="color:#c0392b;font-size:12px">已套用：關注程度</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
+              </div>
+              <div class="qs-type-row" id="qstr-fi">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="fi" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">財務衝擊</span></label>
+                <div class="qs-applied" id="qsta-fi" style="display:none"><span style="color:#c0392b;font-size:12px">已套用：影響程度</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
+              </div>
+              <div class="qs-type-row" id="qstr-ex">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ex" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">外部衝擊</span></label>
+                <div class="qs-applied" id="qsta-ex" style="display:none"><span style="color:#c0392b;font-size:12px">尺度設定請至該年度外部衝擊項目</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="step-pane" id="qs-pane4">
-        <div class="review-card">
-          <h4>公司現況</h4>
-          <div class="review-row"><span class="rv-label">公司</span><span class="rv-val">慢想股份有限公司</span></div>
-          <div class="review-row"><span class="rv-label">評估年度</span><span class="rv-val">2026</span></div>
+
+        <div class="qs-sec" id="qsf-namemap" style="display:none">
+          <div class="qs-sec-hd">問卷名稱對照確認</div>
+          <div id="qsf-namemap-bd"></div>
         </div>
-        <div class="review-card">
-          <h4>建置情境</h4>
-          <div class="review-row"><span class="rv-label">選擇情境</span><span class="rv-val" id="qs-rv-scenario">尚未選擇</span></div>
-          <div class="review-row"><span class="rv-label">資料來源</span><span class="rv-val" id="qs-rv-source">—</span></div>
+
+        <div class="qs-sec">
+          <div class="qs-sec-hd">期程預定進度</div>
+          <table class="timeline-tbl">
+            <tbody>
+              <tr><td class="phase-cell" rowspan="5">前置作業</td><td class="step-cell">1.1 確認年度進行的問卷種類</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">1.2 確認ESG議題與說明</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">1.3 確認利害關係人</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">1.4 確認營運衝擊因子</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">1.5 確認永續發展衝擊項目</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="phase-cell" rowspan="3">問卷調查</td><td class="step-cell">2.1 建立調查問卷</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">2.2 問卷發放</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">2.3 回收問卷</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="phase-cell" rowspan="2">數據分析</td><td class="step-cell">3.1 計算原始數據</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">3.2 產出分析報表(excel)</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="phase-cell" rowspan="2">確認重大議題</td><td class="step-cell">4.1 報告分析結果</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">4.2 確認年度重大議題</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="phase-cell">第三方查證</td><td class="step-cell">5.1 Pre-assurance（積核方法學）</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="phase-cell" rowspan="2">文稿撰寫</td><td class="step-cell">6.1 問卷方法學撰寫</td><td><input type="date" class="date-inp"></td></tr>
+              <tr><td class="step-cell">6.2 呈現年度重大議題</td><td><input type="date" class="date-inp"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="review-card">
-          <h4>問卷設定</h4>
-          <div class="review-row"><span class="rv-label">問卷名稱</span><span class="rv-val">2026 年度 IFRS 永續風險與機會重大性評估問卷</span></div>
-          <div class="review-row"><span class="rv-label">填答期間</span><span class="rv-val">2026-06-15 ～ 2026-06-30</span></div>
-          <div class="review-row"><span class="rv-label">填答部分</span><span class="rv-val">Part 2、3a、3b、4（全開）</span></div>
-        </div>
-      </div>
-      <div class="qsetup-bottom-bar">
-        <div style="font-size:12px;color:#aaa">步驟 <span id="qs-cur-step">1</span> / 4</div>
-        <div style="display:flex;gap:10px">
-          <button class="btn btn-ghost" id="qs-btn-prev" onclick="qsPrevStep()" style="display:none">← 上一步</button>
-          <button class="btn btn-teal" id="qs-btn-next" onclick="qsNextStep()">下一步 →</button>
+
+        <div class="qsf-bar">
+          <button class="btn btn-ghost" onclick="qsShowList()">取消</button>
+          <button class="btn btn-teal" onclick="qsSave()">儲存</button>
         </div>
       </div>
     </div>
@@ -1317,6 +1332,7 @@ function go(pid){
     if(m.getAttribute('onclick')===`go('${pid}')`) m.classList.add('on');
   });
   document.getElementById('mainArea').scrollTop=0;
+  if(pid==='pg-qsetup') qsShowList();
   if(pid==='pg-distribute') distBuildMatrix();
   if(pid==='pg-monitor'){ monBuildDeptTable(); monBuildActivityList(); }
   if(pid==='pg-analysis'){ anaDrawMatrix(); anaBuildSigLists(); anaBuildRankTable(); anaBuildTopicTable(); anaBuildVcChart(); anaBuildThresholdPreview(); }
@@ -1591,53 +1607,99 @@ function showToast(msg,color){
 }
 
 /* ═══ Questionnaire Setup (pg-qsetup) ═══ */
-let qsCurStep=1, qsScenario=null, qsSubScenario=null;
-function qsShowStep(n){
-  qsCurStep=n;
-  for(let i=1;i<=4;i++){
-    document.getElementById('qs-pane'+i).classList.toggle('on',i===n);
-    const ws=document.getElementById('qs-ws'+i);
-    ws.classList.remove('on','done');
-    if(i===n) ws.classList.add('on');
-    if(i<n) ws.classList.add('done');
-    ws.querySelector('.wstep-num').textContent=i<n?'✓':i;
-  }
-  document.getElementById('qs-cur-step').textContent=n;
-  document.getElementById('qs-btn-prev').style.display=n>1?'':'none';
-  document.getElementById('qs-btn-next').textContent=n===4?'建立問卷 ✓':'下一步 →';
+const QS_DATA=[
+  {id:1,status:'prep',year:2035,name:'2035😊',types:['利害關係人'],deletable:false},
+  {id:2,status:'prep',year:2034,name:'2034',types:['利害關係人','財務衝擊','外部衝擊問卷'],deletable:false},
+  {id:3,status:'prep',year:2033,name:'2033',types:['利害關係人2033','財務衝擊2033','外部衝擊問卷'],deletable:false},
+  {id:4,status:'prep',year:2032,name:'測試2032',types:['利害關係人','財務衝擊','外部衝擊問卷'],deletable:false},
+  {id:5,status:'survey',year:2031,name:'Excel 個人問卷測試',types:['利害關係人'],deletable:true},
+  {id:6,status:'writing',year:2030,name:'Wei TEST',types:['利害關係人','財務衝擊','外部衝擊問卷'],deletable:true},
+  {id:7,status:'survey',year:2029,name:'2029',types:['利害關係人'],deletable:true},
+  {id:8,status:'survey',year:2028,name:'MuttiTest',types:['利害關係人','財務衝擊','外部衝擊問卷'],deletable:true},
+  {id:9,status:'survey',year:2027,name:'AAA',types:['利害關係人'],deletable:true},
+];
+const QS_STATUS_MAP={prep:{label:'前置作業',cls:'badge-prep'},survey:{label:'問卷調查',cls:'badge-survey'},writing:{label:'writing文稿撰寫中',cls:'badge-writing'}};
+let qslPage=1;const qslPer=15;
+
+function qslRender(data){
+  const tb=document.getElementById('qsl-tbody');
+  if(!tb)return;
+  const page=data.slice((qslPage-1)*qslPer,qslPage*qslPer);
+  tb.innerHTML=page.map(r=>{
+    const s=QS_STATUS_MAP[r.status];
+    const types=r.types.map(t=>`<div style="font-size:12px;color:#555">${t}</div>`).join('');
+    const del=r.deletable?`<span class="fi del" title="刪除" onclick="qsDelete(${r.id})"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 3h6"/></svg></span>`:'';
+    return `<tr>
+      <td><span class="badge ${s.cls}">${s.label}</span></td>
+      <td>${r.year}</td>
+      <td class="tleft">${r.name}</td>
+      <td class="tleft">${types}</td>
+      <td><div class="func-icons">
+        <span class="fi" title="編輯" onclick="qsShowForm(${r.id})"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+        ${del}
+      </div></td>
+    </tr>`;
+  }).join('');
+  const total=data.length;
+  const totalPages=Math.max(1,Math.ceil(total/qslPer));
+  const pg=document.getElementById('qsl-pagination');
+  if(pg) pg.innerHTML=`<span class="pag-label">前往</span><input class="pag-ni" value="${qslPage}" onchange="qslGo(this.value)"><span class="pag-label">頁</span>
+    <div class="pag-btn" onclick="qslGo(${qslPage-1})">‹</div>
+    <div class="pag-btn ap">${qslPage}</div>
+    <div class="pag-btn" onclick="qslGo(${qslPage+1})">›</div>
+    <span class="pag-total">共 ${total} 筆</span>
+    <select class="per-page-sel"><option>15項/頁</option></select>`;
 }
-function qsNextStep(){
-  if(qsCurStep===1){qsShowStep(2);}
-  else if(qsCurStep===2){if(!qsScenario){showToast('請選擇建置情境','#c0392b');return;}qsShowStep(3);}
-  else if(qsCurStep===3){qsUpdateReview();qsShowStep(4);}
-  else if(qsCurStep===4){showToast('問卷已建立！正在跳轉至清單設定...','#1A8F7F');setTimeout(()=>window.location='setup.html',1800);}
+function qslGo(p){const t=Math.ceil(QS_DATA.length/qslPer);qslPage=Math.max(1,Math.min(+p,t));qslRender(QS_DATA);}
+function qslFilter(){qslPage=1;qslRender(QS_DATA);}
+function qsDelete(id){if(confirm('確定刪除此專案？'))showToast('已刪除','#c0392b');}
+
+function qsShowList(){
+  document.getElementById('qsl-view').style.display='';
+  document.getElementById('qsf-view').style.display='none';
+  qslRender(QS_DATA);
 }
-function qsPrevStep(){if(qsCurStep>1)qsShowStep(qsCurStep-1);}
-function qsSelectScenario(n){
-  qsScenario=n;
-  document.querySelectorAll('.sc-card').forEach(c=>c.classList.remove('on'));
-  document.getElementById('qs-sc'+n).classList.add('on');
-  document.getElementById('qs-import-section').style.display=qsSubScenario==='1b'?'':'none';
+function qsShowForm(id){
+  document.getElementById('qsl-view').style.display='none';
+  document.getElementById('qsf-view').style.display='';
+  document.getElementById('qsf-crumb').textContent=id?'編輯':'新增';
+  document.getElementById('qsf-name').value='';
+  document.getElementById('qsf-nc').textContent='0';
+  document.querySelectorAll('.lang-pill').forEach(p=>{p.classList.remove('on');p.textContent=p.getAttribute('data-lang')==='zh-tw'?'繁體中文':p.getAttribute('data-lang')==='en'?'English':'简体中文';});
+  document.querySelectorAll('.qs-type-cb').forEach(c=>{c.checked=false;});
+  document.querySelectorAll('.qs-applied').forEach(el=>el.style.display='none');
+  document.querySelectorAll('.qs-type-row').forEach(el=>el.classList.remove('on'));
+  document.getElementById('qsf-namemap').style.display='none';
 }
-function qsSelectSub(code){
-  qsSubScenario=code;
-  if(!qsScenario) qsSelectScenario(parseInt(code[0]));
-  document.querySelectorAll('.sc-sub-item').forEach(i=>i.classList.remove('on'));
-  document.getElementById('qs-sc'+code).classList.add('on');
-  document.getElementById('qs-import-section').style.display=code==='1b'?'':'none';
+function qsToggleLang(btn){
+  btn.classList.toggle('on');
+  const labels={'zh-tw':'繁體中文','en':'English','zh-cn':'简体中文'};
+  const lang=btn.getAttribute('data-lang');
+  btn.textContent=btn.classList.contains('on')?'✓ '+labels[lang]:labels[lang];
+  qsUpdateNamemap();
 }
-function qsUpdateSubOrg(){
-  const on=document.getElementById('qs-tog-sub').classList.contains('on');
-  document.getElementById('qs-sub-org-detail').style.display=on?'':'none';
-  const rv=document.getElementById('qs-rv-suborg');
-  if(rv) rv.textContent=on?'已啟用（含子公司）':'未啟用';
+function qsUpdateTypes(){
+  ['sh','fi','ex'].forEach(k=>{
+    const cb=document.querySelector(`.qs-type-cb[data-key="${k}"]`);
+    document.getElementById('qstr-'+k).classList.toggle('on',cb.checked);
+    document.getElementById('qsta-'+k).style.display=cb.checked?'flex':'none';
+  });
+  qsUpdateNamemap();
 }
-function qsUpdateReview(){
-  const scNames={1:'情境 1｜引用前年度資料',2:'情境 2｜全新建立（完整 IFRS）',3:'情境 3｜全新建立（永續專項）'};
-  const subNames={'1a':'引用系統既有資料','1b':'匯入公司自備資料（Excel 匯入）','1c':'含子公司資料','2a':'全新建立','3a':'全新建立'};
-  document.getElementById('qs-rv-scenario').textContent=qsScenario?scNames[qsScenario]:'尚未選擇';
-  document.getElementById('qs-rv-source').textContent=qsSubScenario?subNames[qsSubScenario]:'—';
+function qsUpdateNamemap(){
+  const langs=[...document.querySelectorAll('.lang-pill.on')].map(b=>b.getAttribute('data-lang'));
+  const types=[...document.querySelectorAll('.qs-type-cb:checked')].map(c=>c.getAttribute('data-key'));
+  const langLabels={'zh-tw':'繁體中文','en':'English','zh-cn':'简体中文'};
+  const typeLabels={'sh':'利害關係人','fi':'財務衝擊','ex':'外部衝擊'};
+  const nm=document.getElementById('qsf-namemap');
+  const bd=document.getElementById('qsf-namemap-bd');
+  if(!langs.length||!types.length){nm.style.display='none';return;}
+  nm.style.display='';
+  const headers=langs.map(l=>`<th>${langLabels[l]}</th>`).join('');
+  const rows=types.map(t=>`<tr><td>${typeLabels[t]}</td>${langs.map(l=>`<td><input value="${typeLabels[t]}"></td>`).join('')}</tr>`).join('');
+  bd.innerHTML=`<table class="namemap-tbl"><thead><tr><th>問卷種類\\語系</th>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
 }
+function qsSave(){showToast('已儲存','#1A8F7F');qsShowList();}
 
 /* ═══ Distribute (pg-distribute) ═══ */
 const DIST_THEMES=['氣候策略','能源管理','水資源管理','生物多樣性','廢棄物管理','人才發展','職場安全','永續供應鏈','公司治理','資訊安全','財務績效'];
