@@ -939,7 +939,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td><select onchange="qslFilter()"><option value="">請選擇</option><option>前置作業</option><option>問卷調查</option><option>writing文稿撰寫中</option></select></td>
                 <td><select onchange="qslFilter()"><option value="">請選擇</option><option>2035</option><option>2034</option><option>2033</option><option>2032</option><option>2031</option><option>2030</option><option>2029</option><option>2028</option><option>2027</option></select></td>
                 <td><select onchange="qslFilter()"><option value="">請選擇</option></select></td>
-                <td><select onchange="qslFilter()"><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊問卷</option></select></td>
+                <td><select onchange="qslFilter()"><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊問卷</option><option>IFRS</option></select></td>
                 <td></td>
               </tr>
             </thead>
@@ -994,6 +994,10 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
               <div class="qs-type-row" id="qstr-ex">
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ex" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">外部衝擊</span></label>
                 <div class="qs-applied" id="qsta-ex" style="display:none"><span style="color:#c0392b;font-size:12px">尺度設定請至該年度外部衝擊項目</span></div>
+              </div>
+              <div class="qs-type-row" id="qstr-ifrs">
+                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ifrs" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">IFRS</span></label>
+                <div class="qs-applied" id="qsta-ifrs" style="display:none"><span style="color:#c0392b;font-size:12px">已套用：IFRS S1/S2 重大性評估</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
               </div>
             </div>
           </div>
@@ -1667,8 +1671,7 @@ function qsShowForm(id){
   document.getElementById('qsf-nc').textContent='0';
   document.querySelectorAll('.lang-pill').forEach(p=>{p.classList.remove('on');p.textContent=p.getAttribute('data-lang')==='zh-tw'?'繁體中文':p.getAttribute('data-lang')==='en'?'English':'简体中文';});
   document.querySelectorAll('.qs-type-cb').forEach(c=>{c.checked=false;});
-  document.querySelectorAll('.qs-applied').forEach(el=>el.style.display='none');
-  document.querySelectorAll('.qs-type-row').forEach(el=>el.classList.remove('on'));
+  ['sh','fi','ex','ifrs'].forEach(k=>{document.getElementById('qsta-'+k).style.display='none';document.getElementById('qstr-'+k).classList.remove('on');});
   document.getElementById('qsf-namemap').style.display='none';
 }
 function qsToggleLang(btn){
@@ -1679,7 +1682,7 @@ function qsToggleLang(btn){
   qsUpdateNamemap();
 }
 function qsUpdateTypes(){
-  ['sh','fi','ex'].forEach(k=>{
+  ['sh','fi','ex','ifrs'].forEach(k=>{
     const cb=document.querySelector(`.qs-type-cb[data-key="${k}"]`);
     document.getElementById('qstr-'+k).classList.toggle('on',cb.checked);
     document.getElementById('qsta-'+k).style.display=cb.checked?'flex':'none';
@@ -1690,7 +1693,7 @@ function qsUpdateNamemap(){
   const langs=[...document.querySelectorAll('.lang-pill.on')].map(b=>b.getAttribute('data-lang'));
   const types=[...document.querySelectorAll('.qs-type-cb:checked')].map(c=>c.getAttribute('data-key'));
   const langLabels={'zh-tw':'繁體中文','en':'English','zh-cn':'简体中文'};
-  const typeLabels={'sh':'利害關係人','fi':'財務衝擊','ex':'外部衝擊'};
+  const typeLabels={'sh':'利害關係人','fi':'財務衝擊','ex':'外部衝擊','ifrs':'IFRS'};
   const nm=document.getElementById('qsf-namemap');
   const bd=document.getElementById('qsf-namemap-bd');
   if(!langs.length||!types.length){nm.style.display='none';return;}
