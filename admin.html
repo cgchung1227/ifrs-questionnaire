@@ -163,6 +163,55 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .badge-prep{background:#fdf0dc;color:#8a5d00}
 .badge-survey{background:#e8f0fb;color:#2E5FA8}
 .badge-writing{background:#e0f5ee;color:#1a7a50}
+.badge-editing{background:#fde8e8;color:#a03030}
+.badge-testing{background:#fdf0dc;color:#8a5d00}
+/* 年度問卷建置 */
+.qsy-func{display:flex;align-items:center;gap:10px}
+.qsy-func-new{font-size:13px;color:#1A8F7F;cursor:pointer;font-weight:500;white-space:nowrap}
+.qsy-func-new.disabled{color:#c8d8d4;cursor:default;pointer-events:none}
+.qsy-func-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;cursor:pointer;color:#888;transition:all .15s;flex-shrink:0}
+.qsy-func-icon:hover:not(.disabled){background:#f0f5f3;color:#1A8F7F}
+.qsy-func-icon.disabled{color:#d0d8d4;cursor:default;pointer-events:none}
+.qsy-func-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+.qsy-confirm-btn{padding:5px 12px;border:1px solid #c8d8d4;border-radius:5px;font-size:12px;cursor:pointer;background:#fff;color:#444;font-family:inherit;transition:all .15s;white-space:nowrap}
+.qsy-confirm-btn:hover:not(:disabled){border-color:#1A8F7F;color:#1A8F7F}
+.qsy-confirm-btn:disabled{opacity:.35;cursor:default}
+/* 問卷建置器 7-step */
+.qsb-progress{display:flex;align-items:flex-start;margin-bottom:28px;gap:0}
+.qsb-step-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative}
+.qsb-step-item:not(:last-child)::after{content:'';position:absolute;top:15px;left:50%;right:-50%;height:2px;background:#e0eeea;z-index:0}
+.qsb-step-item.done::after{background:#1A8F7F}
+.qsb-sc{width:30px;height:30px;border-radius:50%;background:#e0e0e0;color:#bbb;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0;position:relative}
+.qsb-step-item.done .qsb-sc{background:#1A8F7F;color:#fff}
+.qsb-step-item.on .qsb-sc{background:#2d2d2d;color:#fff;box-shadow:0 0 0 3px rgba(45,45,45,.15)}
+.qsb-sl{font-size:11px;color:#aaa;text-align:center;line-height:1.3;white-space:nowrap}
+.qsb-step-item.done .qsb-sl{color:#1A8F7F}
+.qsb-step-item.on .qsb-sl{color:#2d2d2d;font-weight:700}
+.qsb-pane{display:none}.qsb-pane.on{display:block}
+.qsb-content{background:#fff;border:1px solid #e0eeea;border-radius:8px;overflow:hidden;margin-bottom:16px}
+.qsb-lang-tabs{display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #e0eeea}
+.qsb-lang-tab{padding:10px 14px;font-size:13px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px}
+.qsb-lang-tab.on{color:#1A8F7F;border-bottom-color:#1A8F7F;font-weight:600}
+.qsb-type-label{margin-left:auto;font-size:12px;color:#555;font-weight:600;padding:0 4px}
+.qsb-toolbar{display:flex;gap:3px;flex-wrap:wrap;padding:8px 12px;background:#f8f8f8;border-bottom:1px solid #eee;align-items:center}
+.qsb-tb{padding:3px 7px;border:1px solid #ddd;border-radius:3px;background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:#333;font-family:inherit}
+.qsb-tb:hover{background:#e8e8e8}
+.qsb-ta{width:100%;padding:14px 16px;border:none;outline:none;font-size:14px;font-family:inherit;resize:none;min-height:80px;color:#2d2d2d;display:block}
+.q-req-label{font-size:12px;color:#c0392b;margin-right:2px}
+.q-opt-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.q-opt-inp{flex:1;padding:7px 12px;border:1px solid #c8d8d4;border-radius:5px;font-size:13px;font-family:inherit}
+.q-opt-inp:focus{outline:none;border-color:#1A8F7F}
+.q-opt-btn{width:28px;height:28px;border-radius:5px;border:1px solid #c8d8d4;background:#fff;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:#666;flex-shrink:0}
+.q-opt-btn:hover{border-color:#1A8F7F;color:#1A8F7F}
+.qsb-q-block{background:#fff;border:1px solid #e0eeea;border-radius:8px;padding:20px;margin-bottom:16px}
+.sort-list{background:#f8fcfb;border-radius:0 0 8px 8px;border:1px solid #d8ece6;border-top:none}
+.sort-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #eef5f3;cursor:grab}
+.sort-item:last-child{border-bottom:none}
+.sort-num{width:28px;height:28px;border-radius:50%;background:#e8f8f4;color:#1A8F7F;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sort-code{font-size:11px;color:#1A8F7F}
+.sort-text{font-size:13px;color:#2d2d2d;margin-top:2px}
+.sort-handle{margin-left:auto;color:#c0c0c0;font-size:18px;letter-spacing:1px}
+.qsb-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #e0eeea;padding:14px 0;display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:8px}
 .qs-sec{background:#fff;border:1px solid #e0eeea;border-radius:10px;padding:24px;margin-bottom:20px}
 .qs-sec-hd{font-size:14px;font-weight:700;color:#2d2d2d;border-left:3px solid #1A8F7F;padding-left:10px;margin-bottom:18px}
 .lang-pill{padding:7px 22px;border:1px solid #c8d8d4;border-radius:20px;background:#fff;font-size:13px;font-family:inherit;cursor:pointer;color:#555;transition:all .15s}
@@ -1036,6 +1085,280 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
           <button class="btn btn-teal" onclick="qsSave()">儲存</button>
         </div>
       </div>
+
+      <!-- ── 年度問卷建置 VIEW ── -->
+      <div id="qsy-view" style="display:none">
+        <div class="ph">
+          <div><h1><span class="pg-code c3">C3-01</span>建立問卷 <span class="slash">/</span> <span class="sub">年度問卷建置</span></h1></div>
+          <div class="ph-actions">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:13px;font-weight:600;color:#555;white-space:nowrap">* 年度</span>
+              <select class="fsel" id="qsy-year-sel" style="width:110px">
+                <option>2035</option><option selected>2034</option><option>2033</option><option>2032</option>
+              </select>
+            </div>
+            <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入"></div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:120px">狀態</th>
+                <th style="width:140px">問卷種類</th>
+                <th>功能</th>
+                <th style="width:110px">測試回填</th>
+                <th style="width:100px">顧問確認</th>
+                <th style="width:100px">公司確認</th>
+              </tr>
+              <tr class="frow">
+                <td><select><option value="">請選擇</option><option>問卷編輯中</option><option>試填中</option></select></td>
+                <td><select><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊問卷</option><option>IFRS</option></select></td>
+                <td></td><td></td><td></td><td></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-editing">問卷編輯中</span></td>
+                <td style="font-weight:500">利害關係人</td>
+                <td><div class="qsy-func">
+                  <span class="qsy-func-new" onclick="qsShowBuilder('sh','利害關係人')">新增</span>
+                  <span class="qsy-func-icon" title="編輯" onclick="qsShowBuilder('sh','利害關係人')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+                  <span class="qsy-func-icon" title="預覽" onclick="showToast('預覽功能開發中','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                  <span class="qsy-func-icon disabled" title="還原"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
+                  <span class="qsy-func-icon" title="發布" onclick="showToast('已發布','#1A8F7F')"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                </div></td>
+                <td><div class="qsy-func" style="justify-content:center">
+                  <span class="qsy-func-icon" title="寄送測試" onclick="showToast('測試問卷已寄出','#1A8F7F')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="qsy-func-icon disabled" title="回填紀錄"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                </div></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-testing">試填中</span></td>
+                <td style="font-weight:500">財務衝擊</td>
+                <td><div class="qsy-func">
+                  <span class="qsy-func-new disabled">新增</span>
+                  <span class="qsy-func-icon" title="編輯" onclick="qsShowBuilder('fi','財務衝擊')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+                  <span class="qsy-func-icon" title="預覽" onclick="showToast('預覽功能開發中','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                  <span class="qsy-func-icon" title="還原" onclick="showToast('已還原至上一版本','#e8a820')"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
+                  <span class="qsy-func-icon" title="發布" onclick="showToast('已發布','#1A8F7F')"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                </div></td>
+                <td><div class="qsy-func" style="justify-content:center">
+                  <span class="qsy-func-icon" title="寄送測試" onclick="showToast('測試問卷已寄出','#1A8F7F')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="qsy-func-icon" title="回填紀錄" onclick="showToast('回填紀錄','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                </div></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-editing">問卷編輯中</span></td>
+                <td style="font-weight:500">外部衝擊問卷</td>
+                <td><div class="qsy-func">
+                  <span class="qsy-func-new disabled">新增</span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                </div></td>
+                <td><div class="qsy-func" style="justify-content:center">
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                </div></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+              </tr>
+              <tr style="background:#fafcfb">
+                <td><span style="font-size:12px;color:#aaa">—</span></td>
+                <td style="font-weight:600;color:#1A8F7F">IFRS</td>
+                <td><div class="qsy-func">
+                  <span class="qsy-func-new" onclick="qsShowBuilder('ifrs','IFRS')">新增</span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                </div></td>
+                <td><div class="qsy-func" style="justify-content:center">
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                </div></td>
+                <td><button class="qsy-confirm-btn" disabled>定版確認</button></td>
+                <td><button class="qsy-confirm-btn" disabled>定版確認</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span class="pag-label">前往</span><input class="pag-ni" value="1"><span class="pag-label">頁</span>
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 4 項</span>
+          <select class="per-page-sel"><option>15項/頁</option></select>
+        </div>
+      </div>
+
+      <!-- ── 問卷建置器 7-step VIEW ── -->
+      <div id="qsb-view" style="display:none">
+        <div class="ph">
+          <div><h1><span class="pg-code c3">C3-01</span>建立問卷 <span class="slash">/</span> <span class="sub" id="qsb-title">IFRS 2034</span></h1></div>
+          <div class="ph-actions"><button class="btn btn-ghost btn-sm" onclick="qsShowYear()">← 返回</button></div>
+        </div>
+        <div class="qsb-progress">
+          <div class="qsb-step-item on" id="qsbs-1"><div class="qsb-sc" id="qsbc-1">1</div><div class="qsb-sl">問卷開頭</div></div>
+          <div class="qsb-step-item" id="qsbs-2"><div class="qsb-sc" id="qsbc-2">2</div><div class="qsb-sl">引文/說明</div></div>
+          <div class="qsb-step-item" id="qsbs-3"><div class="qsb-sc" id="qsbc-3">3</div><div class="qsb-sl">聯絡人資訊</div></div>
+          <div class="qsb-step-item" id="qsbs-4"><div class="qsb-sc" id="qsbc-4">4</div><div class="qsb-sl">基本問題<br>（固定）</div></div>
+          <div class="qsb-step-item" id="qsbs-5"><div class="qsb-sc" id="qsbc-5">5</div><div class="qsb-sl">基本問題<br>（自行增設）</div></div>
+          <div class="qsb-step-item" id="qsbs-6"><div class="qsb-sc" id="qsbc-6">6</div><div class="qsb-sl">意見建議</div></div>
+          <div class="qsb-step-item" id="qsbs-7"><div class="qsb-sc" id="qsbc-7">7</div><div class="qsb-sl">結語段落</div></div>
+        </div>
+
+        <!-- Step 1: 問卷開頭 -->
+        <div class="qsb-pane on" id="qsbp-1">
+          <div class="qsb-content">
+            <div class="qsb-lang-tabs">
+              <span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span>
+              <span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span>
+              <span class="qsb-type-label">文字題</span>
+            </div>
+            <div class="qsb-toolbar">
+              <button class="qsb-tb"><b>B</b></button><button class="qsb-tb"><i>I</i></button><button class="qsb-tb"><u>U</u></button><button class="qsb-tb" style="text-decoration:line-through">S</button>
+              <button class="qsb-tb">"</button><button class="qsb-tb">&lt;&gt;</button><button class="qsb-tb">H₁</button><button class="qsb-tb">H₂</button>
+              <button class="qsb-tb">≡</button><button class="qsb-tb">•</button><button class="qsb-tb">x₂</button><button class="qsb-tb">x²</button>
+              <span style="width:1px;background:#ddd;margin:0 4px;height:18px;display:inline-block;vertical-align:middle"></span>
+              <select style="font-size:11px;border:1px solid #ddd;border-radius:3px;padding:2px 4px;background:#fff"><option>Normal</option><option>H1</option><option>H2</option></select>
+              <select style="font-size:11px;border:1px solid #ddd;border-radius:3px;padding:2px 4px;background:#fff"><option>Normal</option><option>Large</option></select>
+              <select style="font-size:11px;border:1px solid #ddd;border-radius:3px;padding:2px 4px;background:#fff"><option>Sans Serif</option><option>Serif</option><option>Monospace</option></select>
+            </div>
+            <textarea class="qsb-ta" id="qsb-opening" rows="4"></textarea>
+          </div>
+        </div>
+
+        <!-- Step 2: 引文/說明 -->
+        <div class="qsb-pane" id="qsbp-2">
+          <div class="qsb-content">
+            <div class="qsb-lang-tabs">
+              <span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span>
+              <span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span>
+              <span class="qsb-type-label">文字題</span>
+            </div>
+            <div class="qsb-toolbar">
+              <button class="qsb-tb"><b>B</b></button><button class="qsb-tb"><i>I</i></button><button class="qsb-tb"><u>U</u></button>
+              <button class="qsb-tb">≡</button><button class="qsb-tb">•</button>
+            </div>
+            <textarea class="qsb-ta" rows="6" placeholder="輸入引文或說明..."></textarea>
+          </div>
+        </div>
+
+        <!-- Step 3: 聯絡人資訊 -->
+        <div class="qsb-pane" id="qsbp-3">
+          <div class="qsb-content">
+            <div class="qsb-lang-tabs">
+              <span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span>
+              <span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span>
+              <span class="qsb-type-label">聯絡資訊</span>
+            </div>
+            <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="fg"><label class="fl">姓名 <span class="req">*</span></label><input class="finp" placeholder="顧問姓名"></div>
+              <div class="fg"><label class="fl">職稱</label><input class="finp" placeholder="職稱"></div>
+              <div class="fg"><label class="fl">Email <span class="req">*</span></label><input class="finp" type="email" placeholder="email@company.com"></div>
+              <div class="fg"><label class="fl">電話</label><input class="finp" placeholder="電話號碼"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: 基本問題（固定） -->
+        <div class="qsb-pane" id="qsbp-4">
+          <div class="qsb-q-block">
+            <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px">
+              <div class="fg" style="flex:0 0 130px;margin-bottom:0"><label class="fl">題目代碼</label><input class="finp" value="001" readonly style="background:#f8fcfb;color:#aaa"></div>
+              <div class="fg" style="flex:1;margin-bottom:0"><label class="fl"><span class="q-req-label">*</span>題型種類</label>
+                <select class="fsel"><option>single_choice</option><option>multiple_choice</option><option>text</option><option>rating</option></select>
+              </div>
+              <div style="display:flex;gap:8px;flex-shrink:0">
+                <button class="btn btn-ghost btn-sm">＋</button>
+                <button class="btn btn-del btn-sm" style="padding:5px 10px"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6M9 3h6"/></svg></button>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
+              <div><div class="fl" style="margin-bottom:6px">是否需要問卷對象回答</div><div class="radio-group"><label><input type="radio" name="fq1-show" checked> 是</label><label><input type="radio" name="fq1-show"> 否</label></div></div>
+              <div><div class="fl" style="margin-bottom:6px">是否必填</div><div class="radio-group"><label><input type="radio" name="fq1-must" checked> 是</label><label><input type="radio" name="fq1-must"> 否</label></div></div>
+            </div>
+            <div class="qsb-content">
+              <div class="qsb-lang-tabs"><span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span><span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span><span class="qsb-type-label">單選題</span></div>
+              <div style="padding:16px">
+                <input class="finp" id="qsb-fq1-text" value="身為填答人，您的身份是：" style="margin-bottom:14px">
+                <div class="q-opt-row"><span class="q-req-label">*</span><span style="font-size:13px;color:#555;min-width:40px">選項 1</span><input class="q-opt-inp" value="公司內部員工"><button class="q-opt-btn">＋</button></div>
+                <div class="q-opt-row"><span class="q-req-label">*</span><span style="font-size:13px;color:#555;min-width:40px">選項 2</span><input class="q-opt-inp" value="外部專家顧問"><button class="q-opt-btn">－</button></div>
+                <div class="q-opt-row"><span class="q-req-label">*</span><span style="font-size:13px;color:#555;min-width:40px">選項 3</span><input class="q-opt-inp" value="投資人"><button class="q-opt-btn">－</button></div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div style="padding:12px 16px;background:#f0faf8;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;color:#2d6b5f;border:1px solid #d8ece6;border-bottom:none">排序設定（手動拖拉調整）</div>
+            <div class="sort-list">
+              <div class="sort-item"><div class="sort-num">1</div><div><div class="sort-code">001</div><div class="sort-text">身為填答人，您的身份是：</div></div><div class="sort-handle">⠿</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: 基本問題（自行增設） -->
+        <div class="qsb-pane" id="qsbp-5">
+          <div class="qsb-q-block" id="qsb-cq-wrap">
+            <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px">
+              <div class="fg" style="flex:0 0 130px;margin-bottom:0"><label class="fl">題目代碼</label><input class="finp" value="001" readonly style="background:#f8fcfb;color:#aaa"></div>
+              <div class="fg" style="flex:1;margin-bottom:0"><label class="fl"><span class="q-req-label">*</span>題型種類</label>
+                <select class="fsel"><option>single_choice</option><option>multiple_choice</option><option>text</option><option>rating</option></select>
+              </div>
+              <div style="display:flex;gap:8px;flex-shrink:0">
+                <button class="btn btn-ghost btn-sm" onclick="qsbAddCustomQ()">＋</button>
+                <button class="btn btn-del btn-sm" style="padding:5px 10px"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6M9 3h6"/></svg></button>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
+              <div><div class="fl" style="margin-bottom:6px">是否需要問卷對象回答</div><div class="radio-group"><label><input type="radio" name="cq1-show"> 是</label><label><input type="radio" name="cq1-show" checked> 否</label></div></div>
+              <div><div class="fl" style="margin-bottom:6px">是否必填</div><div class="radio-group"><label><input type="radio" name="cq1-must" checked> 是</label><label><input type="radio" name="cq1-must"> 否</label></div></div>
+            </div>
+            <div class="qsb-content">
+              <div class="qsb-lang-tabs"><span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span><span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span><span class="qsb-type-label">單選題</span></div>
+              <div style="padding:16px">
+                <input class="finp" placeholder="請輸入題目..." style="margin-bottom:14px">
+                <div class="q-opt-row"><span class="q-req-label">*</span><span style="font-size:13px;color:#555;min-width:40px">選項 1</span><input class="q-opt-inp" placeholder="選項內容"><button class="q-opt-btn">＋</button></div>
+                <div class="q-opt-row"><span class="q-req-label">*</span><span style="font-size:13px;color:#555;min-width:40px">選項 2</span><input class="q-opt-inp" placeholder="選項內容"><button class="q-opt-btn">－</button></div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div style="padding:12px 16px;background:#f0faf8;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;color:#2d6b5f;border:1px solid #d8ece6;border-bottom:none">排序設定（手動拖拉調整）</div>
+            <div class="sort-list" id="qsb-sort-list">
+              <div class="sort-item"><div class="sort-num">1</div><div><div class="sort-code">001</div><div class="sort-text">（新增題目）</div></div><div class="sort-handle">⠿</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: 意見建議 -->
+        <div class="qsb-pane" id="qsbp-6">
+          <div class="qsb-content">
+            <div class="qsb-lang-tabs"><span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span><span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span><span class="qsb-type-label">文字題</span></div>
+            <div class="qsb-toolbar"><button class="qsb-tb"><b>B</b></button><button class="qsb-tb"><i>I</i></button><button class="qsb-tb"><u>U</u></button><button class="qsb-tb">≡</button><button class="qsb-tb">•</button></div>
+            <textarea class="qsb-ta" rows="4" placeholder="輸入意見建議引導文字...">請提供您對本次 IFRS 重大性評估的意見與建議：</textarea>
+          </div>
+        </div>
+
+        <!-- Step 7: 結語段落 -->
+        <div class="qsb-pane" id="qsbp-7">
+          <div class="qsb-content">
+            <div class="qsb-lang-tabs"><span class="qsb-lang-tab on" onclick="qsbLangTab(this)">繁體中文</span><span class="qsb-lang-tab" onclick="qsbLangTab(this)">简体中文</span><span class="qsb-type-label">文字題</span></div>
+            <div class="qsb-toolbar"><button class="qsb-tb"><b>B</b></button><button class="qsb-tb"><i>I</i></button><button class="qsb-tb"><u>U</u></button><button class="qsb-tb">≡</button><button class="qsb-tb">•</button></div>
+            <textarea class="qsb-ta" rows="4" placeholder="輸入結語...">感謝您撥冗填答本問卷。您的寶貴意見將作為公司制定永續發展策略的重要依據。</textarea>
+          </div>
+        </div>
+
+        <div class="qsb-bar">
+          <button class="btn btn-ghost" id="qsb-btn-prev" onclick="qsbPrev()" style="display:none">上一步</button>
+          <button class="btn btn-teal" id="qsb-btn-next" onclick="qsbNext()">下一步</button>
+        </div>
+      </div>
     </div>
 
     <!-- ═══════════════════════════════
@@ -1636,7 +1959,7 @@ function qslRender(data){
     return `<tr>
       <td><span class="badge ${s.cls}">${s.label}</span></td>
       <td>${r.year}</td>
-      <td class="tleft">${r.name}</td>
+      <td class="tleft"><span style="color:#1A8F7F;cursor:pointer;text-decoration:underline" onclick="qsEnterYear(${r.year})">${r.name}</span></td>
       <td class="tleft">${types}</td>
       <td><div class="func-icons">
         <span class="fi" title="編輯" onclick="qsShowForm(${r.id})"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
@@ -1703,6 +2026,49 @@ function qsUpdateNamemap(){
   bd.innerHTML=`<table class="namemap-tbl"><thead><tr><th>問卷種類\\語系</th>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 function qsSave(){showToast('已儲存','#1A8F7F');qsShowList();}
+
+/* 年度問卷建置 */
+let qsyYear='2034';
+function qsShowYear(){
+  ['qsl-view','qsf-view','qsb-view'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('qsy-view').style.display='';
+}
+/* 問卷建置器 */
+let qsbStep=1, qsbType='', qsbLabel='';
+function qsShowBuilder(typeKey,typeLabel){
+  qsbType=typeKey; qsbLabel=typeLabel; qsbStep=1;
+  ['qsl-view','qsf-view','qsy-view'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('qsb-view').style.display='';
+  const typeDefaults={sh:'利害關係人',fi:'財務衝擊',ex:'外部衝擊問卷',ifrs:'IFRS'};
+  document.getElementById('qsb-title').textContent=(typeDefaults[typeKey]||typeLabel)+' '+qsyYear;
+  const fqText=document.getElementById('qsb-fq1-text');
+  if(fqText&&typeKey==='ifrs') fqText.value='您的填答身份為：';
+  qsbGoStep(1);
+}
+function qsbGoStep(n){
+  qsbStep=n;
+  for(let i=1;i<=7;i++){
+    const si=document.getElementById('qsbs-'+i);
+    const sc=document.getElementById('qsbc-'+i);
+    si.classList.remove('on','done');
+    if(i===n){si.classList.add('on');sc.textContent=i;}
+    else if(i<n){si.classList.add('done');sc.textContent='✓';}
+    else{sc.textContent=i;}
+    document.getElementById('qsbp-'+i).classList.toggle('on',i===n);
+  }
+  document.getElementById('qsb-btn-prev').style.display=n>1?'':'none';
+  document.getElementById('qsb-btn-next').textContent=n===7?'完成 ✓':'下一步';
+}
+function qsbNext(){if(qsbStep===7){showToast('問卷已建立！','#1A8F7F');qsShowYear();}else qsbGoStep(qsbStep+1);}
+function qsbPrev(){if(qsbStep>1)qsbGoStep(qsbStep-1);}
+function qsbLangTab(tab){
+  const tabs=tab.closest('.qsb-lang-tabs').querySelectorAll('.qsb-lang-tab');
+  tabs.forEach(t=>t.classList.remove('on'));
+  tab.classList.add('on');
+}
+function qsbAddCustomQ(){showToast('已新增題目','#1A8F7F');}
+/* 從年度專案期程規劃列表進入年度問卷建置 */
+function qsEnterYear(year){qsyYear=String(year);const sel=document.getElementById('qsy-year-sel');if(sel){[...sel.options].forEach(o=>{o.selected=o.value==year||o.text==year;});}qsShowYear();}
 
 /* ═══ Distribute (pg-distribute) ═══ */
 const DIST_THEMES=['氣候策略','能源管理','水資源管理','生物多樣性','廢棄物管理','人才發展','職場安全','永續供應鏈','公司治理','資訊安全','財務績效'];
