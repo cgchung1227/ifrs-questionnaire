@@ -1268,17 +1268,11 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
         </div>
       </div>
 
-      <!-- ── 年度問卷建置 VIEW ── -->
+      <!-- ── 年度問卷總覽 VIEW ── -->
       <div id="qsy-view" style="display:none">
         <div class="ph">
-          <div><h1><span class="pg-code c3">C3-01</span>建立問卷 <span class="slash">/</span> <span class="sub">年度問卷建置</span></h1></div>
+          <div><h1><span class="pg-code c3">C3-01</span>建立問卷 <span class="slash">/</span> <span class="sub">年度問卷總覽</span></h1></div>
           <div class="ph-actions">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:13px;font-weight:600;color:#555;white-space:nowrap">* 年度</span>
-              <select class="fsel" id="qsy-year-sel" style="width:110px">
-                <option>2035</option><option selected>2034</option><option>2033</option><option>2032</option>
-              </select>
-            </div>
             <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入"></div>
           </div>
         </div>
@@ -1286,95 +1280,111 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
           <table class="tbl">
             <thead>
               <tr>
-                <th style="width:120px">狀態</th>
-                <th style="width:140px">問卷種類</th>
-                <th>功能</th>
-                <th style="width:110px">測試回填</th>
-                <th style="width:100px">顧問確認</th>
-                <th style="width:100px">公司確認</th>
+                <th style="width:110px">狀態</th>
+                <th style="width:60px">年度</th>
+                <th style="width:130px">問卷種類</th>
+                <th style="width:220px">問卷發放時間</th>
+                <th style="width:90px">建議回收數量</th>
+                <th style="width:90px">實際填寫數量</th>
+                <th style="width:60px">設置</th>
+                <th style="width:100px">發放</th>
+                <th style="width:100px">回填資料</th>
+                <th style="width:60px">回收</th>
               </tr>
               <tr class="frow">
-                <td><select><option value="">請選擇</option><option>問卷編輯中</option><option>試填中</option></select></td>
+                <td><select><option value="">請選擇</option><option>問卷編輯中</option><option>試填中</option><option>問卷發放中</option></select></td>
+                <td><select><option value="">請選擇</option><option>2035</option><option>2034</option><option>2033</option></select></td>
                 <td><select><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊問卷</option><option>IFRS</option></select></td>
-                <td></td><td></td><td></td><td></td>
+                <td><select><option value="">請選擇</option></select></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
               </tr>
             </thead>
             <tbody>
+              <!-- 2034 -->
               <tr>
                 <td><span class="badge badge-editing">問卷編輯中</span></td>
-                <td style="font-weight:500">利害關係人</td>
-                <td><div class="qsy-func">
-                  <span class="qsy-func-new" onclick="qsShowBuilder('sh','利害關係人')">新增</span>
-                  <span class="qsy-func-icon" title="編輯" onclick="qsShowBuilder('sh','利害關係人')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                  <span class="qsy-func-icon" title="預覽" onclick="showToast('預覽功能開發中','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                  <span class="qsy-func-icon disabled" title="還原"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
-                  <span class="qsy-func-icon" title="發布" onclick="showToast('已發布','#1A8F7F')"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                <td>2034</td><td style="font-weight:500">利害關係人</td>
+                <td style="color:#aaa;font-size:12px">—</td><td>—</td><td>—</td>
+                <td><div class="func-icons"><span class="fi" onclick="qsShowBuilder('sh','利害關係人')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                 </div></td>
-                <td><div class="qsy-func" style="justify-content:center">
-                  <span class="qsy-func-icon" title="寄送測試" onclick="showToast('測試問卷已寄出','#1A8F7F')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
-                  <span class="qsy-func-icon disabled" title="回填紀錄"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
                 </div></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><div class="func-icons"><span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span></div></td>
               </tr>
               <tr>
                 <td><span class="badge badge-testing">試填中</span></td>
-                <td style="font-weight:500">財務衝擊</td>
-                <td><div class="qsy-func">
-                  <span class="qsy-func-new disabled">新增</span>
-                  <span class="qsy-func-icon" title="編輯" onclick="qsShowBuilder('fi','財務衝擊')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                  <span class="qsy-func-icon" title="預覽" onclick="showToast('預覽功能開發中','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                  <span class="qsy-func-icon" title="還原" onclick="showToast('已還原至上一版本','#e8a820')"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
-                  <span class="qsy-func-icon" title="發布" onclick="showToast('已發布','#1A8F7F')"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                <td>2034</td><td style="font-weight:500">財務衝擊</td>
+                <td style="color:#aaa;font-size:12px">—</td><td>—</td><td>—</td>
+                <td><div class="func-icons"><span class="fi" onclick="qsShowBuilder('fi','財務衝擊')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                 </div></td>
-                <td><div class="qsy-func" style="justify-content:center">
-                  <span class="qsy-func-icon" title="寄送測試" onclick="showToast('測試問卷已寄出','#1A8F7F')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
-                  <span class="qsy-func-icon" title="回填紀錄" onclick="showToast('回填紀錄','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
                 </div></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><div class="func-icons"><span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span></div></td>
               </tr>
               <tr>
                 <td><span class="badge badge-editing">問卷編輯中</span></td>
-                <td style="font-weight:500">外部衝擊問卷</td>
-                <td><div class="qsy-func">
-                  <span class="qsy-func-new disabled">新增</span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                <td>2034</td><td style="font-weight:500">外部衝擊問卷</td>
+                <td style="color:#aaa;font-size:12px">—</td><td>—</td><td>—</td>
+                <td><div class="func-icons"><span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                 </div></td>
-                <td><div class="qsy-func" style="justify-content:center">
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
                 </div></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('顧問已定版確認','#1A8F7F')">定版確認</button></td>
-                <td><button class="qsy-confirm-btn" onclick="showToast('公司已定版確認','#1A8F7F')">定版確認</button></td>
+                <td><div class="func-icons"><span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span></div></td>
               </tr>
-              <tr style="background:#fafcfb">
+              <tr>
                 <td><span style="font-size:12px;color:#aaa">—</span></td>
-                <td style="font-weight:600;color:#1A8F7F">IFRS</td>
-                <td><div class="qsy-func">
-                  <span class="qsy-func-new" onclick="qsShowBuilder('ifrs','IFRS')">新增</span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg></span>
+                <td>2034</td><td style="font-weight:600;color:#1A8F7F">IFRS</td>
+                <td style="color:#aaa;font-size:12px">—</td><td>—</td><td>—</td>
+                <td><div class="func-icons"><span class="fi" style="color:#1A8F7F" onclick="qsShowBuilder('ifrs','IFRS')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                 </div></td>
-                <td><div class="qsy-func" style="justify-content:center">
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
-                  <span class="qsy-func-icon disabled"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <td><div class="func-icons">
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                  <span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
                 </div></td>
-                <td><button class="qsy-confirm-btn" disabled>定版確認</button></td>
-                <td><button class="qsy-confirm-btn" disabled>定版確認</button></td>
+                <td><div class="func-icons"><span class="fi" style="opacity:.3"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span></div></td>
+              </tr>
+              <!-- 2033 已發放的範例 -->
+              <tr>
+                <td><span class="badge" style="background:#e0f0fd;color:#1a5f8a">問卷發放中</span></td>
+                <td>2033</td><td style="font-weight:500">利害關係人 2033</td>
+                <td style="font-size:12px">2026/04/09 ～ 2026/04/18</td>
+                <td>20</td><td>6</td>
+                <td><div class="func-icons"><span class="fi" onclick="showToast('編輯問卷','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+                <td><div class="func-icons">
+                  <span class="fi" onclick="showToast('發放問卷','#1A8F7F')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+                  <span class="fi" onclick="showToast('下載發放清單','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+                </div></td>
+                <td><div class="func-icons">
+                  <span class="fi" onclick="showToast('上傳回填資料','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+                  <span class="fi" onclick="showToast('查看回填紀錄','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                </div></td>
+                <td><div class="func-icons"><span class="fi" onclick="showToast('查看回收狀況','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span></div></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="pagination">
           <span class="pag-label">前往</span><input class="pag-ni" value="1"><span class="pag-label">頁</span>
-          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
-          <span class="pag-total">共 4 項</span>
+          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">2</div><div class="pag-btn">›</div>
+          <span class="pag-total">共 29 項</span>
           <select class="per-page-sel"><option>15項/頁</option></select>
         </div>
       </div>
