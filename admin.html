@@ -980,6 +980,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
               <th class="tleft">題目名稱 <span class="sort-icon">⇅</span></th>
               <th style="width:110px;text-align:center">題目類型</th>
               <th style="width:70px;text-align:center">必填</th>
+              <th style="width:90px;text-align:center">可調整性</th>
               <th style="width:100px">關聯尺度</th>
               <th style="width:60px">排序</th>
               <th style="width:70px">功能</th>
@@ -991,6 +992,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td><select><option>請選擇</option></select></td>
                 <td><select><option>請選擇</option><option>機率</option><option>財務衝擊</option><option>時間維度</option></select></td>
                 <td><select><option>請選擇</option><option>是</option><option>否</option></select></td>
+                <td><select><option>請選擇</option><option>固定</option><option>可變動</option></select></td>
                 <td></td><td></td><td></td>
               </tr>
               <tr>
@@ -998,6 +1000,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td class="tleft" style="font-weight:600">發生機率</td>
                 <td style="text-align:center"><span class="chip chip-blue" style="margin:0">機率</span></td>
                 <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td>
+                <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td>
                 <td style="font-size:12px;color:#555">SC01</td><td>1</td>
                 <td><div class="func-icons"><span class="fi" onclick="openModal('edit-quant-p01')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
               </tr>
@@ -1006,6 +1009,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td class="tleft" style="font-weight:600">財務影響－營收</td>
                 <td style="text-align:center"><span class="chip chip-teal" style="margin:0">財務衝擊</span></td>
                 <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td>
+                <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td>
                 <td style="font-size:12px;color:#555">SC02</td><td>2</td>
                 <td><div class="func-icons"><span class="fi" onclick="openModal('edit-quant-p02')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
               </tr>
@@ -1014,6 +1018,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td class="tleft" style="font-weight:600">財務影響－成本</td>
                 <td style="text-align:center"><span class="chip chip-teal" style="margin:0">財務衝擊</span></td>
                 <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td>
+                <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td>
                 <td style="font-size:12px;color:#555">SC02</td><td>3</td>
                 <td><div class="func-icons"><span class="fi" onclick="openModal('edit-quant-p03')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
               </tr>
@@ -1022,6 +1027,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td class="tleft" style="font-weight:600">EBITDA 影響(%)</td>
                 <td style="text-align:center"><span class="chip chip-teal" style="margin:0">財務衝擊</span></td>
                 <td style="text-align:center"><span style="font-size:12px;color:#aaa">選填</span></td>
+                <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b07800;font-weight:600">可變動</span></td>
                 <td style="font-size:12px;color:#555">文字輸入</td><td>4</td>
                 <td><div class="func-icons"><span class="fi" onclick="openModal('edit-quant-p04')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
               </tr>
@@ -1030,6 +1036,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td class="tleft" style="font-weight:600">影響時間維度</td>
                 <td style="text-align:center"><span class="chip" style="margin:0;background:#e8f0fb;color:#2E5FA8">時間維度</span></td>
                 <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td>
+                <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td>
                 <td style="font-size:12px;color:#555">TS01~TS03</td><td>5</td>
                 <td><div class="func-icons"><span class="fi" onclick="openModal('edit-quant-p05')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
               </tr>
@@ -1058,6 +1065,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
               <th style="width:70px">代碼 <span class="sort-icon">⇅</span></th>
               <th class="tleft">題目名稱 <span class="sort-icon">⇅</span></th>
               <th style="width:70px;text-align:center">必填</th>
+              <th style="width:90px;text-align:center">可調整性</th>
               <th style="width:100px">關聯尺度</th>
               <th style="width:60px">排序</th>
               <th style="width:70px">功能</th>
@@ -1068,15 +1076,16 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <td><select><option>請選擇</option></select></td>
                 <td><select><option>請選擇</option></select></td>
                 <td><select><option>請選擇</option><option>是</option><option>否</option></select></td>
+                <td><select><option>請選擇</option><option>固定</option><option>可變動</option></select></td>
                 <td></td><td></td><td></td>
               </tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q01</td><td class="tleft" style="font-weight:600">此風險/機會是否影響公司政策決策</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>1</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q02</td><td class="tleft" style="font-weight:600">此風險/機會是否影響公司策略規劃</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>2</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q03</td><td class="tleft" style="font-weight:600">此風險/機會是否影響薪酬結構</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>3</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q04</td><td class="tleft" style="font-weight:600">此風險/機會是否受法規或合規要求影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>4</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q05</td><td class="tleft" style="font-weight:600">此風險/機會是否影響供應商篩選或管理</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>5</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q06</td><td class="tleft" style="font-weight:600">此風險/機會是否受股東或投資人要求影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>6</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
-              <tr><td><span class="badge badge-on">啟用</span></td><td>Q07</td><td class="tleft" style="font-weight:600">此風險/機會是否受客戶要求或市場趨勢影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="font-size:12px;color:#555">SC03</td><td>7</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q01</td><td class="tleft" style="font-weight:600">此風險/機會是否影響公司政策決策</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td><td style="font-size:12px;color:#555">SC03</td><td>1</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q02</td><td class="tleft" style="font-weight:600">此風險/機會是否影響公司策略規劃</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td><td style="font-size:12px;color:#555">SC03</td><td>2</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q03</td><td class="tleft" style="font-weight:600">此風險/機會是否影響薪酬結構</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td><td style="font-size:12px;color:#555">SC03</td><td>3</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q04</td><td class="tleft" style="font-weight:600">此風險/機會是否受法規或合規要求影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f0f4ff;color:#3a5fcd;font-weight:600">固定</span></td><td style="font-size:12px;color:#555">SC03</td><td>4</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q05</td><td class="tleft" style="font-weight:600">此風險/機會是否影響供應商篩選或管理</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b07800;font-weight:600">可變動</span></td><td style="font-size:12px;color:#555">SC03</td><td>5</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q06</td><td class="tleft" style="font-weight:600">此風險/機會是否受股東或投資人要求影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b07800;font-weight:600">可變動</span></td><td style="font-size:12px;color:#555">SC03</td><td>6</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
+              <tr><td><span class="badge badge-on">啟用</span></td><td>Q07</td><td class="tleft" style="font-weight:600">此風險/機會是否受客戶要求或市場趨勢影響</td><td style="text-align:center"><span class="badge badge-on" style="font-size:11px">必填</span></td><td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b07800;font-weight:600">可變動</span></td><td style="font-size:12px;color:#555">SC03</td><td>7</td><td><div class="func-icons"><span class="fi" onclick="openModal('edit-qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td></tr>
             </tbody>
           </table>
           <div class="pagination">
@@ -1173,9 +1182,30 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ex" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">外部衝擊</span></label>
                 <div class="qs-applied" id="qsta-ex" style="display:none"><span style="color:#c0392b;font-size:12px">尺度設定請至該年度外部衝擊項目</span></div>
               </div>
-              <div class="qs-type-row" id="qstr-ifrs">
+              <div class="qs-type-row" id="qstr-ifrs" style="flex-wrap:wrap">
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ifrs" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">IFRS</span></label>
-                <div class="qs-applied" id="qsta-ifrs" style="display:none"><span style="color:#c0392b;font-size:12px">已套用：IFRS S1/S2 重大性評估</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
+                <div class="qs-applied" id="qsta-ifrs" style="display:none;flex-direction:column;gap:10px;width:100%;padding:10px 0 4px">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="color:#c0392b;font-size:12px">已套用：IFRS S1/S2 重大性評估</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
+                  <div>
+                    <div class="fl" style="font-size:12px;margin-bottom:6px;color:#555">問卷結構模式 <span style="color:#e53e3e">*</span></div>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
+                        <input type="radio" name="ifrs-mode" value="A" style="margin-top:2px">
+                        <span>
+                          <span style="font-size:13px;font-weight:600">模式 A</span>
+                          <span style="font-size:12px;color:#888;margin-left:4px">— 僅顯示議題（適用：客戶已有明確議題清單）</span>
+                        </span>
+                      </label>
+                      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
+                        <input type="radio" name="ifrs-mode" value="B" checked style="margin-top:2px">
+                        <span>
+                          <span style="font-size:13px;font-weight:600">模式 B</span>
+                          <span style="font-size:12px;color:#888;margin-left:4px">— 顯示議題＋永續主題（適用：需細化至主題層級）</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1873,7 +1903,7 @@ const MODAL_CONTENTS = {
           <option value="">＋ 新增議題</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}
         </select>
       </div>
-      <span style="font-size:11px;color:#888;margin-top:3px">永續主題可隸屬多個 ESG 議題（1對多關係）</span></div>
+      <span style="font-size:11px;color:#888;margin-top:3px">永續主題可隸屬多個 ESG 議題（多對多關係）</span></div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 主題名稱</th></tr></thead>
     <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
@@ -1886,32 +1916,51 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
     </div>
     <div class="fg"><label class="fl">所屬 ESG 議題</label>
-      <input class="finp" value="氣候策略與能源管理" readonly style="background:#f5f5f5">
-      <span style="font-size:11px;color:#aaa;margin-top:2px">所屬議題不可更改，如需變更請刪除後重新新增</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <span class="chip chip-teal">氣候策略與能源管理<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
+          <option value="">＋ 新增議題</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}
+        </select>
+      </div></div>
     <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" value="氣候策略"></div>
     <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2">與氣候變遷相關的策略規劃、目標設定與績效管理</textarea></div>`},
   'add-iro':{title:'新增風險／機會項目',body:()=>`
     <div class="fg"><label class="fl">永續主題 <span class="req">*</span></label>
-      <select class="fsel">
-        <option value="">請選擇</option>
-        <option>氣候策略</option><option>能源管理</option><option>水資源管理</option>
-        <option>生物多樣性</option><option>廢棄物管理</option><option>人才發展</option>
-        <option>職場安全</option><option>資訊安全</option><option>公司治理</option>
-      </select></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
+          <option value="">＋ 新增主題</option>
+          <option>氣候策略</option><option>能源管理</option><option>水資源管理</option>
+          <option>生物多樣性</option><option>廢棄物管理</option><option>人才發展</option>
+          <option>職場安全</option><option>資訊安全</option><option>公司治理</option>
+        </select>
+      </div>
+      <span style="font-size:11px;color:#888;margin-top:3px">風險／機會可關聯多個永續主題（多對多關係）</span></div>
+    <div class="fg"><label class="fl">類型 <span class="req">*</span></label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="iro-type" value="risk" checked> ⚠ 風險</label>
+        <label><input type="radio" name="iro-type" value="opp"> ✦ 機會</label>
+      </div>
+    </div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 名稱</th></tr></thead>
     <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="2" placeholder="請輸入"></textarea></td></tr>
     <tr><td>English</td><td><textarea class="ftextarea" rows="2" placeholder="Please enter"></textarea></td></tr>
     <tr><td>简体中文</td><td><textarea class="ftextarea" rows="2" placeholder="请输入"></textarea></td></tr></tbody></table>`},
   'edit-iro':{title:'編輯風險／機會項目',body:()=>`
-    <div class="grid2">
-      <div class="fg"><label class="fl">ESG 議題</label><input class="finp" value="氣候策略與能源管理" readonly style="background:#f5f5f5"></div>
-      <div class="fg"><label class="fl">永續主題</label><input class="finp" value="氣候策略" readonly style="background:#f5f5f5"></div>
-      <div class="fg"><label class="fl">類型</label>
-        <div class="radio-group" style="margin-top:6px">
-          <label><input type="radio" name="irot2" value="risk" checked> ⚠ 風險</label>
-          <label><input type="radio" name="irot2" value="opp"> ✦ 機會</label>
-        </div>
+    <div class="fg"><label class="fl">永續主題</label>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
+        <span class="chip chip-teal">氣候策略<span class="rm" onclick="removeChip(this)">✕</span></span>
+        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
+          <option value="">＋ 新增主題</option>
+          <option>能源管理</option><option>水資源管理</option>
+          <option>生物多樣性</option><option>廢棄物管理</option><option>人才發展</option>
+          <option>職場安全</option><option>資訊安全</option><option>公司治理</option>
+        </select>
+      </div></div>
+    <div class="fg"><label class="fl">類型</label>
+      <div class="radio-group" style="margin-top:6px">
+        <label><input type="radio" name="irot2" value="risk" checked> ⚠ 風險</label>
+        <label><input type="radio" name="irot2" value="opp"> ✦ 機會</label>
       </div>
     </div>
     <div class="fg"><label class="fl">描述 <span class="req">*</span></label>
@@ -1937,8 +1986,14 @@ const MODAL_CONTENTS = {
     <div class="grid2">
       <div class="fg"><label class="fl">關聯尺度</label>
         <select class="fsel"><option value="">請選擇</option><option>SC01 發生機率</option><option>SC02 財務影響</option><option>SC03 質化題選項</option><option>文字輸入</option><option>TS01~TS03 時間尺度</option></select></div>
-      <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>
-    </div>`},
+      <div class="fg"><label class="fl">可調整性 <span class="req">*</span></label>
+        <div class="radio-group" style="margin-top:8px">
+          <label><input type="radio" name="q-adj" value="固定" checked> 固定</label>
+          <label><input type="radio" name="q-adj" value="可變動"> 可變動</label>
+        </div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'edit-quant-p01':{title:'編輯量化題目：發生機率',body:()=>`
     <div class="grid3">
       <div class="fg"><label class="fl">代碼</label><input class="finp" value="P01" readonly style="background:#f5f5f5"></div>
@@ -1956,6 +2011,12 @@ const MODAL_CONTENTS = {
       </div>
     </div>
     <div class="fg"><label class="fl">關聯尺度</label><input class="finp" value="SC01 發生機率" readonly style="background:#f5f5f5"></div>
+    <div class="fg"><label class="fl">可調整性</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="q-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="q-adj" value="可變動"> 可變動</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'edit-quant-p02':{title:'編輯量化題目：財務影響－營收',body:()=>`
     <div class="grid3">
@@ -1975,6 +2036,12 @@ const MODAL_CONTENTS = {
     </div>
     <div class="fg"><label class="fl">關聯尺度</label>
       <select class="fsel"><option>SC02 財務影響</option><option>SC01 發生機率</option><option>文字輸入</option></select></div>
+    <div class="fg"><label class="fl">可調整性</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="q-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="q-adj" value="可變動"> 可變動</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'edit-quant-p03':{title:'編輯量化題目：財務影響－成本',body:()=>`
     <div class="grid3">
@@ -1994,6 +2061,12 @@ const MODAL_CONTENTS = {
     </div>
     <div class="fg"><label class="fl">關聯尺度</label>
       <select class="fsel"><option>SC02 財務影響</option><option>SC01 發生機率</option><option>文字輸入</option></select></div>
+    <div class="fg"><label class="fl">可調整性</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="q-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="q-adj" value="可變動"> 可變動</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'edit-quant-p04':{title:'編輯量化題目：EBITDA 影響',body:()=>`
     <div class="grid3">
@@ -2013,6 +2086,12 @@ const MODAL_CONTENTS = {
     </div>
     <div class="fg"><label class="fl">關聯尺度</label>
       <select class="fsel"><option>文字輸入</option><option>SC02 財務影響</option></select></div>
+    <div class="fg"><label class="fl">可調整性</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="q-adj" value="固定"> 固定</label>
+        <label><input type="radio" name="q-adj" value="可變動" checked> 可變動</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'edit-quant-p05':{title:'編輯量化題目：影響時間維度',body:()=>`
     <div class="grid3">
@@ -2031,6 +2110,12 @@ const MODAL_CONTENTS = {
       </div>
     </div>
     <div class="fg"><label class="fl">關聯尺度</label><input class="finp" value="TS01~TS03 時間尺度" readonly style="background:#f5f5f5"></div>
+    <div class="fg"><label class="fl">可調整性</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="q-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="q-adj" value="可變動"> 可變動</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">說明</label><input class="finp" placeholder="選填，補充說明"></div>`},
   'add-qual':{title:'新增質化題目',body:()=>`
     <div class="grid3">
@@ -2048,6 +2133,12 @@ const MODAL_CONTENTS = {
       </div>
       <div class="fg"><label class="fl">關聯尺度</label>
         <select class="fsel"><option>SC03 質化題選項</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">可調整性 <span class="req">*</span></label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="qq-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="qq-adj" value="可變動"> 可變動</label>
+      </div>
     </div>`},
   'edit-qual':{title:'編輯質化題目',body:()=>`
     <div class="grid3">
@@ -2065,6 +2156,12 @@ const MODAL_CONTENTS = {
       </div>
       <div class="fg"><label class="fl">關聯尺度</label>
         <select class="fsel"><option>SC03 質化題選項</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">可調整性 <span class="req">*</span></label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="qq-adj" value="固定" checked> 固定</label>
+        <label><input type="radio" name="qq-adj" value="可變動"> 可變動</label>
+      </div>
     </div>`},
   'add-scale':{title:'新增問卷尺度',body:()=>`
     <div class="grid3">
