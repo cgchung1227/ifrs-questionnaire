@@ -2249,100 +2249,86 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
     ═══════════════════════════════ -->
     <div class="page" id="pg-scale-mgmt">
       <div id="scm-list">
-        <div class="page-head">
-          <div>
-            <div class="breadcrumb"><span class="bc-cur">問卷填答尺度管理</span><span class="bc-sep">/</span><span class="bc-cur">總覽</span></div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
+        <div class="ph">
+          <div><h1><span class="pg-code">B08</span>問卷填答尺度管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+          <div class="ph-actions">
             <button class="btn btn-teal" onclick="scmShowAdd()">新增</button>
-            <button class="btn btn-ghost">○ 重置篩選</button>
-            <input class="search-input" placeholder="🔍 請輸入" style="width:200px">
+            <button class="btn btn-ghost">↺ 重置篩選</button>
+            <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入"></div>
           </div>
         </div>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th style="width:160px">狀態</th>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:120px">狀態</th>
               <th>問卷種類</th>
               <th>尺度類型</th>
-              <th style="width:120px">功能</th>
-            </tr>
-            <tr class="filter-row">
-              <th><select class="col-filter"><option value="">請選擇</option><option>啟用</option><option>停用</option></select></th>
-              <th><select class="col-filter"><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>IFRS重大性評估</option></select></th>
-              <th><select class="col-filter"><option value="">請選擇</option><option>關注程度</option><option>影響程度</option><option>發生機率</option><option>財務影響－營收</option><option>財務影響－成本</option><option>質化題選項</option><option>影響時間尺度</option></select></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>利害關係人</td>
-              <td>關注程度</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('sh')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>財務衝擊</td>
-              <td>影響程度</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fi')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>IFRS重大性評估</td>
-              <td>發生機率</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('prob')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>IFRS重大性評估</td>
-              <td>財務影響－營收</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fin-rev')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>IFRS重大性評估</td>
-              <td>財務影響－成本</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fin-cost')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>IFRS重大性評估</td>
-              <td>質化題選項</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td style="text-align:center"><span class="badge badge-on">啟用</span></td>
-              <td>IFRS重大性評估</td>
-              <td>影響時間尺度</td>
-              <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('time')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="pag-bar">
-          <span style="font-size:12px;color:#888">前往</span>
-          <input type="number" value="1" style="width:40px;padding:3px 6px;border:1px solid #d0e4e0;border-radius:4px;font-size:12px;text-align:center">
-          <span style="font-size:12px;color:#888">頁</span>
-          <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
-          <span style="font-size:12px;color:#888;margin-left:8px">共 7 項</span>
-          <select style="font-size:12px;padding:3px 6px;border:1px solid #d0e4e0;border-radius:4px;margin-left:8px"><option>15項/頁</option><option>30項/頁</option></select>
+              <th style="width:100px">功能</th>
+            </tr></thead>
+            <tbody>
+              <tr class="frow">
+                <td><select><option>請選擇</option><option>啟用</option><option>停用</option></select></td>
+                <td><select><option>請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>IFRS重大性評估</option></select></td>
+                <td><select><option>請選擇</option><option>關注程度</option><option>影響程度</option><option>發生機率</option><option>財務影響－營收</option><option>財務影響－成本</option><option>質化題選項</option><option>影響時間尺度</option></select></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>利害關係人</td><td>關注程度</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('sh')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>財務衝擊</td><td>影響程度</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fi')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>IFRS重大性評估</td><td>發生機率</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('prob')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>IFRS重大性評估</td><td>財務影響－營收</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fin-rev')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>IFRS重大性評估</td><td>財務影響－成本</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('fin-cost')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>IFRS重大性評估</td><td>質化題選項</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('qual')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-on">啟用</span></td>
+                <td>IFRS重大性評估</td><td>影響時間尺度</td>
+                <td><div class="func-icons"><span class="fi" onclick="scmShowEdit('time')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi" onclick="showToast('已複製尺度','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg></span></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+            <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+            <span class="pag-total">共 7 項</span>
+            <select class="per-page-sel"><option>15項/頁</option><option>30項/頁</option></select>
+          </div>
         </div>
       </div><!-- /scm-list -->
 
       <!-- 新增 view -->
       <div id="scm-add" style="display:none">
-        <div class="page-head">
-          <div class="breadcrumb">
-            <span class="bc-link" onclick="scmShowList()" style="color:#1A8F7F;cursor:pointer">問卷填答尺度管理</span>
-            <span class="bc-sep">/</span><span class="bc-cur">新增</span>
-          </div>
+        <div class="ph">
+          <div><h1><span class="pg-code">B08</span>問卷填答尺度管理 <span class="slash">/</span> <span class="sub" style="cursor:pointer;text-decoration:underline" onclick="scmShowList()">總覽</span> <span class="slash">/</span> <span class="sub">新增</span></h1></div>
         </div>
         <div class="card" style="max-width:860px">
           <div class="card-body" style="display:flex;flex-direction:column;gap:16px">
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
-              <div class="fg"><label class="fl req-star">尺度類型代碼</label><input class="finp" placeholder="請輸入"></div>
+              <div class="fg"><label class="fl"><span class="req">*</span> 尺度類型代碼</label><input class="finp" placeholder="請輸入"></div>
               <div class="fg"><label class="fl">尺度類型名稱</label><input class="finp" placeholder="請輸入"></div>
-              <div class="fg"><label class="fl req-star">問卷種類</label>
+              <div class="fg"><label class="fl"><span class="req">*</span> 問卷種類</label>
                 <select class="fsel"><option value="">請選擇</option><option>利害關係人</option><option>財務衝擊</option><option>外部衝擊</option><option>IFRS重大性評估</option></select>
               </div>
             </div>
@@ -2356,16 +2342,18 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
             </div>
             <div style="border-top:1px solid #e8f0ee;padding-top:16px">
               <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:12px">多語系</div>
-              <table class="data-table">
-                <thead><tr><th style="width:160px">語言</th><th>尺度說明</th></tr></thead>
-                <tbody>
-                  <tr><td><span style="color:#e53e3e">*</span> 繁體中文</td><td><textarea class="finp" style="width:100%;min-height:60px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
-                  <tr><td>English</td><td><textarea class="finp" style="width:100%;min-height:60px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
-                  <tr><td>简体中文</td><td><textarea class="finp" style="width:100%;min-height:60px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
-                  <tr><td>한국어</td><td><textarea class="finp" style="width:100%;min-height:60px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
-                  <tr><td>日本語</td><td><textarea class="finp" style="width:100%;min-height:60px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
-                </tbody>
-              </table>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead><tr><th style="width:160px">語言</th><th>尺度說明</th></tr></thead>
+                  <tbody>
+                    <tr><td><span class="req">*</span> 繁體中文</td><td><textarea class="finp" style="width:100%;min-height:56px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
+                    <tr><td>English</td><td><textarea class="finp" style="width:100%;min-height:56px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
+                    <tr><td>简体中文</td><td><textarea class="finp" style="width:100%;min-height:56px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
+                    <tr><td>한국어</td><td><textarea class="finp" style="width:100%;min-height:56px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
+                    <tr><td>日本語</td><td><textarea class="finp" style="width:100%;min-height:56px;resize:vertical" placeholder="請輸入"></textarea></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:8px">
               <button class="btn btn-ghost" onclick="scmShowList()">取消</button>
@@ -2377,38 +2365,35 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 
       <!-- 編輯 view -->
       <div id="scm-edit" style="display:none">
-        <div class="page-head">
-          <div class="breadcrumb">
-            <span class="bc-link" onclick="scmShowList()" style="color:#1A8F7F;cursor:pointer">問卷填答尺度管理</span>
-            <span class="bc-sep">/</span><span class="bc-cur">編輯</span>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-ghost" onclick="showToast('進入編輯模式','#1A8F7F')">編輯</button>
+        <div class="ph">
+          <div><h1><span class="pg-code">B08</span>問卷填答尺度管理 <span class="slash">/</span> <span class="sub" style="cursor:pointer;text-decoration:underline" onclick="scmShowList()">總覽</span> <span class="slash">/</span> <span class="sub">編輯</span></h1></div>
+          <div class="ph-actions">
+            <button class="btn btn-ghost" onclick="showToast('已儲存','#1A8F7F')">編輯</button>
             <button class="btn btn-teal" onclick="scmShowAdd()">新增</button>
           </div>
         </div>
-        <div style="display:flex;gap:0;border:1px solid #d0e4e0;border-radius:8px;overflow:hidden;max-width:1000px">
-          <!-- Left: scale levels -->
-          <div style="width:200px;flex-shrink:0;background:#f8fbfa;border-right:1px solid #d0e4e0" id="scm-levels"></div>
-          <!-- Right: detail -->
+        <div style="display:flex;border:1px solid #e0eeea;border-radius:8px;overflow:hidden;max-width:1000px">
+          <div style="width:190px;flex-shrink:0;background:#f8fbfa;border-right:1px solid #e0eeea" id="scm-levels"></div>
           <div style="flex:1;padding:20px 24px">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eef4f2">
-              <div><div style="font-size:11px;color:#888;margin-bottom:3px">問卷種類</div><input class="finp" id="scm-qtype" readonly style="background:#f5f8f7"></div>
-              <div><div style="font-size:11px;color:#888;margin-bottom:3px">尺度類型</div><input class="finp" id="scm-stype" readonly style="background:#f5f8f7"></div>
-              <div><div style="font-size:11px;color:#888;margin-bottom:3px">衝擊維度</div><select class="fsel" id="scm-dim"><option value="">請選擇</option><option>財務衝擊</option><option>永續衝擊</option></select></div>
-              <div><div style="font-size:11px;color:#888;margin-bottom:3px">外部衝擊方向</div><input class="finp" id="scm-dir" placeholder="—"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eef5f3">
+              <div class="fg"><label class="fl">問卷種類</label><input class="finp" id="scm-qtype" readonly style="background:#f5f8f7;color:#555"></div>
+              <div class="fg"><label class="fl">尺度類型</label><input class="finp" id="scm-stype" readonly style="background:#f5f8f7;color:#555"></div>
+              <div class="fg"><label class="fl">衝擊維度</label><select class="fsel" id="scm-dim"><option value="">請選擇</option><option>財務衝擊</option><option>永續衝擊</option></select></div>
+              <div class="fg"><label class="fl">外部衝擊方向</label><input class="finp" id="scm-dir" placeholder="—"></div>
             </div>
             <div style="display:grid;grid-template-columns:1fr 80px 80px;gap:12px;align-items:start;margin-bottom:16px">
-              <div class="fg"><label class="fl">尺度說明</label><textarea class="finp" id="scm-desc" style="width:100%;min-height:60px;resize:vertical"></textarea></div>
-              <div class="fg"><label class="fl req-star">分數</label><input class="finp" id="scm-score" type="number"></div>
-              <div class="fg"><label class="fl req-star">排序</label><input class="finp" id="scm-order" type="number"></div>
+              <div class="fg"><label class="fl">尺度說明</label><textarea class="finp" id="scm-desc" style="width:100%;min-height:56px;resize:vertical"></textarea></div>
+              <div class="fg"><label class="fl"><span class="req">*</span> 分數</label><input class="finp" id="scm-score" type="number"></div>
+              <div class="fg"><label class="fl"><span class="req">*</span> 排序</label><input class="finp" id="scm-order" type="number"></div>
             </div>
-            <div style="border-top:1px solid #eef4f2;padding-top:16px">
+            <div style="border-top:1px solid #eef5f3;padding-top:16px">
               <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:10px">多語系</div>
-              <table class="data-table">
-                <thead><tr><th style="width:120px">語言</th><th>尺度說明</th></tr></thead>
-                <tbody id="scm-lang-body"></tbody>
-              </table>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead><tr><th style="width:120px">語言</th><th>尺度說明</th></tr></thead>
+                  <tbody id="scm-lang-body"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
