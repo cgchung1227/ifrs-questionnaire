@@ -425,30 +425,30 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 
   <div class="left-menu" id="leftMenu">
     <div class="lm-section">
-      <div class="lm-label">C2 · 整合現有模組</div>
-      <div class="lm-item" onclick="go('pg-aspect')"><span class="lm-code">B02</span>議題面向管理</div>
-      <div class="lm-item on" onclick="go('pg-esg')"><span class="lm-code">B01</span>ESG 議題清單</div>
-      <div class="lm-item" onclick="go('pg-financial')"><span class="lm-code">B05</span>財務衝擊項目管理</div>
-      <div class="lm-item" onclick="go('pg-scale-mgmt')"><span class="lm-code">B08</span>問卷填答尺度管理</div>
+      <div class="lm-label">整合現有模組</div>
+      <div class="lm-item" onclick="go('pg-aspect')">議題面向管理</div>
+      <div class="lm-item on" onclick="go('pg-esg')">ESG 議題清單</div>
+      <div class="lm-item" onclick="go('pg-financial')">財務衝擊項目管理</div>
+      <div class="lm-item" onclick="go('pg-scale-mgmt')">問卷填答尺度管理</div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">C2 · 新增模組（IFRS）</div>
-      <div class="lm-item" onclick="go('pg-theme')"><span class="lm-code">B03</span>永續主題管理</div>
-      <div class="lm-item" onclick="go('pg-iro')"><span class="lm-code">B04</span>風險／機會清單</div>
-      <div class="lm-item" onclick="go('pg-iro-setting')"><span class="lm-code">B06</span>R/O 類型</div>
-      <div class="lm-item" onclick="go('pg-vc')"><span class="lm-code">B07</span>價值鏈位置</div>
-      <div class="lm-item" onclick="go('pg-question')"><span class="lm-code">B09</span>IFRS問卷題目設定</div>
+      <div class="lm-label">新增模組（IFRS）</div>
+      <div class="lm-item" onclick="go('pg-theme')">永續主題管理</div>
+      <div class="lm-item" onclick="go('pg-iro')">風險／機會清單</div>
+      <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型</div>
+      <div class="lm-item" onclick="go('pg-vc')">價值鏈位置</div>
+      <div class="lm-item" onclick="go('pg-question')">IFRS 問卷題目設定</div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">C3 · 問卷建置與發放</div>
-      <div class="lm-item" onclick="go('pg-qsetup')"><span class="lm-code">C3-01</span>問卷建置入口</div>
+      <div class="lm-label">問卷建置與發放</div>
+      <div class="lm-item" onclick="go('pg-qsetup')">問卷建置入口</div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">分析 · 新增模組（IFRS）</div>
-      <div class="lm-item" onclick="go('pg-ifrs-analysis')"><span class="lm-code" style="background:#fce4ec;color:#c2185b">A01</span>IFRS 重大性評估分析</div>
+      <div class="lm-label">分析（IFRS）</div>
+      <div class="lm-item" onclick="go('pg-ifrs-analysis')">IFRS 重大性評估分析</div>
     </div>
   </div>
 
@@ -1214,25 +1214,6 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                 <label style="display:flex;align-items:center;gap:10px;cursor:pointer;flex:1"><input type="checkbox" class="qs-type-cb" data-key="ifrs" onchange="qsUpdateTypes()"><span style="font-size:13px;font-weight:500">IFRS</span></label>
                 <div class="qs-applied" id="qsta-ifrs" style="display:none;flex-direction:column;gap:10px;width:100%;padding:10px 0 4px">
                   <div style="display:flex;align-items:center;gap:8px"><span style="color:#c0392b;font-size:12px">已套用：IFRS S1/S2 重大性評估</span><button class="btn btn-ghost btn-sm" onclick="showToast('尺度編輯功能開發中','#2E5FA8')">編輯尺度</button></div>
-                  <div>
-                    <div class="fl" style="font-size:12px;margin-bottom:6px;color:#555">問卷結構模式 <span style="color:#e53e3e">*</span></div>
-                    <div style="display:flex;flex-direction:column;gap:6px">
-                      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
-                        <input type="radio" name="ifrs-mode" value="A" style="margin-top:2px">
-                        <span>
-                          <span style="font-size:13px;font-weight:600">模式 A</span>
-                          <span style="font-size:12px;color:#888;margin-left:4px">— 僅顯示議題（適用：客戶已有明確議題清單）</span>
-                        </span>
-                      </label>
-                      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
-                        <input type="radio" name="ifrs-mode" value="B" checked style="margin-top:2px">
-                        <span>
-                          <span style="font-size:13px;font-weight:600">模式 B</span>
-                          <span style="font-size:12px;color:#888;margin-left:4px">— 顯示議題＋永續主題（適用：需細化至主題層級）</span>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1925,7 +1906,6 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
         <!-- Tab bar -->
         <div class="tab-bar">
           <div class="tab on" onclick="ifiaSetTab(this,'ifia-tb-overall')">公司整體</div>
-          <div class="tab" onclick="ifiaSetTab(this,'ifia-tb-dept')">部門比較</div>
           <div class="tab" onclick="ifiaSetTab(this,'ifia-tb-qual')">質化題通過率</div>
         </div>
 
@@ -2020,104 +2000,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
           </div>
         </div>
 
-        <!-- ── Tab 2: 部門比較 ── -->
-        <div id="ifia-tb-dept" style="display:none">
-          <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap" id="ifia-dept-pills">
-            <span class="dept-pill on" onclick="ifiaSetDept(this)">永續發展部</span>
-            <span class="dept-pill" onclick="ifiaSetDept(this)">環境管理部</span>
-            <span class="dept-pill" onclick="ifiaSetDept(this)">財務會計部</span>
-            <span class="dept-pill" onclick="ifiaSetDept(this)">人力資源部</span>
-          </div>
-          <div class="tbl-wrap">
-            <table class="tbl">
-              <thead>
-                <tr>
-                  <th class="tleft" rowspan="2" style="min-width:200px">風險／機會項目</th>
-                  <th rowspan="2" style="width:60px">類型</th>
-                  <th colspan="2" style="border-left:1px solid #c5e0d8">發生機率</th>
-                  <th colspan="2" style="border-left:1px solid #c5e0d8">財務影響－營收</th>
-                  <th colspan="2" style="border-left:1px solid #c5e0d8">財務影響－成本</th>
-                  <th colspan="2" style="border-left:1px solid #c5e0d8">時間維度</th>
-                </tr>
-                <tr>
-                  <th style="width:60px;border-left:1px solid #c5e0d8">平均</th><th style="width:50px">名次</th>
-                  <th style="width:60px;border-left:1px solid #c5e0d8">平均</th><th style="width:50px">名次</th>
-                  <th style="width:60px;border-left:1px solid #c5e0d8">平均</th><th style="width:50px">名次</th>
-                  <th style="width:90px;border-left:1px solid #c5e0d8;font-size:11px">主要時段</th><th style="width:50px">名次</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px">氣候策略與能源管理</td>
-                </tr>
-                <tr>
-                  <td class="tleft">碳定價制度強化，付費配額擴大導致成本上升</td>
-                  <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.00</span></td><td><span class="rank-num">1</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">3</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.50</span></td><td><span class="rank-num">1</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">短50%中50%</td><td><span class="rank-num">2</span></td>
-                </tr>
-                <tr>
-                  <td class="tleft">品牌客戶要求低碳製程，若未因應購買意願下降</td>
-                  <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">4</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.00</span></td><td><span class="rank-num">1</span></td>
-                  <td style="border-left:1px solid #eef5f3">2.00</td><td><span class="rank-num">6</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中100%</td><td><span class="rank-num">3</span></td>
-                </tr>
-                <tr>
-                  <td class="tleft">擴展節能與碳標籤產品組合，強化品牌信任</td>
-                  <td><span class="chip chip-green" style="margin:0;font-size:11px">✦ 機會</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.50</td><td><span class="rank-num">2</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.00</span></td><td><span class="rank-num">1</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">3</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中50%長50%</td><td><span class="rank-num">1</span></td>
-                </tr>
-                <tr>
-                  <td class="tleft">再生能源成本波動影響電力採購預算</td>
-                  <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.50</td><td><span class="rank-num">2</span></td>
-                  <td style="border-left:1px solid #eef5f3">2.50</td><td><span class="rank-num">4</span></td>
-                  <td style="border-left:1px solid #eef5f3">4.00</td><td><span class="rank-num">2</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">短100%</td><td><span class="rank-num">1</span></td>
-                </tr>
-                <tr>
-                  <td class="tleft">根據 RE100 策略擴大再生能源，降低電費與排放</td>
-                  <td><span class="chip chip-green" style="margin:0;font-size:11px">✦ 機會</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">4</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.50</td><td><span class="rank-num">2</span></td>
-                  <td style="border-left:1px solid #eef5f3">4.00</td><td><span class="rank-num">2</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中50%長50%</td><td><span class="rank-num">4</span></td>
-                </tr>
-                <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px">水資源管理</td>
-                </tr>
-                <tr>
-                  <td class="tleft">水資源短缺影響廠區生產，增加資本支出</td>
-                  <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.00</span></td><td><span class="rank-num">1</span></td>
-                  <td style="border-left:1px solid #eef5f3">2.00</td><td><span class="rank-num">5</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">3</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中50%長50%</td><td><span class="rank-num">5</span></td>
-                </tr>
-                <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px">生物多樣性</td>
-                </tr>
-                <tr>
-                  <td class="tleft">生態系服務減損導致原料取得成本上升</td>
-                  <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
-                  <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">4</span></td>
-                  <td style="border-left:1px solid #eef5f3"><span class="score-lo">2.00</span></td><td><span class="rank-num">6</span></td>
-                  <td style="border-left:1px solid #eef5f3">2.50</td><td><span class="rank-num">5</span></td>
-                  <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">長100%</td><td><span class="rank-num">6</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- ── Tab 3: 質化題通過率 ── -->
+        <!-- ── Tab 2: 質化題通過率 ── -->
         <div id="ifia-tb-qual" style="display:none">
           <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap">
             <div style="display:flex;gap:6px;align-items:center;font-size:12px;color:#888">
@@ -3210,7 +3093,7 @@ function ifiaShowResult(){
 function ifiaSetTab(el,tid){
   el.closest('.tab-bar').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['ifia-tb-overall','ifia-tb-dept','ifia-tb-qual'].forEach(id=>{
+  ['ifia-tb-overall','ifia-tb-qual'].forEach(id=>{
     const p=document.getElementById(id);
     if(p) p.style.display=(id===tid)?'':'none';
   });
