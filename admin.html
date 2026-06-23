@@ -190,6 +190,18 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 tr.row-very-sig>td{background:#fff5f5!important}
 tr.row-sig>td{background:#fffbf2!important}
 .rank-num{display:inline-block;min-width:24px;text-align:center;font-size:12px;color:#888}
+/* citation */
+.cit-step{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;min-width:72px}
+.cit-sc{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#e0eae8;color:#888;border:2px solid #ccc;transition:all .15s}
+.cit-sl{font-size:11px;color:#888;text-align:center;white-space:nowrap;transition:color .15s}
+.cit-step.on .cit-sc{background:#1A8F7F;color:#fff;border-color:#1A8F7F}
+.cit-step.on .cit-sl{color:#1A8F7F;font-weight:600}
+.cit-conn{flex:1;height:2px;background:#d5e8e2;margin-top:14px;min-width:20px}
+.cit-lang{padding:10px 14px;font-size:13px;cursor:pointer;color:#888;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.cit-lang.on{color:#1A8F7F;font-weight:600;border-bottom-color:#1A8F7F}
+.cit-tb{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid #ddd;border-radius:4px;font-size:12px;cursor:pointer;color:#444;background:#fff}
+.cit-tb:hover{background:#f5f5f5}
+.cit-tb-sep{width:1px;height:22px;background:#ddd;margin:2px 2px}
 .ana-icon{display:inline-flex;align-items:center;color:#aaa;cursor:pointer;transition:color .15s}
 .ana-icon:hover{color:#1A8F7F}
 .ana-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6}
@@ -2360,58 +2372,120 @@ tr.row-sig>td{background:#fffbf2!important}
          問卷引文建置管理
     ═══════════════════════════════ -->
     <div class="page" id="pg-citation">
-      <div class="ph">
-        <div><h1>問卷引文建置管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
-        <div class="ph-actions">
-          <button class="btn btn-primary btn-sm" onclick="showToast('新增引文','#1A8F7F')">＋ 新增引文</button>
-          <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入"></div>
+
+      <!-- ── 總覽 ── -->
+      <div id="cit-list">
+        <div class="ph">
+          <div><h1>問卷引文建置管理 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+          <div class="ph-actions">
+            <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入"></div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:220px">問卷種類</th>
+                <th style="width:140px">問卷使用尺度</th>
+                <th style="width:100px">多語系</th>
+                <th style="width:80px">功能</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:500">利害關係人</td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></td>
+                <td><div class="func-icons"><span class="fi" onclick="citShowEdit('利害關係人')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">財務衝擊</td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></td>
+                <td><div class="func-icons"><span class="fi" onclick="citShowEdit('財務衝擊')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">外部衝擊問卷</td>
+                <td style="color:#bbb">-</td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></td>
+                <td><div class="func-icons"><span class="fi" onclick="citShowEdit('外部衝擊問卷')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;color:#1A8F7F">IFRS 重大性評估</td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A8F7F" stroke-width="1.8"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></td>
+                <td><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A8F7F" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></td>
+                <td><div class="func-icons"><span class="fi" style="color:#1A8F7F" onclick="citShowEdit('IFRS 重大性評估')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pag-label">前往</span><input class="pag-ni" value="1"> 頁
+            <div class="pag-btn">‹</div><div class="pag-btn ap">1</div><div class="pag-btn">›</div>
+            <span class="pag-total">共 4 項</span>
+            <select class="per-page-sel"><option>15項/頁</option></select>
+          </div>
         </div>
       </div>
-      <div class="tbl-wrap">
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th style="width:80px">狀態</th>
-              <th class="tleft" style="min-width:180px">引文名稱</th>
-              <th class="tleft" style="min-width:300px">內容摘要</th>
-              <th style="width:100px">適用問卷類型</th>
-              <th style="width:80px">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="badge" style="background:#e0f5ee;color:#1a7a50">啟用</span></td>
-              <td class="tleft" style="font-weight:500">氣候風險評估引導說明</td>
-              <td class="tleft" style="font-size:12px;color:#555">請依據貴公司實際面臨的氣候相關風險，評估其發生機率與潛在財務影響……</td>
-              <td style="font-size:12px">IFRS</td>
-              <td><div class="func-icons">
-                <span class="fi" onclick="showToast('編輯引文','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                <span class="fi" onclick="showToast('已停用','#888')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span>
-              </div></td>
-            </tr>
-            <tr>
-              <td><span class="badge" style="background:#e0f5ee;color:#1a7a50">啟用</span></td>
-              <td class="tleft" style="font-weight:500">機會評估引導說明</td>
-              <td class="tleft" style="font-size:12px;color:#555">請評估以下永續機會對貴公司未來財務績效的正面影響程度……</td>
-              <td style="font-size:12px">IFRS</td>
-              <td><div class="func-icons">
-                <span class="fi" onclick="showToast('編輯引文','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                <span class="fi" onclick="showToast('已停用','#888')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span>
-              </div></td>
-            </tr>
-            <tr>
-              <td><span class="badge" style="background:#f5f5f5;color:#888">停用</span></td>
-              <td class="tleft" style="font-weight:500;color:#aaa">ESG 議題重要性說明（舊版）</td>
-              <td class="tleft" style="font-size:12px;color:#aaa">本問卷旨在了解您對各 ESG 議題的重視程度……</td>
-              <td style="font-size:12px;color:#aaa">一般</td>
-              <td><div class="func-icons">
-                <span class="fi" style="opacity:.4" onclick="showToast('編輯引文','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
-                <span class="fi" onclick="showToast('已啟用','#1A8F7F')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
-              </div></td>
-            </tr>
-          </tbody>
-        </table>
+
+      <!-- ── 編輯頁 ── -->
+      <div id="cit-edit" style="display:none">
+        <div class="ph" style="margin-bottom:20px">
+          <div><h1><span id="cit-edit-type" style="color:#1A8F7F;font-weight:700"></span> <span class="slash">/</span> <span class="sub">問卷引文建置管理</span></h1></div>
+        </div>
+
+        <!-- 步驟條 -->
+        <div style="display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:28px;overflow-x:auto;padding-bottom:4px">
+          <div class="cit-step on" id="cit-s1" onclick="citGoStep(1)"><div class="cit-sc">1</div><div class="cit-sl">問卷開頭</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s2" onclick="citGoStep(2)"><div class="cit-sc">2</div><div class="cit-sl">引文／說明</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s3" onclick="citGoStep(3)"><div class="cit-sc">3</div><div class="cit-sl">聯絡人資訊</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s4" onclick="citGoStep(4)"><div class="cit-sc">4</div><div class="cit-sl">基本問題（固定）</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s5" onclick="citGoStep(5)"><div class="cit-sc">5</div><div class="cit-sl">基本問題（自行增設）</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s6" onclick="citGoStep(6)"><div class="cit-sc">6</div><div class="cit-sl">意見建議</div></div>
+          <div class="cit-conn"></div>
+          <div class="cit-step" id="cit-s7" onclick="citGoStep(7)"><div class="cit-sc">7</div><div class="cit-sl">結語段落</div></div>
+        </div>
+
+        <!-- 語系 tab + 編輯器 -->
+        <div style="border:1px solid #d0e8e2;border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d0e8e2;padding:0 16px;background:#f8fcfb">
+            <div style="display:flex;gap:0">
+              <div class="cit-lang on" onclick="citSetLang(this)">繁體中文</div>
+              <div class="cit-lang" onclick="citSetLang(this)">English</div>
+              <div class="cit-lang" onclick="citSetLang(this)">簡体中文</div>
+              <div class="cit-lang" onclick="citSetLang(this)">한국어</div>
+              <div class="cit-lang" onclick="citSetLang(this)">日本語</div>
+            </div>
+            <span style="font-size:12px;color:#888;padding:8px 0">文字題</span>
+          </div>
+          <!-- 假工具列 -->
+          <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;border-bottom:1px solid #eee;background:#fff">
+            <span class="cit-tb">B</span><span class="cit-tb"><i>I</i></span><span class="cit-tb"><u>U</u></span><span class="cit-tb" style="text-decoration:line-through">S</span>
+            <span class="cit-tb-sep"></span>
+            <span class="cit-tb">"</span><span class="cit-tb">&lt;/&gt;</span><span class="cit-tb">H₁</span><span class="cit-tb">H₂</span>
+            <span class="cit-tb-sep"></span>
+            <span class="cit-tb">≡</span><span class="cit-tb">•≡</span>
+            <span class="cit-tb-sep"></span>
+            <span class="cit-tb">⇤</span><span class="cit-tb">⇥</span>
+          </div>
+          <!-- 內容區 -->
+          <div id="cit-editor" contenteditable="true" style="min-height:180px;padding:20px 24px;font-size:14px;line-height:1.7;outline:none;background:#fff">
+            <p style="text-align:center;font-weight:700;font-size:16px">2026 年度 IFRS 重大性評估問卷</p>
+          </div>
+        </div>
+
+        <!-- 底部按鈕 -->
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+          <button class="btn btn-ghost btn-sm" onclick="citShowList()">返回總覽</button>
+          <button class="btn btn-ghost btn-sm" onclick="citPrevStep()">上一步</button>
+          <button class="btn btn-primary btn-sm" onclick="citNextStep()">下一步</button>
+        </div>
       </div>
+
     </div><!-- /pg-citation -->
 
   </div>
@@ -3643,6 +3717,32 @@ const SCM_DATA = {
 };
 let scmCurrentKey = null;
 let scmCurrentLevelIdx = 0;
+
+/* ═══ Citation (pg-citation) ═══ */
+let citStep = 1;
+function citShowList(){
+  document.getElementById('cit-list').style.display='';
+  document.getElementById('cit-edit').style.display='none';
+}
+function citShowEdit(type){
+  document.getElementById('cit-list').style.display='none';
+  document.getElementById('cit-edit').style.display='';
+  document.getElementById('cit-edit-type').textContent = type;
+  citGoStep(1);
+}
+function citGoStep(n){
+  citStep = n;
+  for(let i=1;i<=7;i++){
+    const el = document.getElementById('cit-s'+i);
+    if(el) el.classList.toggle('on', i===n);
+  }
+}
+function citPrevStep(){ if(citStep>1) citGoStep(citStep-1); }
+function citNextStep(){ if(citStep<7) citGoStep(citStep+1); else showToast('已完成所有步驟','#1A8F7F'); }
+function citSetLang(el){
+  el.closest('div').querySelectorAll('.cit-lang').forEach(l=>l.classList.remove('on'));
+  el.classList.add('on');
+}
 
 function scmShowList(){
   document.getElementById('scm-list').style.display='';
