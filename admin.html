@@ -183,6 +183,12 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .qual-lo{background:#fde8e8;color:#a03030}
 .score-hi{color:#1a7a50;font-weight:700}
 .score-lo{color:#a03030;font-weight:600}
+.sig-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.sig-badge.very{background:#fce4ec;color:#b71c1c}
+.sig-badge.yes{background:#fff3e0;color:#c84b00}
+.sig-badge.no{background:#f0f0f0;color:#888}
+tr.row-very-sig>td{background:#fff5f5!important}
+tr.row-sig>td{background:#fffbf2!important}
 .rank-num{display:inline-block;min-width:24px;text-align:center;font-size:12px;color:#888}
 .ana-icon{display:inline-flex;align-items:center;color:#aaa;cursor:pointer;transition:color .15s}
 .ana-icon:hover{color:#1A8F7F}
@@ -1898,11 +1904,33 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
           </div>
         </div>
 
-        <!-- TOP N -->
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
-          <span style="font-size:13px;color:#555;font-weight:500">*顯著 TOP 設定值</span>
-          <input type="number" value="5" style="width:72px;padding:5px 10px;border:1px solid #c8d8d4;border-radius:6px;font-size:14px;text-align:center;font-family:inherit;font-weight:700">
-          <button class="btn btn-ghost btn-sm" onclick="showToast('已儲存','#1A8F7F')">儲存</button>
+        <!-- 門檻設定 -->
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:12px 16px;background:#f8fcfb;border:1px solid #d0e8e2;border-radius:8px;flex-wrap:wrap">
+          <span style="font-size:12px;font-weight:700;color:#333;white-space:nowrap">門檻設定</span>
+          <div style="width:1px;height:20px;background:#ccc"></div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#555">
+            <span style="white-space:nowrap">量化顯著 ≥</span>
+            <input type="number" id="th-sig" value="9" min="1" max="25" style="width:52px;padding:4px 8px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;text-align:center;font-family:inherit;font-weight:700">
+            <span>分</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#555">
+            <span style="white-space:nowrap">非常顯著 ≥</span>
+            <input type="number" id="th-very" value="16" min="1" max="25" style="width:52px;padding:4px 8px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;text-align:center;font-family:inherit;font-weight:700">
+            <span>分</span>
+          </div>
+          <div style="width:1px;height:20px;background:#ccc"></div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#555">
+            <span style="white-space:nowrap">質化通過率 ≥</span>
+            <input type="number" id="th-qual-pct" value="75" min="1" max="100" style="width:52px;padding:4px 8px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;text-align:center;font-family:inherit;font-weight:700">
+            <span>%</span>
+          </div>
+          <div style="width:1px;height:20px;background:#ccc"></div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#555">
+            <span style="white-space:nowrap">TOP N</span>
+            <input type="number" id="th-topn" value="5" min="1" style="width:52px;padding:4px 8px;border:1px solid #c8d8d4;border-radius:6px;font-size:13px;text-align:center;font-family:inherit;font-weight:700">
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="ifiaApplyThreshold()">套用</button>
+          <button class="btn btn-ghost btn-sm" onclick="ifiaApplyThreshold();showToast('已儲存','#1A8F7F')">儲存</button>
         </div>
 
         <!-- Tab bar -->
@@ -1923,6 +1951,8 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
                   <th colspan="2" style="border-left:1px solid #c5e0d8">財務影響－營收</th>
                   <th colspan="2" style="border-left:1px solid #c5e0d8">財務影響－成本</th>
                   <th colspan="2" style="border-left:1px solid #c5e0d8">時間維度</th>
+                  <th rowspan="2" style="width:68px;border-left:1px solid #c5e0d8">綜合分數</th>
+                  <th rowspan="2" style="width:82px;border-left:1px solid #c5e0d8">顯著性</th>
                 </tr>
                 <tr>
                   <th style="width:60px;border-left:1px solid #c5e0d8">平均</th><th style="width:50px">名次</th>
@@ -1933,69 +1963,83 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
               </thead>
               <tbody>
                 <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">氣候策略與能源管理</td>
+                  <td colspan="12" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">氣候策略與能源管理</td>
                 </tr>
-                <tr>
+                <tr data-score="16.5">
                   <td class="tleft">碳定價制度強化，付費配額擴大導致成本上升</td>
                   <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">3.83</span></td><td><span class="rank-num">1</span></td>
                   <td style="border-left:1px solid #eef5f3">3.50</td><td><span class="rank-num">2</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.17</span></td><td><span class="rank-num">1</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">短33%中50%</td><td><span class="rank-num">3</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">16.5</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
-                <tr>
+                <tr data-score="12.1">
                   <td class="tleft">品牌客戶要求低碳製程，若未因應購買意願下降</td>
                   <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
                   <td style="border-left:1px solid #eef5f3">3.17</td><td><span class="rank-num">4</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">3.83</span></td><td><span class="rank-num">1</span></td>
                   <td style="border-left:1px solid #eef5f3">2.33</td><td><span class="rank-num">6</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中67%長33%</td><td><span class="rank-num">4</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">12.1</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
-                <tr>
+                <tr data-score="14.0">
                   <td class="tleft">擴展節能與碳標籤產品組合，強化品牌信任</td>
                   <td><span class="chip chip-green" style="margin:0;font-size:11px">✦ 機會</span></td>
                   <td style="border-left:1px solid #eef5f3">3.50</td><td><span class="rank-num">2</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">4.00</span></td><td><span class="rank-num">1</span></td>
                   <td style="border-left:1px solid #eef5f3">3.17</td><td><span class="rank-num">3</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中50%長50%</td><td><span class="rank-num">2</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">14.0</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
-                <tr>
+                <tr data-score="12.2">
                   <td class="tleft">再生能源成本波動影響電力採購預算</td>
                   <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
                   <td style="border-left:1px solid #eef5f3">3.33</td><td><span class="rank-num">3</span></td>
                   <td style="border-left:1px solid #eef5f3">2.67</td><td><span class="rank-num">4</span></td>
                   <td style="border-left:1px solid #eef5f3">3.67</td><td><span class="rank-num">2</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">短50%中50%</td><td><span class="rank-num">1</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">12.2</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
-                <tr>
+                <tr data-score="11.5">
                   <td class="tleft">根據 RE100 策略擴大再生能源，降低電費與排放</td>
                   <td><span class="chip chip-green" style="margin:0;font-size:11px">✦ 機會</span></td>
                   <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">5</span></td>
                   <td style="border-left:1px solid #eef5f3">3.33</td><td><span class="rank-num">3</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">3.83</span></td><td><span class="rank-num">2</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中67%長33%</td><td><span class="rank-num">4</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">11.5</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
                 <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">水資源管理</td>
+                  <td colspan="12" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">水資源管理</td>
                 </tr>
-                <tr>
+                <tr data-score="11.6">
                   <td class="tleft">水資源短缺影響廠區生產，增加資本支出</td>
                   <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-hi">3.67</span></td><td><span class="rank-num">2</span></td>
                   <td style="border-left:1px solid #eef5f3">2.50</td><td><span class="rank-num">5</span></td>
                   <td style="border-left:1px solid #eef5f3">3.17</td><td><span class="rank-num">3</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">中50%長33%</td><td><span class="rank-num">6</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">11.6</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
                 <tr style="background:#f8fcfb">
-                  <td colspan="10" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">生物多樣性</td>
+                  <td colspan="12" class="tleft" style="font-size:11px;font-weight:700;color:#1A8F7F;padding:6px 14px;letter-spacing:.04em">生物多樣性</td>
                 </tr>
-                <tr>
+                <tr data-score="7.5">
                   <td class="tleft">生態系服務減損導致原料取得成本上升</td>
                   <td><span class="chip chip-red" style="margin:0;font-size:11px">⚠ 風險</span></td>
                   <td style="border-left:1px solid #eef5f3">3.17</td><td><span class="rank-num">4</span></td>
                   <td style="border-left:1px solid #eef5f3"><span class="score-lo">2.17</span></td><td><span class="rank-num">6</span></td>
                   <td style="border-left:1px solid #eef5f3">3.00</td><td><span class="rank-num">5</span></td>
                   <td style="border-left:1px solid #eef5f3;font-size:11px;color:#555">長100%</td><td><span class="rank-num">5</span></td>
+                  <td style="border-left:1px solid #eef5f3;font-weight:700">7.5</td>
+                  <td style="border-left:1px solid #eef5f3" class="ifia-sig-cell"></td>
                 </tr>
               </tbody>
             </table>
@@ -2006,9 +2050,9 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
         <div id="ifia-tb-qual" style="display:none">
           <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap">
             <div style="display:flex;gap:6px;align-items:center;font-size:12px;color:#888">
-              <span class="qual-cell qual-hi" style="width:20px;height:20px;font-size:10px">是</span>≥75%
-              <span class="qual-cell qual-mid" style="width:20px;height:20px;font-size:10px;margin-left:8px">是</span>50–74%
-              <span class="qual-cell qual-lo" style="width:20px;height:20px;font-size:10px;margin-left:8px">是</span>&lt;50%
+              <span class="qual-cell qual-hi" style="width:20px;height:20px;font-size:10px">是</span><span id="qual-th-display">≥75%</span>
+              <span class="qual-cell qual-mid" style="width:20px;height:20px;font-size:10px;margin-left:8px">是</span><span id="qual-th-mid-display">50–74%</span>
+              <span class="qual-cell qual-lo" style="width:20px;height:20px;font-size:10px;margin-left:8px">是</span><span id="qual-th-lo-display">&lt;50%</span>
             </div>
           </div>
           <div class="tbl-wrap">
@@ -3091,6 +3135,44 @@ function ifiaShowList(){
 function ifiaShowResult(){
   document.getElementById('ifia-list').style.display='none';
   document.getElementById('ifia-result').style.display='';
+  ifiaApplyThreshold();
+}
+function ifiaApplyThreshold(){
+  const thSig  = parseFloat(document.getElementById('th-sig').value)      || 9;
+  const thVery = parseFloat(document.getElementById('th-very').value)     || 16;
+  const thQual = parseFloat(document.getElementById('th-qual-pct').value) || 75;
+  // 量化 highlight
+  document.querySelectorAll('#ifia-tb-overall tbody tr[data-score]').forEach(tr=>{
+    const score = parseFloat(tr.dataset.score);
+    tr.classList.remove('row-very-sig','row-sig');
+    const cell = tr.querySelector('.ifia-sig-cell');
+    if(!cell) return;
+    if(score >= thVery){
+      tr.classList.add('row-very-sig');
+      cell.innerHTML='<span class="sig-badge very">非常顯著</span>';
+    } else if(score >= thSig){
+      tr.classList.add('row-sig');
+      cell.innerHTML='<span class="sig-badge yes">顯著</span>';
+    } else {
+      cell.innerHTML='<span class="sig-badge no">未達顯著</span>';
+    }
+  });
+  // 質化 re-classify & legend update
+  const midLow = Math.max(1, Math.round(thQual * 0.67));
+  const dHi  = document.getElementById('qual-th-display');
+  const dMid = document.getElementById('qual-th-mid-display');
+  const dLo  = document.getElementById('qual-th-lo-display');
+  if(dHi)  dHi.textContent  = '≥'+thQual+'%';
+  if(dMid) dMid.textContent = midLow+'–'+(thQual-1)+'%';
+  if(dLo)  dLo.textContent  = '<'+midLow+'%';
+  document.querySelectorAll('#ifia-tb-qual tbody .qual-cell').forEach(cell=>{
+    const pct = parseInt(cell.textContent);
+    if(isNaN(pct)) return;
+    cell.classList.remove('qual-hi','qual-mid','qual-lo');
+    if(pct >= thQual)       cell.classList.add('qual-hi');
+    else if(pct >= midLow)  cell.classList.add('qual-mid');
+    else                    cell.classList.add('qual-lo');
+  });
 }
 function ifiaSetTab(el,tid){
   el.closest('.tab-bar').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
