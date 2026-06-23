@@ -1937,6 +1937,7 @@ tr.row-sig>td{background:#fffbf2!important}
         <div class="tab-bar">
           <div class="tab on" onclick="ifiaSetTab(this,'ifia-tb-overall')">公司整體</div>
           <div class="tab" onclick="ifiaSetTab(this,'ifia-tb-qual')">質化題通過率</div>
+          <div class="tab" onclick="ifiaSetTab(this,'ifia-tb-esg')">ESG 議題顯著對應</div>
         </div>
 
         <!-- ── Tab 1: 公司整體 ── -->
@@ -2165,6 +2166,33 @@ tr.row-sig>td{background:#fffbf2!important}
                   <td><div class="qual-cell qual-mid">50%</div></td>
                   <td style="font-weight:700;color:#a03030">2 / 7</td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── Tab 3: ESG 議題顯著對應 ── -->
+        <div id="ifia-tb-esg" style="display:none">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap">
+            <div style="display:flex;gap:10px;align-items:center;font-size:12px;color:#888">
+              <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:12px;height:12px;background:#f06292;border-radius:2px;display:inline-block"></span>非常顯著</span>
+              <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:12px;height:12px;background:#ffb74d;border-radius:2px;display:inline-block"></span>顯著</span>
+              <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:12px;height:12px;background:#e0e0e0;border-radius:2px;display:inline-block"></span>未達顯著</span>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th class="tleft" style="min-width:200px">ESG 議題</th>
+                  <th style="width:90px">非常顯著</th>
+                  <th style="width:70px">顯著</th>
+                  <th style="width:80px">合計顯著</th>
+                  <th style="width:80px">未達顯著</th>
+                  <th class="tleft" style="min-width:200px">R/O 分布</th>
+                </tr>
+              </thead>
+              <tbody id="ifia-esg-tbody">
               </tbody>
             </table>
           </div>
@@ -3128,6 +3156,15 @@ function qsbAddCustomQ(){showToast('已新增題目','#1A8F7F');}
 function qsEnterYear(year){qsyYear=String(year);const sel=document.getElementById('qsy-year-sel');if(sel){[...sel.options].forEach(o=>{o.selected=o.value==year||o.text==year;});}qsShowYear();}
 
 /* ═══ IFRS Analysis (pg-ifrs-analysis) ═══ */
+const IFIA_RO = [
+  {group:'氣候策略與能源管理', score:16.5},
+  {group:'氣候策略與能源管理', score:12.1},
+  {group:'氣候策略與能源管理', score:14.0},
+  {group:'氣候策略與能源管理', score:12.2},
+  {group:'氣候策略與能源管理', score:11.5},
+  {group:'水資源管理',         score:11.6},
+  {group:'生物多樣性',         score:7.5},
+];
 function ifiaShowList(){
   document.getElementById('ifia-list').style.display='';
   document.getElementById('ifia-result').style.display='none';
@@ -3173,11 +3210,52 @@ function ifiaApplyThreshold(){
     else if(pct >= midLow)  cell.classList.add('qual-mid');
     else                    cell.classList.add('qual-lo');
   });
+  // ESG 議題計數表
+  ifiaUpdateEsgTable(thSig, thVery);
+}
+function ifiaUpdateEsgTable(thSig, thVery){
+  const tbody = document.getElementById('ifia-esg-tbody');
+  if(!tbody) return;
+  // 依議題分組統計
+  const groups = {};
+  IFIA_RO.forEach(item=>{
+    if(!groups[item.group]) groups[item.group]={very:0,sig:0,none:0};
+    if(item.score >= thVery)      groups[item.group].very++;
+    else if(item.score >= thSig)  groups[item.group].sig++;
+    else                          groups[item.group].none++;
+  });
+  const maxTotal = Math.max(...Object.values(groups).map(g=>g.very+g.sig+g.none));
+  tbody.innerHTML='';
+  Object.entries(groups).forEach(([name,c])=>{
+    const total    = c.very+c.sig+c.none;
+    const sigTotal = c.very+c.sig;
+    const vPct = Math.round(c.very/total*100);
+    const sPct = Math.round(c.sig /total*100);
+    const nPct = 100-vPct-sPct;
+    // bar width relative to group with most items
+    const barW = Math.round(total/maxTotal*100);
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="tleft">'+name+'</td>'+
+      '<td>'+(c.very  ? '<span class="sig-badge very">'+c.very+'</span>'  : '<span style="color:#bbb">—</span>')+'</td>'+
+      '<td>'+(c.sig   ? '<span class="sig-badge yes">'+c.sig+'</span>'    : '<span style="color:#bbb">—</span>')+'</td>'+
+      '<td style="font-weight:700;color:'+(sigTotal?'#c84b00':'#bbb')+'">'+( sigTotal||'—')+'</td>'+
+      '<td>'+(c.none  ? '<span style="color:#999">'+c.none+'</span>'      : '<span style="color:#bbb">—</span>')+'</td>'+
+      '<td><div style="display:flex;align-items:center;gap:6px">'+
+        '<div style="width:'+barW+'%;max-width:200px;display:flex;height:14px;border-radius:4px;overflow:hidden;gap:1px">'+
+          (vPct ? '<div style="width:'+vPct+'%;background:#f06292" title="非常顯著 '+c.very+'"></div>' : '')+
+          (sPct ? '<div style="width:'+sPct+'%;background:#ffb74d" title="顯著 '+c.sig+'"></div>' : '')+
+          (nPct ? '<div style="width:'+nPct+'%;background:#e0e0e0" title="未達顯著 '+c.none+'"></div>' : '')+
+        '</div>'+
+        '<span style="font-size:11px;color:#888">'+total+' 項</span>'+
+      '</div></td>';
+    tbody.appendChild(tr);
+  });
 }
 function ifiaSetTab(el,tid){
   el.closest('.tab-bar').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  ['ifia-tb-overall','ifia-tb-qual'].forEach(id=>{
+  ['ifia-tb-overall','ifia-tb-qual','ifia-tb-esg'].forEach(id=>{
     const p=document.getElementById(id);
     if(p) p.style.display=(id===tid)?'':'none';
   });
