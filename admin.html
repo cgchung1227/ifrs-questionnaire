@@ -28,6 +28,8 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .lm-item{padding:9px 14px;cursor:pointer;color:#555;font-size:13px;font-weight:400;transition:all .15s;border-left:3px solid transparent;white-space:nowrap}
 .lm-item:hover{background:#f5faf8;color:#1A8F7F}
 .lm-item.on{background:#f0faf8;color:#1A8F7F;border-left-color:#1A8F7F;font-weight:600}
+.lm-item.lm-dim{color:#bbb}
+.lm-item.lm-dim:hover,.lm-item.lm-dim.on{color:#1A8F7F}
 .lm-item .new-tag{font-size:9px;background:#1A8F7F;color:#fff;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle}
 .lm-tag{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:5px;vertical-align:middle;display:inline-block;line-height:1.4;white-space:nowrap}
 .lm-tag-new{background:#e0f5ee;color:#1a7a50}
@@ -448,11 +450,11 @@ tr.row-sig>td{background:#fffbf2!important}
   <div class="left-menu" id="leftMenu">
     <div class="lm-section">
       <div class="lm-label">後台問卷管理</div>
-      <div class="lm-item" onclick="go('pg-aspect')">議題面向管理</div>
-      <div class="lm-item on" onclick="go('pg-esg')">ESG 議題清單</div>
-      <div class="lm-item" onclick="go('pg-financial')">財務衝擊項目管理</div>
-      <div class="lm-item" onclick="go('pg-scale-mgmt')">問卷填答尺度管理</div>
-      <div class="lm-item" onclick="go('pg-citation')">問卷引文建置管理</div>
+      <div class="lm-item lm-dim" onclick="go('pg-aspect')">議題面向管理</div>
+      <div class="lm-item lm-dim on" onclick="go('pg-esg')">ESG 議題清單</div>
+      <div class="lm-item lm-dim" onclick="go('pg-financial')">財務衝擊項目管理</div>
+      <div class="lm-item lm-dim" onclick="go('pg-scale-mgmt')">問卷填答尺度管理</div>
+      <div class="lm-item lm-dim" onclick="go('pg-citation')">問卷引文建置管理</div>
       <div class="lm-item" onclick="go('pg-theme')">永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-iro')">風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
@@ -468,7 +470,7 @@ tr.row-sig>td{background:#fffbf2!important}
     <div class="lm-section">
       <div class="lm-label">分析</div>
       <div class="lm-item" onclick="go('pg-ifrs-analysis')">IFRS 重大性評估分析 <span class="lm-tag lm-tag-mod">修改</span></div>
-      <div class="lm-item" onclick="go('pg-report')">報表產出與揭露</div>
+      <div class="lm-item lm-dim" onclick="go('pg-report')">報表產出與揭露</div>
     </div>
   </div>
 
