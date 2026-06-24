@@ -29,6 +29,10 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 .lm-item:hover{background:#f5faf8;color:#1A8F7F}
 .lm-item.on{background:#f0faf8;color:#1A8F7F;border-left-color:#1A8F7F;font-weight:600}
 .lm-item .new-tag{font-size:9px;background:#1A8F7F;color:#fff;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.lm-tag{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:5px;vertical-align:middle;display:inline-block;line-height:1.4;white-space:nowrap}
+.lm-tag-new{background:#e0f5ee;color:#1a7a50}
+.lm-tag-merge{background:#e3f0fb;color:#1a5f8a}
+.lm-tag-mod{background:#fff3e0;color:#b06000}
 .lm-code{font-size:9px;font-weight:700;background:#e8f0fb;color:#2E5FA8;padding:1px 5px;border-radius:3px;margin-right:5px;letter-spacing:.02em;vertical-align:middle;flex-shrink:0}
 .pg-code{display:inline-block;font-size:11px;font-weight:700;background:#e8f0fb;color:#2E5FA8;padding:2px 8px;border-radius:4px;margin-right:8px;letter-spacing:.04em;vertical-align:middle}
 .pg-code.c3{background:#e0f5ee;color:#1a7a50}
@@ -443,31 +447,28 @@ tr.row-sig>td{background:#fffbf2!important}
 
   <div class="left-menu" id="leftMenu">
     <div class="lm-section">
-      <div class="lm-label">整合現有模組</div>
+      <div class="lm-label">後台問卷管理</div>
       <div class="lm-item" onclick="go('pg-aspect')">議題面向管理</div>
       <div class="lm-item on" onclick="go('pg-esg')">ESG 議題清單</div>
       <div class="lm-item" onclick="go('pg-financial')">財務衝擊項目管理</div>
       <div class="lm-item" onclick="go('pg-scale-mgmt')">問卷填答尺度管理</div>
       <div class="lm-item" onclick="go('pg-citation')">問卷引文建置管理</div>
-    </div>
-    <div class="lm-divider"></div>
-    <div class="lm-section">
-      <div class="lm-label">新增模組（IFRS）</div>
-      <div class="lm-item" onclick="go('pg-theme')">永續主題管理</div>
-      <div class="lm-item" onclick="go('pg-iro')">風險／機會清單</div>
-      <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型</div>
-      <div class="lm-item" onclick="go('pg-vc')">價值鏈位置</div>
-      <div class="lm-item" onclick="go('pg-question')">IFRS 問卷題目設定</div>
+      <div class="lm-item" onclick="go('pg-theme')">永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-iro')">風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-vc')">價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-question')">IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
       <div class="lm-label">問卷建置與發放</div>
-      <div class="lm-item" onclick="go('pg-qsetup')">問卷建置入口</div>
+      <div class="lm-item" onclick="go('pg-qsetup')">問卷建置入口 <span class="lm-tag lm-tag-merge">合併</span></div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">分析（IFRS）</div>
-      <div class="lm-item" onclick="go('pg-ifrs-analysis')">IFRS 重大性評估分析</div>
+      <div class="lm-label">分析</div>
+      <div class="lm-item" onclick="go('pg-ifrs-analysis')">IFRS 重大性評估分析 <span class="lm-tag lm-tag-mod">修改</span></div>
+      <div class="lm-item" onclick="go('pg-report')">報表產出與揭露</div>
     </div>
   </div>
 
@@ -2211,6 +2212,19 @@ tr.row-sig>td{background:#fffbf2!important}
 
       </div><!-- /ifia-result -->
     </div><!-- /pg-ifrs-analysis -->
+
+    <!-- ═══════════════════════════════
+         報表產出與揭露
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-report">
+      <div class="ph">
+        <div><h1>報表產出與揭露</h1></div>
+      </div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">📄</div>
+        此功能開發中
+      </div>
+    </div><!-- /pg-report -->
 
     <!-- ═══════════════════════════════
          B08 問卷填答尺度管理
