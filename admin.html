@@ -461,7 +461,7 @@ tr.row-sig>td{background:#fffbf2!important}
       <div class="lm-item" onclick="go('pg-iro-setting')">C2 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-vc')">C2 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-sasb-theme')">C2 SASB 主題維護 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-sasb-industry')">C2 SASB 行業資料庫 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-sasb-industry')">C2 SASB 行業資料庫 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-question')">C2 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item on" onclick="go('pg-esg')">C2.5 ESG 議題清單 <span class="lm-tag lm-tag-mod">修改</span></div>
       <div class="lm-item lm-dim" onclick="go('pg-disclosure')">C2.6 永續揭露準則資料庫 <span style="font-size:11px;opacity:.6">✎</span></div>
@@ -2332,8 +2332,89 @@ tr.row-sig>td{background:#fffbf2!important}
       </div>
     </div>
     <div class="page" id="pg-sasb-industry">
-      <div class="ph"><div><h1>C2 SASB 行業資料庫</h1></div></div>
-      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🏭</div>此功能開發中</div>
+      <div class="ph">
+        <div><h1>C2 SASB 行業資料庫 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入產業別或代號"></div>
+        </div>
+      </div>
+      <p style="padding:0 24px 12px;font-size:12px;color:#888">SASB 行業資料庫為唯讀參考資料，供顧問查詢公司所屬產業的適用主題。如需新增主題請至「C2 SASB 主題維護」。</p>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:140px">SASB 面向 <span class="sort-icon">⇅</span></th>
+            <th style="width:180px">產業別 <span class="sort-icon">⇅</span></th>
+            <th style="width:100px">行業代號</th>
+            <th class="tleft">說明</th>
+            <th style="width:80px;text-align:center">主題數</th>
+            <th style="width:70px">功能</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td><select><option>請選擇</option><option>技術與通訊</option><option>金融</option><option>消費品</option><option>資源轉換</option><option>服務業</option><option>基礎設施</option></select></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
+              <td style="font-weight:600">軟體與IT服務</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SI</td>
+              <td class="tleft" style="font-size:12px;color:#555">企業軟體、雲端服務、資訊安全、IT顧問等</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">6 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
+              <td style="font-weight:600">半導體</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SC</td>
+              <td class="tleft" style="font-size:12px;color:#555">晶片設計、晶圓代工、封裝測試等半導體製造</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">8 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
+              <td style="font-weight:600">商業銀行</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-CB</td>
+              <td class="tleft" style="font-size:12px;color:#555">存款、放款、財富管理、企業金融等銀行業務</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">7 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
+              <td style="font-weight:600">保險</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-IN</td>
+              <td class="tleft" style="font-size:12px;color:#555">壽險、產險、再保險等保險業務</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">5 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
+              <td style="font-weight:600">房地產</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-RE</td>
+              <td class="tleft" style="font-size:12px;color:#555">商業辦公、住宅開發、物業管理、REIT</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">6 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
+              <td style="font-weight:600">廢棄物管理</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-WM</td>
+              <td class="tleft" style="font-size:12px;color:#555">廢棄物收集、處理、資源回收與環境服務</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">5 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td><span class="chip" style="background:#fdf2f8;color:#86198f;font-size:10px">服務業</span></td>
+              <td style="font-weight:600">專業服務</td>
+              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">SV-PS</td>
+              <td class="tleft" style="font-size:12px;color:#555">管理顧問、法律、會計、人力資源等專業服務</td>
+              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">4 個主題</span></td>
+              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="page" id="pg-disclosure">
       <div class="ph"><div><h1>C2.6 永續揭露準則資料庫</h1></div></div>
