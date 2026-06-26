@@ -449,31 +449,40 @@ tr.row-sig>td{background:#fffbf2!important}
 
   <div class="left-menu" id="leftMenu">
     <div class="lm-section">
-      <div class="lm-label">後台問卷管理</div>
-      <div class="lm-item lm-dim" onclick="go('pg-citation')">問卷引文建置管理</div>
-      <div class="lm-item lm-dim" onclick="go('pg-scale-mgmt')">問卷填答尺度管理</div>
-      <div class="lm-item lm-dim" onclick="go('pg-aspect')">議題面向管理</div>
-      <div class="lm-item lm-dim on" onclick="go('pg-esg')">ESG 議題清單</div>
-      <div class="lm-item lm-dim" onclick="go('pg-financial')">財務衝擊項目管理</div>
-      <div class="lm-item" onclick="go('pg-theme')">永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item" onclick="go('pg-iro')">風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item" onclick="go('pg-iro-setting')">R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item" onclick="go('pg-vc')">價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item" onclick="go('pg-question')">IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-label">C1</div>
+      <div class="lm-item lm-dim">模組權限管理 <span class="lm-tag lm-tag-mod">修改</span></div>
+      <div class="lm-item lm-dim">角色權限管理 <span class="lm-tag lm-tag-mod">修改</span></div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">問卷建置與發放</div>
-      <div class="lm-item lm-dim" onclick="go('pg-annual-plan')">年度專案期程規劃</div>
-      <div class="lm-item lm-dim" onclick="go('pg-annual-esg')">年度 ESG 議題清單</div>
-      <div class="lm-item lm-dim" onclick="go('pg-qoverview')">年度問卷總覽</div>
-      <div class="lm-item" onclick="go('pg-qsetup')">問卷建置入口 <span class="lm-tag lm-tag-mod">修改</span></div>
+      <div class="lm-label">C2</div>
+      <div class="lm-item" onclick="go('pg-theme')">C2 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-iro')">C2 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-iro-setting')">C2 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-vc')">C2 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-sasb-theme')">C2 SASB 主題維護 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-sasb-industry')">C2 SASB 行業資料庫 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-question')">C2 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item on" onclick="go('pg-esg')">C2.5 ESG 議題清單 <span class="lm-tag lm-tag-mod">修改</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-disclosure')">C2.6 永續揭露準則資料庫 <span style="font-size:11px;opacity:.6">✎</span></div>
     </div>
     <div class="lm-divider"></div>
     <div class="lm-section">
-      <div class="lm-label">分析</div>
-      <div class="lm-item" onclick="go('pg-ifrs-analysis')">IFRS 重大性評估分析 <span class="lm-tag lm-tag-mod">修改</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-report')">報表產出與揭露</div>
+      <div class="lm-label">C3</div>
+      <div class="lm-item lm-dim" onclick="go('pg-c3-question')">C3 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-c3-theme')">C3 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-c3-iro')">C3 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-c3-iro-type')">C3 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-c3-vc')">C3 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-qsetup')">C3 年度問卷建置 <span class="lm-tag lm-tag-mod">修改</span></div>
+      <div class="lm-item" onclick="go('pg-qoverview')">C3 年度問卷總覽 <span class="lm-tag lm-tag-mod">修改</span></div>
+    </div>
+    <div class="lm-divider"></div>
+    <div class="lm-section">
+      <div class="lm-label">C4</div>
+      <div class="lm-item" onclick="go('pg-ifrs-analysis')">C4 IFRS 問卷分析 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-c4-material')">C4 重大性議題分析 <span style="font-size:11px;opacity:.6">✎</span></div>
+      <div class="lm-item lm-dim" onclick="go('pg-report')">C4 報表產出與揭露 <span style="font-size:11px;opacity:.6">✎</span></div>
     </div>
   </div>
 
@@ -2241,6 +2250,54 @@ tr.row-sig>td{background:#fffbf2!important}
       <div class="ph"><div><h1>年度問卷總覽</h1></div></div>
       <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">📊</div>此功能開發中</div>
     </div><!-- /pg-qoverview -->
+
+    <!-- ═══════════════════════════════
+         C2 佔位頁
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-sasb-theme">
+      <div class="ph"><div><h1>C2 SASB 主題維護</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🏷️</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-sasb-industry">
+      <div class="ph"><div><h1>C2 SASB 行業資料庫</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🏭</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-disclosure">
+      <div class="ph"><div><h1>C2.6 永續揭露準則資料庫</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">📖</div>此功能開發中</div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         C3 佔位頁
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-c3-question">
+      <div class="ph"><div><h1>C3 IFRS 問卷題目設定</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">📝</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-c3-theme">
+      <div class="ph"><div><h1>C3 永續主題管理</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🌿</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-c3-iro">
+      <div class="ph"><div><h1>C3 風險／機會清單</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">⚖️</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-c3-iro-type">
+      <div class="ph"><div><h1>C3 R/O 類型</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🔖</div>此功能開發中</div>
+    </div>
+    <div class="page" id="pg-c3-vc">
+      <div class="ph"><div><h1>C3 價值鏈位置</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🔗</div>此功能開發中</div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         C4 佔位頁
+    ═══════════════════════════════ -->
+    <div class="page" id="pg-c4-material">
+      <div class="ph"><div><h1>C4 重大性議題分析</h1></div></div>
+      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">📊</div>此功能開發中</div>
+    </div>
 
     <!-- ═══════════════════════════════
          報表產出與揭露
