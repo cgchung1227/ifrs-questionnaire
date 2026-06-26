@@ -471,9 +471,9 @@ tr.row-sig>td{background:#fffbf2!important}
       <div class="lm-label">C3</div>
       <div class="lm-item" onclick="go('pg-c3-question')">C3 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-c3-theme')">C3 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-c3-iro')">C3 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-c3-iro-type')">C3 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-c3-vc')">C3 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-c3-iro')">C3 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-c3-iro-type')">C3 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-c3-vc')">C3 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-qsetup')">C3 年度問卷建置 <span class="lm-tag lm-tag-mod">修改</span></div>
       <div class="lm-item" onclick="go('pg-qoverview')">C3 年度問卷總覽 <span class="lm-tag lm-tag-mod">修改</span></div>
     </div>
@@ -2627,16 +2627,157 @@ tr.row-sig>td{background:#fffbf2!important}
       </div>
     </div>
     <div class="page" id="pg-c3-iro">
-      <div class="ph"><div><h1>C3 風險／機會清單</h1></div></div>
-      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">⚖️</div>此功能開發中</div>
+      <div class="ph">
+        <div><h1>C3 風險／機會清單 <span class="slash">/</span> <span class="sub">2026 年度</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal">儲存設定</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+          <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入"></div>
+        </div>
+      </div>
+      <div style="background:#fffbea;border:1px solid #f5d87a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7a5800">
+        ⚠️ 確認本年度納入評估的風險與機會項目。未勾選的項目將不出現在同仁問卷中。顧問可於「備注」欄填寫增刪說明，由公司窗口確認。
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:50px;text-align:center">納入</th>
+            <th style="width:120px">永續主題</th>
+            <th style="width:70px;text-align:center">類型</th>
+            <th class="tleft">描述</th>
+            <th style="width:90px;text-align:center">確認狀態</th>
+            <th style="width:120px">顧問備注</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td></td>
+              <td><select><option>請選擇</option><option>氣候策略</option><option>能源管理</option><option>水資源管理</option><option>人才發展</option></select></td>
+              <td><select><option>請選擇</option><option>風險</option><option>機會</option></select></td>
+              <td></td>
+              <td><select><option>請選擇</option><option>已確認</option><option>待確認</option></select></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip chip-teal" style="font-size:10px">氣候策略</span></td>
+              <td><span class="chip chip-red" style="font-size:10px">風險</span></td>
+              <td class="tleft" style="font-size:12px">碳定價制度強化，付費配額擴大導致營運成本上升</td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+              <td style="font-size:11px;color:#aaa">—</td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip chip-teal" style="font-size:10px">氣候策略</span></td>
+              <td><span class="chip chip-red" style="font-size:10px">風險</span></td>
+              <td class="tleft" style="font-size:12px">品牌客戶要求低碳製程，若未因應消費者購買意願下降</td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+              <td style="font-size:11px;color:#aaa">—</td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip chip-teal" style="font-size:10px">氣候策略</span></td>
+              <td><span class="chip chip-green" style="font-size:10px">機會</span></td>
+              <td class="tleft" style="font-size:12px">擴展高評等節能產品與碳標籤產品組合，強化品牌信任</td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+              <td style="font-size:11px;color:#aaa">—</td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip chip-teal" style="font-size:10px">能源管理</span></td>
+              <td><span class="chip chip-red" style="font-size:10px">風險</span></td>
+              <td class="tleft" style="font-size:12px">再生能源成本波動影響電力採購預算</td>
+              <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b06000;font-weight:600">待確認</span></td>
+              <td style="font-size:11px;color:#555">建議移除，客戶本年已簽長約</td>
+            </tr>
+            <tr style="opacity:.5">
+              <td style="text-align:center"><input type="checkbox" style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip" style="background:#f0f0f0;color:#aaa;font-size:10px">水資源管理</span></td>
+              <td><span class="chip chip-red" style="font-size:10px">風險</span></td>
+              <td class="tleft" style="font-size:12px;color:#aaa">水資源短缺影響廠區生產</td>
+              <td style="text-align:center"><span style="font-size:11px;color:#bbb">不適用</span></td>
+              <td style="font-size:11px;color:#bbb">本年度廠區已解除缺水警戒</td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td><span class="chip chip-teal" style="font-size:10px">人才發展</span></td>
+              <td><span class="chip chip-red" style="font-size:10px">風險</span></td>
+              <td class="tleft" style="font-size:12px">關鍵技術人才流失，影響 R&D 與客戶服務能力</td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+              <td style="font-size:11px;color:#aaa">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="page" id="pg-c3-iro-type">
-      <div class="ph"><div><h1>C3 R/O 類型</h1></div></div>
-      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🔖</div>此功能開發中</div>
+      <div class="ph">
+        <div><h1>C3 R/O 類型 <span class="slash">/</span> <span class="sub">2026 年度</span></h1></div>
+        <div class="ph-actions"><button class="btn btn-teal">儲存設定</button></div>
+      </div>
+      <div style="background:#fffbea;border:1px solid #f5d87a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7a5800">
+        ⚠️ 確認本年度問卷中使用的 R/O 類型與影響時間尺度設定（對應同仁填答 Part 2）。
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:280px">
+          <div style="font-size:12px;font-weight:700;color:#2d2d2d;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #eee">IRO 類型</div>
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:50px;text-align:center">啟用</th>
+              <th>類型名稱</th>
+              <th style="width:70px;text-align:center">適用</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">實體風險</td><td style="text-align:center"><span class="chip chip-red" style="font-size:10px">風險</span></td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">轉型風險</td><td style="text-align:center"><span class="chip chip-red" style="font-size:10px">風險</span></td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">市場機會</td><td style="text-align:center"><span class="chip chip-green" style="font-size:10px">機會</span></td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">資源效率</td><td style="text-align:center"><span class="chip chip-green" style="font-size:10px">機會</span></td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px;color:#bbb">聲譽風險</td><td style="text-align:center"><span class="chip chip-red" style="font-size:10px;opacity:.4">風險</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <div style="font-size:12px;font-weight:700;color:#2d2d2d;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #eee">影響時間尺度</div>
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:50px;text-align:center">啟用</th>
+              <th>尺度名稱</th>
+              <th style="width:90px">範圍說明</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">短期</td><td style="font-size:11px;color:#888">0–3 年</td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">中期</td><td style="font-size:11px;color:#888">3–10 年</td></tr>
+              <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:14px;height:14px"></td><td style="font-size:13px">長期</td><td style="font-size:11px;color:#888">10 年以上</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="page" id="pg-c3-vc">
-      <div class="ph"><div><h1>C3 價值鏈位置</h1></div></div>
-      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🔗</div>此功能開發中</div>
+      <div class="ph">
+        <div><h1>C3 價值鏈位置 <span class="slash">/</span> <span class="sub">2026 年度</span></h1></div>
+        <div class="ph-actions"><button class="btn btn-teal">儲存設定</button></div>
+      </div>
+      <div style="background:#fffbea;border:1px solid #f5d87a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7a5800">
+        ⚠️ 確認本年度問卷 Part 4「價值鏈位置」的可選選項。勾選的項目將出現在同仁填答的多選清單中。
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:50px;text-align:center">納入</th>
+            <th style="width:80px">代碼</th>
+            <th style="width:200px">位置名稱</th>
+            <th class="tleft">說明</th>
+            <th style="width:80px;text-align:center">排序</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td><td>VC01</td><td style="font-weight:600">上游供應商</td><td class="tleft" style="font-size:12px;color:#555">原料、零組件、設備等直接供應鏈夥伴</td><td style="text-align:center">1</td></tr>
+            <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td><td>VC02</td><td style="font-weight:600">自身營運</td><td class="tleft" style="font-size:12px;color:#555">公司自有廠區、辦公室等直接營運範疇</td><td style="text-align:center">2</td></tr>
+            <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td><td>VC03</td><td style="font-weight:600">下游客戶</td><td class="tleft" style="font-size:12px;color:#555">產品使用端、品牌客戶、分銷商</td><td style="text-align:center">3</td></tr>
+            <tr><td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td><td>VC04</td><td style="font-weight:600">投資活動</td><td class="tleft" style="font-size:12px;color:#555">被投資事業、合資公司、股權投資</td><td style="text-align:center">4</td></tr>
+            <tr style="opacity:.5"><td style="text-align:center"><input type="checkbox" style="accent-color:#1A8F7F;width:15px;height:15px"></td><td>VC05</td><td>融資活動</td><td class="tleft" style="font-size:12px;color:#aaa">貸款、債券發行、融資安排</td><td style="text-align:center;color:#aaa">5</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- ═══════════════════════════════
