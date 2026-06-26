@@ -470,7 +470,7 @@ tr.row-sig>td{background:#fffbf2!important}
     <div class="lm-section">
       <div class="lm-label">C3</div>
       <div class="lm-item" onclick="go('pg-c3-question')">C3 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item lm-dim" onclick="go('pg-c3-theme')">C3 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
+      <div class="lm-item" onclick="go('pg-c3-theme')">C3 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item lm-dim" onclick="go('pg-c3-iro')">C3 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item lm-dim" onclick="go('pg-c3-iro-type')">C3 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item lm-dim" onclick="go('pg-c3-vc')">C3 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
@@ -2539,8 +2539,92 @@ tr.row-sig>td{background:#fffbf2!important}
       </div>
     </div>
     <div class="page" id="pg-c3-theme">
-      <div class="ph"><div><h1>C3 永續主題管理</h1></div></div>
-      <div style="padding:40px 24px;color:#aaa;font-size:14px;text-align:center"><div style="font-size:36px;margin-bottom:12px">🌿</div>此功能開發中</div>
+      <div class="ph">
+        <div><h1>C3 永續主題管理 <span class="slash">/</span> <span class="sub">2026 年度</span></h1></div>
+        <div class="ph-actions">
+          <button class="btn btn-teal">儲存設定</button>
+          <button class="btn btn-ghost">↺ 重置篩選</button>
+        </div>
+      </div>
+      <div style="background:#fffbea;border:1px solid #f5d87a;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7a5800">
+        ⚠️ 此頁面為本年度 IFRS 評估範圍確認。勾選的主題將出現在同仁填答問卷中，並可於「部門對應」欄指定負責部門（供 C3 問卷發放設定使用）。
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:50px;text-align:center">納入</th>
+            <th style="width:80px">代碼</th>
+            <th style="width:160px">永續主題名稱</th>
+            <th class="tleft">說明</th>
+            <th style="width:180px">所屬 ESG 議題</th>
+            <th style="width:80px;text-align:center">R/O 數</th>
+            <th style="width:180px">負責部門</th>
+            <th style="width:80px;text-align:center">確認狀態</th>
+          </tr></thead>
+          <tbody>
+            <tr class="frow">
+              <td></td>
+              <td></td>
+              <td><select><option>請選擇</option></select></td>
+              <td></td>
+              <td><select><option>請選擇</option><option>環境面</option><option>社會面</option><option>治理/經濟面</option></select></td>
+              <td></td>
+              <td><select><option>請選擇</option></select></td>
+              <td><select><option>請選擇</option><option>已確認</option><option>待確認</option></select></td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td>T001</td>
+              <td style="font-weight:600">氣候策略</td>
+              <td class="tleft" style="font-size:12px;color:#555">與氣候變遷相關的策略規劃、目標設定與績效管理</td>
+              <td><span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span></td>
+              <td style="text-align:center">5</td>
+              <td><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">永續發展部</span><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">董事會秘書</span></td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td>T002</td>
+              <td style="font-weight:600">能源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">再生能源使用、能源效率提升、電力來源管理</td>
+              <td><span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span></td>
+              <td style="text-align:center">4</td>
+              <td><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">廠務處</span></td>
+              <td style="text-align:center"><span class="badge badge-on" style="font-size:11px">已確認</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td>T003</td>
+              <td style="font-weight:600">水資源管理</td>
+              <td class="tleft" style="font-size:12px;color:#555">用水效率、廢水管理、水資源風險評估</td>
+              <td><span class="chip chip-green" style="font-size:10px">水資源管理</span></td>
+              <td style="text-align:center">3</td>
+              <td><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">廠務處</span><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">環安衛部</span></td>
+              <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b06000;font-weight:600">待確認</span></td>
+            </tr>
+            <tr style="opacity:.5">
+              <td style="text-align:center"><input type="checkbox" style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td>T004</td>
+              <td>生物多樣性</td>
+              <td class="tleft" style="font-size:12px;color:#aaa">生態系服務、自然資本、物種保育</td>
+              <td><span class="chip" style="background:#f0f0f0;color:#aaa;font-size:10px">生物多樣性</span></td>
+              <td style="text-align:center;color:#aaa">2</td>
+              <td style="color:#bbb;font-size:12px">— 未納入</td>
+              <td style="text-align:center"><span style="font-size:11px;color:#bbb">不適用</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:center"><input type="checkbox" checked style="accent-color:#1A8F7F;width:15px;height:15px"></td>
+              <td>T005</td>
+              <td style="font-weight:600">人才發展</td>
+              <td class="tleft" style="font-size:12px;color:#555">人才招募、培育、留任與組織文化</td>
+              <td><span class="chip chip-green" style="font-size:10px">人才吸引與留任</span></td>
+              <td style="text-align:center">3</td>
+              <td><span class="chip" style="background:#e8f4fd;color:#1a5f8a;font-size:10px">人力資源部</span></td>
+              <td style="text-align:center"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff8e6;color:#b06000;font-weight:600">待確認</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="page" id="pg-c3-iro">
       <div class="ph"><div><h1>C3 風險／機會清單</h1></div></div>
