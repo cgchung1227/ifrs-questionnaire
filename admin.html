@@ -468,6 +468,7 @@ tr.row-sig>td{background:#fffbf2!important}
     <div class="lm-divider"></div>
     <div class="lm-section">
       <div class="lm-label">C3</div>
+      <div class="lm-item" onclick="go('pg-dept')">C3 部門管理 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-c3-question')">C3 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-c3-theme')">C3 永續主題管理 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-c3-iro')">C3 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
@@ -2532,6 +2533,31 @@ tr.row-sig>td{background:#fffbf2!important}
       </div>
       </div><!-- /c3q-list -->
     </div>
+    <div class="page" id="pg-dept">
+      <div class="ph">
+        <div>
+          <h1><span class="pg-code c3">C3</span>部門管理</h1>
+          <div style="font-size:12px;color:#888;margin-top:4px">維護公司部門清單與問卷窗口資訊</div>
+        </div>
+        <div class="ph-actions">
+          <button class="btn btn-teal btn-sm" onclick="deptOpenAdd()">＋ 新增部門</button>
+          <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入" oninput="deptSearch(this.value)"></div>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:80px">部門代碼</th>
+            <th class="tleft">部門名稱</th>
+            <th style="width:110px">窗口姓名</th>
+            <th style="width:200px">窗口 Email</th>
+            <th style="width:80px;text-align:center">狀態</th>
+            <th style="width:80px;text-align:center">功能</th>
+          </tr></thead>
+          <tbody id="dept-tbody"></tbody>
+        </table>
+      </div>
+    </div>
     <div class="page" id="pg-c3-theme">
       <div id="c3th-list">
       <div class="ph" style="flex-wrap:wrap;row-gap:10px">
@@ -2589,7 +2615,11 @@ tr.row-sig>td{background:#fffbf2!important}
         <div class="qs-sec">
           <div class="qs-sec-hd">C3 設定欄位</div>
           <div class="grid2">
-            <div class="fg"><label class="fl">負責部門</label><input class="finp" id="c3th-f-dept" placeholder="請輸入負責部門（如：永續發展部）"></div>
+            <div class="fg"><label class="fl">負責部門</label>
+              <select class="fsel" id="c3th-f-dept">
+                <option value="">請選擇</option>
+              </select>
+            </div>
             <div class="fg"><label class="fl">確認狀態</label>
               <select class="fsel" id="c3th-f-confirmed">
                 <option value="已確認">已確認</option>
@@ -3146,6 +3176,8 @@ function go(pid){
   });
   document.getElementById('mainArea').scrollTop=0;
   if(pid==='pg-iro') iroSwitchCat('S1');
+  if(pid==='pg-dept') deptRender();
+  if(pid==='pg-c3-theme') c3thPopulateDeptSelect();
   if(pid==='pg-qsetup') qsShowList();
   if(pid==='pg-qoverview') qsShowOverview();
   if(pid==='pg-sasb-theme'){ sasbThRender(); sasbThShowList(); }
@@ -4038,10 +4070,15 @@ function ifiaSetDept(el){
 /* ═══ Distribute (pg-distribute) ═══ */
 const DIST_THEMES=['氣候策略','能源管理','水資源管理','生物多樣性','廢棄物管理','人才發展','職場安全','永續供應鏈','公司治理','資訊安全','財務績效'];
 const DIST_CODES=['T01','T02','T03','T04','T05','T06','T07','T08','T09','T10','T11'];
-let distDepts=[
-  {code:'D001',name:'永續發展部'},{code:'D002',name:'環境管理部'},{code:'D003',name:'人力資源部'},
-  {code:'D004',name:'財務會計部'},{code:'D005',name:'業務行銷部'},{code:'D006',name:'資訊技術部'},
+const DEPT_DATA=[
+  {code:'D001',name:'永續發展部',contact:'王小明',email:'wang@company.com',status:'啟用'},
+  {code:'D002',name:'環境管理部',contact:'李大華',email:'li@company.com',status:'啟用'},
+  {code:'D003',name:'人力資源部',contact:'陳美玲',email:'chen@company.com',status:'啟用'},
+  {code:'D004',name:'財務會計部',contact:'張志豪',email:'zhang@company.com',status:'啟用'},
+  {code:'D005',name:'業務行銷部',contact:'林雅婷',email:'lin@company.com',status:'啟用'},
+  {code:'D006',name:'資訊技術部',contact:'黃建國',email:'huang@company.com',status:'啟用'},
 ];
+let distDepts=DEPT_DATA.filter(d=>d.status==='啟用').map(d=>({code:d.code,name:d.name}));
 let distMappings={'D001':[0,1,2,3,4,8],'D002':[2,3,4],'D003':[5,6],'D004':[9,10],'D005':[7,9],'D006':[9]};
 let distLinksGenerated=false;
 function distBuildMatrix(){
@@ -4627,6 +4664,81 @@ function c3thSave(){
   c3thRender(); c3thShowList(); showToast('已儲存','#1A8F7F');
 }
 
+/* ═══ 部門管理 ═══ */
+let deptEdit=-1;
+function deptRender(filter){
+  const tbody=document.getElementById('dept-tbody');
+  if(!tbody) return;
+  const q=(filter||'').trim().toLowerCase();
+  const rows=DEPT_DATA.filter(d=>!q||d.name.toLowerCase().includes(q)||d.code.toLowerCase().includes(q)||d.contact.toLowerCase().includes(q));
+  tbody.innerHTML=rows.map((d)=>{
+    const idx=DEPT_DATA.indexOf(d);
+    const statusBadge=d.status==='啟用'
+      ?'<span style="display:inline-block;padding:2px 10px;background:#e0f5ee;color:#1a7a50;border:1px solid #9ECFC7;border-radius:4px;font-size:11px;font-weight:600">啟用</span>'
+      :'<span style="display:inline-block;padding:2px 10px;background:#f5f5f5;color:#888;border:1px solid #ddd;border-radius:4px;font-size:11px;font-weight:600">停用</span>';
+    return `<tr>
+      <td style="font-family:monospace;color:#2E5FA8">${d.code}</td>
+      <td>${d.name}</td>
+      <td>${d.contact}</td>
+      <td style="color:#555">${d.email}</td>
+      <td style="text-align:center">${statusBadge}</td>
+      <td style="text-align:center">
+        <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:3px 10px" onclick="deptOpenEdit(${idx})">編輯</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+function deptSearch(q){ deptRender(q); }
+function deptOpenAdd(){
+  deptEdit=-1;
+  document.getElementById('dept-modal-title').textContent='新增部門';
+  document.getElementById('dept-f-code').value='';
+  document.getElementById('dept-f-name').value='';
+  document.getElementById('dept-f-contact').value='';
+  document.getElementById('dept-f-email').value='';
+  document.getElementById('dept-f-status').value='啟用';
+  document.getElementById('dept-f-code').readOnly=false;
+  document.getElementById('modal-dept').classList.add('show');
+}
+function deptOpenEdit(idx){
+  deptEdit=idx;
+  const d=DEPT_DATA[idx];
+  document.getElementById('dept-modal-title').textContent='編輯部門';
+  document.getElementById('dept-f-code').value=d.code;
+  document.getElementById('dept-f-name').value=d.name;
+  document.getElementById('dept-f-contact').value=d.contact;
+  document.getElementById('dept-f-email').value=d.email;
+  document.getElementById('dept-f-status').value=d.status;
+  document.getElementById('dept-f-code').readOnly=true;
+  document.getElementById('modal-dept').classList.add('show');
+}
+function deptSave(){
+  const code=document.getElementById('dept-f-code').value.trim();
+  const name=document.getElementById('dept-f-name').value.trim();
+  const contact=document.getElementById('dept-f-contact').value.trim();
+  const email=document.getElementById('dept-f-email').value.trim();
+  const status=document.getElementById('dept-f-status').value;
+  if(!code||!name){showToast('請填寫部門代碼與名稱','#c0392b');return;}
+  if(deptEdit===-1){
+    if(DEPT_DATA.find(d=>d.code===code)){showToast('部門代碼已存在','#c0392b');return;}
+    DEPT_DATA.push({code,name,contact,email,status});
+  } else {
+    Object.assign(DEPT_DATA[deptEdit],{name,contact,email,status});
+  }
+  distDepts=DEPT_DATA.filter(d=>d.status==='啟用').map(d=>({code:d.code,name:d.name}));
+  deptRender();
+  c3thPopulateDeptSelect();
+  document.getElementById('modal-dept').classList.remove('show');
+  showToast(deptEdit===-1?'已新增部門：'+name:'已儲存部門：'+name,'#1A8F7F');
+}
+function c3thPopulateDeptSelect(){
+  const sel=document.getElementById('c3th-f-dept');
+  if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">請選擇</option>'+DEPT_DATA.filter(d=>d.status==='啟用').map(d=>`<option value="${d.name}">${d.name}</option>`).join('');
+  if(cur) sel.value=cur;
+}
+
 /* ═══ C3 風險／機會清單 ═══ */
 const C3RO_DATA=[
   {code:'R001',theme:'氣候策略',type:'風險',desc:'碳定價制度強化，付費配額擴大導致營運成本上升',included:true, confirmed:'已確認',note:''},
@@ -4961,6 +5073,26 @@ function scmSelectLevel(idx){
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="document.getElementById('mon-modal-deadline').classList.remove('show')">取消</button>
       <button class="btn btn-teal" onclick="document.getElementById('mon-modal-deadline').classList.remove('show');showToast('截止日設定已更新','#1A8F7F')">儲存設定</button>
+    </div>
+  </div>
+</div>
+<div class="modal-bg" id="modal-dept">
+  <div class="modal-box" style="max-width:480px">
+    <div class="modal-head"><h3 id="dept-modal-title">新增部門</h3><span class="modal-close" onclick="document.getElementById('modal-dept').classList.remove('show')">✕</span></div>
+    <div class="modal-body">
+      <div class="grid2">
+        <div class="fg"><label class="fl">部門代碼 <span class="req">*</span></label><input class="finp" id="dept-f-code" placeholder="例：D007"></div>
+        <div class="fg"><label class="fl">狀態</label>
+          <select class="fsel" id="dept-f-status"><option value="啟用">啟用</option><option value="停用">停用</option></select>
+        </div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">部門名稱 <span class="req">*</span></label><input class="finp" id="dept-f-name" placeholder="例：永續發展部"></div>
+        <div class="fg"><label class="fl">窗口姓名</label><input class="finp" id="dept-f-contact" placeholder="例：王小明"></div>
+        <div class="fg"><label class="fl">窗口 Email</label><input class="finp" id="dept-f-email" placeholder="例：wang@company.com"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="document.getElementById('modal-dept').classList.remove('show')">取消</button>
+      <button class="btn btn-teal" onclick="deptSave()">儲存</button>
     </div>
   </div>
 </div>
