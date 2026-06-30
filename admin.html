@@ -460,7 +460,6 @@ tr.row-sig>td{background:#fffbf2!important}
       <div class="lm-item" onclick="go('pg-iro')">C2 風險／機會清單 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-iro-setting')">C2 R/O 類型 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-vc')">C2 價值鏈位置 <span class="lm-tag lm-tag-new">新增</span></div>
-      <div class="lm-item" onclick="go('pg-sasb-theme')">C2 SASB 主題維護 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-sasb-industry')">C2 SASB 行業資料庫 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item" onclick="go('pg-question')">C2 IFRS 問卷題目設定 <span class="lm-tag lm-tag-new">新增</span></div>
       <div class="lm-item on" onclick="go('pg-esg')">C2.5 ESG 議題清單 <span class="lm-tag lm-tag-mod">修改</span></div>
@@ -2340,89 +2339,145 @@ tr.row-sig>td{background:#fffbf2!important}
       </div>
     </div>
     <div class="page" id="pg-sasb-industry">
-      <div class="ph">
-        <div><h1>C2 SASB 行業資料庫 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
-        <div class="ph-actions">
-          <button class="btn btn-ghost">↺ 重置篩選</button>
-          <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入產業別或代號"></div>
+      <div id="sasbind-list">
+        <div class="ph">
+          <div><h1>C2 SASB 行業資料庫 <span class="slash">/</span> <span class="sub">總覽</span></h1></div>
+          <div class="ph-actions">
+            <button class="btn btn-ghost">↺ 重置篩選</button>
+            <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入產業別或代號"></div>
+          </div>
         </div>
-      </div>
-      <p style="padding:0 24px 12px;font-size:12px;color:#888">SASB 行業資料庫為唯讀參考資料，供顧問查詢公司所屬產業的適用主題。如需新增主題請至「C2 SASB 主題維護」。</p>
-      <div class="tbl-wrap">
-        <table class="tbl">
-          <thead><tr>
-            <th style="width:140px">SASB 面向 <span class="sort-icon">⇅</span></th>
-            <th style="width:180px">產業別 <span class="sort-icon">⇅</span></th>
-            <th style="width:100px">行業代號</th>
-            <th class="tleft">說明</th>
-            <th style="width:80px;text-align:center">主題數</th>
-            <th style="width:70px">功能</th>
-          </tr></thead>
-          <tbody>
-            <tr class="frow">
-              <td><select><option>請選擇</option><option>技術與通訊</option><option>金融</option><option>消費品</option><option>資源轉換</option><option>服務業</option><option>基礎設施</option></select></td>
-              <td><select><option>請選擇</option></select></td>
-              <td></td><td></td><td></td><td></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
-              <td style="font-weight:600">軟體與IT服務</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SI</td>
-              <td class="tleft" style="font-size:12px;color:#555">企業軟體、雲端服務、資訊安全、IT顧問等</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">6 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
-              <td style="font-weight:600">半導體</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SC</td>
-              <td class="tleft" style="font-size:12px;color:#555">晶片設計、晶圓代工、封裝測試等半導體製造</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">8 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
-              <td style="font-weight:600">商業銀行</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-CB</td>
-              <td class="tleft" style="font-size:12px;color:#555">存款、放款、財富管理、企業金融等銀行業務</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">7 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
-              <td style="font-weight:600">保險</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-IN</td>
-              <td class="tleft" style="font-size:12px;color:#555">壽險、產險、再保險等保險業務</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">5 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
-              <td style="font-weight:600">房地產</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-RE</td>
-              <td class="tleft" style="font-size:12px;color:#555">商業辦公、住宅開發、物業管理、REIT</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">6 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
-              <td style="font-weight:600">廢棄物管理</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-WM</td>
-              <td class="tleft" style="font-size:12px;color:#555">廢棄物收集、處理、資源回收與環境服務</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">5 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-            <tr>
-              <td><span class="chip" style="background:#fdf2f8;color:#86198f;font-size:10px">服務業</span></td>
-              <td style="font-weight:600">專業服務</td>
-              <td style="font-family:monospace;font-size:12px;color:#2E5FA8">SV-PS</td>
-              <td class="tleft" style="font-size:12px;color:#555">管理顧問、法律、會計、人力資源等專業服務</td>
-              <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="go('pg-sasb-theme')">4 個主題</span></td>
-              <td><div class="func-icons"><span class="fi" title="查看主題" onclick="go('pg-sasb-theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:140px">SASB 面向 <span class="sort-icon">⇅</span></th>
+              <th style="width:180px">產業別 <span class="sort-icon">⇅</span></th>
+              <th style="width:100px">行業代號</th>
+              <th class="tleft">說明</th>
+              <th style="width:80px;text-align:center">主題數</th>
+              <th style="width:70px">功能</th>
+            </tr></thead>
+            <tbody>
+              <tr class="frow">
+                <td><select><option>請選擇</option><option>技術與通訊</option><option>金融</option><option>消費品</option><option>資源轉換</option><option>服務業</option><option>基礎設施</option></select></td>
+                <td><select><option>請選擇</option></select></td>
+                <td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
+                <td style="font-weight:600">軟體與IT服務</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SI</td>
+                <td class="tleft" style="font-size:12px;color:#555">企業軟體、雲端服務、資訊安全、IT顧問等</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('軟體與IT服務')">6 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('軟體與IT服務')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#eef2ff;color:#3730a3;font-size:10px">技術與通訊</span></td>
+                <td style="font-weight:600">半導體</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">TC-SC</td>
+                <td class="tleft" style="font-size:12px;color:#555">晶片設計、晶圓代工、封裝測試等半導體製造</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('半導體')">8 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('半導體')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
+                <td style="font-weight:600">商業銀行</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-CB</td>
+                <td class="tleft" style="font-size:12px;color:#555">存款、放款、財富管理、企業金融等銀行業務</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('商業銀行')">7 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('商業銀行')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#fef3c7;color:#92400e;font-size:10px">金融</span></td>
+                <td style="font-weight:600">保險</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">FN-IN</td>
+                <td class="tleft" style="font-size:12px;color:#555">壽險、產險、再保險等保險業務</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('保險')">5 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('保險')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
+                <td style="font-weight:600">房地產</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-RE</td>
+                <td class="tleft" style="font-size:12px;color:#555">商業辦公、住宅開發、物業管理、REIT</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('房地產')">6 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('房地產')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#f0fdf4;color:#166534;font-size:10px">基礎設施</span></td>
+                <td style="font-weight:600">廢棄物管理</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">IF-WM</td>
+                <td class="tleft" style="font-size:12px;color:#555">廢棄物收集、處理、資源回收與環境服務</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('廢棄物管理')">5 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('廢棄物管理')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+              <tr>
+                <td><span class="chip" style="background:#fdf2f8;color:#86198f;font-size:10px">服務業</span></td>
+                <td style="font-weight:600">專業服務</td>
+                <td style="font-family:monospace;font-size:12px;color:#2E5FA8">SV-PS</td>
+                <td class="tleft" style="font-size:12px;color:#555">管理顧問、法律、會計、人力資源等專業服務</td>
+                <td style="text-align:center"><span style="color:#1A8F7F;font-weight:600;cursor:pointer;text-decoration:underline" onclick="sasbIndShowThemes('專業服務')">4 個主題</span></td>
+                <td><div class="func-icons"><span class="fi" title="管理主題" onclick="sasbIndShowThemes('專業服務')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /#sasbind-list -->
+      <div id="sasbind-themes" style="display:none">
+        <div class="ph">
+          <div><h1>C2 SASB 行業資料庫 <span class="slash">/</span> <span class="sub" id="sasbind-ind-name"></span></h1></div>
+          <div class="ph-actions">
+            <button class="btn btn-ghost btn-sm" onclick="sasbIndShowList()">← 返回列表</button>
+            <button class="btn btn-teal btn-sm" onclick="sasbIndShowThForm(null)">＋ 新增主題</button>
+          </div>
+        </div>
+        <div id="sasbind-th-list">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:80px">狀態</th>
+                <th style="width:180px;font-family:monospace">SASB 代號</th>
+                <th style="width:180px">主題名稱</th>
+                <th class="tleft">說明</th>
+                <th style="width:160px">ESG 議題</th>
+                <th style="width:70px">功能</th>
+              </tr></thead>
+              <tbody id="sasbind-th-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="sasbind-th-form" style="display:none">
+          <div class="qs-sec" style="margin:16px 24px">
+            <div class="qs-sec-hd" id="sasbind-th-crumb">新增主題</div>
+            <div class="grid2">
+              <div class="fg"><label class="fl">狀態</label>
+                <select class="fsel" id="sasbind-f-status"><option>啟用</option><option>停用</option></select>
+              </div>
+              <div class="fg"><label class="fl">SASB 代號 <span class="req">*</span></label>
+                <input class="finp" id="sasbind-f-code" placeholder="例：IF-WM-110a.1">
+              </div>
+              <div class="fg" style="grid-column:1/-1"><label class="fl">主題名稱 <span class="req">*</span></label>
+                <input class="finp" id="sasbind-f-name" placeholder="請輸入主題名稱">
+              </div>
+              <div class="fg" style="grid-column:1/-1"><label class="fl">說明</label>
+                <textarea class="finp" id="sasbind-f-desc" rows="2" style="resize:vertical" placeholder="請輸入主題說明"></textarea>
+              </div>
+              <div class="fg" style="grid-column:1/-1"><label class="fl">ESG 議題</label>
+                <select class="fsel" id="sasbind-f-esg">
+                  <option value="">請選擇</option>
+                  <option>氣候策略與能源管理</option><option>水資源管理</option><option>生物多樣性</option>
+                  <option>空汙與廢棄物</option><option>人才吸引與留任</option><option>職場安全與健康</option>
+                  <option>資訊安全與隱私</option><option>公司治理與誠信經營</option>
+                </select>
+              </div>
+            </div>
+            <div class="qsf-bar">
+              <button class="btn btn-ghost" onclick="sasbIndThFormCancel()">取消</button>
+              <button class="btn btn-teal" onclick="sasbIndThSave()">儲存</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /#sasbind-themes -->
     </div>
     <div class="page" id="pg-disclosure">
       <div class="ph"><div><h1>C2.6 永續揭露準則資料庫</h1></div></div>
@@ -2542,6 +2597,22 @@ tr.row-sig>td{background:#fffbf2!important}
                 <option value="待確認">待確認</option>
                 <option value="不適用">不適用</option>
               </select>
+            </div>
+            <div class="fg" style="grid-column:1/-1"><label class="fl">SASB 主題</label>
+              <select class="fsel" id="c3th-f-sasb-theme" onchange="c3thLoadSasbCodes()">
+                <option value="">請選擇</option>
+                <option>廢棄物管理</option>
+                <option>房地產</option>
+                <option>軟體與IT服務</option>
+                <option>半導體</option>
+                <option>商業銀行</option>
+                <option>保險</option>
+                <option>專業服務</option>
+              </select>
+            </div>
+            <div class="fg" style="grid-column:1/-1" id="c3th-sasb-codes-wrap">
+              <label class="fl">SASB 編號 <span style="font-size:11px;color:#888;font-weight:400">（可多選）</span></label>
+              <div id="c3th-sasb-codes" style="display:flex;flex-wrap:wrap;gap:10px;padding:10px 12px;border:1px solid #d0e4de;border-radius:6px;background:#fff;min-height:42px"></div>
             </div>
           </div>
         </div>
@@ -4308,6 +4379,101 @@ function sasbThDelete(idx){
   showToast('已刪除','#c0392b');
 }
 
+/* ═══ c3thLoadSasbCodes ═══ */
+function c3thLoadSasbCodes(savedCodes){
+  const ind=document.getElementById('c3th-f-sasb-theme').value;
+  const wrap=document.getElementById('c3th-sasb-codes-wrap');
+  const box=document.getElementById('c3th-sasb-codes');
+  if(!ind){wrap.style.display='none';box.innerHTML='';return;}
+  wrap.style.display='';
+  const saved=savedCodes!==undefined?savedCodes:(C3TH_DATA[c3thEdit]?.sasbCodes||[]);
+  const codes=SASBTH_DATA.filter(t=>t.industry===ind);
+  if(!codes.length){box.innerHTML='<span style="color:#aaa;font-size:12px">此產業尚無 SASB 主題資料</span>';return;}
+  box.innerHTML=codes.map(t=>`<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;padding:4px 8px;border:1px solid #d0e4de;border-radius:4px;background:#f9fcfb">
+    <input type="checkbox" value="${t.code}" ${saved.includes(t.code)?'checked':''} style="accent-color:#1A8F7F">
+    <span style="font-family:monospace;color:#2E5FA8;font-size:11px">${t.code}</span>
+    <span style="color:#333">${t.name}</span>
+  </label>`).join('');
+}
+
+/* ═══ SASB 行業資料庫 主題管理 ═══ */
+let sasbIndCurInd='';
+let sasbIndThEdit=null;
+function sasbIndShowList(){
+  document.getElementById('sasbind-list').style.display='';
+  document.getElementById('sasbind-themes').style.display='none';
+}
+function sasbIndShowThemes(industry){
+  sasbIndCurInd=industry;
+  document.getElementById('sasbind-ind-name').textContent=industry+' 主題';
+  document.getElementById('sasbind-list').style.display='none';
+  document.getElementById('sasbind-themes').style.display='';
+  document.getElementById('sasbind-th-form').style.display='none';
+  document.getElementById('sasbind-th-list').style.display='';
+  sasbIndRenderThemes();
+}
+function sasbIndRenderThemes(){
+  const tb=document.getElementById('sasbind-th-tbody'); if(!tb) return;
+  const rows=SASBTH_DATA.filter(r=>r.industry===sasbIndCurInd);
+  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px">尚無主題資料，請點「新增主題」</td></tr>';return;}
+  const pencil=`<svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>`;
+  const trash=`<svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`;
+  tb.innerHTML=rows.map(r=>{
+    const globalIdx=SASBTH_DATA.indexOf(r);
+    const on=r.status==='啟用';
+    return `<tr>
+      <td><span class="badge ${on?'badge-on':'badge-off'}">${r.status}</span></td>
+      <td style="font-family:monospace;font-size:12px;color:#2E5FA8">${r.code}</td>
+      <td style="font-weight:${on?'600':'normal'};color:${on?'inherit':'#aaa'}">${r.name}</td>
+      <td class="tleft" style="font-size:12px;color:${on?'#555':'#ccc'}">${r.desc}</td>
+      <td><span class="chip chip-green" style="font-size:10px">${r.esg}</span></td>
+      <td><div class="func-icons">
+        <span class="fi" onclick="sasbIndShowThForm(${globalIdx})">${pencil}</span>
+        <span class="fi del" onclick="sasbIndThDelete(${globalIdx})">${trash}</span>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+function sasbIndShowThForm(globalIdx){
+  sasbIndThEdit=globalIdx;
+  const isNew=globalIdx===null;
+  document.getElementById('sasbind-th-crumb').textContent=isNew?'新增主題':'編輯主題';
+  const r=isNew?{status:'啟用',code:'',name:'',desc:'',esg:''}:SASBTH_DATA[globalIdx];
+  document.getElementById('sasbind-f-status').value=r.status;
+  document.getElementById('sasbind-f-code').value=r.code;
+  document.getElementById('sasbind-f-name').value=r.name;
+  document.getElementById('sasbind-f-desc').value=r.desc;
+  document.getElementById('sasbind-f-esg').value=r.esg;
+  document.getElementById('sasbind-th-form').style.display='';
+  document.getElementById('sasbind-th-list').style.display='none';
+}
+function sasbIndThFormCancel(){
+  document.getElementById('sasbind-th-form').style.display='none';
+  document.getElementById('sasbind-th-list').style.display='';
+}
+function sasbIndThSave(){
+  const rec={
+    status:document.getElementById('sasbind-f-status').value,
+    industry:sasbIndCurInd,
+    code:document.getElementById('sasbind-f-code').value.trim(),
+    name:document.getElementById('sasbind-f-name').value.trim(),
+    desc:document.getElementById('sasbind-f-desc').value.trim(),
+    esg:document.getElementById('sasbind-f-esg').value,
+  };
+  if(!rec.code||!rec.name){showToast('請填寫 SASB 代號與主題名稱','#c0392b');return;}
+  if(sasbIndThEdit===null) SASBTH_DATA.push(rec);
+  else SASBTH_DATA[sasbIndThEdit]=rec;
+  sasbIndThFormCancel();
+  sasbIndRenderThemes();
+  showToast(sasbIndThEdit===null?'已新增主題':'已更新主題','#1A8F7F');
+}
+function sasbIndThDelete(globalIdx){
+  if(!confirm('確認刪除此 SASB 主題？')) return;
+  SASBTH_DATA.splice(globalIdx,1);
+  sasbIndRenderThemes();
+  showToast('已刪除','#c0392b');
+}
+
 /* ═══ B06 R/O 類型 S1/S2 Tab ═══ */
 let iroTypeCat='S1';
 function iroTypeSwitchCat(cat){
@@ -4407,11 +4573,11 @@ function c3qShowList(){ document.getElementById('c3q-list').style.display=''; }
 
 /* ═══ C3 永續主題管理 ═══ */
 const C3TH_DATA=[
-  {code:'T001',name:'氣候策略',esg:'氣候策略與能源管理',ro:5,included:true, dept:'永續發展部',confirmed:'已確認'},
-  {code:'T002',name:'能源管理',esg:'氣候策略與能源管理',ro:4,included:true, dept:'廠務處',    confirmed:'已確認'},
-  {code:'T003',name:'水資源管理',esg:'水資源管理',ro:3,included:true, dept:'廠務處',    confirmed:'待確認'},
-  {code:'T004',name:'生物多樣性',esg:'生物多樣性',ro:2,included:false,dept:'',          confirmed:'不適用'},
-  {code:'T005',name:'人才發展',esg:'人才吸引與留任',ro:3,included:true, dept:'人力資源部',confirmed:'待確認'},
+  {code:'T001',name:'氣候策略',esg:'氣候策略與能源管理',ro:5,included:true, dept:'永續發展部',confirmed:'已確認',sasbTheme:'廢棄物管理',sasbCodes:['IF-WM-140a.1']},
+  {code:'T002',name:'能源管理',esg:'氣候策略與能源管理',ro:4,included:true, dept:'廠務處',    confirmed:'已確認',sasbTheme:'廢棄物管理',sasbCodes:['IF-WM-110a.1','IF-WM-140a.1']},
+  {code:'T003',name:'水資源管理',esg:'水資源管理',ro:3,included:true, dept:'廠務處',    confirmed:'待確認',sasbTheme:'',sasbCodes:[]},
+  {code:'T004',name:'生物多樣性',esg:'生物多樣性',ro:2,included:false,dept:'',          confirmed:'不適用',sasbTheme:'',sasbCodes:[]},
+  {code:'T005',name:'人才發展',esg:'人才吸引與留任',ro:3,included:true, dept:'人力資源部',confirmed:'待確認',sasbTheme:'軟體與IT服務',sasbCodes:['TC-SI-230a.1']},
 ];
 const C2TH_MASTER=[
   {code:'T006',name:'廢棄物管理',esg:'空汙與廢棄物'},
@@ -4449,12 +4615,16 @@ function c3thShowForm(idx){
   document.getElementById('c3th-ro-esg').value=r.esg;
   document.getElementById('c3th-f-dept').value=r.dept;
   document.getElementById('c3th-f-confirmed').value=r.confirmed;
+  document.getElementById('c3th-f-sasb-theme').value=r.sasbTheme||'';
+  c3thLoadSasbCodes(r.sasbCodes||[]);
   document.getElementById('c3th-list').style.display='none';
   document.getElementById('c3th-form').style.display='';
 }
 function c3thSave(){
   C3TH_DATA[c3thEdit].dept=document.getElementById('c3th-f-dept').value.trim();
   C3TH_DATA[c3thEdit].confirmed=document.getElementById('c3th-f-confirmed').value;
+  C3TH_DATA[c3thEdit].sasbTheme=document.getElementById('c3th-f-sasb-theme').value;
+  C3TH_DATA[c3thEdit].sasbCodes=[...document.querySelectorAll('#c3th-sasb-codes input[type=checkbox]:checked')].map(c=>c.value);
   c3thRender(); c3thShowList(); showToast('已儲存','#1A8F7F');
 }
 
