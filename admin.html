@@ -709,8 +709,7 @@ tr.row-sig>td{background:#fffbf2!important}
             <th style="width:80px">代碼 <span class="sort-icon">⇅</span></th>
             <th style="width:160px">永續主題名稱 <span class="sort-icon">⇅</span></th>
             <th class="tleft">說明</th>
-            <th style="width:180px">所屬 ESG 議題</th>
-            <th style="width:90px">風險/機會數</th>
+            <th style="width:80px;text-align:center">S1/S2</th>
             <th style="width:70px">功能</th>
           </tr></thead>
           <tbody>
@@ -719,18 +718,15 @@ tr.row-sig>td{background:#fffbf2!important}
               <td><select><option>請選擇</option></select></td>
               <td><select><option>請選擇</option></select></td>
               <td><select><option>請選擇</option></select></td>
-              <td><select><option>請選擇</option></select></td>
-              <td></td><td></td>
+              <td><select><option>請選擇</option><option>S1</option><option>S2</option></select></td>
+              <td></td>
             </tr>
             <tr>
               <td><span class="badge badge-on">啟用</span></td>
               <td>T001</td>
               <td style="font-weight:600">氣候策略</td>
               <td class="tleft" style="font-size:12px;color:#555">與氣候變遷相關的策略規劃、目標設定與績效管理</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">3</span> 風險 <span style="color:#1A8F7F;font-weight:600">2</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:4px;font-size:11px;font-weight:700">S1</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -738,10 +734,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T002</td>
               <td style="font-weight:600">能源管理</td>
               <td class="tleft" style="font-size:12px;color:#555">再生能源使用、能源效率提升、電力來源管理</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">氣候策略與能源管理</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">2</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:4px;font-size:11px;font-weight:700">S1</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -749,10 +742,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T003</td>
               <td style="font-weight:600">水資源管理</td>
               <td class="tleft" style="font-size:12px;color:#555">用水效率、廢水管理、水資源風險評估</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">水資源管理</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -760,10 +750,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T004</td>
               <td style="font-weight:600">生物多樣性</td>
               <td class="tleft" style="font-size:12px;color:#555">生態系服務、自然資本、物種保育</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">生物多樣性</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -771,10 +758,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T005</td>
               <td style="font-weight:600">人才發展</td>
               <td class="tleft" style="font-size:12px;color:#555">人才招募、培育、留任與組織文化</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">人才吸引與留任</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -782,10 +766,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T006</td>
               <td style="font-weight:600">資訊安全</td>
               <td class="tleft" style="font-size:12px;color:#555">資安管理體系、資料保護、網路韌性</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">資訊安全與隱私</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">2</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
             <tr>
@@ -793,10 +774,7 @@ tr.row-sig>td{background:#fffbf2!important}
               <td>T007</td>
               <td style="font-weight:600">公司治理</td>
               <td class="tleft" style="font-size:12px;color:#555">董事會治理、反貪腐、透明度揭露</td>
-              <td><div style="display:flex;flex-wrap:wrap">
-                <span class="chip chip-green" style="font-size:10px">公司治理與誠信經營</span>
-              </div></td>
-              <td style="text-align:center"><span style="color:#c0392b;font-weight:600">1</span> 風險 <span style="color:#1A8F7F;font-weight:600">1</span> 機會</td>
+              <td style="text-align:center"><span style="display:inline-block;padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span></td>
               <td><div class="func-icons"><span class="fi" onclick="openModal('edit-theme')"><svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg></span><span class="fi del"><svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg></span></div></td>
             </tr>
           </tbody>
@@ -1250,6 +1228,48 @@ tr.row-sig>td{background:#fffbf2!important}
           <div id="qsf-namemap-bd"></div>
         </div>
 
+        <div class="qs-sec" id="qsf-test-dispatch">
+          <div class="qs-sec-hd">測試問卷發放設定（依部門）</div>
+          <div style="font-size:12px;color:#888;margin-bottom:12px">設定各部門的測試問卷（試填）發放對象與期間，正式發放請至問卷總覽操作。</div>
+          <table class="tbl" style="margin-bottom:0">
+            <thead><tr>
+              <th style="width:140px">部門</th>
+              <th style="width:100px;text-align:center">發放試填</th>
+              <th style="width:180px">試填期間</th>
+              <th class="tleft">發放對象說明</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600">財務部</td>
+                <td style="text-align:center"><label style="cursor:pointer"><input type="checkbox" checked> 啟用</label></td>
+                <td><div style="display:flex;gap:4px;align-items:center"><input type="date" class="date-inp" style="width:130px"> <span style="color:#aaa;font-size:11px">~</span> <input type="date" class="date-inp" style="width:130px"></div></td>
+                <td><input class="finp" placeholder="例：財務長、財務主管" style="font-size:12px"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">永續發展部</td>
+                <td style="text-align:center"><label style="cursor:pointer"><input type="checkbox" checked> 啟用</label></td>
+                <td><div style="display:flex;gap:4px;align-items:center"><input type="date" class="date-inp" style="width:130px"> <span style="color:#aaa;font-size:11px">~</span> <input type="date" class="date-inp" style="width:130px"></div></td>
+                <td><input class="finp" placeholder="例：ESG 主管" style="font-size:12px"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">風險管理部</td>
+                <td style="text-align:center"><label style="cursor:pointer"><input type="checkbox"> 啟用</label></td>
+                <td><div style="display:flex;gap:4px;align-items:center"><input type="date" class="date-inp" style="width:130px"> <span style="color:#aaa;font-size:11px">~</span> <input type="date" class="date-inp" style="width:130px"></div></td>
+                <td><input class="finp" placeholder="例：風控主管" style="font-size:12px"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600">業務部</td>
+                <td style="text-align:center"><label style="cursor:pointer"><input type="checkbox"> 啟用</label></td>
+                <td><div style="display:flex;gap:4px;align-items:center"><input type="date" class="date-inp" style="width:130px"> <span style="color:#aaa;font-size:11px">~</span> <input type="date" class="date-inp" style="width:130px"></div></td>
+                <td><input class="finp" placeholder="例：業務主管" style="font-size:12px"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:8px">
+            <button class="btn btn-ghost btn-sm" onclick="showToast('已依部門設定寄出試填通知','#1A8F7F')">發送試填通知</button>
+          </div>
+        </div>
+
         <div class="qs-sec">
           <div class="qs-sec-hd">期程預定進度</div>
           <table class="timeline-tbl">
@@ -1287,6 +1307,12 @@ tr.row-sig>td{background:#fffbf2!important}
             <div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#aaa" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="請輸入"></div>
           </div>
         </div>
+        <div style="display:flex;gap:0;border-bottom:2px solid #e0eeea;margin:0 0 0 0">
+          <div class="tab on" id="qsovtab-official" onclick="qsovSwitch('official')" style="padding:9px 20px;cursor:pointer;font-size:13px;color:#1A8F7F;border-bottom:2px solid #1A8F7F;font-weight:700;margin-bottom:-2px">正式問卷</div>
+          <div class="tab" id="qsovtab-test" onclick="qsovSwitch('test')" style="padding:9px 20px;cursor:pointer;font-size:13px;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px">試填問卷</div>
+        </div>
+        <div id="qsov-official" style="display:block">
+          <div style="padding:8px 0 4px;font-size:12px;color:#888">正式問卷：已通過試填確認，可對外發放的問卷</div>
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
@@ -1398,6 +1424,47 @@ tr.row-sig>td{background:#fffbf2!important}
           <span class="pag-total">共 29 項</span>
           <select class="per-page-sel"><option>15項/頁</option></select>
         </div>
+        </div><!-- /qsov-official -->
+        <div id="qsov-test" style="display:none">
+          <div style="padding:8px 0 4px;font-size:12px;color:#888">試填問卷：依部門發放的測試問卷，請於問卷建置中設定試填期間。</div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:100px">狀態</th>
+                <th style="width:70px">年度</th>
+                <th style="width:120px">問卷種類</th>
+                <th style="width:110px">部門</th>
+                <th style="width:180px">試填期間</th>
+                <th style="width:90px">填寫數量</th>
+                <th style="width:80px">功能</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-testing">試填中</span></td>
+                  <td>2034</td><td style="font-weight:500">IFRS</td>
+                  <td>財務部</td>
+                  <td style="font-size:12px">2026/03/01 ～ 2026/03/15</td>
+                  <td>3 / 5</td>
+                  <td><div class="func-icons">
+                    <span class="fi" onclick="showToast('查看試填結果','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                    <span class="fi del" onclick="showToast('結束試填','#c0392b')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+                  </div></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-testing">試填中</span></td>
+                  <td>2034</td><td style="font-weight:500">IFRS</td>
+                  <td>永續發展部</td>
+                  <td style="font-size:12px">2026/03/01 ～ 2026/03/15</td>
+                  <td>2 / 3</td>
+                  <td><div class="func-icons">
+                    <span class="fi" onclick="showToast('查看試填結果','#2E5FA8')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                    <span class="fi del" onclick="showToast('結束試填','#c0392b')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+                  </div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- /qsov-test -->
       </div>
 
       <!-- ── 問卷建置器 7-step VIEW ── -->
@@ -1412,8 +1479,52 @@ tr.row-sig>td{background:#fffbf2!important}
           <div class="qsb-step-item" id="qsbs-3"><div class="qsb-sc" id="qsbc-3">3</div><div class="qsb-sl">聯絡人資訊</div></div>
           <div class="qsb-step-item" id="qsbs-4"><div class="qsb-sc" id="qsbc-4">4</div><div class="qsb-sl">基本問題<br>（固定）</div></div>
           <div class="qsb-step-item" id="qsbs-5"><div class="qsb-sc" id="qsbc-5">5</div><div class="qsb-sl">基本問題<br>（自行增設）</div></div>
+          <div class="qsb-step-item" id="qsbs-s1"><div class="qsb-sc" style="background:#1e40af">S1</div><div class="qsb-sl">S1 氣候相關<br>題目</div></div>
+          <div class="qsb-step-item" id="qsbs-s2"><div class="qsb-sc" style="background:#166534">S2</div><div class="qsb-sl">S2 自然相關<br>題目</div></div>
           <div class="qsb-step-item" id="qsbs-6"><div class="qsb-sc" id="qsbc-6">6</div><div class="qsb-sl">意見建議</div></div>
           <div class="qsb-step-item" id="qsbs-7"><div class="qsb-sc" id="qsbc-7">7</div><div class="qsb-sl">結語段落</div></div>
+        </div>
+        <!-- S1 questions pane -->
+        <div class="qsb-pane" id="qsbp-s1">
+          <div class="qsb-content">
+            <div style="padding:12px 16px;background:#dbeafe;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;color:#1e40af;border:1px solid #bfdbfe;border-bottom:none;display:flex;align-items:center;gap:8px">
+              <span style="padding:2px 10px;background:#1e40af;color:#fff;border-radius:4px;font-size:11px;font-weight:700">S1</span> 氣候相關重大性評估題目
+              <span style="font-size:11px;font-weight:400;color:#3b82f6">（依永續主題 S1 排序）</span>
+            </div>
+            <div style="padding:16px">
+              <div style="margin-bottom:12px;font-size:12px;color:#555">以下題目依 S1 氣候相關永續主題順序排列，每個主題對應一組風險/機會評估題組。</div>
+              <div style="border:1px solid #e0eeea;border-radius:6px;overflow:hidden">
+                <div style="padding:10px 14px;background:#f0f9ff;font-size:12px;font-weight:600;border-bottom:1px solid #e0eeea;color:#1e40af">T001 氣候策略</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555">Q1.1 請評估氣候策略相關風險的發生機率（1-5 分）</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555;background:#fafafa;border-top:1px solid #eee">Q1.2 請評估氣候策略相關風險的財務影響（1-5 分）</div>
+                <div style="padding:10px 14px;background:#f0f9ff;font-size:12px;font-weight:600;border-top:1px solid #e0eeea;border-bottom:1px solid #e0eeea;color:#1e40af">T002 能源管理</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555">Q2.1 請評估能源管理相關風險的發生機率（1-5 分）</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555;background:#fafafa;border-top:1px solid #eee">Q2.2 請評估能源管理相關風險的財務影響（1-5 分）</div>
+              </div>
+              <div style="margin-top:8px;font-size:11px;color:#aaa">共 2 個 S1 主題 · 4 題</div>
+            </div>
+          </div>
+        </div>
+        <!-- S2 questions pane -->
+        <div class="qsb-pane" id="qsbp-s2">
+          <div class="qsb-content">
+            <div style="padding:12px 16px;background:#dcfce7;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;color:#166534;border:1px solid #bbf7d0;border-bottom:none;display:flex;align-items:center;gap:8px">
+              <span style="padding:2px 10px;background:#166534;color:#fff;border-radius:4px;font-size:11px;font-weight:700">S2</span> 自然相關重大性評估題目
+              <span style="font-size:11px;font-weight:400;color:#16a34a">（依永續主題 S2 排序）</span>
+            </div>
+            <div style="padding:16px">
+              <div style="margin-bottom:12px;font-size:12px;color:#555">以下題目依 S2 自然相關永續主題順序排列，每個主題對應一組風險/機會評估題組。</div>
+              <div style="border:1px solid #e0eeea;border-radius:6px;overflow:hidden">
+                <div style="padding:10px 14px;background:#f0fdf4;font-size:12px;font-weight:600;border-bottom:1px solid #e0eeea;color:#166534">T003 水資源管理</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555">Q3.1 請評估水資源管理相關風險的發生機率（1-5 分）</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555;background:#fafafa;border-top:1px solid #eee">Q3.2 請評估水資源管理相關風險的財務影響（1-5 分）</div>
+                <div style="padding:10px 14px;background:#f0fdf4;font-size:12px;font-weight:600;border-top:1px solid #e0eeea;border-bottom:1px solid #e0eeea;color:#166534">T004 生物多樣性</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555">Q4.1 請評估生物多樣性相關風險的發生機率（1-5 分）</div>
+                <div style="padding:10px 14px;font-size:12px;color:#555;background:#fafafa;border-top:1px solid #eee">Q4.2 請評估生物多樣性相關風險的財務影響（1-5 分）</div>
+              </div>
+              <div style="margin-top:8px;font-size:11px;color:#aaa">共 5 個 S2 主題 · 10 題</div>
+            </div>
+          </div>
         </div>
 
         <!-- Step 1: 問卷開頭 -->
@@ -2259,10 +2370,9 @@ tr.row-sig>td{background:#fffbf2!important}
             <thead><tr>
               <th style="width:80px">狀態</th>
               <th style="width:160px">產業別 <span class="sort-icon">⇅</span></th>
-              <th style="width:150px">SASB 代號 <span class="sort-icon">⇅</span></th>
+              <th style="width:220px">SASB 代號（可多選）<span class="sort-icon">⇅</span></th>
               <th style="width:180px">SASB 主題名稱 <span class="sort-icon">⇅</span></th>
               <th class="tleft">說明</th>
-              <th style="width:160px">對應 ESG 議題</th>
               <th style="width:70px">功能</th>
             </tr></thead>
             <tbody id="sasbth-tbody"></tbody>
@@ -2302,36 +2412,22 @@ tr.row-sig>td{background:#fffbf2!important}
               </select>
             </div>
             <div class="fg">
-              <label class="fl">SASB 代號 <span class="req">*</span></label>
-              <input class="finp" id="sasbth-f-code" placeholder="例：IF-WM-110a.1">
-            </div>
-            <div class="fg">
               <label class="fl">SASB 主題名稱 <span class="req">*</span></label>
               <input class="finp" id="sasbth-f-name" placeholder="請輸入主題名稱">
             </div>
           </div>
         </div>
         <div class="qs-sec">
-          <div class="qs-sec-hd">說明與對應</div>
-          <div class="fg" style="margin-bottom:16px">
+          <div class="qs-sec-hd">說明</div>
+          <div class="fg">
             <label class="fl">說明</label>
             <textarea class="finp" id="sasbth-f-desc" rows="3" style="resize:vertical" placeholder="請輸入主題說明"></textarea>
           </div>
           <div class="fg">
-            <label class="fl">對應 ESG 議題</label>
-            <select class="fsel" id="sasbth-f-esg">
-              <option value="">請選擇</option>
-              <option>氣候策略與能源管理</option>
-              <option>水資源管理</option>
-              <option>廢棄物管理</option>
-              <option>生物多樣性</option>
-              <option>人才吸引與留任</option>
-              <option>勞工健康與安全</option>
-              <option>供應鏈管理</option>
-              <option>公司治理</option>
-              <option>資訊安全</option>
-            </select>
+            <label class="fl">SASB 代號 <span style="font-size:11px;color:#888;font-weight:400">（多個代號請用逗號分隔）</span></label>
+            <textarea class="finp" id="sasbth-f-code" rows="2" style="resize:vertical" placeholder="例：TC-SI-230a.1, TC-SI-230a.2"></textarea>
           </div>
+          <div style="font-size:11px;color:#888;padding:4px 0">注意：ESG 議題對應由 C3 階段依公司需求設定，C2 不進行議題對應。</div>
         </div>
         <div class="qsf-bar">
           <button class="btn btn-ghost" onclick="sasbThShowList()">取消</button>
@@ -2436,10 +2532,9 @@ tr.row-sig>td{background:#fffbf2!important}
             <table class="tbl">
               <thead><tr>
                 <th style="width:80px">狀態</th>
-                <th style="width:180px;font-family:monospace">SASB 代號</th>
+                <th style="width:220px;font-family:monospace">SASB 代號（可多選）</th>
                 <th style="width:180px">主題名稱</th>
                 <th class="tleft">說明</th>
-                <th style="width:160px">ESG 議題</th>
                 <th style="width:70px">功能</th>
               </tr></thead>
               <tbody id="sasbind-th-tbody"></tbody>
@@ -2453,22 +2548,14 @@ tr.row-sig>td{background:#fffbf2!important}
               <div class="fg"><label class="fl">狀態</label>
                 <select class="fsel" id="sasbind-f-status"><option>啟用</option><option>停用</option></select>
               </div>
-              <div class="fg"><label class="fl">SASB 代號 <span class="req">*</span></label>
-                <input class="finp" id="sasbind-f-code" placeholder="例：IF-WM-110a.1">
+              <div class="fg" style="grid-column:1/-1"><label class="fl">SASB 代號 <span class="req">*</span> <span style="font-size:11px;color:#888;font-weight:400">（多個代號請用逗號分隔，例：IF-WM-110a.1, IF-WM-110a.2）</span></label>
+                <textarea class="finp" id="sasbind-f-code" rows="2" style="resize:vertical" placeholder="例：IF-WM-110a.1, IF-WM-110a.2"></textarea>
               </div>
               <div class="fg" style="grid-column:1/-1"><label class="fl">主題名稱 <span class="req">*</span></label>
                 <input class="finp" id="sasbind-f-name" placeholder="請輸入主題名稱">
               </div>
               <div class="fg" style="grid-column:1/-1"><label class="fl">說明</label>
                 <textarea class="finp" id="sasbind-f-desc" rows="2" style="resize:vertical" placeholder="請輸入主題說明"></textarea>
-              </div>
-              <div class="fg" style="grid-column:1/-1"><label class="fl">ESG 議題</label>
-                <select class="fsel" id="sasbind-f-esg">
-                  <option value="">請選擇</option>
-                  <option>氣候策略與能源管理</option><option>水資源管理</option><option>生物多樣性</option>
-                  <option>空汙與廢棄物</option><option>人才吸引與留任</option><option>職場安全與健康</option>
-                  <option>資訊安全與隱私</option><option>公司治理與誠信經營</option>
-                </select>
               </div>
             </div>
             <div class="qsf-bar">
@@ -2609,8 +2696,7 @@ tr.row-sig>td{background:#fffbf2!important}
             <th style="width:50px;text-align:center">納入</th>
             <th style="width:80px">代碼</th>
             <th class="tleft">永續主題名稱</th>
-            <th style="width:160px">所屬 ESG 議題</th>
-            <th style="width:110px">負責部門</th>
+            <th style="width:80px;text-align:center">S1/S2</th>
             <th style="width:90px;text-align:center">確認狀態</th>
             <th style="width:60px">功能</th>
           </tr></thead>
@@ -2640,19 +2726,15 @@ tr.row-sig>td{background:#fffbf2!important}
         <div class="qs-sec">
           <div class="qs-sec-hd">C3 設定欄位</div>
           <div class="grid2">
-            <div class="fg"><label class="fl">負責部門</label>
-              <select class="fsel" id="c3th-f-dept">
-                <option value="">請選擇</option>
-              </select>
-            </div>
-            <div class="fg"><label class="fl">確認狀態</label>
+            <div class="fg" style="grid-column:1/-1"><label class="fl">確認狀態</label>
               <select class="fsel" id="c3th-f-confirmed">
                 <option value="已確認">已確認</option>
                 <option value="待確認">待確認</option>
                 <option value="不適用">不適用</option>
               </select>
             </div>
-            <div class="fg" style="grid-column:1/-1"><label class="fl">SASB 主題</label>
+            <div class="fg" style="grid-column:1/-1">
+              <label class="fl">SASB 主題 <span style="font-size:11px;color:#2E5FA8;font-weight:400">（依公司所屬產業篩選）</span></label>
               <select class="fsel" id="c3th-f-sasb-theme" onchange="c3thLoadSasbCodes()">
                 <option value="">請選擇</option>
                 <option>廢棄物管理</option>
@@ -2696,13 +2778,21 @@ tr.row-sig>td{background:#fffbf2!important}
           <div class="search-wrap"><span style="color:#bbb;display:inline-flex"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span><input placeholder="請輸入"></div>
         </div>
       </div>
+      <div id="c3ro-batch-bar" style="display:none;align-items:center;gap:10px;padding:8px 16px;background:#f0f9ff;border-bottom:1px solid #bae6fd;font-size:13px">
+        <span id="c3ro-sel-count" style="color:#0369a1;font-weight:600">已選 0 筆</span>
+        <span style="color:#94a3b8">批次設定 R/O 類型：</span>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="c3ro-batch-type" value="風險" checked> <span style="padding:2px 10px;background:#fde8e8;color:#a03030;border:1px solid #f0b8b8;border-radius:4px;font-size:11px;font-weight:600">風險</span></label>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="c3ro-batch-type" value="機會"> <span style="padding:2px 10px;background:#e0f5ee;color:#1a7a50;border:1px solid #9ECFC7;border-radius:4px;font-size:11px;font-weight:600">機會</span></label>
+        <button class="btn btn-teal btn-sm" onclick="c3roBatchSetType()">套用</button>
+        <button class="btn btn-ghost btn-sm" onclick="c3roClearSel()">取消</button>
+      </div>
       <div class="tbl-wrap">
         <table class="tbl">
           <thead><tr>
-            <th style="width:50px;text-align:center">納入</th>
+            <th style="width:36px;text-align:center"><input type="checkbox" id="c3ro-chk-all" onclick="c3roToggleAll(this)"></th>
             <th style="width:65px">代碼</th>
             <th style="width:110px">永續主題</th>
-            <th style="width:60px;text-align:center">類型</th>
+            <th style="width:70px;text-align:center">R/O 類型</th>
             <th class="tleft">描述</th>
             <th style="width:90px;text-align:center">確認狀態</th>
             <th style="width:60px">功能</th>
@@ -2734,6 +2824,13 @@ tr.row-sig>td{background:#fffbf2!important}
         <div class="qs-sec">
           <div class="qs-sec-hd">C3 設定欄位</div>
           <div class="grid2">
+            <div class="fg"><label class="fl">R/O 類型</label>
+              <div class="radio-group" style="margin-top:8px">
+                <label><input type="radio" name="c3ro-f-type" value="風險" checked> <span style="padding:2px 10px;background:#fde8e8;color:#a03030;border:1px solid #f0b8b8;border-radius:4px;font-size:11px;font-weight:600">風險</span></label>
+                <label><input type="radio" name="c3ro-f-type" value="機會"> <span style="padding:2px 10px;background:#e0f5ee;color:#1a7a50;border:1px solid #9ECFC7;border-radius:4px;font-size:11px;font-weight:600">機會</span></label>
+                <label><input type="radio" name="c3ro-f-type" value="不細分"> 不細分</label>
+              </div>
+            </div>
             <div class="fg"><label class="fl">確認狀態</label>
               <select class="fsel" id="c3ro-f-confirmed">
                 <option value="已確認">已確認</option>
@@ -3290,13 +3387,12 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">代碼 <span class="req">*</span></label><input class="finp" placeholder="例：T008"></div>
       <div class="fg"><label class="fl">排序</label><input class="finp" type="number" placeholder="例：8"></div>
     </div>
-    <div class="fg"><label class="fl">所屬 ESG 議題 <span class="req">*</span></label>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
-        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
-          <option value="">＋ 新增議題</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}
-        </select>
+    <div class="fg"><label class="fl">S1/S2 分類 <span class="req">*</span></label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="th-s12" value="S1" checked> <span style="padding:2px 10px;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:4px;font-size:11px;font-weight:700">S1</span> 氣候相關</label>
+        <label><input type="radio" name="th-s12" value="S2"> <span style="padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span> 自然相關</label>
       </div>
-      <span style="font-size:11px;color:#888;margin-top:3px">永續主題可隸屬多個 ESG 議題（多對多關係）</span></div>
+    </div>
     <div class="form-section-title" style="margin-top:8px">多語系</div>
     <table class="ml-tbl"><thead><tr><th style="width:110px">語言</th><th class="tleft">* 主題名稱</th></tr></thead>
     <tbody><tr><td>繁體中文</td><td><textarea class="ftextarea" rows="1" placeholder="請輸入"></textarea></td></tr>
@@ -3308,13 +3404,12 @@ const MODAL_CONTENTS = {
       <div class="fg"><label class="fl">代碼</label><input class="finp" value="T001" readonly style="background:#f5f5f5"></div>
       <div class="fg"><label class="fl">排序</label><input class="finp" value="1" type="number"></div>
     </div>
-    <div class="fg"><label class="fl">所屬 ESG 議題</label>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1px solid #c8d8d4;border-radius:6px;background:#f8fcfb">
-        <span class="chip chip-teal">氣候策略與能源管理<span class="rm" onclick="removeChip(this)">✕</span></span>
-        <select class="add-chip-btn" style="appearance:none" onchange="addFromModal(this,'teal')">
-          <option value="">＋ 新增議題</option>${ESG_OPTIONS.map(e=>`<option>${e}</option>`).join('')}
-        </select>
-      </div></div>
+    <div class="fg"><label class="fl">S1/S2 分類</label>
+      <div class="radio-group" style="margin-top:8px">
+        <label><input type="radio" name="th-s12-e" value="S1" checked> <span style="padding:2px 10px;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-radius:4px;font-size:11px;font-weight:700">S1</span> 氣候相關</label>
+        <label><input type="radio" name="th-s12-e" value="S2"> <span style="padding:2px 10px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;font-size:11px;font-weight:700">S2</span> 自然相關</label>
+      </div>
+    </div>
     <div class="fg"><label class="fl">永續主題名稱 <span class="req">*</span></label><input class="finp" value="氣候策略"></div>
     <div class="fg"><label class="fl">說明</label><textarea class="ftextarea" rows="2">與氣候變遷相關的策略規劃、目標設定與績效管理</textarea></div>`},
   'add-iro':{title:'新增風險／機會項目',body:()=>`
@@ -3940,6 +4035,14 @@ function qsShowOverview(){
   document.getElementById('qsy-view').style.display='';
   document.getElementById('qsb-view').style.display='none';
 }
+function qsovSwitch(tab){
+  ['official','test'].forEach(function(t){
+    const pane=document.getElementById('qsov-'+t);
+    const tabEl=document.getElementById('qsovtab-'+t);
+    if(pane) pane.style.display=t===tab?'block':'none';
+    if(tabEl){ tabEl.style.color=t===tab?'#1A8F7F':'#888'; tabEl.style.borderBottomColor=t===tab?'#1A8F7F':'transparent'; tabEl.style.fontWeight=t===tab?'700':'500'; }
+  });
+}
 function qsShowYear(){
   _navToPage('pg-qoverview');
   qsShowOverview();
@@ -4388,10 +4491,9 @@ function sasbThRender(){
     return `<tr>
       <td><span class="badge ${on?'badge-on':'badge-off'}">${r.status}</span></td>
       <td><span class="chip" style="background:#f0f5ff;color:#3b5fc0;font-size:10px">${r.industry}</span></td>
-      <td style="font-family:monospace;font-size:12px;color:#2E5FA8">${r.code}</td>
+      <td style="font-size:12px">${(r.code||'').split(',').map(c=>c.trim()).filter(Boolean).map(c=>`<span style="font-family:monospace;background:#eef2ff;color:#3730a3;padding:1px 6px;border-radius:3px;margin-right:4px">${c}</span>`).join('')||r.code}</td>
       <td style="font-weight:${on?'600':'normal'};color:${on?'inherit':'#aaa'}">${r.name}</td>
       <td class="tleft" style="font-size:12px;color:${on?'#555':'#ccc'}">${r.desc}</td>
-      <td><span class="chip ${on?'chip-green':''}" style="${on?'':'background:#f0f0f0;color:#aaa;'}font-size:10px">${r.esg}</span></td>
       <td><div class="func-icons">
         <span class="fi" onclick="sasbThShowForm(${i})">${_PENCIL}</span>
         <span class="fi del" onclick="sasbThDelete(${i})">${_TRASH}</span>
@@ -4413,7 +4515,6 @@ function sasbThShowForm(idx){
   document.getElementById('sasbth-f-code').value     = r.code;
   document.getElementById('sasbth-f-name').value     = r.name;
   document.getElementById('sasbth-f-desc').value     = r.desc;
-  document.getElementById('sasbth-f-esg').value      = r.esg;
   document.getElementById('sasbth-list').style.display='none';
   document.getElementById('sasbth-form').style.display='';
 }
@@ -4424,9 +4525,9 @@ function sasbThSave(){
     code:     document.getElementById('sasbth-f-code').value.trim(),
     name:     document.getElementById('sasbth-f-name').value.trim(),
     desc:     document.getElementById('sasbth-f-desc').value.trim(),
-    esg:      document.getElementById('sasbth-f-esg').value,
+    esg:      '',
   };
-  if(!rec.industry||!rec.code||!rec.name){showToast('請填寫必填欄位（產業別、SASB代號、主題名稱）','#c0392b');return;}
+  if(!rec.industry||!rec.name){showToast('請填寫必填欄位（產業別、主題名稱）','#c0392b');return;}
   if(sasbThEdit===null) SASBTH_DATA.push(rec);
   else SASBTH_DATA[sasbThEdit]=rec;
   sasbThRender();
@@ -4476,18 +4577,19 @@ function sasbIndShowThemes(industry){
 function sasbIndRenderThemes(){
   const tb=document.getElementById('sasbind-th-tbody'); if(!tb) return;
   const rows=SASBTH_DATA.filter(r=>r.industry===sasbIndCurInd);
-  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px">尚無主題資料，請點「新增主題」</td></tr>';return;}
+  if(!rows.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:#aaa;padding:24px">尚無主題資料，請點「新增主題」</td></tr>';return;}
   const pencil=`<svg viewBox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>`;
   const trash=`<svg viewBox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`;
   tb.innerHTML=rows.map(r=>{
     const globalIdx=SASBTH_DATA.indexOf(r);
     const on=r.status==='啟用';
+    const codes=(r.code||'').split(',').map(c=>c.trim()).filter(Boolean);
+    const codeHtml=codes.map(c=>`<span style="font-family:monospace;font-size:11px;background:#eef2ff;color:#3730a3;padding:1px 6px;border-radius:3px;margin-right:4px">${c}</span>`).join('');
     return `<tr>
       <td><span class="badge ${on?'badge-on':'badge-off'}">${r.status}</span></td>
-      <td style="font-family:monospace;font-size:12px;color:#2E5FA8">${r.code}</td>
+      <td style="font-size:12px">${codeHtml||r.code}</td>
       <td style="font-weight:${on?'600':'normal'};color:${on?'inherit':'#aaa'}">${r.name}</td>
       <td class="tleft" style="font-size:12px;color:${on?'#555':'#ccc'}">${r.desc}</td>
-      <td><span class="chip chip-green" style="font-size:10px">${r.esg}</span></td>
       <td><div class="func-icons">
         <span class="fi" onclick="sasbIndShowThForm(${globalIdx})">${pencil}</span>
         <span class="fi del" onclick="sasbIndThDelete(${globalIdx})">${trash}</span>
@@ -4519,7 +4621,7 @@ function sasbIndThSave(){
     code:document.getElementById('sasbind-f-code').value.trim(),
     name:document.getElementById('sasbind-f-name').value.trim(),
     desc:document.getElementById('sasbind-f-desc').value.trim(),
-    esg:document.getElementById('sasbind-f-esg').value,
+    esg:'',
   };
   if(!rec.code||!rec.name){showToast('請填寫 SASB 代號與主題名稱','#c0392b');return;}
   if(sasbIndThEdit===null) SASBTH_DATA.push(rec);
@@ -4807,6 +4909,10 @@ function c3roRender(){
   </tr>`).join('');
 }
 function c3roShowList(){ document.getElementById('c3ro-list').style.display=''; document.getElementById('c3ro-form').style.display='none'; }
+function c3roToggleAll(cb){ document.querySelectorAll('.c3ro-row-chk').forEach(c=>c.checked=cb.checked); c3roUpdateBatchBar(); }
+function c3roUpdateBatchBar(){ const sel=document.querySelectorAll('.c3ro-row-chk:checked').length; const bar=document.getElementById('c3ro-batch-bar'); if(bar){bar.style.display=sel>0?'flex':'none';} const cnt=document.getElementById('c3ro-sel-count'); if(cnt) cnt.textContent='已選 '+sel+' 筆'; }
+function c3roClearSel(){ document.querySelectorAll('.c3ro-row-chk').forEach(c=>c.checked=false); const chkAll=document.getElementById('c3ro-chk-all'); if(chkAll) chkAll.checked=false; c3roUpdateBatchBar(); }
+function c3roBatchSetType(){ const type=document.querySelector('input[name="c3ro-batch-type"]:checked')?.value||'風險'; document.querySelectorAll('.c3ro-row-chk:checked').forEach(cb=>{ const tr=cb.closest('tr'); if(tr){ const typeCell=tr.querySelector('.c3ro-type-cell'); if(typeCell) typeCell.setAttribute('data-type',type); } }); c3roClearSel(); showToast('已批次設定 R/O 類型：'+type,'#1A8F7F'); }
 function c3roShowForm(idx){
   c3roEdit=idx;
   const r=C3RO_DATA[idx];
