@@ -211,7 +211,7 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 <div class="content-card" id="mainScroll">
 
   <!-- SURVEY INTRO HEADER -->
-  <div class="survey-intro">
+  <div class="survey-intro" id="surveyIntro">
     <div class="survey-intro-main">
       <div class="survey-l1">OOOO 股份有限公司 IFRS 重大性評估問卷</div>
 
@@ -232,11 +232,26 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
 
   <!-- C3-05 ENTRY SCREEN -->
   <div id="entryScreen" class="entry-screen">
-    <div class="entry-title">步驟一：確認填答範圍</div>
-    <div class="entry-sub">請選擇您所屬部門，系統將帶出對應的永續主題，確認後開始填答。</div>
+    <div class="entry-title">步驟一：填寫基本資料與確認填答範圍</div>
+    <div class="entry-sub">請填寫基本資料並選擇所屬部門，系統將帶出您需填答的永續主題。</div>
 
     <div class="entry-section">
-      <h3><span class="step-badge">1</span>選擇您的部門</h3>
+      <h3><span class="step-badge">1</span>填寫基本資料</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="fg"><label class="fl">姓名 <span style="color:#aaa;font-weight:400">（選填）</span></label>
+          <input class="dept-sel" id="basicName" type="text" placeholder="請輸入姓名" style="width:100%">
+        </div>
+        <div class="fg"><label class="fl">職稱 <span style="color:#aaa;font-weight:400">（選填）</span></label>
+          <input class="dept-sel" id="basicTitle" type="text" placeholder="請輸入職稱" style="width:100%">
+        </div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">Email <span style="color:#aaa;font-weight:400">（選填）</span></label>
+          <input class="dept-sel" id="basicEmail" type="email" placeholder="請輸入 Email" style="width:100%">
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-section">
+      <h3><span class="step-badge">2</span>選擇您的部門</h3>
       <select class="dept-sel" id="deptSelect" onchange="onDeptChange(this.value)">
         <option value="">— 請選擇部門 —</option>
         <option value="sustain">永續發展部</option>
@@ -249,8 +264,6 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
       </select>
 
       <div class="scope-list" id="scopeList">
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:10px;letter-spacing:.04em">您需填答的永續主題：</div>
-        <div id="scopeItems"></div>
         <div class="confirm-bar" id="confirmBar" style="display:none">
           <div class="confirm-bar-icon">📋</div>
           <div class="confirm-bar-text" id="confirmBarText"></div>
@@ -260,12 +273,23 @@ body{font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',sans-serif;ba
   </div>
 
   <!-- CARD INNER -->
-  <div class="card-inner" id="surveyContent" style="display:none">
-
-    <!-- TOPIC CONTENT -->
-    <div id="topicContent"></div>
-
-  </div><!-- /card-inner -->
+  <div id="surveyContent" style="display:none">
+    <!-- S1/S2 TABS -->
+    <div style="padding:16px 32px 0;background:#fff;border-bottom:1px solid #EEF3F1">
+      <div class="part-tabs" style="display:flex;max-width:320px">
+        <div id="tab-s2" class="pt" onclick="switchS12('S2')" style="flex:1">
+          S2<span class="pt-num">氣候相關</span>
+        </div>
+        <div id="tab-s1" class="pt" onclick="switchS12('S1')" style="flex:1">
+          S1<span class="pt-num">一般永續</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-inner">
+      <!-- TOPIC CONTENT -->
+      <div id="topicContent"></div>
+    </div>
+  </div><!-- /surveyContent -->
 </div><!-- /content-card -->
 </div><!-- /page-wrap -->
 
@@ -333,7 +357,7 @@ const VC_OPTIONS = ['上游供應商','自有營運','下游客戶','投資活�
 
 const ISSUES_T3 = [
   {
-    id:'e01', code:'E-01', name:'氣候變遷與極端氣候事件',
+    id:'e01', code:'E-01', name:'氣候變遷與極端氣候事件', s12:'S2',
     sasb:'SASB: EM-EP-110a.1 · 永續主題：氣候變遷 · 實體風險', collapsed:true,
     risks:[
       { id:'re01', desc:'極端降雨與洪水事件頻率增加，導致廠區設備損毀及生產中斷', checked:true,
@@ -361,7 +385,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e02', code:'E-02', name:'水資源短缺與水質污染',
+    id:'e02', code:'E-02', name:'水資源短缺與水質污染', s12:'S1',
     sasb:'SASB: IF-WU-140a.1 · 永續主題：水資源管理', collapsed:true,
     risks:[
       { id:'re04', desc:'廠區位於高缺水風險地區，製程用水取得成本顯著上升', checked:true,
@@ -383,7 +407,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e03', code:'E-03', name:'碳排放與能源轉型',
+    id:'e03', code:'E-03', name:'碳排放與能源轉型', s12:'S2',
     sasb:'SASB: EM-EP-110a.3 · 永續主題：碳排放 · 轉型風險—政策和法規',
     risks:[
       { id:'re06', desc:'碳定價機制實施後，溫室氣體排放成本大幅增加，影響生產成本結構', checked:true,
@@ -411,7 +435,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e04', code:'E-04', name:'生態系服務喪失', sasb:'SASB: IF-WM-160a.1 · 永續主題：生物多樣性 · 氣候調適',
+    id:'e04', code:'E-04', name:'生態系服務喪失', s12:'S1', sasb:'SASB: IF-WM-160a.1 · 永續主題：生物多樣性 · 氣候調適',
     risks:[
       { id:'r1', desc:'營運區域周邊生態系服務（如授粉、水源涵養）減損，導致原料取得成本上升', checked:true,
         p2:{iro:'實體風險',time:'中期（3–5 年）',note:'生態調節服務相關'},
@@ -438,7 +462,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e05', code:'E-05', name:'外來物種入侵與土地使用變更', sasb:'SASB: RR-BI-160a.1 · 永續主題：生物多樣性', collapsed:true,
+    id:'e05', code:'E-05', name:'外來物種入侵與土地使用變更', s12:'S1', sasb:'SASB: RR-BI-160a.1 · 永續主題：生物多樣性', collapsed:true,
     risks:[
       { id:'r4', desc:'外來入侵物種擴散至廠區周邊，導致生態補救及清除成本增加', checked:true,
         p2:{iro:'實體風險',time:'長期（5 年以上）',note:''},
@@ -457,7 +481,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e06', code:'E-06', name:'廢棄物管理與循環經濟',
+    id:'e06', code:'E-06', name:'廢棄物管理與循環經濟', s12:'S1',
     sasb:'SASB: RT-HH-150a.1 · 永續主題：廢棄物管理 · 循環經濟',
     risks:[
       { id:'re09', desc:'有害廢棄物處理法規加嚴，合規成本提升且違規罰款風險增加', checked:false },
@@ -470,7 +494,7 @@ const ISSUES_T3 = [
     ]
   },
   {
-    id:'e07', code:'E-07', name:'供應鏈永續與人權風險',
+    id:'e07', code:'E-07', name:'供應鏈永續與人權風險', s12:'S1',
     sasb:'SASB: CG-HP-430a.1 · 永續主題：供應鏈管理 · 社會責任',
     risks:[
       { id:'re12', desc:'供應商勞工條件不符國際標準，引發品牌聲譽損害與客戶抵制風險', checked:false },
@@ -487,8 +511,10 @@ const ISSUES_T3 = [
 let currentTopicIdx = 2;
 let expandedIssues = new Set(['e04']);
 let expandedCards = new Set(['r1','o1']);
-let activeParts = {}; // cardId -> partSuffix
-let customCards = []; // track added custom
+let activeParts = {};
+let customCards = [];
+let activeS12 = 'S2';
+let filteredIssues = ISSUES_T3;
 
 // ══════════════════════════════════════════
 // RENDER
@@ -499,7 +525,14 @@ function renderAll(){
 
 function renderTopicContent(){
   const container = document.getElementById('topicContent');
-  container.innerHTML = ISSUES_T3.map(iss => renderIssue(iss)).join('');
+  container.innerHTML = filteredIssues.filter(i=>i.s12===activeS12).map(iss => renderIssue(iss)).join('');
+}
+
+function switchS12(s){
+  activeS12 = s;
+  document.getElementById('tab-s1').classList.toggle('active', s==='S1');
+  document.getElementById('tab-s2').classList.toggle('active', s==='S2');
+  renderTopicContent();
 }
 
 function renderIssue(iss){
@@ -596,17 +629,16 @@ function renderRODetail(item, isRisk, activePart, isOpen){
 
 function renderPart2(item, isRisk, activePart){
   const d = item.p2 || {};
-  const typeOpts = isRisk ? IRO_TYPES : OPP_TYPES;
+  const iroBadgeColor = isRisk ? '#FEF0EE' : '#E4F6F1';
+  const iroBadgeText = isRisk ? '#e05252' : '#1A8F7F';
   return `<div class="part-content ${activePart==='p1'?'active':''}" id="p1-${item.id}">
     <div class="part-label">Part 2 — 識別確認</div>
-    <div class="field-grid-3">
+    <div class="field-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="fg">
-        <label class="fl">IRO 類型<span class="req">*</span></label>
-        <select class="fsel ${d.iro?'filled':item.checked?'err':''}" onchange="updateField('${item.id}','p2','iro',this.value)">
-          <option value="">請選擇</option>
-          ${typeOpts.map(o=>`<option ${d.iro===o?'selected':''}>${o}</option>`).join('')}
-        </select>
-        ${item.checked&&!d.iro?'<span class="ferr">▲ 必填</span>':''}
+        <label class="fl">IRO 類型（顧問已設定）</label>
+        <div style="padding:9px 12px;background:#F8FAFB;border:1.5px solid #DDE6E3;border-radius:8px;font-size:13px;color:#555;min-height:38px">
+          ${d.iro ? `<span style="background:${iroBadgeColor};color:${iroBadgeText};padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600">${d.iro}</span>` : '<span style="color:#bbb">—</span>'}
+        </div>
       </div>
       <div class="fg">
         <label class="fl">影響時間尺度<span class="req">*</span></label>
@@ -615,10 +647,6 @@ function renderPart2(item, isRisk, activePart){
           ${TIME_OPTIONS.map(o=>`<option ${d.time===o?'selected':''}>${o}</option>`).join('')}
         </select>
         ${item.checked&&!d.time?'<span class="ferr">▲ 必填</span>':''}
-      </div>
-      <div class="fg">
-        <label class="fl">永續主題說明<span style="color:#aaa;font-weight:400">（選填）</span></label>
-        <input type="text" class="fsel ${d.note?'filled':''}" value="${d.note||''}" placeholder="說明此風險與永續主題的關聯" oninput="updateField('${item.id}','p2','note',this.value)">
       </div>
     </div>
   </div>`;
@@ -919,16 +947,6 @@ function onDeptChange(val){
   const topics = ISSUES_T3.filter(i=>ids.includes(i.id));
   const deptName = document.getElementById('deptSelect').options[document.getElementById('deptSelect').selectedIndex].text;
 
-  scopeItems.innerHTML = topics.map(t=>`
-    <div class="scope-item">
-      <span class="scope-code">${t.code}</span>
-      <div>
-        <div class="scope-name">${t.name}</div>
-        <div class="scope-sasb">${t.sasb||''}</div>
-      </div>
-      <span class="scope-count">${t.risks.length} 風險 / ${t.opps.length} 機會</span>
-    </div>`).join('');
-
   document.getElementById('confirmBarText').innerHTML =
     `<strong>${deptName}</strong> 共需填答 <strong>${topics.length} 個永續主題</strong>，共 ${topics.reduce((s,t)=>s+t.risks.length+t.opps.length,0)} 項風險與機會，預計填答時間 10–15 分鐘。`;
   confirmBar.style.display='flex';
@@ -942,17 +960,27 @@ function confirmEntry(){
   const ids = DEPT_TOPICS[val] || [];
   const deptName = document.getElementById('deptSelect').options[document.getElementById('deptSelect').selectedIndex].text;
 
-  // Filter topics to only assigned ones
-  const filtered = ISSUES_T3.filter(i=>ids.includes(i.id));
-  // Re-render with filtered topics
-  const container = document.getElementById('topicContent');
-  container.innerHTML = filtered.map(iss => renderIssue(iss)).join('');
+  // Collect basic info
+  const respName  = document.getElementById('basicName').value.trim();
+  const respTitle = document.getElementById('basicTitle').value.trim();
+  const respEmail = document.getElementById('basicEmail').value.trim();
 
+  // Filter and store issues for this dept
+  filteredIssues = ISSUES_T3.filter(i=>ids.includes(i.id));
+
+  // Hide intro and entry, show survey
+  document.getElementById('surveyIntro').style.display='none';
   document.getElementById('entryScreen').style.display='none';
   document.getElementById('surveyContent').style.display='block';
   document.getElementById('btnConfirmEntry').style.display='none';
   document.getElementById('btnSubmit').style.display='inline-flex';
-  document.getElementById('botLeft').innerHTML = `<span style="color:#888">部門：</span><strong style="color:#1A8F7F">${deptName}</strong>`;
+
+  const nameLabel = respName ? `${respName}${respTitle?' · '+respTitle:''}` : deptName;
+  document.getElementById('botLeft').innerHTML = `<span style="color:#888">填答者：</span><strong style="color:#1A8F7F">${nameLabel}</strong>`;
+
+  // Init S2 tab active
+  activeS12 = 'S2';
+  switchS12('S2');
   window.scrollTo(0,0);
 }
 
