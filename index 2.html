@@ -562,17 +562,13 @@ function renderIssue(iss){
 
 function renderROSection(iss, type){
   const isRisk = type==='risk';
-  const items = isRisk ? iss.risks : iss.opps;
-  const checkedCount = items.filter(r=>r.checked).length;
+  const items = (isRisk ? iss.risks : iss.opps).filter(r=>r.checked);
   const label = isRisk ? '⚠ 風險' : '✦ 機會';
   const cls = isRisk ? 'risk-b' : 'opp-b';
-  const reqCls = checkedCount>0 ? 'ro-req ok' : 'ro-req';
-  const reqLabel = checkedCount>0 ? `✓ 已選 ${checkedCount} 項` : '* 至少一項';
-
+  if(items.length===0) return '';
   return `<div class="ro-hdr">
     <span class="ro-badge ${cls}">${label}</span>
-    <span style="font-size:12px;color:#888">點選核取方塊選擇項目，展開後填寫評估欄位</span>
-    <span class="${reqCls}">${reqLabel}</span>
+    <span style="font-size:12px;color:#888">請依序填寫以下評估欄位</span>
   </div>
   ${items.map(item => renderROCard(item, isRisk, iss.id)).join('')}`;
 }
@@ -580,14 +576,12 @@ function renderROSection(iss, type){
 function renderROCard(item, isRisk, issId){
   const isOpen = expandedCards.has(item.id);
   const activePart = activeParts[item.id] || 'p1';
-  return `<div class="ro-card ${item.checked?'sel':''}" id="card-${item.id}">
+  return `<div class="ro-card sel" id="card-${item.id}">
     <div class="ro-card-hdr">
-      <div class="chkbox ${item.checked?'on':''}" onclick="toggleCheck('${item.id}','${issId}','${isRisk?'risk':'opp'}')">${item.checked?'✓':''}</div>
-      <div class="ro-desc" onclick="if(document.getElementById('card-${item.id}').classList.contains('sel'))toggleExpand('${item.id}')">${item.desc}</div>
-      ${item.custom?'<span class="custom-tag">自訂新增</span>':''}
-      ${item.checked?`<span class="expand-arrow" onclick="toggleExpand('${item.id}')" style="transform:${isOpen?'rotate(180deg)':'rotate(0)'}">▼</span>`:''}
+      <div class="ro-desc" onclick="toggleExpand('${item.id}')" style="cursor:pointer">${item.desc}</div>
+      <span class="expand-arrow" onclick="toggleExpand('${item.id}')" style="transform:${isOpen?'rotate(180deg)':'rotate(0)'}">▼</span>
     </div>
-    ${item.checked ? renderRODetail(item, isRisk, activePart, isOpen) : ''}
+    ${renderRODetail(item, isRisk, activePart, isOpen)}
   </div>`;
 }
 
