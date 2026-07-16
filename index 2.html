@@ -546,15 +546,10 @@ function renderIssue(iss){
   return `<div class="issue" id="iss-${iss.id}">
     <div class="issue-hdr" onclick="toggleIssue('${iss.id}')">
       <div class="issue-left">
-        <span class="icode">${iss.code}</span>
         <div>
           <div class="iname">${iss.name}</div>
           <div class="isasb">${iss.sasb}</div>
         </div>
-      </div>
-      <div class="istatus">
-        <span class="sbadge ${statusCls}">${statusLabel}</span>
-        <span class="chevron ${isOpen?'open':''}">▼</span>
       </div>
     </div>
     <div class="issue-body ${isOpen?'open':''}" id="body-${iss.id}">
@@ -633,13 +628,7 @@ function renderPart2(item, isRisk, activePart){
   const iroBadgeText = isRisk ? '#e05252' : '#1A8F7F';
   return `<div class="part-content ${activePart==='p1'?'active':''}" id="p1-${item.id}">
     <div class="part-label">Part 2 — 識別確認</div>
-    <div class="field-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="fg">
-        <label class="fl">IRO 類型（顧問已設定）</label>
-        <div style="padding:9px 12px;background:#F8FAFB;border:1.5px solid #DDE6E3;border-radius:8px;font-size:13px;color:#555;min-height:38px">
-          ${d.iro ? `<span style="background:${iroBadgeColor};color:${iroBadgeText};padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600">${d.iro}</span>` : '<span style="color:#bbb">—</span>'}
-        </div>
-      </div>
+    <div style="max-width:320px">
       <div class="fg">
         <label class="fl">影響時間尺度<span class="req">*</span></label>
         <select class="fsel ${d.time?'filled':item.checked?'err':''}" onchange="updateField('${item.id}','p2','time',this.value)">
@@ -894,7 +883,6 @@ function submitForm(){
     if(!hasRisk) errors.push(`「${iss.name}」尚未選擇任何風險項目`);
     if(!hasOpp) errors.push(`「${iss.name}」尚未選擇任何機會項目`);
     for(const item of [...iss.risks,...iss.opps].filter(x=>x.checked)){
-      if(!item.p2?.iro) errors.push(`「${iss.name}」中的風險/機會：IRO 類型為必填`);
       if(!item.p2?.time) errors.push(`「${iss.name}」中的風險/機會：影響時間尺度為必填`);
       if(!item.p4?.vc?.length) errors.push(`「${iss.name}」中的風險/機會：請選擇價值鏈位置`);
     }
